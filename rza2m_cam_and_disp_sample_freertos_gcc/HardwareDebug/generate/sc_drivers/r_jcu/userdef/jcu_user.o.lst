@@ -1,0 +1,1314 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"jcu_user.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.R_JCU_PrintRegisters,"ax",%progbits
+  17              		.align	2
+  18              		.global	R_JCU_PrintRegisters
+  19              		.syntax unified
+  20              		.arm
+  21              		.fpu neon
+  23              	R_JCU_PrintRegisters:
+  24              	.LFB4:
+  25              		.file 1 "../generate/sc_drivers/r_jcu/userdef/jcu_user.c"
+   1:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /**************************************************************************************************
+   2:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * DISCLAIMER
+   3:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * applicable laws, including copyright laws.
+   6:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * following link:
+  15:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * http://www.renesas.com/disclaimer
+  16:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  *
+  17:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  18:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****  **************************************************************************************************
+  19:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /*******************************************************************************
+  20:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * File        : jcu_user.c
+  21:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * Description : JPEG Codec Unit (JCU)  driver. User defined funcions.
+  22:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * Version     : 1.12
+  23:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  24:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  25:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  26:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  27:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Includes   <System Includes> , "Project Includes"
+  28:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  29:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  <stdio.h>
+  30:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "r_typedefs.h"
+  31:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "iodefine.h"
+  32:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "iobitmask.h"
+  33:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "r_register_bit.h"
+  34:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "rz_co.h"
+  35:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #include  "r_jcu.h"
+  36:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  37:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  38:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Macro definitions
+  39:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  40:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  41:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /***********************************************************************
+  42:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * Defines: Macros in this file scope. Global static defines (GS)
+  43:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ************************************************************************/
+  44:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** #define  GS_N  "\r\n"
+  45:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  46:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  47:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  48:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Typedef definitions
+  49:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  50:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  51:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  52:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Imported global variables and functions (from other files)
+  53:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  54:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  55:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  56:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Exported global variables and functions (to be accessed by other files)
+  57:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  58:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  59:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /******************************************************************************
+  60:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** Private global variables and functions
+  61:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  62:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  63:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  64:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** /**************************************************************************//**
+  65:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * Function Name: R_JCU_PrintRegisters
+  66:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * @brief
+  67:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** * @retval        None
+  68:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** ******************************************************************************/
+  69:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** void  R_JCU_PrintRegisters() 
+  70:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** {
+  26              		.loc 1 70 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 10402DE9 		push	{r4, lr}
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 4, -8
+  33              		.cfi_offset 14, -4
+  34              	.LVL0:
+  71:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     volatile uint8_t*  array; 
+  72:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     const uint8_t   no_shift = IOREG_NONSHIFT_ACCESS; 
+  73:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     const uint32_t  no_mask  = IOREG_NONMASK_ACCESS; 
+  74:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  75:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     #ifdef __GNUC__
+  76:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     #pragma GCC diagnostic push
+  77:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     #pragma GCC diagnostic ignored "-Wformat="
+  78:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     #endif
+  79:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+  80:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( ""GS_N );
+  35              		.loc 1 80 0
+  36 0004 000000E3 		movw	r0, #:lower16:.LC0
+  37 0008 000040E3 		movt	r0, #:upper16:.LC0
+  38 000c FEFFFFEB 		bl	puts
+  39              	.LVL1:
+  81:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCU Registers"GS_N );/* Cast to an appropriate type */
+  40              		.loc 1 81 0
+  41 0010 000000E3 		movw	r0, #:lower16:.LC1
+  42 0014 000040E3 		movt	r0, #:upper16:.LC1
+  43 0018 FEFFFFEB 		bl	puts
+  44              	.LVL2:
+  82:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCMOD  = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCMOD  ) );/* Cast to an appropriate typ
+  45              		.loc 1 82 0
+  46 001c 0020E0E3 		mvn	r2, #0
+  47 0020 0010A0E3 		mov	r1, #0
+  48 0024 070AA0E3 		mov	r0, #28672
+  49 0028 01084EE3 		movt	r0, 59393
+  50 002c FEFFFFEB 		bl	RZA_IO_RegRead_8
+  51              	.LVL3:
+  52 0030 0010A0E1 		mov	r1, r0
+  53 0034 000000E3 		movw	r0, #:lower16:.LC2
+  54 0038 000040E3 		movt	r0, #:upper16:.LC2
+  55 003c FEFFFFEB 		bl	printf
+  56              	.LVL4:
+  83:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCCMD  = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCCMD  ) );/* Cast to an appropriate typ
+  57              		.loc 1 83 0
+  58 0040 0020E0E3 		mvn	r2, #0
+  59 0044 0010A0E3 		mov	r1, #0
+  60 0048 010007E3 		movw	r0, #28673
+  61 004c 01084EE3 		movt	r0, 59393
+  62 0050 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  63              	.LVL5:
+  64 0054 0010A0E1 		mov	r1, r0
+  65 0058 000000E3 		movw	r0, #:lower16:.LC3
+  66 005c 000040E3 		movt	r0, #:upper16:.LC3
+  67 0060 FEFFFFEB 		bl	printf
+  68              	.LVL6:
+  84:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTN  = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCQTN  ) );/* Cast to an appropriate typ
+  69              		.loc 1 84 0
+  70 0064 0020E0E3 		mvn	r2, #0
+  71 0068 0010A0E3 		mov	r1, #0
+  72 006c 030007E3 		movw	r0, #28675
+  73 0070 01084EE3 		movt	r0, 59393
+  74 0074 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  75              	.LVL7:
+  76 0078 0010A0E1 		mov	r1, r0
+  77 007c 000000E3 		movw	r0, #:lower16:.LC4
+  78 0080 000040E3 		movt	r0, #:upper16:.LC4
+  79 0084 FEFFFFEB 		bl	printf
+  80              	.LVL8:
+  85:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHTN  = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCHTN  ) );/* Cast to an appropriate typ
+  81              		.loc 1 85 0
+  82 0088 0020E0E3 		mvn	r2, #0
+  83 008c 0010A0E3 		mov	r1, #0
+  84 0090 040007E3 		movw	r0, #28676
+  85 0094 01084EE3 		movt	r0, 59393
+  86 0098 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  87              	.LVL9:
+  88 009c 0010A0E1 		mov	r1, r0
+  89 00a0 000000E3 		movw	r0, #:lower16:.LC5
+  90 00a4 000040E3 		movt	r0, #:upper16:.LC5
+  91 00a8 FEFFFFEB 		bl	printf
+  92              	.LVL10:
+  86:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDRIU = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDRIU ) );/* Cast to an appropriate typ
+  93              		.loc 1 86 0
+  94 00ac 0020E0E3 		mvn	r2, #0
+  95 00b0 0010A0E3 		mov	r1, #0
+  96 00b4 050007E3 		movw	r0, #28677
+  97 00b8 01084EE3 		movt	r0, 59393
+  98 00bc FEFFFFEB 		bl	RZA_IO_RegRead_8
+  99              	.LVL11:
+ 100 00c0 0010A0E1 		mov	r1, r0
+ 101 00c4 000000E3 		movw	r0, #:lower16:.LC6
+ 102 00c8 000040E3 		movt	r0, #:upper16:.LC6
+ 103 00cc FEFFFFEB 		bl	printf
+ 104              	.LVL12:
+  87:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDRID = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDRID ) );/* Cast to an appropriate typ
+ 105              		.loc 1 87 0
+ 106 00d0 0020E0E3 		mvn	r2, #0
+ 107 00d4 0010A0E3 		mov	r1, #0
+ 108 00d8 060007E3 		movw	r0, #28678
+ 109 00dc 01084EE3 		movt	r0, 59393
+ 110 00e0 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 111              	.LVL13:
+ 112 00e4 0010A0E1 		mov	r1, r0
+ 113 00e8 000000E3 		movw	r0, #:lower16:.LC7
+ 114 00ec 000040E3 		movt	r0, #:upper16:.LC7
+ 115 00f0 FEFFFFEB 		bl	printf
+ 116              	.LVL14:
+  88:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCVSZU = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCVSZU ) );/* Cast to an appropriate typ
+ 117              		.loc 1 88 0
+ 118 00f4 0020E0E3 		mvn	r2, #0
+ 119 00f8 0010A0E3 		mov	r1, #0
+ 120 00fc 070007E3 		movw	r0, #28679
+ 121 0100 01084EE3 		movt	r0, 59393
+ 122 0104 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 123              	.LVL15:
+ 124 0108 0010A0E1 		mov	r1, r0
+ 125 010c 000000E3 		movw	r0, #:lower16:.LC8
+ 126 0110 000040E3 		movt	r0, #:upper16:.LC8
+ 127 0114 FEFFFFEB 		bl	printf
+ 128              	.LVL16:
+  89:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCVSZD = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCVSZD ) );/* Cast to an appropriate typ
+ 129              		.loc 1 89 0
+ 130 0118 0020E0E3 		mvn	r2, #0
+ 131 011c 0010A0E3 		mov	r1, #0
+ 132 0120 080007E3 		movw	r0, #28680
+ 133 0124 01084EE3 		movt	r0, 59393
+ 134 0128 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 135              	.LVL17:
+ 136 012c 0010A0E1 		mov	r1, r0
+ 137 0130 000000E3 		movw	r0, #:lower16:.LC9
+ 138 0134 000040E3 		movt	r0, #:upper16:.LC9
+ 139 0138 FEFFFFEB 		bl	printf
+ 140              	.LVL18:
+  90:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHSZU = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCHSZU ) );/* Cast to an appropriate typ
+ 141              		.loc 1 90 0
+ 142 013c 0020E0E3 		mvn	r2, #0
+ 143 0140 0010A0E3 		mov	r1, #0
+ 144 0144 090007E3 		movw	r0, #28681
+ 145 0148 01084EE3 		movt	r0, 59393
+ 146 014c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 147              	.LVL19:
+ 148 0150 0010A0E1 		mov	r1, r0
+ 149 0154 000000E3 		movw	r0, #:lower16:.LC10
+ 150 0158 000040E3 		movt	r0, #:upper16:.LC10
+ 151 015c FEFFFFEB 		bl	printf
+ 152              	.LVL20:
+  91:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHSZD = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCHSZD ) );/* Cast to an appropriate typ
+ 153              		.loc 1 91 0
+ 154 0160 0020E0E3 		mvn	r2, #0
+ 155 0164 0010A0E3 		mov	r1, #0
+ 156 0168 0A0007E3 		movw	r0, #28682
+ 157 016c 01084EE3 		movt	r0, 59393
+ 158 0170 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 159              	.LVL21:
+ 160 0174 0010A0E1 		mov	r1, r0
+ 161 0178 000000E3 		movw	r0, #:lower16:.LC11
+ 162 017c 000040E3 		movt	r0, #:upper16:.LC11
+ 163 0180 FEFFFFEB 		bl	printf
+ 164              	.LVL22:
+  92:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDTCU = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDTCU ) );/* Cast to an appropriate typ
+ 165              		.loc 1 92 0
+ 166 0184 0020E0E3 		mvn	r2, #0
+ 167 0188 0010A0E3 		mov	r1, #0
+ 168 018c 0B0007E3 		movw	r0, #28683
+ 169 0190 01084EE3 		movt	r0, 59393
+ 170 0194 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 171              	.LVL23:
+ 172 0198 0010A0E1 		mov	r1, r0
+ 173 019c 000000E3 		movw	r0, #:lower16:.LC12
+ 174 01a0 000040E3 		movt	r0, #:upper16:.LC12
+ 175 01a4 FEFFFFEB 		bl	printf
+ 176              	.LVL24:
+  93:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDTCM = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDTCM ) );/* Cast to an appropriate typ
+ 177              		.loc 1 93 0
+ 178 01a8 0020E0E3 		mvn	r2, #0
+ 179 01ac 0010A0E3 		mov	r1, #0
+ 180 01b0 0C0007E3 		movw	r0, #28684
+ 181 01b4 01084EE3 		movt	r0, 59393
+ 182 01b8 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 183              	.LVL25:
+ 184 01bc 0010A0E1 		mov	r1, r0
+ 185 01c0 000000E3 		movw	r0, #:lower16:.LC13
+ 186 01c4 000040E3 		movt	r0, #:upper16:.LC13
+ 187 01c8 FEFFFFEB 		bl	printf
+ 188              	.LVL26:
+  94:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDTCD = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDTCD ) );/* Cast to an appropriate typ
+ 189              		.loc 1 94 0
+ 190 01cc 0020E0E3 		mvn	r2, #0
+ 191 01d0 0010A0E3 		mov	r1, #0
+ 192 01d4 0D0007E3 		movw	r0, #28685
+ 193 01d8 01084EE3 		movt	r0, 59393
+ 194 01dc FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 195              	.LVL27:
+ 196 01e0 0010A0E1 		mov	r1, r0
+ 197 01e4 000000E3 		movw	r0, #:lower16:.LC14
+ 198 01e8 000040E3 		movt	r0, #:upper16:.LC14
+ 199 01ec FEFFFFEB 		bl	printf
+ 200              	.LVL28:
+  95:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JINTE0 = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JINTE0 ) );/* Cast to an appropriate typ
+ 201              		.loc 1 95 0
+ 202 01f0 0020E0E3 		mvn	r2, #0
+ 203 01f4 0010A0E3 		mov	r1, #0
+ 204 01f8 0E0007E3 		movw	r0, #28686
+ 205 01fc 01084EE3 		movt	r0, 59393
+ 206 0200 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 207              	.LVL29:
+ 208 0204 0010A0E1 		mov	r1, r0
+ 209 0208 000000E3 		movw	r0, #:lower16:.LC15
+ 210 020c 000040E3 		movt	r0, #:upper16:.LC15
+ 211 0210 FEFFFFEB 		bl	printf
+ 212              	.LVL30:
+  96:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JINTS0 = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JINTS0 ) );/* Cast to an appropriate typ
+ 213              		.loc 1 96 0
+ 214 0214 0020E0E3 		mvn	r2, #0
+ 215 0218 0010A0E3 		mov	r1, #0
+ 216 021c 0F0007E3 		movw	r0, #28687
+ 217 0220 01084EE3 		movt	r0, 59393
+ 218 0224 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 219              	.LVL31:
+ 220 0228 0010A0E1 		mov	r1, r0
+ 221 022c 000000E3 		movw	r0, #:lower16:.LC16
+ 222 0230 000040E3 		movt	r0, #:upper16:.LC16
+ 223 0234 FEFFFFEB 		bl	printf
+ 224              	.LVL32:
+  97:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCDERR = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCDERR ) );/* Cast to an appropriate typ
+ 225              		.loc 1 97 0
+ 226 0238 0020E0E3 		mvn	r2, #0
+ 227 023c 0010A0E3 		mov	r1, #0
+ 228 0240 100007E3 		movw	r0, #28688
+ 229 0244 01084EE3 		movt	r0, 59393
+ 230 0248 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 231              	.LVL33:
+ 232 024c 0010A0E1 		mov	r1, r0
+ 233 0250 000000E3 		movw	r0, #:lower16:.LC17
+ 234 0254 000040E3 		movt	r0, #:upper16:.LC17
+ 235 0258 FEFFFFEB 		bl	printf
+ 236              	.LVL34:
+  98:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCRST  = 0x%02X"GS_N,  R_REGISTER_READ8( &JCU.JCRST  ) );/* Cast to an appropriate typ
+ 237              		.loc 1 98 0
+ 238 025c 0020E0E3 		mvn	r2, #0
+ 239 0260 0010A0E3 		mov	r1, #0
+ 240 0264 110007E3 		movw	r0, #28689
+ 241 0268 01084EE3 		movt	r0, 59393
+ 242 026c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 243              	.LVL35:
+ 244 0270 0010A0E1 		mov	r1, r0
+ 245 0274 000000E3 		movw	r0, #:lower16:.LC18
+ 246 0278 000040E3 		movt	r0, #:upper16:.LC18
+ 247 027c FEFFFFEB 		bl	printf
+ 248              	.LVL36:
+  99:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFECNT   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFECNT   ) );/* Cast to an appropri
+ 249              		.loc 1 99 0
+ 250 0280 0020E0E3 		mvn	r2, #0
+ 251 0284 0010A0E3 		mov	r1, #0
+ 252 0288 400007E3 		movw	r0, #28736
+ 253 028c 01084EE3 		movt	r0, 59393
+ 254 0290 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 255              	.LVL37:
+ 256 0294 0010A0E1 		mov	r1, r0
+ 257 0298 000000E3 		movw	r0, #:lower16:.LC19
+ 258 029c 000040E3 		movt	r0, #:upper16:.LC19
+ 259 02a0 FEFFFFEB 		bl	printf
+ 260              	.LVL38:
+ 100:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFESA    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFESA    ) );/* Cast to an appropri
+ 261              		.loc 1 100 0
+ 262 02a4 0020E0E3 		mvn	r2, #0
+ 263 02a8 0010A0E3 		mov	r1, #0
+ 264 02ac 440007E3 		movw	r0, #28740
+ 265 02b0 01084EE3 		movt	r0, 59393
+ 266 02b4 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 267              	.LVL39:
+ 268 02b8 0010A0E1 		mov	r1, r0
+ 269 02bc 000000E3 		movw	r0, #:lower16:.LC20
+ 270 02c0 000040E3 		movt	r0, #:upper16:.LC20
+ 271 02c4 FEFFFFEB 		bl	printf
+ 272              	.LVL40:
+ 101:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFESOFST = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFESOFST ) );/* Cast to an appropri
+ 273              		.loc 1 101 0
+ 274 02c8 0020E0E3 		mvn	r2, #0
+ 275 02cc 0010A0E3 		mov	r1, #0
+ 276 02d0 480007E3 		movw	r0, #28744
+ 277 02d4 01084EE3 		movt	r0, 59393
+ 278 02d8 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 279              	.LVL41:
+ 280 02dc 0010A0E1 		mov	r1, r0
+ 281 02e0 000000E3 		movw	r0, #:lower16:.LC21
+ 282 02e4 000040E3 		movt	r0, #:upper16:.LC21
+ 283 02e8 FEFFFFEB 		bl	printf
+ 284              	.LVL42:
+ 102:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFEDA    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFEDA    ) );/* Cast to an appropri
+ 285              		.loc 1 102 0
+ 286 02ec 0020E0E3 		mvn	r2, #0
+ 287 02f0 0010A0E3 		mov	r1, #0
+ 288 02f4 4C0007E3 		movw	r0, #28748
+ 289 02f8 01084EE3 		movt	r0, 59393
+ 290 02fc FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 291              	.LVL43:
+ 292 0300 0010A0E1 		mov	r1, r0
+ 293 0304 000000E3 		movw	r0, #:lower16:.LC22
+ 294 0308 000040E3 		movt	r0, #:upper16:.LC22
+ 295 030c FEFFFFEB 		bl	printf
+ 296              	.LVL44:
+ 103:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFESLC   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFESLC   ) );/* Cast to an appropri
+ 297              		.loc 1 103 0
+ 298 0310 0020E0E3 		mvn	r2, #0
+ 299 0314 0010A0E3 		mov	r1, #0
+ 300 0318 500007E3 		movw	r0, #28752
+ 301 031c 01084EE3 		movt	r0, 59393
+ 302 0320 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 303              	.LVL45:
+ 304 0324 0010A0E1 		mov	r1, r0
+ 305 0328 000000E3 		movw	r0, #:lower16:.LC23
+ 306 032c 000040E3 		movt	r0, #:upper16:.LC23
+ 307 0330 FEFFFFEB 		bl	printf
+ 308              	.LVL46:
+ 104:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFEDDC   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFEDDC   ) );/* Cast to an appropri
+ 309              		.loc 1 104 0
+ 310 0334 0020E0E3 		mvn	r2, #0
+ 311 0338 0010A0E3 		mov	r1, #0
+ 312 033c 540007E3 		movw	r0, #28756
+ 313 0340 01084EE3 		movt	r0, 59393
+ 314 0344 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 315              	.LVL47:
+ 316 0348 0010A0E1 		mov	r1, r0
+ 317 034c 000000E3 		movw	r0, #:lower16:.LC24
+ 318 0350 000040E3 		movt	r0, #:upper16:.LC24
+ 319 0354 FEFFFFEB 		bl	printf
+ 320              	.LVL48:
+ 105:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDCNT   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDCNT   ) );/* Cast to an appropri
+ 321              		.loc 1 105 0
+ 322 0358 0020E0E3 		mvn	r2, #0
+ 323 035c 0010A0E3 		mov	r1, #0
+ 324 0360 580007E3 		movw	r0, #28760
+ 325 0364 01084EE3 		movt	r0, 59393
+ 326 0368 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 327              	.LVL49:
+ 328 036c 0010A0E1 		mov	r1, r0
+ 329 0370 000000E3 		movw	r0, #:lower16:.LC25
+ 330 0374 000040E3 		movt	r0, #:upper16:.LC25
+ 331 0378 FEFFFFEB 		bl	printf
+ 332              	.LVL50:
+ 106:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDSA    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDSA    ) );/* Cast to an appropri
+ 333              		.loc 1 106 0
+ 334 037c 0020E0E3 		mvn	r2, #0
+ 335 0380 0010A0E3 		mov	r1, #0
+ 336 0384 5C0007E3 		movw	r0, #28764
+ 337 0388 01084EE3 		movt	r0, 59393
+ 338 038c FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 339              	.LVL51:
+ 340 0390 0010A0E1 		mov	r1, r0
+ 341 0394 000000E3 		movw	r0, #:lower16:.LC26
+ 342 0398 000040E3 		movt	r0, #:upper16:.LC26
+ 343 039c FEFFFFEB 		bl	printf
+ 344              	.LVL52:
+ 107:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDDOFST = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDDOFST ) );/* Cast to an appropri
+ 345              		.loc 1 107 0
+ 346 03a0 0020E0E3 		mvn	r2, #0
+ 347 03a4 0010A0E3 		mov	r1, #0
+ 348 03a8 600007E3 		movw	r0, #28768
+ 349 03ac 01084EE3 		movt	r0, 59393
+ 350 03b0 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 351              	.LVL53:
+ 352 03b4 0010A0E1 		mov	r1, r0
+ 353 03b8 000000E3 		movw	r0, #:lower16:.LC27
+ 354 03bc 000040E3 		movt	r0, #:upper16:.LC27
+ 355 03c0 FEFFFFEB 		bl	printf
+ 356              	.LVL54:
+ 108:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDDA    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDDA    ) );/* Cast to an appropri
+ 357              		.loc 1 108 0
+ 358 03c4 0020E0E3 		mvn	r2, #0
+ 359 03c8 0010A0E3 		mov	r1, #0
+ 360 03cc 640007E3 		movw	r0, #28772
+ 361 03d0 01084EE3 		movt	r0, 59393
+ 362 03d4 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 363              	.LVL55:
+ 364 03d8 0010A0E1 		mov	r1, r0
+ 365 03dc 000000E3 		movw	r0, #:lower16:.LC28
+ 366 03e0 000040E3 		movt	r0, #:upper16:.LC28
+ 367 03e4 FEFFFFEB 		bl	printf
+ 368              	.LVL56:
+ 109:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDSDC   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDSDC   ) );/* Cast to an appropri
+ 369              		.loc 1 109 0
+ 370 03e8 0020E0E3 		mvn	r2, #0
+ 371 03ec 0010A0E3 		mov	r1, #0
+ 372 03f0 680007E3 		movw	r0, #28776
+ 373 03f4 01084EE3 		movt	r0, 59393
+ 374 03f8 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 375              	.LVL57:
+ 376 03fc 0010A0E1 		mov	r1, r0
+ 377 0400 000000E3 		movw	r0, #:lower16:.LC29
+ 378 0404 000040E3 		movt	r0, #:upper16:.LC29
+ 379 0408 FEFFFFEB 		bl	printf
+ 380              	.LVL58:
+ 110:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDDLC   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDDLC   ) );/* Cast to an appropri
+ 381              		.loc 1 110 0
+ 382 040c 0020E0E3 		mvn	r2, #0
+ 383 0410 0010A0E3 		mov	r1, #0
+ 384 0414 6C0007E3 		movw	r0, #28780
+ 385 0418 01084EE3 		movt	r0, 59393
+ 386 041c FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 387              	.LVL59:
+ 388 0420 0010A0E1 		mov	r1, r0
+ 389 0424 000000E3 		movw	r0, #:lower16:.LC30
+ 390 0428 000040E3 		movt	r0, #:upper16:.LC30
+ 391 042c FEFFFFEB 		bl	printf
+ 392              	.LVL60:
+ 111:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFDADT   = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFDADT   ) );/* Cast to an appropri
+ 393              		.loc 1 111 0
+ 394 0430 0020E0E3 		mvn	r2, #0
+ 395 0434 0010A0E3 		mov	r1, #0
+ 396 0438 700007E3 		movw	r0, #28784
+ 397 043c 01084EE3 		movt	r0, 59393
+ 398 0440 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 399              	.LVL61:
+ 400 0444 0010A0E1 		mov	r1, r0
+ 401 0448 000000E3 		movw	r0, #:lower16:.LC31
+ 402 044c 000040E3 		movt	r0, #:upper16:.LC31
+ 403 0450 FEFFFFEB 		bl	printf
+ 404              	.LVL62:
+ 112:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JINTE1    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JINTE1    ) );/* Cast to an appropri
+ 405              		.loc 1 112 0
+ 406 0454 0020E0E3 		mvn	r2, #0
+ 407 0458 0010A0E3 		mov	r1, #0
+ 408 045c 8C0007E3 		movw	r0, #28812
+ 409 0460 01084EE3 		movt	r0, 59393
+ 410 0464 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 411              	.LVL63:
+ 412 0468 0010A0E1 		mov	r1, r0
+ 413 046c 000000E3 		movw	r0, #:lower16:.LC32
+ 414 0470 000040E3 		movt	r0, #:upper16:.LC32
+ 415 0474 FEFFFFEB 		bl	printf
+ 416              	.LVL64:
+ 113:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JINTS1    = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JINTS1    ) );/* Cast to an appropri
+ 417              		.loc 1 113 0
+ 418 0478 0020E0E3 		mvn	r2, #0
+ 419 047c 0010A0E3 		mov	r1, #0
+ 420 0480 900007E3 		movw	r0, #28816
+ 421 0484 01084EE3 		movt	r0, 59393
+ 422 0488 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 423              	.LVL65:
+ 424 048c 0010A0E1 		mov	r1, r0
+ 425 0490 000000E3 		movw	r0, #:lower16:.LC33
+ 426 0494 000040E3 		movt	r0, #:upper16:.LC33
+ 427 0498 FEFFFFEB 		bl	printf
+ 428              	.LVL66:
+ 114:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFESVSZ  = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFESVSZ  ) );/* Cast to an appropri
+ 429              		.loc 1 114 0
+ 430 049c 0020E0E3 		mvn	r2, #0
+ 431 04a0 0010A0E3 		mov	r1, #0
+ 432 04a4 940007E3 		movw	r0, #28820
+ 433 04a8 01084EE3 		movt	r0, 59393
+ 434 04ac FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 435              	.LVL67:
+ 436 04b0 0010A0E1 		mov	r1, r0
+ 437 04b4 000000E3 		movw	r0, #:lower16:.LC34
+ 438 04b8 000040E3 		movt	r0, #:upper16:.LC34
+ 439 04bc FEFFFFEB 		bl	printf
+ 440              	.LVL68:
+ 115:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JIFESHSZ  = 0x%08X"GS_N,  R_REGISTER_READ32( &JCU.JIFESHSZ  ) );/* Cast to an appropri
+ 441              		.loc 1 115 0
+ 442 04c0 0020E0E3 		mvn	r2, #0
+ 443 04c4 0010A0E3 		mov	r1, #0
+ 444 04c8 980007E3 		movw	r0, #28824
+ 445 04cc 01084EE3 		movt	r0, 59393
+ 446 04d0 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 447              	.LVL69:
+ 448 04d4 0010A0E1 		mov	r1, r0
+ 449 04d8 000000E3 		movw	r0, #:lower16:.LC35
+ 450 04dc 000040E3 		movt	r0, #:upper16:.LC35
+ 451 04e0 FEFFFFEB 		bl	printf
+ 452              	.LVL70:
+ 116:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 117:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 118:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCQTBL0;
+ 119:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL0[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 453              		.loc 1 119 0
+ 454 04e4 0020E0E3 		mvn	r2, #0
+ 455 04e8 0010A0E3 		mov	r1, #0
+ 456 04ec 710CA0E3 		mov	r0, #28928
+ 457 04f0 01084EE3 		movt	r0, 59393
+ 458 04f4 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 459              	.LVL71:
+ 460 04f8 0010A0E1 		mov	r1, r0
+ 461 04fc 000000E3 		movw	r0, #:lower16:.LC36
+ 462 0500 000040E3 		movt	r0, #:upper16:.LC36
+ 463 0504 FEFFFFEB 		bl	printf
+ 464              	.LVL72:
+ 120:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL0[1] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[1],  no_shift,  no_mask ) );
+ 465              		.loc 1 120 0
+ 466 0508 0020E0E3 		mvn	r2, #0
+ 467 050c 0010A0E3 		mov	r1, #0
+ 468 0510 010107E3 		movw	r0, #28929
+ 469 0514 01084EE3 		movt	r0, 59393
+ 470 0518 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 471              	.LVL73:
+ 472 051c 0010A0E1 		mov	r1, r0
+ 473 0520 000000E3 		movw	r0, #:lower16:.LC37
+ 474 0524 000040E3 		movt	r0, #:upper16:.LC37
+ 475 0528 FEFFFFEB 		bl	printf
+ 476              	.LVL74:
+ 121:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL0[2] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[2],  no_shift,  no_mask ) );
+ 477              		.loc 1 121 0
+ 478 052c 0020E0E3 		mvn	r2, #0
+ 479 0530 0010A0E3 		mov	r1, #0
+ 480 0534 020107E3 		movw	r0, #28930
+ 481 0538 01084EE3 		movt	r0, 59393
+ 482 053c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 483              	.LVL75:
+ 484 0540 0010A0E1 		mov	r1, r0
+ 485 0544 000000E3 		movw	r0, #:lower16:.LC38
+ 486 0548 000040E3 		movt	r0, #:upper16:.LC38
+ 487 054c FEFFFFEB 		bl	printf
+ 488              	.LVL76:
+ 122:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 489              		.loc 1 122 0
+ 490 0550 004000E3 		movw	r4, #:lower16:.LC39
+ 491 0554 004040E3 		movt	r4, #:upper16:.LC39
+ 492 0558 0400A0E1 		mov	r0, r4
+ 493 055c FEFFFFEB 		bl	puts
+ 494              	.LVL77:
+ 123:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 124:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 125:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCQTBL1;
+ 126:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL1[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 495              		.loc 1 126 0
+ 496 0560 0020E0E3 		mvn	r2, #0
+ 497 0564 0010A0E3 		mov	r1, #0
+ 498 0568 400107E3 		movw	r0, #28992
+ 499 056c 01084EE3 		movt	r0, 59393
+ 500 0570 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 501              	.LVL78:
+ 502 0574 0010A0E1 		mov	r1, r0
+ 503 0578 000000E3 		movw	r0, #:lower16:.LC40
+ 504 057c 000040E3 		movt	r0, #:upper16:.LC40
+ 505 0580 FEFFFFEB 		bl	printf
+ 506              	.LVL79:
+ 127:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL1[1] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[1],  no_shift,  no_mask ) );
+ 507              		.loc 1 127 0
+ 508 0584 0020E0E3 		mvn	r2, #0
+ 509 0588 0010A0E3 		mov	r1, #0
+ 510 058c 410107E3 		movw	r0, #28993
+ 511 0590 01084EE3 		movt	r0, 59393
+ 512 0594 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 513              	.LVL80:
+ 514 0598 0010A0E1 		mov	r1, r0
+ 515 059c 000000E3 		movw	r0, #:lower16:.LC41
+ 516 05a0 000040E3 		movt	r0, #:upper16:.LC41
+ 517 05a4 FEFFFFEB 		bl	printf
+ 518              	.LVL81:
+ 128:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 519              		.loc 1 128 0
+ 520 05a8 0400A0E1 		mov	r0, r4
+ 521 05ac FEFFFFEB 		bl	puts
+ 522              	.LVL82:
+ 129:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 130:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 131:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCQTBL2;
+ 132:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL2[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 523              		.loc 1 132 0
+ 524 05b0 0020E0E3 		mvn	r2, #0
+ 525 05b4 0010A0E3 		mov	r1, #0
+ 526 05b8 800107E3 		movw	r0, #29056
+ 527 05bc 01084EE3 		movt	r0, 59393
+ 528 05c0 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 529              	.LVL83:
+ 530 05c4 0010A0E1 		mov	r1, r0
+ 531 05c8 000000E3 		movw	r0, #:lower16:.LC42
+ 532 05cc 000040E3 		movt	r0, #:upper16:.LC42
+ 533 05d0 FEFFFFEB 		bl	printf
+ 534              	.LVL84:
+ 133:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 535              		.loc 1 133 0
+ 536 05d4 0400A0E1 		mov	r0, r4
+ 537 05d8 FEFFFFEB 		bl	puts
+ 538              	.LVL85:
+ 134:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 135:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 136:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCQTBL3;
+ 137:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCQTBL3[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 539              		.loc 1 137 0
+ 540 05dc 0020E0E3 		mvn	r2, #0
+ 541 05e0 0010A0E3 		mov	r1, #0
+ 542 05e4 C00107E3 		movw	r0, #29120
+ 543 05e8 01084EE3 		movt	r0, 59393
+ 544 05ec FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 545              	.LVL86:
+ 546 05f0 0010A0E1 		mov	r1, r0
+ 547 05f4 000000E3 		movw	r0, #:lower16:.LC43
+ 548 05f8 000040E3 		movt	r0, #:upper16:.LC43
+ 549 05fc FEFFFFEB 		bl	printf
+ 550              	.LVL87:
+ 138:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 551              		.loc 1 138 0
+ 552 0600 0400A0E1 		mov	r0, r4
+ 553 0604 FEFFFFEB 		bl	puts
+ 554              	.LVL88:
+ 139:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 140:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 141:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCHTBD0;
+ 142:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHTBD0[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 555              		.loc 1 142 0
+ 556 0608 0020E0E3 		mvn	r2, #0
+ 557 060c 0010A0E3 		mov	r1, #0
+ 558 0610 720CA0E3 		mov	r0, #29184
+ 559 0614 01084EE3 		movt	r0, 59393
+ 560 0618 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 561              	.LVL89:
+ 562 061c 0010A0E1 		mov	r1, r0
+ 563 0620 000000E3 		movw	r0, #:lower16:.LC44
+ 564 0624 000040E3 		movt	r0, #:upper16:.LC44
+ 565 0628 FEFFFFEB 		bl	printf
+ 566              	.LVL90:
+ 143:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 567              		.loc 1 143 0
+ 568 062c 0400A0E1 		mov	r0, r4
+ 569 0630 FEFFFFEB 		bl	puts
+ 570              	.LVL91:
+ 144:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 145:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 146:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCHTBA0;
+ 147:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHTBA0[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 571              		.loc 1 147 0
+ 572 0634 0020E0E3 		mvn	r2, #0
+ 573 0638 0010A0E3 		mov	r1, #0
+ 574 063c 200207E3 		movw	r0, #29216
+ 575 0640 01084EE3 		movt	r0, 59393
+ 576 0644 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 577              	.LVL92:
+ 578 0648 0010A0E1 		mov	r1, r0
+ 579 064c 000000E3 		movw	r0, #:lower16:.LC45
+ 580 0650 000040E3 		movt	r0, #:upper16:.LC45
+ 581 0654 FEFFFFEB 		bl	printf
+ 582              	.LVL93:
+ 148:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 583              		.loc 1 148 0
+ 584 0658 0400A0E1 		mov	r0, r4
+ 585 065c FEFFFFEB 		bl	puts
+ 586              	.LVL94:
+ 149:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 150:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 151:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCHTBD1;
+ 152:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHTBD1[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 587              		.loc 1 152 0
+ 588 0660 0020E0E3 		mvn	r2, #0
+ 589 0664 0010A0E3 		mov	r1, #0
+ 590 0668 730CA0E3 		mov	r0, #29440
+ 591 066c 01084EE3 		movt	r0, 59393
+ 592 0670 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 593              	.LVL95:
+ 594 0674 0010A0E1 		mov	r1, r0
+ 595 0678 000000E3 		movw	r0, #:lower16:.LC46
+ 596 067c 000040E3 		movt	r0, #:upper16:.LC46
+ 597 0680 FEFFFFEB 		bl	printf
+ 598              	.LVL96:
+ 153:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 599              		.loc 1 153 0
+ 600 0684 0400A0E1 		mov	r0, r4
+ 601 0688 FEFFFFEB 		bl	puts
+ 602              	.LVL97:
+ 154:../generate/sc_drivers/r_jcu/userdef/jcu_user.c **** 
+ 155:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     /* Cast to an appropriate type */
+ 156:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     array = &JCU.JCHTBA1;
+ 157:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "JCHTBA1[0] = 0x%02X"GS_N,  RZA_IO_RegRead_8( &array[0],  no_shift,  no_mask ) );
+ 603              		.loc 1 157 0
+ 604 068c 0020E0E3 		mvn	r2, #0
+ 605 0690 0010A0E3 		mov	r1, #0
+ 606 0694 200307E3 		movw	r0, #29472
+ 607 0698 01084EE3 		movt	r0, 59393
+ 608 069c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 609              	.LVL98:
+ 610 06a0 0010A0E1 		mov	r1, r0
+ 611 06a4 000000E3 		movw	r0, #:lower16:.LC47
+ 612 06a8 000040E3 		movt	r0, #:upper16:.LC47
+ 613 06ac FEFFFFEB 		bl	printf
+ 614              	.LVL99:
+ 158:../generate/sc_drivers/r_jcu/userdef/jcu_user.c ****     printf( "        :"GS_N );
+ 615              		.loc 1 158 0
+ 616 06b0 0400A0E1 		mov	r0, r4
+ 617 06b4 FEFFFFEB 		bl	puts
+ 618              	.LVL100:
+ 619 06b8 1080BDE8 		pop	{r4, pc}
+ 620              		.cfi_endproc
+ 621              	.LFE4:
+ 623              		.section	.rodata.R_JCU_PrintRegisters.str1.4,"aMS",%progbits,1
+ 624              		.align	2
+ 625              	.LC0:
+ 626 0000 0D00     		.ascii	"\015\000"
+ 627 0002 0000     		.space	2
+ 628              	.LC1:
+ 629 0004 4A435520 		.ascii	"JCU Registers\015\000"
+ 629      52656769 
+ 629      73746572 
+ 629      730D00
+ 630 0013 00       		.space	1
+ 631              	.LC2:
+ 632 0014 4A434D4F 		.ascii	"JCMOD  = 0x%02X\015\012\000"
+ 632      4420203D 
+ 632      20307825 
+ 632      3032580D 
+ 632      0A00
+ 633 0026 0000     		.space	2
+ 634              	.LC3:
+ 635 0028 4A43434D 		.ascii	"JCCMD  = 0x%02X\015\012\000"
+ 635      4420203D 
+ 635      20307825 
+ 635      3032580D 
+ 635      0A00
+ 636 003a 0000     		.space	2
+ 637              	.LC4:
+ 638 003c 4A435154 		.ascii	"JCQTN  = 0x%02X\015\012\000"
+ 638      4E20203D 
+ 638      20307825 
+ 638      3032580D 
+ 638      0A00
+ 639 004e 0000     		.space	2
+ 640              	.LC5:
+ 641 0050 4A434854 		.ascii	"JCHTN  = 0x%02X\015\012\000"
+ 641      4E20203D 
+ 641      20307825 
+ 641      3032580D 
+ 641      0A00
+ 642 0062 0000     		.space	2
+ 643              	.LC6:
+ 644 0064 4A434452 		.ascii	"JCDRIU = 0x%02X\015\012\000"
+ 644      4955203D 
+ 644      20307825 
+ 644      3032580D 
+ 644      0A00
+ 645 0076 0000     		.space	2
+ 646              	.LC7:
+ 647 0078 4A434452 		.ascii	"JCDRID = 0x%02X\015\012\000"
+ 647      4944203D 
+ 647      20307825 
+ 647      3032580D 
+ 647      0A00
+ 648 008a 0000     		.space	2
+ 649              	.LC8:
+ 650 008c 4A435653 		.ascii	"JCVSZU = 0x%02X\015\012\000"
+ 650      5A55203D 
+ 650      20307825 
+ 650      3032580D 
+ 650      0A00
+ 651 009e 0000     		.space	2
+ 652              	.LC9:
+ 653 00a0 4A435653 		.ascii	"JCVSZD = 0x%02X\015\012\000"
+ 653      5A44203D 
+ 653      20307825 
+ 653      3032580D 
+ 653      0A00
+ 654 00b2 0000     		.space	2
+ 655              	.LC10:
+ 656 00b4 4A434853 		.ascii	"JCHSZU = 0x%02X\015\012\000"
+ 656      5A55203D 
+ 656      20307825 
+ 656      3032580D 
+ 656      0A00
+ 657 00c6 0000     		.space	2
+ 658              	.LC11:
+ 659 00c8 4A434853 		.ascii	"JCHSZD = 0x%02X\015\012\000"
+ 659      5A44203D 
+ 659      20307825 
+ 659      3032580D 
+ 659      0A00
+ 660 00da 0000     		.space	2
+ 661              	.LC12:
+ 662 00dc 4A434454 		.ascii	"JCDTCU = 0x%02X\015\012\000"
+ 662      4355203D 
+ 662      20307825 
+ 662      3032580D 
+ 662      0A00
+ 663 00ee 0000     		.space	2
+ 664              	.LC13:
+ 665 00f0 4A434454 		.ascii	"JCDTCM = 0x%02X\015\012\000"
+ 665      434D203D 
+ 665      20307825 
+ 665      3032580D 
+ 665      0A00
+ 666 0102 0000     		.space	2
+ 667              	.LC14:
+ 668 0104 4A434454 		.ascii	"JCDTCD = 0x%02X\015\012\000"
+ 668      4344203D 
+ 668      20307825 
+ 668      3032580D 
+ 668      0A00
+ 669 0116 0000     		.space	2
+ 670              	.LC15:
+ 671 0118 4A494E54 		.ascii	"JINTE0 = 0x%02X\015\012\000"
+ 671      4530203D 
+ 671      20307825 
+ 671      3032580D 
+ 671      0A00
+ 672 012a 0000     		.space	2
+ 673              	.LC16:
+ 674 012c 4A494E54 		.ascii	"JINTS0 = 0x%02X\015\012\000"
+ 674      5330203D 
+ 674      20307825 
+ 674      3032580D 
+ 674      0A00
+ 675 013e 0000     		.space	2
+ 676              	.LC17:
+ 677 0140 4A434445 		.ascii	"JCDERR = 0x%02X\015\012\000"
+ 677      5252203D 
+ 677      20307825 
+ 677      3032580D 
+ 677      0A00
+ 678 0152 0000     		.space	2
+ 679              	.LC18:
+ 680 0154 4A435253 		.ascii	"JCRST  = 0x%02X\015\012\000"
+ 680      5420203D 
+ 680      20307825 
+ 680      3032580D 
+ 680      0A00
+ 681 0166 0000     		.space	2
+ 682              	.LC19:
+ 683 0168 4A494645 		.ascii	"JIFECNT   = 0x%08X\015\012\000"
+ 683      434E5420 
+ 683      20203D20 
+ 683      30782530 
+ 683      38580D0A 
+ 684 017d 000000   		.space	3
+ 685              	.LC20:
+ 686 0180 4A494645 		.ascii	"JIFESA    = 0x%08X\015\012\000"
+ 686      53412020 
+ 686      20203D20 
+ 686      30782530 
+ 686      38580D0A 
+ 687 0195 000000   		.space	3
+ 688              	.LC21:
+ 689 0198 4A494645 		.ascii	"JIFESOFST = 0x%08X\015\012\000"
+ 689      534F4653 
+ 689      54203D20 
+ 689      30782530 
+ 689      38580D0A 
+ 690 01ad 000000   		.space	3
+ 691              	.LC22:
+ 692 01b0 4A494645 		.ascii	"JIFEDA    = 0x%08X\015\012\000"
+ 692      44412020 
+ 692      20203D20 
+ 692      30782530 
+ 692      38580D0A 
+ 693 01c5 000000   		.space	3
+ 694              	.LC23:
+ 695 01c8 4A494645 		.ascii	"JIFESLC   = 0x%08X\015\012\000"
+ 695      534C4320 
+ 695      20203D20 
+ 695      30782530 
+ 695      38580D0A 
+ 696 01dd 000000   		.space	3
+ 697              	.LC24:
+ 698 01e0 4A494645 		.ascii	"JIFEDDC   = 0x%08X\015\012\000"
+ 698      44444320 
+ 698      20203D20 
+ 698      30782530 
+ 698      38580D0A 
+ 699 01f5 000000   		.space	3
+ 700              	.LC25:
+ 701 01f8 4A494644 		.ascii	"JIFDCNT   = 0x%08X\015\012\000"
+ 701      434E5420 
+ 701      20203D20 
+ 701      30782530 
+ 701      38580D0A 
+ 702 020d 000000   		.space	3
+ 703              	.LC26:
+ 704 0210 4A494644 		.ascii	"JIFDSA    = 0x%08X\015\012\000"
+ 704      53412020 
+ 704      20203D20 
+ 704      30782530 
+ 704      38580D0A 
+ 705 0225 000000   		.space	3
+ 706              	.LC27:
+ 707 0228 4A494644 		.ascii	"JIFDDOFST = 0x%08X\015\012\000"
+ 707      444F4653 
+ 707      54203D20 
+ 707      30782530 
+ 707      38580D0A 
+ 708 023d 000000   		.space	3
+ 709              	.LC28:
+ 710 0240 4A494644 		.ascii	"JIFDDA    = 0x%08X\015\012\000"
+ 710      44412020 
+ 710      20203D20 
+ 710      30782530 
+ 710      38580D0A 
+ 711 0255 000000   		.space	3
+ 712              	.LC29:
+ 713 0258 4A494644 		.ascii	"JIFDSDC   = 0x%08X\015\012\000"
+ 713      53444320 
+ 713      20203D20 
+ 713      30782530 
+ 713      38580D0A 
+ 714 026d 000000   		.space	3
+ 715              	.LC30:
+ 716 0270 4A494644 		.ascii	"JIFDDLC   = 0x%08X\015\012\000"
+ 716      444C4320 
+ 716      20203D20 
+ 716      30782530 
+ 716      38580D0A 
+ 717 0285 000000   		.space	3
+ 718              	.LC31:
+ 719 0288 4A494644 		.ascii	"JIFDADT   = 0x%08X\015\012\000"
+ 719      41445420 
+ 719      20203D20 
+ 719      30782530 
+ 719      38580D0A 
+ 720 029d 000000   		.space	3
+ 721              	.LC32:
+ 722 02a0 4A494E54 		.ascii	"JINTE1    = 0x%08X\015\012\000"
+ 722      45312020 
+ 722      20203D20 
+ 722      30782530 
+ 722      38580D0A 
+ 723 02b5 000000   		.space	3
+ 724              	.LC33:
+ 725 02b8 4A494E54 		.ascii	"JINTS1    = 0x%08X\015\012\000"
+ 725      53312020 
+ 725      20203D20 
+ 725      30782530 
+ 725      38580D0A 
+ 726 02cd 000000   		.space	3
+ 727              	.LC34:
+ 728 02d0 4A494645 		.ascii	"JIFESVSZ  = 0x%08X\015\012\000"
+ 728      5356535A 
+ 728      20203D20 
+ 728      30782530 
+ 728      38580D0A 
+ 729 02e5 000000   		.space	3
+ 730              	.LC35:
+ 731 02e8 4A494645 		.ascii	"JIFESHSZ  = 0x%08X\015\012\000"
+ 731      5348535A 
+ 731      20203D20 
+ 731      30782530 
+ 731      38580D0A 
+ 732 02fd 000000   		.space	3
+ 733              	.LC36:
+ 734 0300 4A435154 		.ascii	"JCQTBL0[0] = 0x%02X\015\012\000"
+ 734      424C305B 
+ 734      305D203D 
+ 734      20307825 
+ 734      3032580D 
+ 735 0316 0000     		.space	2
+ 736              	.LC37:
+ 737 0318 4A435154 		.ascii	"JCQTBL0[1] = 0x%02X\015\012\000"
+ 737      424C305B 
+ 737      315D203D 
+ 737      20307825 
+ 737      3032580D 
+ 738 032e 0000     		.space	2
+ 739              	.LC38:
+ 740 0330 4A435154 		.ascii	"JCQTBL0[2] = 0x%02X\015\012\000"
+ 740      424C305B 
+ 740      325D203D 
+ 740      20307825 
+ 740      3032580D 
+ 741 0346 0000     		.space	2
+ 742              	.LC39:
+ 743 0348 20202020 		.ascii	"        :\015\000"
+ 743      20202020 
+ 743      3A0D00
+ 744 0353 00       		.space	1
+ 745              	.LC40:
+ 746 0354 4A435154 		.ascii	"JCQTBL1[0] = 0x%02X\015\012\000"
+ 746      424C315B 
+ 746      305D203D 
+ 746      20307825 
+ 746      3032580D 
+ 747 036a 0000     		.space	2
+ 748              	.LC41:
+ 749 036c 4A435154 		.ascii	"JCQTBL1[1] = 0x%02X\015\012\000"
+ 749      424C315B 
+ 749      315D203D 
+ 749      20307825 
+ 749      3032580D 
+ 750 0382 0000     		.space	2
+ 751              	.LC42:
+ 752 0384 4A435154 		.ascii	"JCQTBL2[0] = 0x%02X\015\012\000"
+ 752      424C325B 
+ 752      305D203D 
+ 752      20307825 
+ 752      3032580D 
+ 753 039a 0000     		.space	2
+ 754              	.LC43:
+ 755 039c 4A435154 		.ascii	"JCQTBL3[0] = 0x%02X\015\012\000"
+ 755      424C335B 
+ 755      305D203D 
+ 755      20307825 
+ 755      3032580D 
+ 756 03b2 0000     		.space	2
+ 757              	.LC44:
+ 758 03b4 4A434854 		.ascii	"JCHTBD0[0] = 0x%02X\015\012\000"
+ 758      4244305B 
+ 758      305D203D 
+ 758      20307825 
+ 758      3032580D 
+ 759 03ca 0000     		.space	2
+ 760              	.LC45:
+ 761 03cc 4A434854 		.ascii	"JCHTBA0[0] = 0x%02X\015\012\000"
+ 761      4241305B 
+ 761      305D203D 
+ 761      20307825 
+ 761      3032580D 
+ 762 03e2 0000     		.space	2
+ 763              	.LC46:
+ 764 03e4 4A434854 		.ascii	"JCHTBD1[0] = 0x%02X\015\012\000"
+ 764      4244315B 
+ 764      305D203D 
+ 764      20307825 
+ 764      3032580D 
+ 765 03fa 0000     		.space	2
+ 766              	.LC47:
+ 767 03fc 4A434854 		.ascii	"JCHTBA1[0] = 0x%02X\015\012\000"
+ 767      4241315B 
+ 767      305D203D 
+ 767      20307825 
+ 767      3032580D 
+ 768              		.text
+ 769              	.Letext0:
+ 770              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 771              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 772              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 773              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 774              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 775              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 776              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 777              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 778              		.file 10 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 779              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 780              		.file 12 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 781              		.file 13 "<built-in>"
+DEFINED SYMBOLS
+                            *ABS*:00000000 jcu_user.c
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:17     .text.R_JCU_PrintRegisters:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:23     .text.R_JCU_PrintRegisters:00000000 R_JCU_PrintRegisters
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:625    .rodata.R_JCU_PrintRegisters.str1.4:00000000 .LC0
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:628    .rodata.R_JCU_PrintRegisters.str1.4:00000004 .LC1
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:631    .rodata.R_JCU_PrintRegisters.str1.4:00000014 .LC2
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:634    .rodata.R_JCU_PrintRegisters.str1.4:00000028 .LC3
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:637    .rodata.R_JCU_PrintRegisters.str1.4:0000003c .LC4
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:640    .rodata.R_JCU_PrintRegisters.str1.4:00000050 .LC5
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:643    .rodata.R_JCU_PrintRegisters.str1.4:00000064 .LC6
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:646    .rodata.R_JCU_PrintRegisters.str1.4:00000078 .LC7
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:649    .rodata.R_JCU_PrintRegisters.str1.4:0000008c .LC8
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:652    .rodata.R_JCU_PrintRegisters.str1.4:000000a0 .LC9
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:655    .rodata.R_JCU_PrintRegisters.str1.4:000000b4 .LC10
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:658    .rodata.R_JCU_PrintRegisters.str1.4:000000c8 .LC11
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:661    .rodata.R_JCU_PrintRegisters.str1.4:000000dc .LC12
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:664    .rodata.R_JCU_PrintRegisters.str1.4:000000f0 .LC13
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:667    .rodata.R_JCU_PrintRegisters.str1.4:00000104 .LC14
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:670    .rodata.R_JCU_PrintRegisters.str1.4:00000118 .LC15
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:673    .rodata.R_JCU_PrintRegisters.str1.4:0000012c .LC16
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:676    .rodata.R_JCU_PrintRegisters.str1.4:00000140 .LC17
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:679    .rodata.R_JCU_PrintRegisters.str1.4:00000154 .LC18
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:682    .rodata.R_JCU_PrintRegisters.str1.4:00000168 .LC19
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:685    .rodata.R_JCU_PrintRegisters.str1.4:00000180 .LC20
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:688    .rodata.R_JCU_PrintRegisters.str1.4:00000198 .LC21
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:691    .rodata.R_JCU_PrintRegisters.str1.4:000001b0 .LC22
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:694    .rodata.R_JCU_PrintRegisters.str1.4:000001c8 .LC23
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:697    .rodata.R_JCU_PrintRegisters.str1.4:000001e0 .LC24
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:700    .rodata.R_JCU_PrintRegisters.str1.4:000001f8 .LC25
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:703    .rodata.R_JCU_PrintRegisters.str1.4:00000210 .LC26
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:706    .rodata.R_JCU_PrintRegisters.str1.4:00000228 .LC27
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:709    .rodata.R_JCU_PrintRegisters.str1.4:00000240 .LC28
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:712    .rodata.R_JCU_PrintRegisters.str1.4:00000258 .LC29
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:715    .rodata.R_JCU_PrintRegisters.str1.4:00000270 .LC30
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:718    .rodata.R_JCU_PrintRegisters.str1.4:00000288 .LC31
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:721    .rodata.R_JCU_PrintRegisters.str1.4:000002a0 .LC32
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:724    .rodata.R_JCU_PrintRegisters.str1.4:000002b8 .LC33
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:727    .rodata.R_JCU_PrintRegisters.str1.4:000002d0 .LC34
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:730    .rodata.R_JCU_PrintRegisters.str1.4:000002e8 .LC35
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:733    .rodata.R_JCU_PrintRegisters.str1.4:00000300 .LC36
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:736    .rodata.R_JCU_PrintRegisters.str1.4:00000318 .LC37
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:739    .rodata.R_JCU_PrintRegisters.str1.4:00000330 .LC38
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:742    .rodata.R_JCU_PrintRegisters.str1.4:00000348 .LC39
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:745    .rodata.R_JCU_PrintRegisters.str1.4:00000354 .LC40
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:748    .rodata.R_JCU_PrintRegisters.str1.4:0000036c .LC41
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:751    .rodata.R_JCU_PrintRegisters.str1.4:00000384 .LC42
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:754    .rodata.R_JCU_PrintRegisters.str1.4:0000039c .LC43
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:757    .rodata.R_JCU_PrintRegisters.str1.4:000003b4 .LC44
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:760    .rodata.R_JCU_PrintRegisters.str1.4:000003cc .LC45
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:763    .rodata.R_JCU_PrintRegisters.str1.4:000003e4 .LC46
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:766    .rodata.R_JCU_PrintRegisters.str1.4:000003fc .LC47
+C:\Users\tle\AppData\Local\Temp\ccJkavTM.s:624    .rodata.R_JCU_PrintRegisters.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.187.2ff233552538c6ff9b8575ca8ea52cb3
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.stddef.h.39.ec95e8feac892e292b69dc7ae75b0d64
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.30.bbece7fa40993a78092dcc5805132560
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.8188691c2279eac7a223caa50f6694b9
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+                           .group:00000000 wm4.r_register_bit.h.36.91d5ed7a657528d5c2570c5480fee505
+                           .group:00000000 wm4.rz_co_typedef.h.30.d945c9904878daee922b7c70f5e10607
+                           .group:00000000 wm4.rz_co.h.31.aecea41cce99b435cabd8b5611466e3b
+                           .group:00000000 wm4.r_jcu_typedef.h.39.25a55931b0de0f8bae5220b1a85bd4c6
+
+UNDEFINED SYMBOLS
+puts
+RZA_IO_RegRead_8
+printf
+RZA_IO_RegRead_32

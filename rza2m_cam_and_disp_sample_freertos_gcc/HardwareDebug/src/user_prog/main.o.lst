@@ -1,0 +1,551 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"main.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.os_main_task_t,"ax",%progbits
+  17              		.align	2
+  18              		.global	os_main_task_t
+  19              		.syntax unified
+  20              		.arm
+  21              		.fpu neon
+  23              	os_main_task_t:
+  24              	.LFB4:
+  25              		.file 1 "../src/user_prog/main.c"
+   1:../src/user_prog/main.c **** /**************************************************************************************************
+   2:../src/user_prog/main.c ****  * DISCLAIMER
+   3:../src/user_prog/main.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../src/user_prog/main.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../src/user_prog/main.c ****  * applicable laws, including copyright laws.
+   6:../src/user_prog/main.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../src/user_prog/main.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../src/user_prog/main.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../src/user_prog/main.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../src/user_prog/main.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../src/user_prog/main.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../src/user_prog/main.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../src/user_prog/main.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../src/user_prog/main.c ****  * following link:
+  15:../src/user_prog/main.c ****  * http://www.renesas.com/disclaimer
+  16:../src/user_prog/main.c ****  *
+  17:../src/user_prog/main.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  18:../src/user_prog/main.c ****  **************************************************************************************************
+  19:../src/user_prog/main.c **** /*******************************************************************************
+  20:../src/user_prog/main.c **** * File Name    : main.c
+  21:../src/user_prog/main.c **** * Device(s)    : RZ/A2M
+  22:../src/user_prog/main.c **** * Tool-Chain   : e2Studio Ver 7.4.0
+  23:../src/user_prog/main.c **** *              : GNU Arm Embedded Toolchain 6-2017-q2-update
+  24:../src/user_prog/main.c **** * OS           : None
+  25:../src/user_prog/main.c **** * H/W Platform : RZ/A2M Evaluation Board
+  26:../src/user_prog/main.c **** * Description  : RZ/A2M Sample Program - Main
+  27:../src/user_prog/main.c **** * Operation    :
+  28:../src/user_prog/main.c **** * Limitations  :
+  29:../src/user_prog/main.c **** *******************************************************************************/
+  30:../src/user_prog/main.c **** /******************************************************************************
+  31:../src/user_prog/main.c **** Includes   <System Includes> , "Project Includes"
+  32:../src/user_prog/main.c **** ******************************************************************************/
+  33:../src/user_prog/main.c **** #include <stdio.h>
+  34:../src/user_prog/main.c **** #include <string.h>
+  35:../src/user_prog/main.c **** #include <fcntl.h>
+  36:../src/user_prog/main.c **** #include <unistd.h>
+  37:../src/user_prog/main.c **** 
+  38:../src/user_prog/main.c **** #include "r_typedefs.h"
+  39:../src/user_prog/main.c **** #include "iodefine.h"
+  40:../src/user_prog/main.c **** #include "r_cpg_drv_api.h"
+  41:../src/user_prog/main.c **** #include "r_ostm_drv_api.h"
+  42:../src/user_prog/main.c **** #include "r_scifa_drv_api.h"
+  43:../src/user_prog/main.c **** #include "r_gpio_drv_api.h"
+  44:../src/user_prog/main.c **** #include "r_startup_config.h"
+  45:../src/user_prog/main.c **** #include "compiler_settings.h"
+  46:../src/user_prog/main.c **** #include "main.h"
+  47:../src/user_prog/main.c **** #include "r_os_abstraction_api.h"
+  48:../src/user_prog/main.c **** #include "r_task_priority.h"
+  49:../src/user_prog/main.c **** #include "version.h"
+  50:../src/user_prog/main.c **** 
+  51:../src/user_prog/main.c **** #include "iodefine.h"
+  52:../src/user_prog/main.c **** 
+  53:../src/user_prog/main.c **** /******************************************************************************
+  54:../src/user_prog/main.c **** Typedef definitions
+  55:../src/user_prog/main.c **** ******************************************************************************/
+  56:../src/user_prog/main.c **** 
+  57:../src/user_prog/main.c **** 
+  58:../src/user_prog/main.c **** /******************************************************************************
+  59:../src/user_prog/main.c **** Macro definitions
+  60:../src/user_prog/main.c **** ******************************************************************************/
+  61:../src/user_prog/main.c **** 
+  62:../src/user_prog/main.c **** 
+  63:../src/user_prog/main.c **** /******************************************************************************
+  64:../src/user_prog/main.c **** Imported global variables and functions (from other files)
+  65:../src/user_prog/main.c **** ******************************************************************************/
+  66:../src/user_prog/main.c **** extern void sample_main(void);
+  67:../src/user_prog/main.c **** extern void CreateCuiTask(void);
+  68:../src/user_prog/main.c **** 
+  69:../src/user_prog/main.c **** /******************************************************************************
+  70:../src/user_prog/main.c **** Exported global variables and functions (to be accessed by other files)
+  71:../src/user_prog/main.c **** ******************************************************************************/
+  72:../src/user_prog/main.c **** 
+  73:../src/user_prog/main.c **** /******************************************************************************
+  74:../src/user_prog/main.c **** Private global variables and functions
+  75:../src/user_prog/main.c **** ******************************************************************************/
+  76:../src/user_prog/main.c **** static int_t gs_my_gpio_handle;
+  77:../src/user_prog/main.c **** 
+  78:../src/user_prog/main.c **** /* Terminal window escape sequences */
+  79:../src/user_prog/main.c **** static const char_t * const sp_clear_screen = "\x1b[2J";
+  80:../src/user_prog/main.c **** static const char_t * const sp_cursor_home  = "\x1b[H";
+  81:../src/user_prog/main.c **** 
+  82:../src/user_prog/main.c **** /******************************************************************************
+  83:../src/user_prog/main.c **** * Function Name: os_main_task_t
+  84:../src/user_prog/main.c **** * Description  : FreeRTOS main task called by R_OS_KernelInit()
+  85:../src/user_prog/main.c **** *              : FreeRTOS is now configured and R_OS_Abstraction calls
+  86:../src/user_prog/main.c **** *              : can be used.
+  87:../src/user_prog/main.c **** *              : From this point forward no longer use direct_xxx calls.
+  88:../src/user_prog/main.c **** *              : For example
+  89:../src/user_prog/main.c **** *              : in place of   direct_open("ostm2", O_RDWR);
+  90:../src/user_prog/main.c **** *              : use           open(DEVICE_INDENTIFIER "ostm2", O_RDWR);
+  91:../src/user_prog/main.c **** *              :
+  92:../src/user_prog/main.c **** * Arguments    : none
+  93:../src/user_prog/main.c **** * Return Value : 0
+  94:../src/user_prog/main.c **** ******************************************************************************/
+  95:../src/user_prog/main.c **** int_t os_main_task_t(void)
+  96:../src/user_prog/main.c **** {
+  26              		.loc 1 96 0
+  27              		.cfi_startproc
+  28              		@ Volatile: function does not return.
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 04E02DE5 		str	lr, [sp, #-4]!
+  32              		.cfi_def_cfa_offset 4
+  33              		.cfi_offset 14, -4
+  34 0004 14D04DE2 		sub	sp, sp, #20
+  35              		.cfi_def_cfa_offset 24
+  97:../src/user_prog/main.c ****     int_t err;
+  98:../src/user_prog/main.c ****     st_os_abstraction_info_t ver_info;
+  99:../src/user_prog/main.c ****     st_r_drv_gpio_sc_config_t pin_led;
+ 100:../src/user_prog/main.c **** 
+ 101:../src/user_prog/main.c ****     /* For information only
+ 102:../src/user_prog/main.c ****      * Use stdio calls to open drivers once  the kernel is initialised
+ 103:../src/user_prog/main.c ****      *
+ 104:../src/user_prog/main.c ****      * ie
+ 105:../src/user_prog/main.c ****      * int_t ostm3_handle;
+ 106:../src/user_prog/main.c ****      * ostm3_handle = open (DEVICE_INDENTIFIER "ostm2", O_RDWR);
+ 107:../src/user_prog/main.c ****      * close (ostm3_handle);
+ 108:../src/user_prog/main.c ****      */
+ 109:../src/user_prog/main.c **** 
+ 110:../src/user_prog/main.c ****     gs_my_gpio_handle = open (DEVICE_INDENTIFIER "gpio", O_RDWR);
+  36              		.loc 1 110 0
+  37 0008 0210A0E3 		mov	r1, #2
+  38 000c 000000E3 		movw	r0, #:lower16:.LC0
+  39 0010 000040E3 		movt	r0, #:upper16:.LC0
+  40 0014 FEFFFFEB 		bl	open
+  41              	.LVL0:
+ 111:../src/user_prog/main.c **** 
+ 112:../src/user_prog/main.c ****     /* On error */
+ 113:../src/user_prog/main.c ****     if ( gs_my_gpio_handle < 0 )
+  42              		.loc 1 113 0
+  43 0018 000050E3 		cmp	r0, #0
+  44 001c 000000AA 		bge	.L2
+  45              	.L3:
+  46 0020 FEFFFFEA 		b	.L3
+  47              	.L2:
+ 114:../src/user_prog/main.c ****     {
+ 115:../src/user_prog/main.c ****         /* stop execute */
+ 116:../src/user_prog/main.c ****         while(1)
+ 117:../src/user_prog/main.c ****         {
+ 118:../src/user_prog/main.c ****             /* Do Nothing */
+ 119:../src/user_prog/main.c ****             ;
+ 120:../src/user_prog/main.c ****         }
+ 121:../src/user_prog/main.c ****     }
+ 122:../src/user_prog/main.c **** 
+ 123:../src/user_prog/main.c **** 
+ 124:../src/user_prog/main.c ****     /* ==== Output banner message ==== */
+ 125:../src/user_prog/main.c ****     printf("%s%s", sp_clear_screen, sp_cursor_home);
+  48              		.loc 1 125 0
+  49 0024 002000E3 		movw	r2, #:lower16:.LC1
+  50 0028 002040E3 		movt	r2, #:upper16:.LC1
+  51 002c 001000E3 		movw	r1, #:lower16:.LC2
+  52 0030 001040E3 		movt	r1, #:upper16:.LC2
+  53 0034 000000E3 		movw	r0, #:lower16:.LC3
+  54 0038 000040E3 		movt	r0, #:upper16:.LC3
+  55 003c FEFFFFEB 		bl	printf
+  56              	.LVL1:
+ 126:../src/user_prog/main.c ****     printf("RZ/A2M sample for GCC Ver. %u.%u\r\n", APPLICATION_INFO_VERSION, APPLICATION_INFO_RELEA
+  57              		.loc 1 126 0
+  58 0040 0120A0E3 		mov	r2, #1
+  59 0044 0310A0E3 		mov	r1, #3
+  60 0048 000000E3 		movw	r0, #:lower16:.LC4
+  61 004c 000040E3 		movt	r0, #:upper16:.LC4
+  62 0050 FEFFFFEB 		bl	printf
+  63              	.LVL2:
+ 127:../src/user_prog/main.c ****     printf("Copyright (C) 2018 Renesas Electronics Corporation. All rights reserved.\r\n");
+  64              		.loc 1 127 0
+  65 0054 000000E3 		movw	r0, #:lower16:.LC5
+  66 0058 000040E3 		movt	r0, #:upper16:.LC5
+  67 005c FEFFFFEB 		bl	puts
+  68              	.LVL3:
+ 128:../src/user_prog/main.c ****     printf("Build Info Date %s at %s \r\n", __DATE__, __TIME__);
+  69              		.loc 1 128 0
+  70 0060 002000E3 		movw	r2, #:lower16:.LC6
+  71 0064 002040E3 		movt	r2, #:upper16:.LC6
+  72 0068 001000E3 		movw	r1, #:lower16:.LC7
+  73 006c 001040E3 		movt	r1, #:upper16:.LC7
+  74 0070 000000E3 		movw	r0, #:lower16:.LC8
+  75 0074 000040E3 		movt	r0, #:upper16:.LC8
+  76 0078 FEFFFFEB 		bl	printf
+  77              	.LVL4:
+ 129:../src/user_prog/main.c **** 
+ 130:../src/user_prog/main.c ****     if(R_OS_GetVersion(&ver_info) == 0)
+  78              		.loc 1 130 0
+  79 007c 04008DE2 		add	r0, sp, #4
+  80 0080 FEFFFFEB 		bl	R_OS_GetVersion
+  81              	.LVL5:
+  82 0084 000050E3 		cmp	r0, #0
+  83 0088 0100000A 		beq	.L7
+  84              	.L4:
+ 131:../src/user_prog/main.c ****     {
+ 132:../src/user_prog/main.c ****         printf("%s Version %d.%d\r\n", ver_info.p_szdriver_name,
+ 133:../src/user_prog/main.c ****                 ver_info.version.sub.major, ver_info.version.sub.minor);
+ 134:../src/user_prog/main.c ****     }
+ 135:../src/user_prog/main.c **** 
+ 136:../src/user_prog/main.c ****     //CreateCuiTask();
+ 137:../src/user_prog/main.c ****     sample_main();
+  85              		.loc 1 137 0
+  86 008c FEFFFFEB 		bl	sample_main
+  87              	.LVL6:
+  88              	.L5:
+  89 0090 FEFFFFEA 		b	.L5
+  90              	.L7:
+ 132:../src/user_prog/main.c ****                 ver_info.version.sub.major, ver_info.version.sub.minor);
+  91              		.loc 1 132 0
+  92 0094 B430DDE1 		ldrh	r3, [sp, #4]
+  93 0098 B620DDE1 		ldrh	r2, [sp, #6]
+  94 009c 0C109DE5 		ldr	r1, [sp, #12]
+  95 00a0 000000E3 		movw	r0, #:lower16:.LC9
+  96 00a4 000040E3 		movt	r0, #:upper16:.LC9
+  97 00a8 FEFFFFEB 		bl	printf
+  98              	.LVL7:
+  99 00ac F6FFFFEA 		b	.L4
+ 100              		.cfi_endproc
+ 101              	.LFE4:
+ 103              		.section	.text.main,"ax",%progbits
+ 104              		.align	2
+ 105              		.global	main
+ 106              		.syntax unified
+ 107              		.arm
+ 108              		.fpu neon
+ 110              	main:
+ 111              	.LFB5:
+ 138:../src/user_prog/main.c ****     while(1)
+ 139:../src/user_prog/main.c ****     {
+ 140:../src/user_prog/main.c ****         /* Do Nothing */
+ 141:../src/user_prog/main.c ****         ;
+ 142:../src/user_prog/main.c ****     }
+ 143:../src/user_prog/main.c **** }/* End of function os_main_task_t */
+ 144:../src/user_prog/main.c **** 
+ 145:../src/user_prog/main.c **** /******************************************************************************
+ 146:../src/user_prog/main.c **** * Function Name: main
+ 147:../src/user_prog/main.c **** * Description  : C Entry point
+ 148:../src/user_prog/main.c **** *              : opens and configures cpg driver
+ 149:../src/user_prog/main.c **** *              : starts the freertos kernel
+ 150:../src/user_prog/main.c **** * Arguments    : none
+ 151:../src/user_prog/main.c **** * Return Value : 0
+ 152:../src/user_prog/main.c **** ******************************************************************************/
+ 153:../src/user_prog/main.c **** int_t main(void)
+ 154:../src/user_prog/main.c **** {
+ 112              		.loc 1 154 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116 0000 10402DE9 		push	{r4, lr}
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 4, -8
+ 119              		.cfi_offset 14, -4
+ 155:../src/user_prog/main.c ****     int_t cpg_handle;
+ 156:../src/user_prog/main.c **** 
+ 157:../src/user_prog/main.c ****     /* configure any drivers that are required before the Kernel initializes */
+ 158:../src/user_prog/main.c **** 
+ 159:../src/user_prog/main.c ****     /* Initialize the devlink layer */
+ 160:../src/user_prog/main.c ****     R_DEVLINK_Init();
+ 120              		.loc 1 160 0
+ 121 0004 FEFFFFEB 		bl	R_DEVLINK_Init
+ 122              	.LVL8:
+ 161:../src/user_prog/main.c **** 
+ 162:../src/user_prog/main.c ****     /* Initialize CPG */
+ 163:../src/user_prog/main.c ****     cpg_handle = direct_open("cpg", 0);
+ 123              		.loc 1 163 0
+ 124 0008 0010A0E3 		mov	r1, #0
+ 125 000c 000000E3 		movw	r0, #:lower16:.LC10
+ 126 0010 000040E3 		movt	r0, #:upper16:.LC10
+ 127 0014 FEFFFFEB 		bl	direct_open
+ 128              	.LVL9:
+ 164:../src/user_prog/main.c ****     if ( cpg_handle < 0 )
+ 129              		.loc 1 164 0
+ 130 0018 000050E3 		cmp	r0, #0
+ 131 001c 000000AA 		bge	.L9
+ 132              	.L10:
+ 133 0020 FEFFFFEA 		b	.L10
+ 134              	.L9:
+ 165:../src/user_prog/main.c ****     {
+ 166:../src/user_prog/main.c ****         /* stop execute */
+ 167:../src/user_prog/main.c ****         while(1)
+ 168:../src/user_prog/main.c ****         {
+ 169:../src/user_prog/main.c ****             /* Do Nothing */
+ 170:../src/user_prog/main.c ****             ;
+ 171:../src/user_prog/main.c ****         }
+ 172:../src/user_prog/main.c ****     }
+ 173:../src/user_prog/main.c **** 
+ 174:../src/user_prog/main.c ****     /* Can close handle if no need to change clock after here */
+ 175:../src/user_prog/main.c ****     direct_close(cpg_handle);
+ 135              		.loc 1 175 0
+ 136 0024 FEFFFFEB 		bl	direct_close
+ 137              	.LVL10:
+ 176:../src/user_prog/main.c **** 
+ 177:../src/user_prog/main.c ****     /* Start FreeRTOS */
+ 178:../src/user_prog/main.c ****     /* R_OS_InitKernel should never return */
+ 179:../src/user_prog/main.c ****     R_OS_KernelInit();
+ 138              		.loc 1 179 0
+ 139 0028 FEFFFFEB 		bl	R_OS_KernelInit
+ 140              	.LVL11:
+ 180:../src/user_prog/main.c **** 
+ 181:../src/user_prog/main.c **** }/* End of function main */
+ 141              		.loc 1 181 0
+ 142 002c 0000A0E3 		mov	r0, #0
+ 143 0030 1080BDE8 		pop	{r4, pc}
+ 144              		.cfi_endproc
+ 145              	.LFE5:
+ 147              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 148              		.align	2
+ 149              	.LC10:
+ 150 0000 63706700 		.ascii	"cpg\000"
+ 151              		.section	.rodata.os_main_task_t.str1.4,"aMS",%progbits,1
+ 152              		.align	2
+ 153              	.LC0:
+ 154 0000 5C5C2E5C 		.ascii	"\\\\.\\gpio\000"
+ 154      6770696F 
+ 154      00
+ 155 0009 000000   		.space	3
+ 156              	.LC1:
+ 157 000c 1B5B4800 		.ascii	"\033[H\000"
+ 158              	.LC2:
+ 159 0010 1B5B324A 		.ascii	"\033[2J\000"
+ 159      00
+ 160 0015 000000   		.space	3
+ 161              	.LC3:
+ 162 0018 25732573 		.ascii	"%s%s\000"
+ 162      00
+ 163 001d 000000   		.space	3
+ 164              	.LC4:
+ 165 0020 525A2F41 		.ascii	"RZ/A2M sample for GCC Ver. %u.%u\015\012\000"
+ 165      324D2073 
+ 165      616D706C 
+ 165      6520666F 
+ 165      72204743 
+ 166 0043 00       		.space	1
+ 167              	.LC5:
+ 168 0044 436F7079 		.ascii	"Copyright (C) 2018 Renesas Electronics Corporation."
+ 168      72696768 
+ 168      74202843 
+ 168      29203230 
+ 168      31382052 
+ 169 0077 20416C6C 		.ascii	" All rights reserved.\015\000"
+ 169      20726967 
+ 169      68747320 
+ 169      72657365 
+ 169      72766564 
+ 170 008e 0000     		.space	2
+ 171              	.LC6:
+ 172 0090 31353A33 		.ascii	"15:39:00\000"
+ 172      393A3030 
+ 172      00
+ 173 0099 000000   		.space	3
+ 174              	.LC7:
+ 175 009c 46656220 		.ascii	"Feb 19 2020\000"
+ 175      31392032 
+ 175      30323000 
+ 176              	.LC8:
+ 177 00a8 4275696C 		.ascii	"Build Info Date %s at %s \015\012\000"
+ 177      6420496E 
+ 177      666F2044 
+ 177      61746520 
+ 177      25732061 
+ 178              	.LC9:
+ 179 00c4 25732056 		.ascii	"%s Version %d.%d\015\012\000"
+ 179      65727369 
+ 179      6F6E2025 
+ 179      642E2564 
+ 179      0D0A00
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 183              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 184              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 185              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 186              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 187              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 188              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 189              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 190              		.file 10 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 191              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 192              		.file 12 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 193              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 194              		.file 14 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 195              		.file 15 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 196              		.file 16 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 197              		.file 17 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 198              		.file 18 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 199              		.file 19 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 200              		.file 20 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/os_abst
+ 201              		.file 21 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 202              		.file 22 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/os_abst
+ 203              		.file 23 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 204              		.file 24 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 205              		.file 25 "<built-in>"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:17     .text.os_main_task_t:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:23     .text.os_main_task_t:00000000 os_main_task_t
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:153    .rodata.os_main_task_t.str1.4:00000000 .LC0
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:156    .rodata.os_main_task_t.str1.4:0000000c .LC1
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:158    .rodata.os_main_task_t.str1.4:00000010 .LC2
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:161    .rodata.os_main_task_t.str1.4:00000018 .LC3
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:164    .rodata.os_main_task_t.str1.4:00000020 .LC4
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:167    .rodata.os_main_task_t.str1.4:00000044 .LC5
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:171    .rodata.os_main_task_t.str1.4:00000090 .LC6
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:174    .rodata.os_main_task_t.str1.4:0000009c .LC7
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:176    .rodata.os_main_task_t.str1.4:000000a8 .LC8
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:178    .rodata.os_main_task_t.str1.4:000000c4 .LC9
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:104    .text.main:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:110    .text.main:00000000 main
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:149    .rodata.main.str1.4:00000000 .LC10
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:148    .rodata.main.str1.4:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccYjJP5u.s:152    .rodata.os_main_task_t.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.187.2ff233552538c6ff9b8575ca8ea52cb3
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.stddef.h.39.ec95e8feac892e292b69dc7ae75b0d64
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.30.bbece7fa40993a78092dcc5805132560
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.8188691c2279eac7a223caa50f6694b9
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.161.19e15733342b50ead2919490b095303e
+                           .group:00000000 wm4._default_fcntl.h.6.b13d56891b95175b639f824a0fd1ed77
+                           .group:00000000 wm4.time.h.8.db4619001f026d0b4874c029fef0e91f
+                           .group:00000000 wm4.time.h.2.4581ce0ffb6627cfc02162c94bf846c9
+                           .group:00000000 wm4.time.h.25.106a07801fea6508dd6bbd3b8a1c271a
+                           .group:00000000 wm4.stat.h.71.d65ac61ff88c651e198008cfb38bda9c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.unistd.h.2.39165d5b7784d1815ef4b0c4be6df560
+                           .group:00000000 wm4.unistd.h.156.614f0202926a9fae83688cfc56e25f59
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.reent.h.91.b3ea049ebc5486622b61409b78486f84
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_devlink_wrapper.h.70.7c1584c2697f3b1858aea58c7b3e40d4
+                           .group:00000000 wm4.r_cpg_lld_rza2m.h.38.748e978f04f13de48a2982743caa786d
+                           .group:00000000 wm4.r_cpg_drv_api.h.32.8e566090ac7cba9971a7118d89beaaed
+                           .group:00000000 wm4.r_intc_lld_rza2m.h.35.3d9677ac15ad6ee277be59de3e3c1590
+                           .group:00000000 wm4.r_ostm_lld_rza2m.h.66.272f829b409763a94e47858c6b6cb517
+                           .group:00000000 wm4.r_ostm_drv_api.h.51.adcd0e7bd4841f6d7c67e44f00650c60
+                           .group:00000000 wm4.r_rza2_scifa_lld_cfg.h.36.61e814bf2acbefb3a77603b0f9c69f70
+                           .group:00000000 wm4.r_rza2_scifa_lld_api.h.40.f15aca924d8f4510909a605ba9e2cfc9
+                           .group:00000000 wm4.r_rza2_scifa_lld.h.43.14924534f2a1ea5a2c6faa4d9ad3aee1
+                           .group:00000000 wm4.r_scifa_drv_api.h.86.4a1a472a789b5a6ece99522cdc88f0f4
+                           .group:00000000 wm4.r_gpio_lld_rza2m.h.35.fd76d0816769697a06dd6f4a61c03021
+                           .group:00000000 wm4.r_gpio_drv_api.h.82.9514441e942567d0eb0b23efaff62239
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.r_task_priority.h.38.392c062e044daaa9b656a20ff77a37f0
+                           .group:00000000 wm4.version.h.34.8cd0817ba82d9aac945e0278506029ce
+
+UNDEFINED SYMBOLS
+open
+printf
+puts
+R_OS_GetVersion
+sample_main
+R_DEVLINK_Init
+direct_open
+direct_close
+R_OS_KernelInit

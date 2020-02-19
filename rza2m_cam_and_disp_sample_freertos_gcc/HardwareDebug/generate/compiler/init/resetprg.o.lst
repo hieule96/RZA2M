@@ -1,0 +1,1108 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"resetprg.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.disable_rtc,"ax",%progbits
+  17              		.align	2
+  18              		.syntax unified
+  19              		.arm
+  20              		.fpu neon
+  22              	disable_rtc:
+  23              	.LFB4:
+  24              		.file 1 "../generate/compiler/init/resetprg.c"
+   1:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+   2:../generate/compiler/init/resetprg.c ****  * DISCLAIMER
+   3:../generate/compiler/init/resetprg.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../generate/compiler/init/resetprg.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../generate/compiler/init/resetprg.c ****  * applicable laws, including copyright laws.
+   6:../generate/compiler/init/resetprg.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../generate/compiler/init/resetprg.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../generate/compiler/init/resetprg.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../generate/compiler/init/resetprg.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../generate/compiler/init/resetprg.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../generate/compiler/init/resetprg.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../generate/compiler/init/resetprg.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../generate/compiler/init/resetprg.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../generate/compiler/init/resetprg.c ****  * following link:
+  15:../generate/compiler/init/resetprg.c ****  * http://www.renesas.com/disclaimer
+  16:../generate/compiler/init/resetprg.c ****  *
+  17:../generate/compiler/init/resetprg.c ****  * Copyright (C) 2018 Renesas Electronics Corporation. All rights reserved.
+  18:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  19:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  20:../generate/compiler/init/resetprg.c ****  * File Name    : resetprg.c
+  21:../generate/compiler/init/resetprg.c ****  * Device(s)    : RZ/A2M
+  22:../generate/compiler/init/resetprg.c ****  * Tool-Chain   : e2Studio Ver 7.5.0
+  23:../generate/compiler/init/resetprg.c ****  *              : GNU Arm Embedded Toolchain 6-2017-q2-update
+  24:../generate/compiler/init/resetprg.c ****  * OS           : None
+  25:../generate/compiler/init/resetprg.c ****  * H/W Platform : RZ/A2M Evaluation Board
+  26:../generate/compiler/init/resetprg.c ****  * Description  : RZ/A2M Sample Program - C library entry point
+  27:../generate/compiler/init/resetprg.c ****  *              : Variants of this file must be created for each compiler
+  28:../generate/compiler/init/resetprg.c ****  * Operation    :
+  29:../generate/compiler/init/resetprg.c ****  * Limitations  :
+  30:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  31:../generate/compiler/init/resetprg.c **** 
+  32:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  33:../generate/compiler/init/resetprg.c ****  Includes   <System Includes> , "Project Includes"
+  34:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  35:../generate/compiler/init/resetprg.c **** #include "r_typedefs.h"
+  36:../generate/compiler/init/resetprg.c **** #include "compiler_settings.h"
+  37:../generate/compiler/init/resetprg.c **** #include "r_compiler_abstraction_api.h"
+  38:../generate/compiler/init/resetprg.c **** #include "r_cache_lld_rza2m.h"
+  39:../generate/compiler/init/resetprg.c **** #include "r_intc_drv_api.h"
+  40:../generate/compiler/init/resetprg.c **** #include "iodefine.h"
+  41:../generate/compiler/init/resetprg.c **** #include "iobitmask.h"
+  42:../generate/compiler/init/resetprg.c **** #include "rza_io_regrw.h"
+  43:../generate/compiler/init/resetprg.c **** #include "r_startup_config.h"
+  44:../generate/compiler/init/resetprg.c **** #include "resetprg.h"
+  45:../generate/compiler/init/resetprg.c **** 
+  46:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  47:../generate/compiler/init/resetprg.c ****  Macro definitions
+  48:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  49:../generate/compiler/init/resetprg.c **** #define R_PRV_RTC_COUNT (2)
+  50:../generate/compiler/init/resetprg.c **** #define R_PRV_USB_COUNT (2)
+  51:../generate/compiler/init/resetprg.c **** 
+  52:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  53:../generate/compiler/init/resetprg.c ****  Exported global variables
+  54:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  55:../generate/compiler/init/resetprg.c **** extern uint32_t __vector_mirror_table_base;
+  56:../generate/compiler/init/resetprg.c **** 
+  57:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  58:../generate/compiler/init/resetprg.c ****  Private (static) variables and functions
+  59:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  60:../generate/compiler/init/resetprg.c **** static void disable_rtc(uint32_t ch);
+  61:../generate/compiler/init/resetprg.c **** static void disable_usb(uint32_t ch);
+  62:../generate/compiler/init/resetprg.c **** 
+  63:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+  64:../generate/compiler/init/resetprg.c ****  * Function Name: resetprg
+  65:../generate/compiler/init/resetprg.c ****  * Description  : Program entry point after basic peripheral init.
+  66:../generate/compiler/init/resetprg.c ****  * Arguments    : none
+  67:../generate/compiler/init/resetprg.c ****  * Return Value : none
+  68:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+  69:../generate/compiler/init/resetprg.c **** void resetprg (void)
+  70:../generate/compiler/init/resetprg.c **** {
+  71:../generate/compiler/init/resetprg.c ****     /* Disable RTC if macro defined as 1 */
+  72:../generate/compiler/init/resetprg.c **** #if defined(STARTUP_CFG_DISABLE_RTC0) && (STARTUP_CFG_DISABLE_RTC0==1)
+  73:../generate/compiler/init/resetprg.c ****     disable_rtc(0);
+  74:../generate/compiler/init/resetprg.c **** #endif
+  75:../generate/compiler/init/resetprg.c **** #if defined(STARTUP_CFG_DISABLE_RTC1) && (STARTUP_CFG_DISABLE_RTC1==1)
+  76:../generate/compiler/init/resetprg.c ****     disable_rtc(1);
+  77:../generate/compiler/init/resetprg.c **** #endif
+  78:../generate/compiler/init/resetprg.c **** 
+  79:../generate/compiler/init/resetprg.c ****     /* Disable USB if macro defined as 1 */
+  80:../generate/compiler/init/resetprg.c **** #if defined(STARTUP_CFG_DISABLE_USB0) && (STARTUP_CFG_DISABLE_USB0==1)
+  81:../generate/compiler/init/resetprg.c ****     disable_usb(0);
+  82:../generate/compiler/init/resetprg.c **** #endif
+  83:../generate/compiler/init/resetprg.c **** #if defined(STARTUP_CFG_DISABLE_USB1) && (STARTUP_CFG_DISABLE_USB1==1)
+  84:../generate/compiler/init/resetprg.c ****     disable_usb(1);
+  85:../generate/compiler/init/resetprg.c **** #endif
+  86:../generate/compiler/init/resetprg.c **** 
+  87:../generate/compiler/init/resetprg.c ****     /*    Initialize INTC,
+  88:../generate/compiler/init/resetprg.c ****      *    Setup GIC.
+  89:../generate/compiler/init/resetprg.c ****      */
+  90:../generate/compiler/init/resetprg.c ****     if (R_INTC_Init() != INTC_SUCCESS)
+  91:../generate/compiler/init/resetprg.c ****     {
+  92:../generate/compiler/init/resetprg.c ****         while (1)
+  93:../generate/compiler/init/resetprg.c ****         {
+  94:../generate/compiler/init/resetprg.c ****             /* Spin here forever.. */
+  95:../generate/compiler/init/resetprg.c ****             R_COMPILER_Nop();
+  96:../generate/compiler/init/resetprg.c ****         }
+  97:../generate/compiler/init/resetprg.c ****     }
+  98:../generate/compiler/init/resetprg.c **** 
+  99:../generate/compiler/init/resetprg.c ****     /* Initial setting of the level 2 cache */
+ 100:../generate/compiler/init/resetprg.c ****     R_CACHE_L2Init();
+ 101:../generate/compiler/init/resetprg.c **** 
+ 102:../generate/compiler/init/resetprg.c ****     /* Initial setting of the level 1 cache */
+ 103:../generate/compiler/init/resetprg.c ****     R_CACHE_L1Init();
+ 104:../generate/compiler/init/resetprg.c **** 
+ 105:../generate/compiler/init/resetprg.c ****     /* change VBAR to use internal RAM */
+ 106:../generate/compiler/init/resetprg.c ****     __set_vbar((uint32_t)&__vector_mirror_table_base);
+ 107:../generate/compiler/init/resetprg.c **** 
+ 108:../generate/compiler/init/resetprg.c ****     __enable_irq();
+ 109:../generate/compiler/init/resetprg.c ****     __enable_fiq();
+ 110:../generate/compiler/init/resetprg.c **** 
+ 111:../generate/compiler/init/resetprg.c ****     /* call user program */
+ 112:../generate/compiler/init/resetprg.c ****     main();
+ 113:../generate/compiler/init/resetprg.c **** 
+ 114:../generate/compiler/init/resetprg.c ****     /* Stops program from running off */
+ 115:../generate/compiler/init/resetprg.c ****     while (1)
+ 116:../generate/compiler/init/resetprg.c ****     {
+ 117:../generate/compiler/init/resetprg.c ****         /* Spin here forever.. */
+ 118:../generate/compiler/init/resetprg.c ****         R_COMPILER_Nop();
+ 119:../generate/compiler/init/resetprg.c ****     }
+ 120:../generate/compiler/init/resetprg.c **** }
+ 121:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+ 122:../generate/compiler/init/resetprg.c ****  End of function resetprg
+ 123:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+ 124:../generate/compiler/init/resetprg.c **** 
+ 125:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+ 126:../generate/compiler/init/resetprg.c ****  * Function Name: disable_rtc
+ 127:../generate/compiler/init/resetprg.c ****  * Description  : disable RTC module (See HM 16.5.6 and 52.4.2)
+ 128:../generate/compiler/init/resetprg.c ****  * Arguments    : uint32_t ch : channel
+ 129:../generate/compiler/init/resetprg.c ****  * Return Value : none
+ 130:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+ 131:../generate/compiler/init/resetprg.c **** static void disable_rtc(uint32_t ch)
+ 132:../generate/compiler/init/resetprg.c **** {
+  25              		.loc 1 132 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              	.LVL0:
+ 133:../generate/compiler/init/resetprg.c ****     uint8_t dummy8;
+ 134:../generate/compiler/init/resetprg.c ****     uint32_t mask;
+ 135:../generate/compiler/init/resetprg.c ****     uint8_t shift;
+ 136:../generate/compiler/init/resetprg.c ****     static volatile struct st_rtc * const rtc[R_PRV_RTC_COUNT] =
+ 137:../generate/compiler/init/resetprg.c ****     {
+ 138:../generate/compiler/init/resetprg.c ****         &RTC0, &RTC1
+ 139:../generate/compiler/init/resetprg.c ****     };
+ 140:../generate/compiler/init/resetprg.c ****     static const uint8_t mstp_mask[R_PRV_RTC_COUNT] =
+ 141:../generate/compiler/init/resetprg.c ****     {
+ 142:../generate/compiler/init/resetprg.c ****         CPG_STBCR5_MSTP53, CPG_STBCR5_MSTP52
+ 143:../generate/compiler/init/resetprg.c ****     };
+ 144:../generate/compiler/init/resetprg.c ****     static const uint8_t mstp_shift[R_PRV_RTC_COUNT] =
+ 145:../generate/compiler/init/resetprg.c ****     {
+ 146:../generate/compiler/init/resetprg.c ****         CPG_STBCR5_MSTP53_SHIFT, CPG_STBCR5_MSTP52_SHIFT
+ 147:../generate/compiler/init/resetprg.c ****     };
+ 148:../generate/compiler/init/resetprg.c ****     static const uint16_t rtcxtalsel_mask[R_PRV_RTC_COUNT] =
+ 149:../generate/compiler/init/resetprg.c ****     {
+ 150:../generate/compiler/init/resetprg.c ****         PMG_RTCXTALSEL_RTC0XT, PMG_RTCXTALSEL_RTC1XT
+ 151:../generate/compiler/init/resetprg.c ****     };
+ 152:../generate/compiler/init/resetprg.c ****     static const uint8_t rtcxtalsel_shift[R_PRV_RTC_COUNT] =
+ 153:../generate/compiler/init/resetprg.c ****     {
+ 154:../generate/compiler/init/resetprg.c ****         PMG_RTCXTALSEL_RTC0XT_SHIFT, PMG_RTCXTALSEL_RTC1XT_SHIFT
+ 155:../generate/compiler/init/resetprg.c ****     };
+ 156:../generate/compiler/init/resetprg.c **** 
+ 157:../generate/compiler/init/resetprg.c ****     /* channel check */
+ 158:../generate/compiler/init/resetprg.c ****     if (ch >= R_PRV_RTC_COUNT)
+  30              		.loc 1 158 0
+  31 0000 010050E3 		cmp	r0, #1
+  32 0004 1EFF2F81 		bxhi	lr
+ 132:../generate/compiler/init/resetprg.c ****     uint8_t dummy8;
+  33              		.loc 1 132 0
+  34 0008 70402DE9 		push	{r4, r5, r6, lr}
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 000c 0050A0E1 		mov	r5, r0
+ 159:../generate/compiler/init/resetprg.c ****     {
+ 160:../generate/compiler/init/resetprg.c ****         return;
+ 161:../generate/compiler/init/resetprg.c ****     }
+ 162:../generate/compiler/init/resetprg.c **** 
+ 163:../generate/compiler/init/resetprg.c ****     /* 1: select RTCXTAL for RTC (RCR4.RCKSEL = 0) */
+ 164:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&rtc[ch]->RCR4.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+  41              		.loc 1 164 0
+  42 0010 003000E3 		movw	r3, #:lower16:.LANCHOR0
+  43 0014 003040E3 		movt	r3, #:upper16:.LANCHOR0
+  44 0018 004193E7 		ldr	r4, [r3, r0, lsl #2]
+  45 001c 286084E2 		add	r6, r4, #40
+  46 0020 0030E0E3 		mvn	r3, #0
+  47 0024 0020A0E3 		mov	r2, #0
+  48 0028 0210A0E1 		mov	r1, r2
+  49 002c 0600A0E1 		mov	r0, r6
+  50              	.LVL1:
+  51 0030 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+  52              	.LVL2:
+ 165:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&rtc[ch]->RCR4.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+  53              		.loc 1 165 0
+  54 0034 0020E0E3 		mvn	r2, #0
+  55 0038 0010A0E3 		mov	r1, #0
+  56 003c 0600A0E1 		mov	r0, r6
+  57 0040 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  58              	.LVL3:
+ 166:../generate/compiler/init/resetprg.c **** 
+ 167:../generate/compiler/init/resetprg.c ****     /* 2: disable RTC clock (RCR3.RTCEN = 0) */
+ 168:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&rtc[ch]->RCR3.BYTE, 0, RTC_RCR3_RTCEN_SHIFT, RTC_RCR3_RTCEN);
+  59              		.loc 1 168 0
+  60 0044 264084E2 		add	r4, r4, #38
+  61 0048 0130A0E3 		mov	r3, #1
+  62 004c 0020A0E3 		mov	r2, #0
+  63 0050 0210A0E1 		mov	r1, r2
+  64 0054 0400A0E1 		mov	r0, r4
+  65 0058 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+  66              	.LVL4:
+ 169:../generate/compiler/init/resetprg.c **** 
+ 170:../generate/compiler/init/resetprg.c ****     /* Wait for successfully disabled */
+ 171:../generate/compiler/init/resetprg.c ****     dummy8 = 1;
+  67              		.loc 1 171 0
+  68 005c 0100A0E3 		mov	r0, #1
+ 172:../generate/compiler/init/resetprg.c ****     while (0 != dummy8)
+  69              		.loc 1 172 0
+  70 0060 030000EA 		b	.L3
+  71              	.LVL5:
+  72              	.L4:
+ 173:../generate/compiler/init/resetprg.c ****     {
+ 174:../generate/compiler/init/resetprg.c ****         dummy8 = RZA_IO_RegRead_8(&rtc[ch]->RCR3.BYTE, RTC_RCR3_RTCEN_SHIFT, RTC_RCR3_RTCEN);
+  73              		.loc 1 174 0
+  74 0064 0120A0E3 		mov	r2, #1
+  75 0068 0010A0E3 		mov	r1, #0
+  76 006c 0400A0E1 		mov	r0, r4
+  77              	.LVL6:
+  78 0070 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  79              	.LVL7:
+  80              	.L3:
+ 172:../generate/compiler/init/resetprg.c ****     while (0 != dummy8)
+  81              		.loc 1 172 0
+  82 0074 000050E3 		cmp	r0, #0
+  83 0078 F9FFFF1A 		bne	.L4
+ 175:../generate/compiler/init/resetprg.c ****     }
+ 176:../generate/compiler/init/resetprg.c **** 
+ 177:../generate/compiler/init/resetprg.c ****     /* 3: disable RTC clock while standby mode */
+ 178:../generate/compiler/init/resetprg.c ****     mask  = rtcxtalsel_mask[ch];
+  84              		.loc 1 178 0
+  85 007c 003000E3 		movw	r3, #:lower16:.LANCHOR1
+  86 0080 003040E3 		movt	r3, #:upper16:.LANCHOR1
+  87 0084 8510A0E1 		lsl	r1, r5, #1
+  88              	.LVL8:
+ 179:../generate/compiler/init/resetprg.c ****     shift = rtcxtalsel_shift[ch];
+  89              		.loc 1 179 0
+  90 0088 002000E3 		movw	r2, #:lower16:.LANCHOR2
+  91 008c 002040E3 		movt	r2, #:upper16:.LANCHOR2
+  92              	.LVL9:
+ 180:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_16(&PMG.RTCXTALSEL.WORD, 0, shift, mask);
+  93              		.loc 1 180 0
+  94 0090 40400CE3 		movw	r4, #49216
+  95 0094 FF4C4FE3 		movt	r4, 64767
+  96 0098 B13093E1 		ldrh	r3, [r3, r1]
+  97              	.LVL10:
+  98 009c 0520D2E7 		ldrb	r2, [r2, r5]	@ zero_extendqisi2
+  99              	.LVL11:
+ 100 00a0 0010A0E3 		mov	r1, #0
+ 101 00a4 0400A0E1 		mov	r0, r4
+ 102              	.LVL12:
+ 103 00a8 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 104              	.LVL13:
+ 181:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_16(&PMG.RTCXTALSEL.WORD, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 105              		.loc 1 181 0
+ 106 00ac 0020E0E3 		mvn	r2, #0
+ 107 00b0 0010A0E3 		mov	r1, #0
+ 108 00b4 0400A0E1 		mov	r0, r4
+ 109 00b8 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 110              	.LVL14:
+ 182:../generate/compiler/init/resetprg.c **** 
+ 183:../generate/compiler/init/resetprg.c ****     /* 4: Stop RTC module */
+ 184:../generate/compiler/init/resetprg.c ****     mask  = mstp_mask[ch];
+ 111              		.loc 1 184 0
+ 112 00bc 003000E3 		movw	r3, #:lower16:.LANCHOR3
+ 113 00c0 003040E3 		movt	r3, #:upper16:.LANCHOR3
+ 114              	.LVL15:
+ 185:../generate/compiler/init/resetprg.c ****     shift = mstp_shift[ch];
+ 115              		.loc 1 185 0
+ 116 00c4 002000E3 		movw	r2, #:lower16:.LANCHOR4
+ 117 00c8 002040E3 		movt	r2, #:upper16:.LANCHOR4
+ 118              	.LVL16:
+ 186:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&CPG.STBCR5.BYTE, 1, shift, mask);
+ 119              		.loc 1 186 0
+ 120 00cc 284400E3 		movw	r4, #1064
+ 121 00d0 FE4C4FE3 		movt	r4, 64766
+ 122 00d4 0530D3E7 		ldrb	r3, [r3, r5]	@ zero_extendqisi2
+ 123              	.LVL17:
+ 124 00d8 0520D2E7 		ldrb	r2, [r2, r5]	@ zero_extendqisi2
+ 125              	.LVL18:
+ 126 00dc 0110A0E3 		mov	r1, #1
+ 127 00e0 0400A0E1 		mov	r0, r4
+ 128 00e4 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 129              	.LVL19:
+ 187:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&CPG.STBCR5.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 130              		.loc 1 187 0
+ 131 00e8 0020E0E3 		mvn	r2, #0
+ 132 00ec 0010A0E3 		mov	r1, #0
+ 133 00f0 0400A0E1 		mov	r0, r4
+ 134 00f4 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 135              	.LVL20:
+ 136 00f8 7080BDE8 		pop	{r4, r5, r6, pc}
+ 137              		.cfi_endproc
+ 138              	.LFE4:
+ 140              		.section	.text.disable_usb,"ax",%progbits
+ 141              		.align	2
+ 142              		.syntax unified
+ 143              		.arm
+ 144              		.fpu neon
+ 146              	disable_usb:
+ 147              	.LFB5:
+ 188:../generate/compiler/init/resetprg.c **** 
+ 189:../generate/compiler/init/resetprg.c **** }
+ 190:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+ 191:../generate/compiler/init/resetprg.c ****  End of function disable_rtc
+ 192:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+ 193:../generate/compiler/init/resetprg.c **** 
+ 194:../generate/compiler/init/resetprg.c **** /**************************************************************************************************
+ 195:../generate/compiler/init/resetprg.c ****  * Function Name: disable_usb
+ 196:../generate/compiler/init/resetprg.c ****  * Description  : disable USB module (See HM 32.2.4.4, 32.2.4.5, 32.2.20, 33.2.20, 52.2.6 and 52.4.
+ 197:../generate/compiler/init/resetprg.c ****  * Arguments    : uint32_t ch : channel
+ 198:../generate/compiler/init/resetprg.c ****  * Return Value : none
+ 199:../generate/compiler/init/resetprg.c ****  **************************************************************************************************
+ 200:../generate/compiler/init/resetprg.c **** static void disable_usb(uint32_t ch)
+ 201:../generate/compiler/init/resetprg.c **** {
+ 148              		.loc 1 201 0
+ 149              		.cfi_startproc
+ 150              		@ args = 0, pretend = 0, frame = 8
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152              	.LVL21:
+ 202:../generate/compiler/init/resetprg.c ****     uint8_t dummy8;
+ 203:../generate/compiler/init/resetprg.c ****     uint32_t mask;
+ 204:../generate/compiler/init/resetprg.c ****     uint8_t shift;
+ 205:../generate/compiler/init/resetprg.c **** 
+ 206:../generate/compiler/init/resetprg.c ****     /* USB Host IO reg Top Address(ch0, ch1) */
+ 207:../generate/compiler/init/resetprg.c ****     static volatile struct st_usb00 * const usb00_host[R_PRV_USB_COUNT] =
+ 208:../generate/compiler/init/resetprg.c ****     {
+ 209:../generate/compiler/init/resetprg.c ****         &USB00, &USB10
+ 210:../generate/compiler/init/resetprg.c ****     };
+ 211:../generate/compiler/init/resetprg.c **** 
+ 212:../generate/compiler/init/resetprg.c ****     /* USB Function IO reg Top Address(ch0, ch1) */
+ 213:../generate/compiler/init/resetprg.c ****     static volatile struct st_usb01 * const usb01_func[R_PRV_USB_COUNT] =
+ 214:../generate/compiler/init/resetprg.c ****     {
+ 215:../generate/compiler/init/resetprg.c ****         &USB01, &USB11
+ 216:../generate/compiler/init/resetprg.c ****     };
+ 217:../generate/compiler/init/resetprg.c **** 
+ 218:../generate/compiler/init/resetprg.c ****     /* MSTP */
+ 219:../generate/compiler/init/resetprg.c ****     static const uint8_t mstp_mask[R_PRV_USB_COUNT] =
+ 220:../generate/compiler/init/resetprg.c ****     {
+ 221:../generate/compiler/init/resetprg.c ****         CPG_STBCR6_MSTP61, CPG_STBCR6_MSTP60
+ 222:../generate/compiler/init/resetprg.c ****     };
+ 223:../generate/compiler/init/resetprg.c ****     static const uint8_t mstp_shift[R_PRV_USB_COUNT] =
+ 224:../generate/compiler/init/resetprg.c ****     {
+ 225:../generate/compiler/init/resetprg.c ****         CPG_STBCR6_MSTP61_SHIFT, CPG_STBCR6_MSTP60_SHIFT
+ 226:../generate/compiler/init/resetprg.c ****     };
+ 227:../generate/compiler/init/resetprg.c **** 
+ 228:../generate/compiler/init/resetprg.c ****     /* STBREQ */
+ 229:../generate/compiler/init/resetprg.c ****     static const uint8_t stbreq_mask[R_PRV_USB_COUNT] =
+ 230:../generate/compiler/init/resetprg.c ****     {
+ 231:../generate/compiler/init/resetprg.c ****         (CPG_STBREQ3_STBRQ31 | CPG_STBREQ3_STBRQ30), (CPG_STBREQ3_STBRQ33 | CPG_STBREQ3_STBRQ32)
+ 232:../generate/compiler/init/resetprg.c ****     };
+ 233:../generate/compiler/init/resetprg.c ****     static const uint8_t stbreq_shift[R_PRV_USB_COUNT] =
+ 234:../generate/compiler/init/resetprg.c ****     {
+ 235:../generate/compiler/init/resetprg.c ****         CPG_STBREQ3_STBRQ30_SHIFT, CPG_STBREQ3_STBRQ32_SHIFT
+ 236:../generate/compiler/init/resetprg.c ****     };
+ 237:../generate/compiler/init/resetprg.c **** 
+ 238:../generate/compiler/init/resetprg.c ****     /* STBACK */
+ 239:../generate/compiler/init/resetprg.c ****     static const uint8_t stback_mask[R_PRV_USB_COUNT] =
+ 240:../generate/compiler/init/resetprg.c ****     {
+ 241:../generate/compiler/init/resetprg.c ****         (CPG_STBACK3_STBAK31 | CPG_STBACK3_STBAK30), (CPG_STBACK3_STBAK33 | CPG_STBACK3_STBAK32)
+ 242:../generate/compiler/init/resetprg.c ****     };
+ 243:../generate/compiler/init/resetprg.c ****     static const uint8_t stback_shift[R_PRV_USB_COUNT] =
+ 244:../generate/compiler/init/resetprg.c ****     {
+ 245:../generate/compiler/init/resetprg.c ****         CPG_STBACK3_STBAK30_SHIFT, CPG_STBACK3_STBAK32_SHIFT
+ 246:../generate/compiler/init/resetprg.c ****     };
+ 247:../generate/compiler/init/resetprg.c **** 
+ 248:../generate/compiler/init/resetprg.c ****     /* channel check */
+ 249:../generate/compiler/init/resetprg.c ****     if (ch >= R_PRV_USB_COUNT)
+ 153              		.loc 1 249 0
+ 154 0000 010050E3 		cmp	r0, #1
+ 155 0004 1EFF2F81 		bxhi	lr
+ 201:../generate/compiler/init/resetprg.c ****     uint8_t dummy8;
+ 156              		.loc 1 201 0
+ 157 0008 F04F2DE9 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 158              		.cfi_def_cfa_offset 36
+ 159              		.cfi_offset 4, -36
+ 160              		.cfi_offset 5, -32
+ 161              		.cfi_offset 6, -28
+ 162              		.cfi_offset 7, -24
+ 163              		.cfi_offset 8, -20
+ 164              		.cfi_offset 9, -16
+ 165              		.cfi_offset 10, -12
+ 166              		.cfi_offset 11, -8
+ 167              		.cfi_offset 14, -4
+ 168 000c 0CD04DE2 		sub	sp, sp, #12
+ 169              		.cfi_def_cfa_offset 48
+ 170 0010 0070A0E1 		mov	r7, r0
+ 250:../generate/compiler/init/resetprg.c ****     {
+ 251:../generate/compiler/init/resetprg.c ****         return;
+ 252:../generate/compiler/init/resetprg.c ****     }
+ 253:../generate/compiler/init/resetprg.c **** 
+ 254:../generate/compiler/init/resetprg.c ****     /* 1: Start USB module */
+ 255:../generate/compiler/init/resetprg.c **** 
+ 256:../generate/compiler/init/resetprg.c ****     /* MSTP = 0 */
+ 257:../generate/compiler/init/resetprg.c ****     mask  = mstp_mask[ch];
+ 171              		.loc 1 257 0
+ 172 0014 003000E3 		movw	r3, #:lower16:.LANCHOR5
+ 173 0018 003040E3 		movt	r3, #:upper16:.LANCHOR5
+ 174 001c 0090D3E7 		ldrb	r9, [r3, r0]	@ zero_extendqisi2
+ 175              	.LVL22:
+ 258:../generate/compiler/init/resetprg.c ****     shift = mstp_shift[ch];
+ 176              		.loc 1 258 0
+ 177 0020 003000E3 		movw	r3, #:lower16:.LANCHOR6
+ 178 0024 003040E3 		movt	r3, #:upper16:.LANCHOR6
+ 179 0028 0030D3E7 		ldrb	r3, [r3, r0]	@ zero_extendqisi2
+ 180 002c 0320A0E1 		mov	r2, r3
+ 181 0030 04308DE5 		str	r3, [sp, #4]
+ 182              	.LVL23:
+ 259:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&CPG.STBCR6.BYTE, 0, shift, mask);
+ 183              		.loc 1 259 0
+ 184 0034 2C4400E3 		movw	r4, #1068
+ 185 0038 FE4C4FE3 		movt	r4, 64766
+ 186 003c 0930A0E1 		mov	r3, r9
+ 187 0040 0010A0E3 		mov	r1, #0
+ 188 0044 0400A0E1 		mov	r0, r4
+ 189              	.LVL24:
+ 190 0048 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 191              	.LVL25:
+ 260:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&CPG.STBCR6.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 192              		.loc 1 260 0
+ 193 004c 0020E0E3 		mvn	r2, #0
+ 194 0050 0010A0E3 		mov	r1, #0
+ 195 0054 0400A0E1 		mov	r0, r4
+ 196 0058 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 197              	.LVL26:
+ 261:../generate/compiler/init/resetprg.c **** 
+ 262:../generate/compiler/init/resetprg.c ****     /* STBREQ = 0 */
+ 263:../generate/compiler/init/resetprg.c ****     mask  = stbreq_mask[ch];
+ 198              		.loc 1 263 0
+ 199 005c 003000E3 		movw	r3, #:lower16:.LANCHOR7
+ 200 0060 003040E3 		movt	r3, #:upper16:.LANCHOR7
+ 201 0064 07B0D3E7 		ldrb	fp, [r3, r7]	@ zero_extendqisi2
+ 202              	.LVL27:
+ 264:../generate/compiler/init/resetprg.c ****     shift = stbreq_shift[ch];
+ 203              		.loc 1 264 0
+ 204 0068 003000E3 		movw	r3, #:lower16:.LANCHOR8
+ 205 006c 003040E3 		movt	r3, #:upper16:.LANCHOR8
+ 206 0070 07A0D3E7 		ldrb	r10, [r3, r7]	@ zero_extendqisi2
+ 207              	.LVL28:
+ 265:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&CPG.STBREQ3.BYTE, 0x0, shift, mask);
+ 208              		.loc 1 265 0
+ 209 0074 3840A0E3 		mov	r4, #56
+ 210 0078 FE4C4FE3 		movt	r4, 64766
+ 211 007c 0B30A0E1 		mov	r3, fp
+ 212 0080 0A20A0E1 		mov	r2, r10
+ 213 0084 0010A0E3 		mov	r1, #0
+ 214 0088 0400A0E1 		mov	r0, r4
+ 215 008c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 216              	.LVL29:
+ 266:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&CPG.STBREQ3.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 217              		.loc 1 266 0
+ 218 0090 0020E0E3 		mvn	r2, #0
+ 219 0094 0010A0E3 		mov	r1, #0
+ 220 0098 0400A0E1 		mov	r0, r4
+ 221 009c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 222              	.LVL30:
+ 267:../generate/compiler/init/resetprg.c **** 
+ 268:../generate/compiler/init/resetprg.c ****     /* check STBACK = 0 */
+ 269:../generate/compiler/init/resetprg.c ****     mask  = stback_mask[ch];
+ 223              		.loc 1 269 0
+ 224 00a0 003000E3 		movw	r3, #:lower16:.LANCHOR9
+ 225 00a4 003040E3 		movt	r3, #:upper16:.LANCHOR9
+ 226 00a8 0750D3E7 		ldrb	r5, [r3, r7]	@ zero_extendqisi2
+ 227              	.LVL31:
+ 270:../generate/compiler/init/resetprg.c ****     shift = stback_shift[ch];
+ 228              		.loc 1 270 0
+ 229 00ac 003000E3 		movw	r3, #:lower16:.LANCHOR10
+ 230 00b0 003040E3 		movt	r3, #:upper16:.LANCHOR10
+ 231 00b4 0760D3E7 		ldrb	r6, [r3, r7]	@ zero_extendqisi2
+ 232              	.LVL32:
+ 271:../generate/compiler/init/resetprg.c ****     dummy8 = 0x3;
+ 233              		.loc 1 271 0
+ 234 00b8 0340A0E3 		mov	r4, #3
+ 235 00bc 0400A0E1 		mov	r0, r4
+ 272:../generate/compiler/init/resetprg.c ****     while (0x0 != dummy8)
+ 236              		.loc 1 272 0
+ 237 00c0 040000EA 		b	.L11
+ 238              	.LVL33:
+ 239              	.L12:
+ 273:../generate/compiler/init/resetprg.c ****     {
+ 274:../generate/compiler/init/resetprg.c ****         dummy8 = RZA_IO_RegRead_8(&CPG.STBACK3.BYTE, shift, mask);
+ 240              		.loc 1 274 0
+ 241 00c4 0520A0E1 		mov	r2, r5
+ 242 00c8 0610A0E1 		mov	r1, r6
+ 243 00cc 4800A0E3 		mov	r0, #72
+ 244              	.LVL34:
+ 245 00d0 FE0C4FE3 		movt	r0, 64766
+ 246 00d4 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 247              	.LVL35:
+ 248              	.L11:
+ 272:../generate/compiler/init/resetprg.c ****     while (0x0 != dummy8)
+ 249              		.loc 1 272 0
+ 250 00d8 000050E3 		cmp	r0, #0
+ 251 00dc F8FFFF1A 		bne	.L12
+ 252 00e0 0040A0E1 		mov	r4, r0
+ 275:../generate/compiler/init/resetprg.c ****     }
+ 276:../generate/compiler/init/resetprg.c **** 
+ 277:../generate/compiler/init/resetprg.c ****     /* 2: Set the clock supplied to USBPHY to EXTAL clock (PHYCLK_CTRL.UCLKSEL = 0) */
+ 278:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_32(&usb00_host[ch]->PHYCLK_CTRL.LONG, 0, USB_PHYCLK_CTRL_UCLKSEL_SHIFT, USB_PHY
+ 253              		.loc 1 278 0
+ 254 00e4 003000E3 		movw	r3, #:lower16:.LANCHOR11
+ 255 00e8 003040E3 		movt	r3, #:upper16:.LANCHOR11
+ 256 00ec 078193E7 		ldr	r8, [r3, r7, lsl #2]
+ 257 00f0 0130A0E3 		mov	r3, #1
+ 258 00f4 0020A0E3 		mov	r2, #0
+ 259 00f8 0210A0E1 		mov	r1, r2
+ 260 00fc 210D88E2 		add	r0, r8, #2112
+ 261              	.LVL36:
+ 262 0100 040080E2 		add	r0, r0, #4
+ 263 0104 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 264              	.LVL37:
+ 279:../generate/compiler/init/resetprg.c **** 
+ 280:../generate/compiler/init/resetprg.c ****     /* 3: It can recover from deep standby by DP, DM change (PHYIF_CTRL.FIXPHY = 1) */
+ 281:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_32(&usb00_host[ch]->PHYIF_CTRL.LONG, 1, USB_PHYIF_CTRL_FIXPHY_SHIFT, USB_PHYIF_
+ 265              		.loc 1 281 0
+ 266 0108 0130A0E3 		mov	r3, #1
+ 267 010c 0020A0E3 		mov	r2, #0
+ 268 0110 0310A0E1 		mov	r1, r3
+ 269 0114 210D88E2 		add	r0, r8, #2112
+ 270 0118 080080E2 		add	r0, r0, #8
+ 271 011c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 272              	.LVL38:
+ 282:../generate/compiler/init/resetprg.c **** 
+ 283:../generate/compiler/init/resetprg.c ****     /* 4: UTMI+PHY Normal Mode (LPSTS.SUSPM = 1) */
+ 284:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_16(&usb01_func[ch]->LPSTS.WORD, 1, USB_LPSTS_SUSPM_SHIFT, USB_LPSTS_SUSPM);
+ 273              		.loc 1 284 0
+ 274 0120 003000E3 		movw	r3, #:lower16:.LANCHOR12
+ 275 0124 003040E3 		movt	r3, #:upper16:.LANCHOR12
+ 276 0128 070193E7 		ldr	r0, [r3, r7, lsl #2]
+ 277 012c 0139A0E3 		mov	r3, #16384
+ 278 0130 0E20A0E3 		mov	r2, #14
+ 279 0134 0110A0E3 		mov	r1, #1
+ 280 0138 010C80E2 		add	r0, r0, #256
+ 281 013c 020080E2 		add	r0, r0, #2
+ 282 0140 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 283              	.LVL39:
+ 285:../generate/compiler/init/resetprg.c **** 
+ 286:../generate/compiler/init/resetprg.c ****     /* 5: UTMI + reset release (USBCTR.PLL_RST = 0) */
+ 287:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_32(&usb00_host[ch]->USBCTR.LONG, 0, USB_USBCTR_PLL_RST_SHIFT, USB_USBCTR_PLL_RS
+ 284              		.loc 1 287 0
+ 285 0144 837F88E2 		add	r7, r8, #524
+ 286              	.LVL40:
+ 287 0148 0230A0E3 		mov	r3, #2
+ 288 014c 0120A0E3 		mov	r2, #1
+ 289 0150 0010A0E3 		mov	r1, #0
+ 290 0154 0700A0E1 		mov	r0, r7
+ 291 0158 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 292              	.LVL41:
+ 288:../generate/compiler/init/resetprg.c **** 
+ 289:../generate/compiler/init/resetprg.c ****     /* 6: wait 200us delay(Waiting for oscillation stabilization of USBPHY built-in PLL) */
+ 290:../generate/compiler/init/resetprg.c ****     R_SoftwareDelay(STARTUP_CFG_USB_PHY_PLL_DELAY_COUNT);
+ 293              		.loc 1 290 0
+ 294 015c 7D0FA0E3 		mov	r0, #500
+ 295 0160 FEFFFFEB 		bl	R_SoftwareDelay
+ 296              	.LVL42:
+ 291:../generate/compiler/init/resetprg.c **** 
+ 292:../generate/compiler/init/resetprg.c ****     /* 7: Pulldown resistance control is effective (LINECTRL1 = 0x000A0000) */
+ 293:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_32(
+ 297              		.loc 1 293 0
+ 298 0164 0030E0E3 		mvn	r3, #0
+ 299 0168 0020A0E3 		mov	r2, #0
+ 300 016c 0A18A0E3 		mov	r1, #655360
+ 301 0170 810E88E2 		add	r0, r8, #2064
+ 302 0174 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 303              	.LVL43:
+ 294:../generate/compiler/init/resetprg.c ****             &usb00_host[ch]->LINECTRL1.LONG,
+ 295:../generate/compiler/init/resetprg.c ****             (USB_LINECTRL1_DPRPD_EN | USB_LINECTRL1_DMRPD_EN),
+ 296:../generate/compiler/init/resetprg.c ****             IOREG_NONSHIFT_ACCESS,
+ 297:../generate/compiler/init/resetprg.c ****             IOREG_NONMASK_ACCESS);
+ 298:../generate/compiler/init/resetprg.c **** 
+ 299:../generate/compiler/init/resetprg.c ****     /* 8: USBPHY standby mode (USBCTR.DIRPD = 1) */
+ 300:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_32(&usb00_host[ch]->USBCTR.LONG, 1, USB_USBCTR_DIRPD_SHIFT, USB_USBCTR_DIRPD);
+ 304              		.loc 1 300 0
+ 305 0178 0430A0E3 		mov	r3, #4
+ 306 017c 0220A0E3 		mov	r2, #2
+ 307 0180 0110A0E3 		mov	r1, #1
+ 308 0184 0700A0E1 		mov	r0, r7
+ 309 0188 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 310              	.LVL44:
+ 301:../generate/compiler/init/resetprg.c **** 
+ 302:../generate/compiler/init/resetprg.c ****     /* 9: Stop USB module */
+ 303:../generate/compiler/init/resetprg.c **** 
+ 304:../generate/compiler/init/resetprg.c ****     /* STBREQ = 1 */
+ 305:../generate/compiler/init/resetprg.c ****     mask  = stbreq_mask[ch];
+ 306:../generate/compiler/init/resetprg.c ****     shift = stbreq_shift[ch];
+ 307:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&CPG.STBREQ3.BYTE, 0x3, shift, mask);
+ 311              		.loc 1 307 0
+ 312 018c 3870A0E3 		mov	r7, #56
+ 313 0190 FE7C4FE3 		movt	r7, 64766
+ 314 0194 0B30A0E1 		mov	r3, fp
+ 315 0198 0A20A0E1 		mov	r2, r10
+ 316 019c 0310A0E3 		mov	r1, #3
+ 317 01a0 0700A0E1 		mov	r0, r7
+ 318 01a4 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 319              	.LVL45:
+ 308:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&CPG.STBREQ3.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 320              		.loc 1 308 0
+ 321 01a8 0020E0E3 		mvn	r2, #0
+ 322 01ac 0010A0E3 		mov	r1, #0
+ 323 01b0 0700A0E1 		mov	r0, r7
+ 324 01b4 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 325              	.LVL46:
+ 326 01b8 0400A0E1 		mov	r0, r4
+ 309:../generate/compiler/init/resetprg.c **** 
+ 310:../generate/compiler/init/resetprg.c ****     /* check STBACK = 1 */
+ 311:../generate/compiler/init/resetprg.c ****     mask  = stback_mask[ch];
+ 312:../generate/compiler/init/resetprg.c ****     shift = stback_shift[ch];
+ 313:../generate/compiler/init/resetprg.c ****     dummy8 = 0x0;
+ 314:../generate/compiler/init/resetprg.c ****     while (0x3 != dummy8)
+ 327              		.loc 1 314 0
+ 328 01bc 040000EA 		b	.L13
+ 329              	.LVL47:
+ 330              	.L14:
+ 315:../generate/compiler/init/resetprg.c ****     {
+ 316:../generate/compiler/init/resetprg.c ****         dummy8 = RZA_IO_RegRead_8(&CPG.STBACK3.BYTE, shift, mask);
+ 331              		.loc 1 316 0
+ 332 01c0 0520A0E1 		mov	r2, r5
+ 333 01c4 0610A0E1 		mov	r1, r6
+ 334 01c8 4800A0E3 		mov	r0, #72
+ 335              	.LVL48:
+ 336 01cc FE0C4FE3 		movt	r0, 64766
+ 337 01d0 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 338              	.LVL49:
+ 339              	.L13:
+ 314:../generate/compiler/init/resetprg.c ****     {
+ 340              		.loc 1 314 0
+ 341 01d4 030050E3 		cmp	r0, #3
+ 342 01d8 F8FFFF1A 		bne	.L14
+ 343              	.LVL50:
+ 317:../generate/compiler/init/resetprg.c ****     }
+ 318:../generate/compiler/init/resetprg.c **** 
+ 319:../generate/compiler/init/resetprg.c ****     /* MSTP = 1 */
+ 320:../generate/compiler/init/resetprg.c ****     mask  = mstp_mask[ch];
+ 321:../generate/compiler/init/resetprg.c ****     shift = mstp_shift[ch];
+ 322:../generate/compiler/init/resetprg.c ****     RZA_IO_RegWrite_8(&CPG.STBCR6.BYTE, 1, shift, mask);
+ 344              		.loc 1 322 0
+ 345 01dc 2C4400E3 		movw	r4, #1068
+ 346 01e0 FE4C4FE3 		movt	r4, 64766
+ 347 01e4 0930A0E1 		mov	r3, r9
+ 348 01e8 04209DE5 		ldr	r2, [sp, #4]
+ 349 01ec 0110A0E3 		mov	r1, #1
+ 350 01f0 0400A0E1 		mov	r0, r4
+ 351              	.LVL51:
+ 352 01f4 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 353              	.LVL52:
+ 323:../generate/compiler/init/resetprg.c ****     RZA_IO_RegRead_8(&CPG.STBCR6.BYTE, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 354              		.loc 1 323 0
+ 355 01f8 0020E0E3 		mvn	r2, #0
+ 356 01fc 0010A0E3 		mov	r1, #0
+ 357 0200 0400A0E1 		mov	r0, r4
+ 358 0204 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 359              	.LVL53:
+ 324:../generate/compiler/init/resetprg.c **** 
+ 325:../generate/compiler/init/resetprg.c **** }
+ 360              		.loc 1 325 0
+ 361 0208 0CD08DE2 		add	sp, sp, #12
+ 362              		.cfi_def_cfa_offset 36
+ 363              		@ sp needed
+ 364 020c F08FBDE8 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 365              		.cfi_endproc
+ 366              	.LFE5:
+ 368              		.section	.text.resetprg,"ax",%progbits
+ 369              		.align	2
+ 370              		.global	resetprg
+ 371              		.syntax unified
+ 372              		.arm
+ 373              		.fpu neon
+ 375              	resetprg:
+ 376              	.LFB3:
+  70:../generate/compiler/init/resetprg.c ****     /* Disable RTC if macro defined as 1 */
+ 377              		.loc 1 70 0
+ 378              		.cfi_startproc
+ 379              		@ Volatile: function does not return.
+ 380              		@ args = 0, pretend = 0, frame = 0
+ 381              		@ frame_needed = 0, uses_anonymous_args = 0
+ 382 0000 10402DE9 		push	{r4, lr}
+ 383              		.cfi_def_cfa_offset 8
+ 384              		.cfi_offset 4, -8
+ 385              		.cfi_offset 14, -4
+  73:../generate/compiler/init/resetprg.c **** #endif
+ 386              		.loc 1 73 0
+ 387 0004 0000A0E3 		mov	r0, #0
+ 388 0008 FEFFFFEB 		bl	disable_rtc
+ 389              	.LVL54:
+  76:../generate/compiler/init/resetprg.c **** #endif
+ 390              		.loc 1 76 0
+ 391 000c 0100A0E3 		mov	r0, #1
+ 392 0010 FEFFFFEB 		bl	disable_rtc
+ 393              	.LVL55:
+  81:../generate/compiler/init/resetprg.c **** #endif
+ 394              		.loc 1 81 0
+ 395 0014 0000A0E3 		mov	r0, #0
+ 396 0018 FEFFFFEB 		bl	disable_usb
+ 397              	.LVL56:
+  84:../generate/compiler/init/resetprg.c **** #endif
+ 398              		.loc 1 84 0
+ 399 001c 0100A0E3 		mov	r0, #1
+ 400 0020 FEFFFFEB 		bl	disable_usb
+ 401              	.LVL57:
+  90:../generate/compiler/init/resetprg.c ****     {
+ 402              		.loc 1 90 0
+ 403 0024 FEFFFFEB 		bl	R_INTC_Init
+ 404              	.LVL58:
+ 405 0028 000050E3 		cmp	r0, #0
+ 406 002c 0100000A 		beq	.L20
+ 407              	.L21:
+ 408              	.LBB6:
+ 409              	.LBB7:
+ 410              		.file 2 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler
+   1:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** /**************************************************************************************************
+   2:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * DISCLAIMER
+   3:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * applicable laws, including copyright laws.
+   6:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES
+  12:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * following link:
+  15:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * http://www.renesas.com/disclaimer
+  16:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  *
+  17:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Copyright (C) 2018 Renesas Electronics Corporation. All rights reserved.
+  18:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  **************************************************************************************************
+  19:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** /**************************************************************************************************
+  20:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * File Name    : r_compiler_abstraction_api.h
+  21:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Description  : Provides a common api for frequently used compiler specifc operations
+  22:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  **************************************************************************************************
+  23:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #include  "r_typedefs.h"
+  24:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  25:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #ifndef SRC_RENESAS_COMPILER_INC_R_COMPILER_ABSTRACTION_API_H_
+  26:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define SRC_RENESAS_COMPILER_INC_R_COMPILER_ABSTRACTION_API_H_
+  27:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  28:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define R_COMPILER_INLINE static inline
+  29:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define R_COMPILER_WEAK __attribute__((weak))
+  30:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  31:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __enable_irq(void);
+  32:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern uint32_t __disable_irq(void);
+  33:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __enable_fiq(void);
+  34:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __disable_fiq(void);
+  35:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  36:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  37:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** R_COMPILER_INLINE void R_COMPILER_Nop(void) { __asm volatile ("nop"); }
+ 411              		.loc 2 37 0 discriminator 1
+ 412              		.syntax divided
+ 413              	@ 37 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc
+ 414 0030 00F020E3 		nop
+ 415              	@ 0 "" 2
+ 416              		.arm
+ 417              		.syntax unified
+ 418 0034 FDFFFFEA 		b	.L21
+ 419              	.L20:
+ 420              	.LBE7:
+ 421              	.LBE6:
+ 100:../generate/compiler/init/resetprg.c **** 
+ 422              		.loc 1 100 0
+ 423 0038 FEFFFFEB 		bl	R_CACHE_L2Init
+ 424              	.LVL59:
+ 103:../generate/compiler/init/resetprg.c **** 
+ 425              		.loc 1 103 0
+ 426 003c FEFFFFEB 		bl	R_CACHE_L1Init
+ 427              	.LVL60:
+ 106:../generate/compiler/init/resetprg.c **** 
+ 428              		.loc 1 106 0
+ 429 0040 000000E3 		movw	r0, #:lower16:__vector_mirror_table_base
+ 430 0044 000040E3 		movt	r0, #:upper16:__vector_mirror_table_base
+ 431 0048 FEFFFFEB 		bl	__set_vbar
+ 432              	.LVL61:
+ 108:../generate/compiler/init/resetprg.c ****     __enable_fiq();
+ 433              		.loc 1 108 0
+ 434 004c FEFFFFEB 		bl	__enable_irq
+ 435              	.LVL62:
+ 109:../generate/compiler/init/resetprg.c **** 
+ 436              		.loc 1 109 0
+ 437 0050 FEFFFFEB 		bl	__enable_fiq
+ 438              	.LVL63:
+ 112:../generate/compiler/init/resetprg.c **** 
+ 439              		.loc 1 112 0
+ 440 0054 FEFFFFEB 		bl	main
+ 441              	.LVL64:
+ 442              	.L22:
+ 443              	.LBB8:
+ 444              	.LBB9:
+ 445              		.loc 2 37 0 discriminator 1
+ 446              		.syntax divided
+ 447              	@ 37 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc
+ 448 0058 00F020E3 		nop
+ 449              	@ 0 "" 2
+ 450              		.arm
+ 451              		.syntax unified
+ 452 005c FDFFFFEA 		b	.L22
+ 453              	.LBE9:
+ 454              	.LBE8:
+ 455              		.cfi_endproc
+ 456              	.LFE3:
+ 458              		.section	.rodata.mstp_mask.69226,"a",%progbits
+ 459              		.align	2
+ 460              		.set	.LANCHOR3,. + 0
+ 463              	mstp_mask.69226:
+ 464 0000 08       		.byte	8
+ 465 0001 04       		.byte	4
+ 466              		.section	.rodata.mstp_mask.69241,"a",%progbits
+ 467              		.align	2
+ 468              		.set	.LANCHOR5,. + 0
+ 471              	mstp_mask.69241:
+ 472 0000 02       		.byte	2
+ 473 0001 01       		.byte	1
+ 474              		.section	.rodata.mstp_shift.69227,"a",%progbits
+ 475              		.align	2
+ 476              		.set	.LANCHOR4,. + 0
+ 479              	mstp_shift.69227:
+ 480 0000 03       		.byte	3
+ 481 0001 02       		.byte	2
+ 482              		.section	.rodata.mstp_shift.69242,"a",%progbits
+ 483              		.align	2
+ 484              		.set	.LANCHOR6,. + 0
+ 487              	mstp_shift.69242:
+ 488 0000 01       		.byte	1
+ 489 0001 00       		.byte	0
+ 490              		.section	.rodata.rtc.69225,"a",%progbits
+ 491              		.align	2
+ 492              		.set	.LANCHOR0,. + 0
+ 495              	rtc.69225:
+ 496 0000 00D0FFFC 		.word	-50343936
+ 497 0004 0010FFFC 		.word	-50393088
+ 498              		.section	.rodata.rtcxtalsel_mask.69228,"a",%progbits
+ 499              		.align	2
+ 500              		.set	.LANCHOR1,. + 0
+ 503              	rtcxtalsel_mask.69228:
+ 504 0000 0100     		.short	1
+ 505 0002 0200     		.short	2
+ 506              		.section	.rodata.rtcxtalsel_shift.69229,"a",%progbits
+ 507              		.align	2
+ 508              		.set	.LANCHOR2,. + 0
+ 511              	rtcxtalsel_shift.69229:
+ 512 0000 00       		.byte	0
+ 513 0001 01       		.byte	1
+ 514              		.section	.rodata.stback_mask.69245,"a",%progbits
+ 515              		.align	2
+ 516              		.set	.LANCHOR9,. + 0
+ 519              	stback_mask.69245:
+ 520 0000 03       		.byte	3
+ 521 0001 0C       		.byte	12
+ 522              		.section	.rodata.stback_shift.69246,"a",%progbits
+ 523              		.align	2
+ 524              		.set	.LANCHOR10,. + 0
+ 527              	stback_shift.69246:
+ 528 0000 00       		.byte	0
+ 529 0001 02       		.byte	2
+ 530              		.section	.rodata.stbreq_mask.69243,"a",%progbits
+ 531              		.align	2
+ 532              		.set	.LANCHOR7,. + 0
+ 535              	stbreq_mask.69243:
+ 536 0000 03       		.byte	3
+ 537 0001 0C       		.byte	12
+ 538              		.section	.rodata.stbreq_shift.69244,"a",%progbits
+ 539              		.align	2
+ 540              		.set	.LANCHOR8,. + 0
+ 543              	stbreq_shift.69244:
+ 544 0000 00       		.byte	0
+ 545 0001 02       		.byte	2
+ 546              		.section	.rodata.usb00_host.69239,"a",%progbits
+ 547              		.align	2
+ 548              		.set	.LANCHOR11,. + 0
+ 551              	usb00_host.69239:
+ 552 0000 008021E8 		.word	-400457728
+ 553 0004 00A021E8 		.word	-400449536
+ 554              		.section	.rodata.usb01_func.69240,"a",%progbits
+ 555              		.align	2
+ 556              		.set	.LANCHOR12,. + 0
+ 559              	usb01_func.69240:
+ 560 0000 009021E8 		.word	-400453632
+ 561 0004 00B021E8 		.word	-400445440
+ 562              		.text
+ 563              	.Letext0:
+ 564              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 565              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 566              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 567              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 568              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 569              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 570              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 571              		.file 10 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 572              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 573              		.file 12 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 574              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 575              		.file 14 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 576              		.file 15 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 577              		.file 16 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compile
+ 578              		.file 17 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 579              		.file 18 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compile
+DEFINED SYMBOLS
+                            *ABS*:00000000 resetprg.c
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:17     .text.disable_rtc:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:22     .text.disable_rtc:00000000 disable_rtc
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:492    .rodata.rtc.69225:00000000 .LANCHOR0
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:500    .rodata.rtcxtalsel_mask.69228:00000000 .LANCHOR1
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:508    .rodata.rtcxtalsel_shift.69229:00000000 .LANCHOR2
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:460    .rodata.mstp_mask.69226:00000000 .LANCHOR3
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:476    .rodata.mstp_shift.69227:00000000 .LANCHOR4
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:141    .text.disable_usb:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:146    .text.disable_usb:00000000 disable_usb
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:468    .rodata.mstp_mask.69241:00000000 .LANCHOR5
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:484    .rodata.mstp_shift.69242:00000000 .LANCHOR6
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:532    .rodata.stbreq_mask.69243:00000000 .LANCHOR7
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:540    .rodata.stbreq_shift.69244:00000000 .LANCHOR8
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:516    .rodata.stback_mask.69245:00000000 .LANCHOR9
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:524    .rodata.stback_shift.69246:00000000 .LANCHOR10
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:548    .rodata.usb00_host.69239:00000000 .LANCHOR11
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:556    .rodata.usb01_func.69240:00000000 .LANCHOR12
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:369    .text.resetprg:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:375    .text.resetprg:00000000 resetprg
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:459    .rodata.mstp_mask.69226:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:463    .rodata.mstp_mask.69226:00000000 mstp_mask.69226
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:467    .rodata.mstp_mask.69241:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:471    .rodata.mstp_mask.69241:00000000 mstp_mask.69241
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:475    .rodata.mstp_shift.69227:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:479    .rodata.mstp_shift.69227:00000000 mstp_shift.69227
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:483    .rodata.mstp_shift.69242:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:487    .rodata.mstp_shift.69242:00000000 mstp_shift.69242
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:491    .rodata.rtc.69225:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:495    .rodata.rtc.69225:00000000 rtc.69225
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:499    .rodata.rtcxtalsel_mask.69228:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:503    .rodata.rtcxtalsel_mask.69228:00000000 rtcxtalsel_mask.69228
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:507    .rodata.rtcxtalsel_shift.69229:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:511    .rodata.rtcxtalsel_shift.69229:00000000 rtcxtalsel_shift.69229
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:515    .rodata.stback_mask.69245:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:519    .rodata.stback_mask.69245:00000000 stback_mask.69245
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:523    .rodata.stback_shift.69246:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:527    .rodata.stback_shift.69246:00000000 stback_shift.69246
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:531    .rodata.stbreq_mask.69243:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:535    .rodata.stbreq_mask.69243:00000000 stbreq_mask.69243
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:539    .rodata.stbreq_shift.69244:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:543    .rodata.stbreq_shift.69244:00000000 stbreq_shift.69244
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:547    .rodata.usb00_host.69239:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:551    .rodata.usb00_host.69239:00000000 usb00_host.69239
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:555    .rodata.usb01_func.69240:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccOuoLGB.s:559    .rodata.usb01_func.69240:00000000 usb01_func.69240
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4.stddef.h.39.a38874c8f8a57e66301090908ec2a69f
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.features.h.33.d97f2d646536517df901beeb5b9993f5
+                           .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.newlib.h.8.5f2124c7e712be65f83b91ff86a0b1c1
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.r_cache_lld_rza2m.h.47.60fd1c425e79f0ee4cd5b4a9383d982b
+                           .group:00000000 wm4.r_intc_lld_rza2m.h.35.3d9677ac15ad6ee277be59de3e3c1590
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+
+UNDEFINED SYMBOLS
+RZA_IO_RegWrite_8
+RZA_IO_RegRead_8
+RZA_IO_RegWrite_16
+RZA_IO_RegRead_16
+RZA_IO_RegWrite_32
+R_SoftwareDelay
+R_INTC_Init
+R_CACHE_L2Init
+R_CACHE_L1Init
+__vector_mirror_table_base
+__set_vbar
+__enable_irq
+__enable_fiq
+main

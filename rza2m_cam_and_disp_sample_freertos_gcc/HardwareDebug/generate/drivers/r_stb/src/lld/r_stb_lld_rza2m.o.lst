@@ -1,0 +1,2209 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"r_stb_lld_rza2m.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.get_stbcr_info,"ax",%progbits
+  17              		.align	2
+  18              		.syntax unified
+  19              		.arm
+  20              		.fpu neon
+  22              	get_stbcr_info:
+  23              	.LFB3:
+  24              		.file 1 "../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c"
+   1:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /*******************************************************************************
+   2:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * DISCLAIMER
+   3:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * This software is supplied by Renesas Electronics Corporation and is only
+   4:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * intended for use with Renesas products. No other uses are authorized. This
+   5:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * software is owned by Renesas Electronics Corporation and is protected under
+   6:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * all applicable laws, including copyright laws.
+   7:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   8:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT
+   9:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+  10:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED.
+  11:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * TO THE MAXIMUM EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS
+  12:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES SHALL BE LIABLE
+  13:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR
+  14:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * ANY REASON RELATED TO THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE
+  15:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+  16:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Renesas reserves the right, without notice, to make changes to this software
+  17:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * and to discontinue the availability of this software. By using this software,
+  18:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * you agree to the additional terms and conditions found by accessing the
+  19:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * following link:
+  20:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * http://www.renesas.com/disclaimer
+  21:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Copyright (C) 2018 Renesas Electronics Corporation. All rights reserved.
+  22:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** *******************************************************************************/
+  23:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /*******************************************************************************
+  24:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * File Name    : r_stb_lld_rza2m.c
+  25:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Device(s)    : RZ/A2M
+  26:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Tool-Chain   : e2Studio Ver 7.5.0
+  27:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** *              : GNU Arm Embedded Toolchain 6-2017-q2-update
+  28:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * OS           : None
+  29:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * H/W Platform : RZ/A2M Evaluation Board
+  30:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Description  : RZ/A2M Sample Program - API function of STB module
+  31:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Operation    :
+  32:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** * Limitations  :
+  33:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** *******************************************************************************/
+  34:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  35:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  36:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Includes   <System Includes> , "Project Includes"
+  37:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  38:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include <string.h>
+  39:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include <ctype.h>
+  40:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "r_typedefs.h"
+  41:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "r_stb_drv_link.h"
+  42:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "rza_io_regrw.h"
+  43:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "iodefine.h"
+  44:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "iobitmask.h"
+  45:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #include "compiler_settings.h"
+  46:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  47:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  48:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  49:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Macro definitions
+  50:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  51:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #define STB_PRV_RRAM_AREA_3 (*(volatile unsigned long *)0x80010000)
+  52:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #define STB_PRV_RRAM_AREA_2 (*(volatile unsigned long *)0x80008000)
+  53:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #define STB_PRV_RRAM_AREA_1 (*(volatile unsigned long *)0x80004000)
+  54:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** #define STB_PRV_RRAM_AREA_0 (*(volatile unsigned long *)0x80000000)
+  55:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  56:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  57:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Typedef definitions
+  58:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  59:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** typedef struct
+  60:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+  61:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_module_t   module;
+  62:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     volatile void  * reg_address;
+  63:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     uint8_t          mask;
+  64:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** } st_r_prv_reg_info_t;
+  65:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  66:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  67:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  68:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Imported global variables and functions (from other files)
+  69:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  70:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  71:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  72:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  73:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Exported global variables and functions (to be accessed by other files)
+  74:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  75:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  76:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  77:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+  78:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** Private global variables and functions
+  79:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** ******************************************************************************/
+  80:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /*! Version Information */
+  81:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_drv_info_t gs_lld_info =
+  82:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+  83:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+  84:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ((STDIO_STB_RZ_LLD_VERSION_MAJOR << 16) + STDIO_STB_RZ_LLD_VERSION_MINOR)
+  85:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     },
+  86:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     STDIO_STB_RZ_LLD_BUILD_NUM,
+  87:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     STDIO_STB_RZ_LLD_DRV_NAME
+  88:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** };
+  89:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+  90:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t gs_stbcr[] =
+  91:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+  92:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CORESIGHT, &CPG.STBCR2.BYTE,  CPG_STBCR2_MSTP20},
+  93:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_OSTM0,     &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP36},
+  94:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_OSTM1,     &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP35},
+  95:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_OSTM2,     &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP34},
+  96:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_MTU3,      &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP33},
+  97:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CANFD,     &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP32},
+  98:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_ADC,       &CPG.STBCR5.BYTE,  CPG_STBCR5_MSTP57},
+  99:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_GPT,       &CPG.STBCR3.BYTE,  CPG_STBCR3_MSTP30},
+ 100:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCIFA0,    &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP47},
+ 101:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCIFA1,    &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP46},
+ 102:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCIFA2,    &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP45},
+ 103:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCIFA3,    &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP44},
+ 104:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCIFA4,    &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP43},
+ 105:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCI0,      &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP42},
+ 106:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SCI1,      &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP41},
+ 107:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_IrDA,      &CPG.STBCR4.BYTE,  CPG_STBCR4_MSTP40},
+ 108:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CEU,       &CPG.STBCR5.BYTE,  CPG_STBCR5_MSTP56},
+ 109:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RTC0,      &CPG.STBCR5.BYTE,  CPG_STBCR5_MSTP53},
+ 110:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RTC1,      &CPG.STBCR5.BYTE,  CPG_STBCR5_MSTP52},
+ 111:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_JCU,       &CPG.STBCR5.BYTE,  CPG_STBCR5_MSTP51},
+ 112:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VIN,       &CPG.STBCR6.BYTE,  CPG_STBCR6_MSTP66},
+ 113:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_ETHER,     &CPG.STBCR6.BYTE,  CPG_STBCR6_MSTP65|CPG_STBCR6_MSTP64|CPG_STBCR6_MSTP63|CPG
+ 114:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB0,      &CPG.STBCR6.BYTE,  CPG_STBCR6_MSTP61},
+ 115:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB1,      &CPG.STBCR6.BYTE,  CPG_STBCR6_MSTP60},
+ 116:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_IMR2,      &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP77},
+ 117:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRW,       &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP76},
+ 118:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_MIPI,      &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP75},
+ 119:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SSIF0,     &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP73},
+ 120:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SSIF1,     &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP72},
+ 121:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SSIF2,     &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP71},
+ 122:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SSIF3,     &CPG.STBCR7.BYTE,  CPG_STBCR7_MSTP70},
+ 123:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_I2C0,      &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP87},
+ 124:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_I2C1,      &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP86},
+ 125:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_I2C2,      &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP85},
+ 126:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_I2C3,      &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP84},
+ 127:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SPIBSC,    &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP83},
+ 128:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VDC6,      &CPG.STBCR8.BYTE,  CPG_STBCR8_MSTP81},
+ 129:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RSPI0,     &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP97},
+ 130:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RSPI1,     &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP96},
+ 131:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RSPI2,     &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP95},
+ 132:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_HYPERBUS,  &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP93},
+ 133:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_OCTAMEM,   &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP92},
+ 134:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_RSPDIF,    &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP91},
+ 135:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRP,       &CPG.STBCR9.BYTE,  CPG_STBCR9_MSTP90},
+ 136:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_TSIP,      &CPG.STBCR10.BYTE, CPG_STBCR10_MSTP107},
+ 137:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_NAND,      &CPG.STBCR10.BYTE, CPG_STBCR10_MSTP104},
+ 138:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC0,    &CPG.STBCR10.BYTE, CPG_STBCR10_MSTP103|CPG_STBCR10_MSTP102},
+ 139:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC1,    &CPG.STBCR10.BYTE, CPG_STBCR10_MSTP101|CPG_STBCR10_MSTP100},
+ 140:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** };
+ 141:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 142:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t gs_stbreq[] =
+ 143:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 144:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CORESIGHT, &CPG.STBREQ1.BYTE, CPG_STBREQ1_STBRQ15},
+ 145:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CEU,       &CPG.STBREQ1.BYTE, CPG_STBREQ1_STBRQ10},
+ 146:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_JCU,       &CPG.STBREQ1.BYTE, CPG_STBREQ1_STBRQ13},
+ 147:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VIN,       &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ27},
+ 148:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_ETHER,     &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ26},
+ 149:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB0,      &CPG.STBREQ3.BYTE, CPG_STBREQ3_STBRQ31|CPG_STBREQ3_STBRQ30},
+ 150:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB1,      &CPG.STBREQ3.BYTE, CPG_STBREQ3_STBRQ33|CPG_STBREQ3_STBRQ32},
+ 151:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_IMR2,      &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ23},
+ 152:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRW,       &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ21|CPG_STBREQ2_STBRQ20},
+ 153:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VDC6,      &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ25},
+ 154:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRP,       &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ24},
+ 155:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_NAND,      &CPG.STBREQ2.BYTE, CPG_STBREQ2_STBRQ22},
+ 156:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC0,    &CPG.STBREQ1.BYTE, CPG_STBREQ1_STBRQ12},
+ 157:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC1,    &CPG.STBREQ1.BYTE, CPG_STBREQ1_STBRQ11},
+ 158:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** };
+ 159:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 160:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t gs_stback[] =
+ 161:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 162:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CORESIGHT, &CPG.STBACK1.BYTE, CPG_STBACK1_STBAK15},
+ 163:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CEU,       &CPG.STBACK1.BYTE, CPG_STBACK1_STBAK10},
+ 164:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_JCU,       &CPG.STBACK1.BYTE, CPG_STBACK1_STBAK13},
+ 165:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VIN,       &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK27},
+ 166:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_ETHER,     &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK26},
+ 167:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB0,      &CPG.STBACK3.BYTE, CPG_STBACK3_STBAK31|CPG_STBACK3_STBAK30},
+ 168:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_USB1,      &CPG.STBACK3.BYTE, CPG_STBACK3_STBAK33|CPG_STBACK3_STBAK32},
+ 169:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_IMR2,      &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK23},
+ 170:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRW,       &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK21|CPG_STBACK2_STBAK20},
+ 171:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VDC6,      &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK25},
+ 172:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRP,       &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK24},
+ 173:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_NAND,      &CPG.STBACK2.BYTE, CPG_STBACK2_STBAK22},
+ 174:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC0,    &CPG.STBACK1.BYTE, CPG_STBACK1_STBAK12},
+ 175:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SDMMC1,    &CPG.STBACK1.BYTE, CPG_STBACK1_STBAK11},
+ 176:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** };
+ 177:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 178:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t gs_swrstcr[] =
+ 179:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 180:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_CEU,       &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST21},
+ 181:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_JCU,       &CPG.SWRSTCR1.BYTE, CPG_SWRSTCR1_SRST11},
+ 182:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VIN,       &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST25},
+ 183:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_IMR2,      &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST24},
+ 184:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_DRW,       &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST22},
+ 185:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_MIPI,      &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST23},
+ 186:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_SPIBSC,    &CPG.SWRSTCR1.BYTE, CPG_SWRSTCR1_SRST10},
+ 187:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_VDC6,      &CPG.SWRSTCR1.BYTE, CPG_SWRSTCR1_SRST13},
+ 188:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_TSIP,      &CPG.SWRSTCR1.BYTE, CPG_SWRSTCR1_SRST12},
+ 189:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {MODULE_NAND,      &CPG.SWRSTCR2.BYTE, CPG_SWRSTCR2_SRST26},
+ 190:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 191:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** };
+ 192:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 193:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 194:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         get_stbcr_info
+ 195:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get STBCR register information for specified module
+ 196:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module to check
+ 197:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @return     Pointer for register information or NULL if invalid module
+ 198:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 199:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t * get_stbcr_info(e_stb_module_t module)
+ 200:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+  25              		.loc 1 200 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              		@ link register save eliminated.
+  30              	.LVL0:
+ 201:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t index;
+ 202:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t count = (sizeof gs_stbcr) / (sizeof gs_stbcr[0]);
+ 203:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 204:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     for ( index = 0; index < count; index++ )
+  31              		.loc 1 204 0
+  32 0000 0030A0E3 		mov	r3, #0
+  33              	.LVL1:
+  34              	.L2:
+  35              		.loc 1 204 0 is_stmt 0 discriminator 1
+  36 0004 2F0053E3 		cmp	r3, #47
+  37 0008 0B00008A 		bhi	.L6
+ 205:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 206:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( module == gs_stbcr[index].module )
+  38              		.loc 1 206 0 is_stmt 1
+  39 000c 002000E3 		movw	r2, #:lower16:.LANCHOR0
+  40 0010 002040E3 		movt	r2, #:upper16:.LANCHOR0
+  41 0014 83C083E0 		add	ip, r3, r3, lsl #1
+  42 0018 0C11A0E1 		lsl	r1, ip, #2
+  43 001c 0120D2E7 		ldrb	r2, [r2, r1]	@ zero_extendqisi2
+  44 0020 000052E1 		cmp	r2, r0
+ 204:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+  45              		.loc 1 204 0 discriminator 2
+  46 0024 01308312 		addne	r3, r3, #1
+  47              	.LVL2:
+  48 0028 F5FFFF1A 		bne	.L2
+  49              	.L7:
+ 207:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 208:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             return &gs_stbcr[index];
+  50              		.loc 1 208 0
+  51 002c 000000E3 		movw	r0, #:lower16:.LANCHOR0
+  52              	.LVL3:
+  53 0030 000040E3 		movt	r0, #:upper16:.LANCHOR0
+  54 0034 010080E0 		add	r0, r0, r1
+  55 0038 1EFF2FE1 		bx	lr
+  56              	.LVL4:
+  57              	.L6:
+ 209:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 210:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 211:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 212:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* return NULL if not found */
+ 213:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return NULL;
+  58              		.loc 1 213 0
+  59 003c 0000A0E3 		mov	r0, #0
+  60              	.LVL5:
+ 214:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+  61              		.loc 1 214 0
+  62 0040 1EFF2FE1 		bx	lr
+  63              		.cfi_endproc
+  64              	.LFE3:
+  66              		.section	.text.get_stbreq_info,"ax",%progbits
+  67              		.align	2
+  68              		.syntax unified
+  69              		.arm
+  70              		.fpu neon
+  72              	get_stbreq_info:
+  73              	.LFB4:
+ 215:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 216:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function get_stbcr_info
+ 217:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 218:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 219:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 220:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         get_stbreq_info
+ 221:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get STBREQ register information for specified module
+ 222:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module to check
+ 223:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @return     Pointer for register information or NULL if invalid module
+ 224:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 225:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t * get_stbreq_info(e_stb_module_t module)
+ 226:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+  74              		.loc 1 226 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  79              	.LVL6:
+ 227:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t index;
+ 228:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t count = (sizeof gs_stbreq) / (sizeof gs_stbreq[0]);
+ 229:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 230:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     for ( index = 0; index < count; index++ )
+  80              		.loc 1 230 0
+  81 0000 0030A0E3 		mov	r3, #0
+  82              	.LVL7:
+  83              	.L9:
+  84              		.loc 1 230 0 is_stmt 0 discriminator 1
+  85 0004 0D0053E3 		cmp	r3, #13
+  86 0008 0B00008A 		bhi	.L13
+ 231:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 232:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( module == gs_stbreq[index].module )
+  87              		.loc 1 232 0 is_stmt 1
+  88 000c 002000E3 		movw	r2, #:lower16:.LANCHOR1
+  89 0010 002040E3 		movt	r2, #:upper16:.LANCHOR1
+  90 0014 83C083E0 		add	ip, r3, r3, lsl #1
+  91 0018 0C11A0E1 		lsl	r1, ip, #2
+  92 001c 0120D2E7 		ldrb	r2, [r2, r1]	@ zero_extendqisi2
+  93 0020 000052E1 		cmp	r2, r0
+ 230:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+  94              		.loc 1 230 0 discriminator 2
+  95 0024 01308312 		addne	r3, r3, #1
+  96              	.LVL8:
+  97 0028 F5FFFF1A 		bne	.L9
+  98              	.L14:
+ 233:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 234:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             return &gs_stbreq[index];
+  99              		.loc 1 234 0
+ 100 002c 000000E3 		movw	r0, #:lower16:.LANCHOR1
+ 101              	.LVL9:
+ 102 0030 000040E3 		movt	r0, #:upper16:.LANCHOR1
+ 103 0034 010080E0 		add	r0, r0, r1
+ 104 0038 1EFF2FE1 		bx	lr
+ 105              	.LVL10:
+ 106              	.L13:
+ 235:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 236:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 237:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 238:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* return NULL if not found */
+ 239:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return NULL;
+ 107              		.loc 1 239 0
+ 108 003c 0000A0E3 		mov	r0, #0
+ 109              	.LVL11:
+ 240:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 110              		.loc 1 240 0
+ 111 0040 1EFF2FE1 		bx	lr
+ 112              		.cfi_endproc
+ 113              	.LFE4:
+ 115              		.section	.text.get_stback_info,"ax",%progbits
+ 116              		.align	2
+ 117              		.syntax unified
+ 118              		.arm
+ 119              		.fpu neon
+ 121              	get_stback_info:
+ 122              	.LFB5:
+ 241:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 242:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function get_stbreq_info
+ 243:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 244:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 245:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 246:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         get_stback_info
+ 247:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get STBACK register information for specified module
+ 248:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module to check
+ 249:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @return     Pointer for register information or NULL if invalid module
+ 250:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 251:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t * get_stback_info(e_stb_module_t module)
+ 252:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 123              		.loc 1 252 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128              	.LVL12:
+ 253:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t index;
+ 254:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t count = (sizeof gs_stback) / (sizeof gs_stback[0]);
+ 255:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 256:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     for ( index = 0; index < count; index++ )
+ 129              		.loc 1 256 0
+ 130 0000 0030A0E3 		mov	r3, #0
+ 131              	.LVL13:
+ 132              	.L16:
+ 133              		.loc 1 256 0 is_stmt 0 discriminator 1
+ 134 0004 0D0053E3 		cmp	r3, #13
+ 135 0008 0B00008A 		bhi	.L20
+ 257:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 258:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( module == gs_stback[index].module )
+ 136              		.loc 1 258 0 is_stmt 1
+ 137 000c 002000E3 		movw	r2, #:lower16:.LANCHOR2
+ 138 0010 002040E3 		movt	r2, #:upper16:.LANCHOR2
+ 139 0014 83C083E0 		add	ip, r3, r3, lsl #1
+ 140 0018 0C11A0E1 		lsl	r1, ip, #2
+ 141 001c 0120D2E7 		ldrb	r2, [r2, r1]	@ zero_extendqisi2
+ 142 0020 000052E1 		cmp	r2, r0
+ 256:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 143              		.loc 1 256 0 discriminator 2
+ 144 0024 01308312 		addne	r3, r3, #1
+ 145              	.LVL14:
+ 146 0028 F5FFFF1A 		bne	.L16
+ 147              	.L21:
+ 259:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 260:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             return &gs_stback[index];
+ 148              		.loc 1 260 0
+ 149 002c 000000E3 		movw	r0, #:lower16:.LANCHOR2
+ 150              	.LVL15:
+ 151 0030 000040E3 		movt	r0, #:upper16:.LANCHOR2
+ 152 0034 010080E0 		add	r0, r0, r1
+ 153 0038 1EFF2FE1 		bx	lr
+ 154              	.LVL16:
+ 155              	.L20:
+ 261:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 262:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 263:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 264:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* return NULL if not found */
+ 265:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return NULL;
+ 156              		.loc 1 265 0
+ 157 003c 0000A0E3 		mov	r0, #0
+ 158              	.LVL17:
+ 266:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 159              		.loc 1 266 0
+ 160 0040 1EFF2FE1 		bx	lr
+ 161              		.cfi_endproc
+ 162              	.LFE5:
+ 164              		.section	.text.get_swrstcr_info,"ax",%progbits
+ 165              		.align	2
+ 166              		.syntax unified
+ 167              		.arm
+ 168              		.fpu neon
+ 170              	get_swrstcr_info:
+ 171              	.LFB6:
+ 267:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 268:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function get_stback_info
+ 269:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 270:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 271:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 272:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         get_swrstcr_info
+ 273:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get SWRSTCR register information for specified module
+ 274:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module to check
+ 275:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @return     Pointer for register information or NULL if invalid module
+ 276:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 277:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static const st_r_prv_reg_info_t * get_swrstcr_info(e_stb_module_t module)
+ 278:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 172              		.loc 1 278 0
+ 173              		.cfi_startproc
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176              		@ link register save eliminated.
+ 177              	.LVL18:
+ 279:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t index;
+ 280:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     size_t count = (sizeof gs_swrstcr) / (sizeof gs_swrstcr[0]);
+ 281:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 282:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     for ( index = 0; index < count; index++ )
+ 178              		.loc 1 282 0
+ 179 0000 0030A0E3 		mov	r3, #0
+ 180              	.LVL19:
+ 181              	.L23:
+ 182              		.loc 1 282 0 is_stmt 0 discriminator 1
+ 183 0004 090053E3 		cmp	r3, #9
+ 184 0008 0B00008A 		bhi	.L27
+ 283:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 284:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( module == gs_swrstcr[index].module )
+ 185              		.loc 1 284 0 is_stmt 1
+ 186 000c 002000E3 		movw	r2, #:lower16:.LANCHOR3
+ 187 0010 002040E3 		movt	r2, #:upper16:.LANCHOR3
+ 188 0014 83C083E0 		add	ip, r3, r3, lsl #1
+ 189 0018 0C11A0E1 		lsl	r1, ip, #2
+ 190 001c 0120D2E7 		ldrb	r2, [r2, r1]	@ zero_extendqisi2
+ 191 0020 000052E1 		cmp	r2, r0
+ 282:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 192              		.loc 1 282 0 discriminator 2
+ 193 0024 01308312 		addne	r3, r3, #1
+ 194              	.LVL20:
+ 195 0028 F5FFFF1A 		bne	.L23
+ 196              	.L28:
+ 285:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 286:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             return &gs_swrstcr[index];
+ 197              		.loc 1 286 0
+ 198 002c 000000E3 		movw	r0, #:lower16:.LANCHOR3
+ 199              	.LVL21:
+ 200 0030 000040E3 		movt	r0, #:upper16:.LANCHOR3
+ 201 0034 010080E0 		add	r0, r0, r1
+ 202 0038 1EFF2FE1 		bx	lr
+ 203              	.LVL22:
+ 204              	.L27:
+ 287:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 288:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 289:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 290:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* return NULL if not found */
+ 291:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return NULL;
+ 205              		.loc 1 291 0
+ 206 003c 0000A0E3 		mov	r0, #0
+ 207              	.LVL23:
+ 292:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 208              		.loc 1 292 0
+ 209 0040 1EFF2FE1 		bx	lr
+ 210              		.cfi_endproc
+ 211              	.LFE6:
+ 213              		.section	.text.is_clock_supplied,"ax",%progbits
+ 214              		.align	2
+ 215              		.syntax unified
+ 216              		.arm
+ 217              		.fpu neon
+ 219              	is_clock_supplied:
+ 220              	.LFB7:
+ 293:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 294:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function get_swrstcr_info
+ 295:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 296:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 297:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 298:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         is_clock_supplied
+ 299:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Check if clock supplied for specified module
+ 300:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module to check
+ 301:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     true Clock is supplied
+ 302:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     false Clock not suppliked
+ 303:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 304:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** static bool_t is_clock_supplied(e_stb_module_t module)
+ 305:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 221              		.loc 1 305 0
+ 222              		.cfi_startproc
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225              	.LVL24:
+ 226 0000 10402DE9 		push	{r4, lr}
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 4, -8
+ 229              		.cfi_offset 14, -4
+ 230              	.LVL25:
+ 306:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     bool_t result;
+ 307:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stbcr;
+ 308:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     uint8_t value;
+ 309:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 310:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* initialise as clock is not supplied */
+ 311:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     result = false;
+ 312:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 313:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the STBCR register info for specified module */
+ 314:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stbcr = get_stbcr_info(module);
+ 231              		.loc 1 314 0
+ 232 0004 FEFFFFEB 		bl	get_stbcr_info
+ 233              	.LVL26:
+ 315:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( NULL != p_stbcr )
+ 234              		.loc 1 315 0
+ 235 0008 000050E3 		cmp	r0, #0
+ 236 000c 0900000A 		beq	.L31
+ 316:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 317:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         value = RZA_IO_RegRead_8(p_stbcr->reg_address, IOREG_NONSHIFT_ACCESS, p_stbcr->mask);
+ 237              		.loc 1 317 0
+ 238 0010 0820D0E5 		ldrb	r2, [r0, #8]	@ zero_extendqisi2
+ 239 0014 0010A0E3 		mov	r1, #0
+ 240 0018 040090E5 		ldr	r0, [r0, #4]
+ 241              	.LVL27:
+ 242 001c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 243              	.LVL28:
+ 318:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( 0 == value )
+ 244              		.loc 1 318 0
+ 245 0020 000050E3 		cmp	r0, #0
+ 246 0024 0100001A 		bne	.L34
+ 319:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 320:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* return true if all related STBCR bit is zero */
+ 321:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             result = true;
+ 247              		.loc 1 321 0
+ 248 0028 0100A0E3 		mov	r0, #1
+ 249              	.LVL29:
+ 322:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 323:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 324:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 325:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return result;
+ 326:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 250              		.loc 1 326 0
+ 251 002c 1080BDE8 		pop	{r4, pc}
+ 252              	.LVL30:
+ 253              	.L34:
+ 311:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 254              		.loc 1 311 0
+ 255 0030 0000A0E3 		mov	r0, #0
+ 256              	.LVL31:
+ 257 0034 1080BDE8 		pop	{r4, pc}
+ 258              	.LVL32:
+ 259              	.L31:
+ 260 0038 0000A0E3 		mov	r0, #0
+ 261              	.LVL33:
+ 262 003c 1080BDE8 		pop	{r4, pc}
+ 263              		.cfi_endproc
+ 264              	.LFE7:
+ 266              		.section	.text.R_STB_RequestModuleStart,"ax",%progbits
+ 267              		.align	2
+ 268              		.global	R_STB_RequestModuleStart
+ 269              		.syntax unified
+ 270              		.arm
+ 271              		.fpu neon
+ 273              	R_STB_RequestModuleStart:
+ 274              	.LFB8:
+ 327:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 328:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function is_clock_supplied
+ 329:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 330:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 331:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 332:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_RequestModuleStart
+ 333:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Cleanup to start the module after supplying clock
+ 334:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 335:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 336:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 337:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_STATE     Invalid state for operation
+ 338:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_AGAIN             This operation was not completed
+ 339:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 340:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t R_STB_RequestModuleStart( e_stb_module_t module )
+ 341:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 275              		.loc 1 341 0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279              	.LVL34:
+ 280 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 281              		.cfi_def_cfa_offset 24
+ 282              		.cfi_offset 4, -24
+ 283              		.cfi_offset 5, -20
+ 284              		.cfi_offset 6, -16
+ 285              		.cfi_offset 7, -12
+ 286              		.cfi_offset 8, -8
+ 287              		.cfi_offset 14, -4
+ 288 0004 0060A0E1 		mov	r6, r0
+ 289              	.LVL35:
+ 342:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 343:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stbreq;
+ 344:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stback;
+ 345:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     uint8_t value;
+ 346:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 347:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 348:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 349:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 350:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the STBREQ and the STBACK information */
+ 351:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stbreq = get_stbreq_info(module);
+ 290              		.loc 1 351 0
+ 291 0008 FEFFFFEB 		bl	get_stbreq_info
+ 292              	.LVL36:
+ 293 000c 0050A0E1 		mov	r5, r0
+ 294              	.LVL37:
+ 352:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stback = get_stback_info(module);
+ 295              		.loc 1 352 0
+ 296 0010 0600A0E1 		mov	r0, r6
+ 297              	.LVL38:
+ 298 0014 FEFFFFEB 		bl	get_stback_info
+ 299              	.LVL39:
+ 353:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 354:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 355:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_stback) || (NULL == p_stbreq) )
+ 300              		.loc 1 355 0
+ 301 0018 0070A0E1 		mov	r7, r0
+ 302 001c 000055E3 		cmp	r5, #0
+ 303 0020 00005013 		cmpne	r0, #0
+ 304 0024 0600000A 		beq	.L39
+ 348:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 305              		.loc 1 348 0
+ 306 0028 0040A0E3 		mov	r4, #0
+ 307              	.L36:
+ 308              	.LVL40:
+ 356:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 357:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 358:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 359:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 360:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if clock supplied or not */
+ 361:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 309              		.loc 1 361 0
+ 310 002c 000054E3 		cmp	r4, #0
+ 311 0030 0500000A 		beq	.L43
+ 312              	.LVL41:
+ 313              	.L37:
+ 362:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 363:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( !is_clock_supplied(module) )
+ 364:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 365:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* if clock does not supplied, the module can not start. */
+ 366:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             ret = STB_INVALID_STATE;
+ 367:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 368:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 369:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 370:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 314              		.loc 1 370 0
+ 315 0034 000054E3 		cmp	r4, #0
+ 316 0038 0800000A 		beq	.L44
+ 317              	.LVL42:
+ 318              	.L38:
+ 371:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 372:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* turned off standby request bit */
+ 373:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegWrite_8(p_stbreq->reg_address, 0, IOREG_NONSHIFT_ACCESS, p_stbreq->mask);
+ 374:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 375:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* dummy read */
+ 376:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegRead_8(p_stbreq->reg_address, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 377:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 378:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* read start completion */
+ 379:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         value = RZA_IO_RegRead_8(p_stback->reg_address, IOREG_NONSHIFT_ACCESS, p_stback->mask);
+ 380:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( 0 != value )
+ 381:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 382:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* If at least one related bits still 1, start not completed.
+ 383:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              * In this case, return STB_AGAIN.
+ 384:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              */
+ 385:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             ret = STB_AGAIN;
+ 386:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 387:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 388:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 389:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 390:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 319              		.loc 1 390 0
+ 320 003c 0400A0E1 		mov	r0, r4
+ 321 0040 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 322              	.LVL43:
+ 323              	.L39:
+ 357:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 324              		.loc 1 357 0
+ 325 0044 0040E0E3 		mvn	r4, #0
+ 326 0048 F7FFFFEA 		b	.L36
+ 327              	.LVL44:
+ 328              	.L43:
+ 363:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 329              		.loc 1 363 0
+ 330 004c 0600A0E1 		mov	r0, r6
+ 331              	.LVL45:
+ 332 0050 FEFFFFEB 		bl	is_clock_supplied
+ 333              	.LVL46:
+ 334 0054 000050E3 		cmp	r0, #0
+ 366:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 335              		.loc 1 366 0
+ 336 0058 0240E003 		mvneq	r4, #2
+ 337              	.LVL47:
+ 338 005c F4FFFFEA 		b	.L37
+ 339              	.LVL48:
+ 340              	.L44:
+ 373:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 341              		.loc 1 373 0
+ 342 0060 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 343 0064 0020A0E3 		mov	r2, #0
+ 344 0068 0210A0E1 		mov	r1, r2
+ 345 006c 040095E5 		ldr	r0, [r5, #4]
+ 346 0070 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 347              	.LVL49:
+ 376:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 348              		.loc 1 376 0
+ 349 0074 0020E0E3 		mvn	r2, #0
+ 350 0078 0010A0E3 		mov	r1, #0
+ 351 007c 040095E5 		ldr	r0, [r5, #4]
+ 352 0080 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 353              	.LVL50:
+ 379:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( 0 != value )
+ 354              		.loc 1 379 0
+ 355 0084 0820D7E5 		ldrb	r2, [r7, #8]	@ zero_extendqisi2
+ 356 0088 0010A0E3 		mov	r1, #0
+ 357 008c 040097E5 		ldr	r0, [r7, #4]
+ 358 0090 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 359              	.LVL51:
+ 380:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 360              		.loc 1 380 0
+ 361 0094 000050E3 		cmp	r0, #0
+ 385:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 362              		.loc 1 385 0
+ 363 0098 0140E013 		mvnne	r4, #1
+ 364              	.LVL52:
+ 365 009c E6FFFFEA 		b	.L38
+ 366              		.cfi_endproc
+ 367              	.LFE8:
+ 369              		.section	.text.R_STB_RequestModuleStop,"ax",%progbits
+ 370              		.align	2
+ 371              		.global	R_STB_RequestModuleStop
+ 372              		.syntax unified
+ 373              		.arm
+ 374              		.fpu neon
+ 376              	R_STB_RequestModuleStop:
+ 377              	.LFB9:
+ 391:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 392:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_RequestModuleStart
+ 393:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 394:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 395:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 396:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_RequestModuleStop
+ 397:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Prepare to stop the module
+ 398:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 399:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 400:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 401:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_STATE     Invalid state for operation
+ 402:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_AGAIN             This operation was not completed
+ 403:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 404:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t  R_STB_RequestModuleStop( e_stb_module_t module )
+ 405:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 378              		.loc 1 405 0
+ 379              		.cfi_startproc
+ 380              		@ args = 0, pretend = 0, frame = 0
+ 381              		@ frame_needed = 0, uses_anonymous_args = 0
+ 382              	.LVL53:
+ 383 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 384              		.cfi_def_cfa_offset 24
+ 385              		.cfi_offset 4, -24
+ 386              		.cfi_offset 5, -20
+ 387              		.cfi_offset 6, -16
+ 388              		.cfi_offset 7, -12
+ 389              		.cfi_offset 8, -8
+ 390              		.cfi_offset 14, -4
+ 391 0004 0060A0E1 		mov	r6, r0
+ 392              	.LVL54:
+ 406:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 407:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stbreq;
+ 408:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stback;
+ 409:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     uint8_t value;
+ 410:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 411:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 412:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 413:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 414:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the STBREQ and the STBACK information */
+ 415:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stbreq = get_stbreq_info(module);
+ 393              		.loc 1 415 0
+ 394 0008 FEFFFFEB 		bl	get_stbreq_info
+ 395              	.LVL55:
+ 396 000c 0050A0E1 		mov	r5, r0
+ 397              	.LVL56:
+ 416:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stback = get_stback_info(module);
+ 398              		.loc 1 416 0
+ 399 0010 0600A0E1 		mov	r0, r6
+ 400              	.LVL57:
+ 401 0014 FEFFFFEB 		bl	get_stback_info
+ 402              	.LVL58:
+ 417:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 418:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 419:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_stback) || (NULL == p_stbreq) )
+ 403              		.loc 1 419 0
+ 404 0018 0070A0E1 		mov	r7, r0
+ 405 001c 000055E3 		cmp	r5, #0
+ 406 0020 00005013 		cmpne	r0, #0
+ 407 0024 0600000A 		beq	.L49
+ 412:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 408              		.loc 1 412 0
+ 409 0028 0040A0E3 		mov	r4, #0
+ 410              	.L46:
+ 411              	.LVL59:
+ 420:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 421:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 422:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 423:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 424:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if clock supplied or not */
+ 425:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 412              		.loc 1 425 0
+ 413 002c 000054E3 		cmp	r4, #0
+ 414 0030 0500000A 		beq	.L53
+ 415              	.LVL60:
+ 416              	.L47:
+ 426:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 427:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( !is_clock_supplied(module) )
+ 428:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 429:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* if clock does not supplied, the module can not start. */
+ 430:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             ret = STB_INVALID_STATE;
+ 431:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 432:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 433:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 434:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 417              		.loc 1 434 0
+ 418 0034 000054E3 		cmp	r4, #0
+ 419 0038 0800000A 		beq	.L54
+ 420              	.LVL61:
+ 421              	.L48:
+ 435:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 436:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* turned on standby request bit */
+ 437:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegWrite_8(p_stbreq->reg_address, p_stbreq->mask, IOREG_NONSHIFT_ACCESS, p_stbreq->m
+ 438:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 439:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* dummy read */
+ 440:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegRead_8(p_stbreq->reg_address, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 441:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 442:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* read stop completion */
+ 443:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         value = RZA_IO_RegRead_8(p_stback->reg_address, IOREG_NONSHIFT_ACCESS, p_stback->mask);
+ 444:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( p_stback->mask != value )
+ 445:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 446:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* If at least one related bits still 0, stop not completed.
+ 447:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              * In this case, return STB_AGAIN.
+ 448:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              */
+ 449:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             ret = STB_AGAIN;
+ 450:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 451:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 452:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 453:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 454:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 422              		.loc 1 454 0
+ 423 003c 0400A0E1 		mov	r0, r4
+ 424 0040 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 425              	.LVL62:
+ 426              	.L49:
+ 421:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 427              		.loc 1 421 0
+ 428 0044 0040E0E3 		mvn	r4, #0
+ 429 0048 F7FFFFEA 		b	.L46
+ 430              	.LVL63:
+ 431              	.L53:
+ 427:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 432              		.loc 1 427 0
+ 433 004c 0600A0E1 		mov	r0, r6
+ 434              	.LVL64:
+ 435 0050 FEFFFFEB 		bl	is_clock_supplied
+ 436              	.LVL65:
+ 437 0054 000050E3 		cmp	r0, #0
+ 430:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 438              		.loc 1 430 0
+ 439 0058 0240E003 		mvneq	r4, #2
+ 440              	.LVL66:
+ 441 005c F4FFFFEA 		b	.L47
+ 442              	.LVL67:
+ 443              	.L54:
+ 437:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 444              		.loc 1 437 0
+ 445 0060 0810D5E5 		ldrb	r1, [r5, #8]	@ zero_extendqisi2
+ 446 0064 0130A0E1 		mov	r3, r1
+ 447 0068 0020A0E3 		mov	r2, #0
+ 448 006c 040095E5 		ldr	r0, [r5, #4]
+ 449 0070 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 450              	.LVL68:
+ 440:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 451              		.loc 1 440 0
+ 452 0074 0020E0E3 		mvn	r2, #0
+ 453 0078 0010A0E3 		mov	r1, #0
+ 454 007c 040095E5 		ldr	r0, [r5, #4]
+ 455 0080 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 456              	.LVL69:
+ 443:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( p_stback->mask != value )
+ 457              		.loc 1 443 0
+ 458 0084 0820D7E5 		ldrb	r2, [r7, #8]	@ zero_extendqisi2
+ 459 0088 0010A0E3 		mov	r1, #0
+ 460 008c 040097E5 		ldr	r0, [r7, #4]
+ 461 0090 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 462              	.LVL70:
+ 444:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 463              		.loc 1 444 0
+ 464 0094 0830D7E5 		ldrb	r3, [r7, #8]	@ zero_extendqisi2
+ 465 0098 030050E1 		cmp	r0, r3
+ 449:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 466              		.loc 1 449 0
+ 467 009c 0140E013 		mvnne	r4, #1
+ 468              	.LVL71:
+ 469 00a0 E5FFFFEA 		b	.L48
+ 470              		.cfi_endproc
+ 471              	.LFE9:
+ 473              		.section	.text.R_STB_StopModule,"ax",%progbits
+ 474              		.align	2
+ 475              		.global	R_STB_StopModule
+ 476              		.syntax unified
+ 477              		.arm
+ 478              		.fpu neon
+ 480              	R_STB_StopModule:
+ 481              	.LFB10:
+ 455:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 456:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_RequestModuleStart
+ 457:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 458:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 459:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 460:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_StopModule
+ 461:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Stops the module
+ 462:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 463:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 464:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 465:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 466:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t R_STB_StopModule( e_stb_module_t module )
+ 467:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 482              		.loc 1 467 0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486              	.LVL72:
+ 487 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 488              		.cfi_def_cfa_offset 16
+ 489              		.cfi_offset 4, -16
+ 490              		.cfi_offset 5, -12
+ 491              		.cfi_offset 6, -8
+ 492              		.cfi_offset 14, -4
+ 493              	.LVL73:
+ 468:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 469:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stbcr;
+ 470:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 471:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 472:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 473:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 474:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the STBCR information */
+ 475:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stbcr = get_stbcr_info(module);
+ 494              		.loc 1 475 0
+ 495 0004 FEFFFFEB 		bl	get_stbcr_info
+ 496              	.LVL74:
+ 476:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 477:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 478:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_stbcr) )
+ 497              		.loc 1 478 0
+ 498 0008 005050E2 		subs	r5, r0, #0
+ 499 000c 0400000A 		beq	.L58
+ 472:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 500              		.loc 1 472 0
+ 501 0010 0040A0E3 		mov	r4, #0
+ 502              	.L56:
+ 503              	.LVL75:
+ 479:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 480:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 481:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 482:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 483:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 504              		.loc 1 483 0
+ 505 0014 000054E3 		cmp	r4, #0
+ 506 0018 0300000A 		beq	.L60
+ 507              	.LVL76:
+ 508              	.L57:
+ 484:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 485:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* set module standby */
+ 486:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegWrite_8(p_stbcr->reg_address, p_stbcr->mask, IOREG_NONSHIFT_ACCESS, p_stbcr->mask
+ 487:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 488:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* dummy read */
+ 489:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegRead_8(p_stbcr->reg_address, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 490:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 491:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 492:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 493:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 509              		.loc 1 493 0
+ 510 001c 0400A0E1 		mov	r0, r4
+ 511 0020 7080BDE8 		pop	{r4, r5, r6, pc}
+ 512              	.LVL77:
+ 513              	.L58:
+ 480:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 514              		.loc 1 480 0
+ 515 0024 0040E0E3 		mvn	r4, #0
+ 516 0028 F9FFFFEA 		b	.L56
+ 517              	.LVL78:
+ 518              	.L60:
+ 486:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 519              		.loc 1 486 0
+ 520 002c 0810D5E5 		ldrb	r1, [r5, #8]	@ zero_extendqisi2
+ 521 0030 0130A0E1 		mov	r3, r1
+ 522 0034 0020A0E3 		mov	r2, #0
+ 523 0038 040095E5 		ldr	r0, [r5, #4]
+ 524              	.LVL79:
+ 525 003c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 526              	.LVL80:
+ 489:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 527              		.loc 1 489 0
+ 528 0040 0020E0E3 		mvn	r2, #0
+ 529 0044 0010A0E3 		mov	r1, #0
+ 530 0048 040095E5 		ldr	r0, [r5, #4]
+ 531 004c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 532              	.LVL81:
+ 533 0050 F1FFFFEA 		b	.L57
+ 534              		.cfi_endproc
+ 535              	.LFE10:
+ 537              		.section	.text.R_STB_StartModule,"ax",%progbits
+ 538              		.align	2
+ 539              		.global	R_STB_StartModule
+ 540              		.syntax unified
+ 541              		.arm
+ 542              		.fpu neon
+ 544              	R_STB_StartModule:
+ 545              	.LFB11:
+ 494:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 495:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_StopModule
+ 496:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 497:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 498:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 499:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_StartModule
+ 500:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Starts the module
+ 501:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 502:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 503:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 504:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 505:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t R_STB_StartModule( e_stb_module_t module )
+ 506:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 546              		.loc 1 506 0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550              	.LVL82:
+ 551 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 552              		.cfi_def_cfa_offset 16
+ 553              		.cfi_offset 4, -16
+ 554              		.cfi_offset 5, -12
+ 555              		.cfi_offset 6, -8
+ 556              		.cfi_offset 14, -4
+ 557              	.LVL83:
+ 507:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 508:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_stbcr;
+ 509:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 510:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 511:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 512:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 513:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the STBCR information */
+ 514:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_stbcr = get_stbcr_info(module);
+ 558              		.loc 1 514 0
+ 559 0004 FEFFFFEB 		bl	get_stbcr_info
+ 560              	.LVL84:
+ 515:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 516:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 517:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_stbcr) )
+ 561              		.loc 1 517 0
+ 562 0008 005050E2 		subs	r5, r0, #0
+ 563 000c 0400000A 		beq	.L64
+ 511:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 564              		.loc 1 511 0
+ 565 0010 0040A0E3 		mov	r4, #0
+ 566              	.L62:
+ 567              	.LVL85:
+ 518:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 519:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 520:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 521:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 522:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 568              		.loc 1 522 0
+ 569 0014 000054E3 		cmp	r4, #0
+ 570 0018 0300000A 		beq	.L66
+ 571              	.LVL86:
+ 572              	.L63:
+ 523:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 524:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* clear module standby */
+ 525:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegWrite_8(p_stbcr->reg_address, 0, IOREG_NONSHIFT_ACCESS, p_stbcr->mask);
+ 526:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 527:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* dummy read */
+ 528:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegRead_8(p_stbcr->reg_address, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 529:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 530:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 531:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 532:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 573              		.loc 1 532 0
+ 574 001c 0400A0E1 		mov	r0, r4
+ 575 0020 7080BDE8 		pop	{r4, r5, r6, pc}
+ 576              	.LVL87:
+ 577              	.L64:
+ 519:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 578              		.loc 1 519 0
+ 579 0024 0040E0E3 		mvn	r4, #0
+ 580 0028 F9FFFFEA 		b	.L62
+ 581              	.LVL88:
+ 582              	.L66:
+ 525:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 583              		.loc 1 525 0
+ 584 002c 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 585 0030 0020A0E3 		mov	r2, #0
+ 586 0034 0210A0E1 		mov	r1, r2
+ 587 0038 040095E5 		ldr	r0, [r5, #4]
+ 588              	.LVL89:
+ 589 003c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 590              	.LVL90:
+ 528:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 591              		.loc 1 528 0
+ 592 0040 0020E0E3 		mvn	r2, #0
+ 593 0044 0010A0E3 		mov	r1, #0
+ 594 0048 040095E5 		ldr	r0, [r5, #4]
+ 595 004c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 596              	.LVL91:
+ 597 0050 F1FFFFEA 		b	.L63
+ 598              		.cfi_endproc
+ 599              	.LFE11:
+ 601              		.section	.text.R_STB_SetModuleResetState,"ax",%progbits
+ 602              		.align	2
+ 603              		.global	R_STB_SetModuleResetState
+ 604              		.syntax unified
+ 605              		.arm
+ 606              		.fpu neon
+ 608              	R_STB_SetModuleResetState:
+ 609              	.LFB12:
+ 533:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 534:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_StartModule
+ 535:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 536:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 537:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 538:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_SetModuleResetState
+ 539:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Set module reset state
+ 540:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @note       this API also run the process described in the section 52.3.6
+ 541:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  *             of User's Manual.
+ 542:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 543:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  state: reset state
+ 544:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 545:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 546:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_STATE     Invalid state for operation
+ 547:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 548:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t R_STB_SetModuleResetState( e_stb_module_t module, e_stb_reset_state_t state )
+ 549:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 610              		.loc 1 549 0
+ 611              		.cfi_startproc
+ 612              		@ args = 0, pretend = 0, frame = 0
+ 613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 614              	.LVL92:
+ 615 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 616              		.cfi_def_cfa_offset 24
+ 617              		.cfi_offset 4, -24
+ 618              		.cfi_offset 5, -20
+ 619              		.cfi_offset 6, -16
+ 620              		.cfi_offset 7, -12
+ 621              		.cfi_offset 8, -8
+ 622              		.cfi_offset 14, -4
+ 623 0004 0050A0E1 		mov	r5, r0
+ 624 0008 0140A0E1 		mov	r4, r1
+ 625              	.LVL93:
+ 550:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 551:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_swrstcr;
+ 552:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 553:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 554:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 555:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 556:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the SWRSTCR information */
+ 557:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_swrstcr = get_swrstcr_info(module);
+ 626              		.loc 1 557 0
+ 627 000c FEFFFFEB 		bl	get_swrstcr_info
+ 628              	.LVL94:
+ 558:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 559:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 560:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_swrstcr) )
+ 629              		.loc 1 560 0
+ 630 0010 007050E2 		subs	r7, r0, #0
+ 631 0014 1600000A 		beq	.L75
+ 554:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 632              		.loc 1 554 0
+ 633 0018 0060A0E3 		mov	r6, #0
+ 634              	.L68:
+ 635              	.LVL95:
+ 561:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 562:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 563:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 564:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 565:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if clock supplied */
+ 566:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (STB_SUCCESS == ret) && (!is_clock_supplied(module)) )
+ 636              		.loc 1 566 0
+ 637 001c 000056E3 		cmp	r6, #0
+ 638 0020 1500000A 		beq	.L79
+ 639              	.LVL96:
+ 640              	.L69:
+ 567:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 568:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_STATE;
+ 569:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 570:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 571:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 641              		.loc 1 571 0
+ 642 0024 000056E3 		cmp	r6, #0
+ 643 0028 0F00001A 		bne	.L70
+ 572:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 573:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( MODULE_RESET_STATE == state )
+ 644              		.loc 1 573 0
+ 645 002c 000054E3 		cmp	r4, #0
+ 646 0030 1D00001A 		bne	.L71
+ 647              	.LVL97:
+ 648              	.L72:
+ 574:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 575:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* needs module stop request if state wants to be reset */
+ 576:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* wait while returns STB_AGAIN */
+ 577:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             do
+ 578:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             {
+ 579:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 ret = R_STB_RequestModuleStop(module);
+ 649              		.loc 1 579 0 discriminator 1
+ 650 0034 0500A0E1 		mov	r0, r5
+ 651 0038 FEFFFFEB 		bl	R_STB_RequestModuleStop
+ 652              	.LVL98:
+ 653 003c 0040A0E1 		mov	r4, r0
+ 654              	.LVL99:
+ 580:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             } while ( STB_AGAIN == ret );
+ 655              		.loc 1 580 0 discriminator 1
+ 656 0040 020070E3 		cmn	r0, #2
+ 657 0044 FAFFFF0A 		beq	.L72
+ 581:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 582:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /*
+ 583:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              * check if the module successfully stop or the module does not support module stop */
+ 584:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             if ( (STB_INVALID_MODULE == ret) || (STB_SUCCESS == ret) )
+ 658              		.loc 1 584 0
+ 659 0048 013080E2 		add	r3, r0, #1
+ 660 004c 7330EFE6 		uxtb	r3, r3
+ 661 0050 010053E3 		cmp	r3, #1
+ 662 0054 0D00009A 		bls	.L80
+ 663              	.LVL100:
+ 664              	.L73:
+ 585:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             {
+ 586:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 /* set the module in reset state */
+ 587:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 RZA_IO_RegWrite_8(p_swrstcr->reg_address, p_swrstcr->mask, IOREG_NONSHIFT_ACCESS, p
+ 588:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 589:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 /* overwrite the return code as success */
+ 590:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 ret = STB_SUCCESS;
+ 591:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             }
+ 592:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 593:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         else
+ 594:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 595:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* turned off reset bit */
+ 596:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             RZA_IO_RegWrite_8(p_swrstcr->reg_address, 0, IOREG_NONSHIFT_ACCESS, p_swrstcr->mask);
+ 597:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 598:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* needs module stop request if state wants to be "not reset" */
+ 599:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* wait while returns STB_AGAIN */
+ 600:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             do
+ 601:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             {
+ 602:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 ret = R_STB_RequestModuleStart(module);
+ 603:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             } while ( STB_AGAIN == ret );
+ 604:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 605:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /*
+ 606:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****              * check if the module does not support module stop */
+ 607:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             if ( STB_INVALID_MODULE == ret )
+ 608:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             {
+ 609:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 /* overwrite the return code as success */
+ 610:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****                 ret = STB_SUCCESS;
+ 611:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             }
+ 612:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 613:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 614:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* dummy read the SWRSTCR register */
+ 615:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         RZA_IO_RegRead_8(p_swrstcr->reg_address, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 665              		.loc 1 615 0
+ 666 0058 0020E0E3 		mvn	r2, #0
+ 667 005c 0010A0E3 		mov	r1, #0
+ 668 0060 040097E5 		ldr	r0, [r7, #4]
+ 669 0064 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 670              	.LVL101:
+ 671 0068 0460A0E1 		mov	r6, r4
+ 672              	.LVL102:
+ 673              	.L70:
+ 616:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 617:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 618:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 619:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 674              		.loc 1 619 0
+ 675 006c 0600A0E1 		mov	r0, r6
+ 676 0070 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 677              	.LVL103:
+ 678              	.L75:
+ 562:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 679              		.loc 1 562 0
+ 680 0074 0060E0E3 		mvn	r6, #0
+ 681 0078 E7FFFFEA 		b	.L68
+ 682              	.LVL104:
+ 683              	.L79:
+ 566:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 684              		.loc 1 566 0 discriminator 1
+ 685 007c 0500A0E1 		mov	r0, r5
+ 686              	.LVL105:
+ 687 0080 FEFFFFEB 		bl	is_clock_supplied
+ 688              	.LVL106:
+ 689 0084 000050E3 		cmp	r0, #0
+ 568:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 690              		.loc 1 568 0
+ 691 0088 0260E003 		mvneq	r6, #2
+ 692              	.LVL107:
+ 693 008c E4FFFFEA 		b	.L69
+ 694              	.LVL108:
+ 695              	.L80:
+ 587:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 696              		.loc 1 587 0
+ 697 0090 0810D7E5 		ldrb	r1, [r7, #8]	@ zero_extendqisi2
+ 698 0094 0130A0E1 		mov	r3, r1
+ 699 0098 0020A0E3 		mov	r2, #0
+ 700 009c 040097E5 		ldr	r0, [r7, #4]
+ 701              	.LVL109:
+ 702 00a0 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 703              	.LVL110:
+ 590:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             }
+ 704              		.loc 1 590 0
+ 705 00a4 0640A0E1 		mov	r4, r6
+ 706 00a8 EAFFFFEA 		b	.L73
+ 707              	.LVL111:
+ 708              	.L71:
+ 596:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 709              		.loc 1 596 0
+ 710 00ac 0830D7E5 		ldrb	r3, [r7, #8]	@ zero_extendqisi2
+ 711 00b0 0020A0E3 		mov	r2, #0
+ 712 00b4 0210A0E1 		mov	r1, r2
+ 713 00b8 040097E5 		ldr	r0, [r7, #4]
+ 714 00bc FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 715              	.LVL112:
+ 716              	.L74:
+ 602:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             } while ( STB_AGAIN == ret );
+ 717              		.loc 1 602 0 discriminator 1
+ 718 00c0 0500A0E1 		mov	r0, r5
+ 719 00c4 FEFFFFEB 		bl	R_STB_RequestModuleStart
+ 720              	.LVL113:
+ 721 00c8 0040A0E1 		mov	r4, r0
+ 722              	.LVL114:
+ 603:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 723              		.loc 1 603 0 discriminator 1
+ 724 00cc 020070E3 		cmn	r0, #2
+ 725 00d0 FAFFFF0A 		beq	.L74
+ 607:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             {
+ 726              		.loc 1 607 0
+ 727 00d4 010070E3 		cmn	r0, #1
+ 610:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             }
+ 728              		.loc 1 610 0
+ 729 00d8 0640A001 		moveq	r4, r6
+ 730 00dc DDFFFFEA 		b	.L73
+ 731              		.cfi_endproc
+ 732              	.LFE12:
+ 734              		.section	.text.R_STB_GetModuleResetState,"ax",%progbits
+ 735              		.align	2
+ 736              		.global	R_STB_GetModuleResetState
+ 737              		.syntax unified
+ 738              		.arm
+ 739              		.fpu neon
+ 741              	R_STB_GetModuleResetState:
+ 742              	.LFB13:
+ 620:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 621:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_SetModuleResetState
+ 622:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 623:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 624:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 625:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_GetModuleResetState
+ 626:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get module reset state
+ 627:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  module: module number
+ 628:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[out] p_state: reset state
+ 629:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation.
+ 630:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_MODULE    Invalid module number or does not supported
+ 631:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_INVALID_STATE     Invalid state for operation
+ 632:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 633:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** e_stb_err_t R_STB_GetModuleResetState( e_stb_module_t module, e_stb_reset_state_t * p_state )
+ 634:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 743              		.loc 1 634 0
+ 744              		.cfi_startproc
+ 745              		@ args = 0, pretend = 0, frame = 0
+ 746              		@ frame_needed = 0, uses_anonymous_args = 0
+ 747              	.LVL115:
+ 748 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 749              		.cfi_def_cfa_offset 24
+ 750              		.cfi_offset 4, -24
+ 751              		.cfi_offset 5, -20
+ 752              		.cfi_offset 6, -16
+ 753              		.cfi_offset 7, -12
+ 754              		.cfi_offset 8, -8
+ 755              		.cfi_offset 14, -4
+ 756 0004 0070A0E1 		mov	r7, r0
+ 757 0008 0160A0E1 		mov	r6, r1
+ 758              	.LVL116:
+ 635:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     e_stb_err_t ret;
+ 636:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     const st_r_prv_reg_info_t * p_swrstcr;
+ 637:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     uint8_t current_bit;
+ 638:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 639:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* Initialise error state */
+ 640:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     ret = STB_SUCCESS;
+ 641:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 642:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* obtain the SWRSTCR information */
+ 643:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_swrstcr = get_swrstcr_info(module);
+ 759              		.loc 1 643 0
+ 760 000c FEFFFFEB 		bl	get_swrstcr_info
+ 761              	.LVL117:
+ 644:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 645:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if unsupported module */
+ 646:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (NULL == p_swrstcr) )
+ 762              		.loc 1 646 0
+ 763 0010 005050E2 		subs	r5, r0, #0
+ 764 0014 0600000A 		beq	.L86
+ 640:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 765              		.loc 1 640 0
+ 766 0018 0040A0E3 		mov	r4, #0
+ 767              	.L82:
+ 768              	.LVL118:
+ 647:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 648:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_MODULE;
+ 649:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 650:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 651:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     /* check if clock supplied */
+ 652:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( (STB_SUCCESS == ret) && (!is_clock_supplied(module)) )
+ 769              		.loc 1 652 0
+ 770 001c 000054E3 		cmp	r4, #0
+ 771 0020 0500000A 		beq	.L89
+ 772              	.LVL119:
+ 773              	.L83:
+ 653:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 654:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         ret = STB_INVALID_STATE;
+ 655:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 656:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 657:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     if ( STB_SUCCESS == ret )
+ 774              		.loc 1 657 0
+ 775 0024 000054E3 		cmp	r4, #0
+ 776 0028 0800000A 		beq	.L90
+ 777              	.L84:
+ 658:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 659:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* get current reset state */
+ 660:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         current_bit = RZA_IO_RegRead_8(p_swrstcr->reg_address, IOREG_NONSHIFT_ACCESS, p_swrstcr->ma
+ 661:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 662:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         /* check if all bit listed in swrstcr_bit is zero */
+ 663:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         if ( 0 == current_bit )
+ 664:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 665:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* store MODULE_NOT_RESET_STATE to p_state */
+ 666:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             *p_state = MODULE_NOT_RESET_STATE;
+ 667:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 668:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         else
+ 669:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 670:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             /* at least one bit is 1, it is still in the reset state */
+ 671:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****             *p_state = MODULE_RESET_STATE;
+ 672:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 673:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 674:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 675:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return ret;
+ 676:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 778              		.loc 1 676 0
+ 779 002c 0400A0E1 		mov	r0, r4
+ 780 0030 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 781              	.LVL120:
+ 782              	.L86:
+ 648:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 783              		.loc 1 648 0
+ 784 0034 0040E0E3 		mvn	r4, #0
+ 785 0038 F7FFFFEA 		b	.L82
+ 786              	.LVL121:
+ 787              	.L89:
+ 652:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     {
+ 788              		.loc 1 652 0 discriminator 1
+ 789 003c 0700A0E1 		mov	r0, r7
+ 790              	.LVL122:
+ 791 0040 FEFFFFEB 		bl	is_clock_supplied
+ 792              	.LVL123:
+ 793 0044 000050E3 		cmp	r0, #0
+ 654:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     }
+ 794              		.loc 1 654 0
+ 795 0048 0240E003 		mvneq	r4, #2
+ 796              	.LVL124:
+ 797 004c F4FFFFEA 		b	.L83
+ 798              	.LVL125:
+ 799              	.L90:
+ 660:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 800              		.loc 1 660 0
+ 801 0050 0820D5E5 		ldrb	r2, [r5, #8]	@ zero_extendqisi2
+ 802 0054 0010A0E3 		mov	r1, #0
+ 803 0058 040095E5 		ldr	r0, [r5, #4]
+ 804 005c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 805              	.LVL126:
+ 663:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         {
+ 806              		.loc 1 663 0
+ 807 0060 000050E3 		cmp	r0, #0
+ 671:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 808              		.loc 1 671 0
+ 809 0064 0030A013 		movne	r3, #0
+ 810 0068 0030C615 		strbne	r3, [r6]
+ 811 006c EEFFFF1A 		bne	.L84
+ 812              	.L91:
+ 666:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****         }
+ 813              		.loc 1 666 0
+ 814 0070 0130A0E3 		mov	r3, #1
+ 815 0074 0030C6E5 		strb	r3, [r6]
+ 816 0078 EBFFFFEA 		b	.L84
+ 817              		.cfi_endproc
+ 818              	.LFE13:
+ 820              		.section	.text.R_STB_GetVersion,"ax",%progbits
+ 821              		.align	2
+ 822              		.global	R_STB_GetVersion
+ 823              		.syntax unified
+ 824              		.arm
+ 825              		.fpu neon
+ 827              	R_STB_GetVersion:
+ 828              	.LFB14:
+ 677:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /******************************************************************************
+ 678:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * End of function R_STB_GetModuleResetState
+ 679:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  ******************************************************************************/
+ 680:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 681:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** /**
+ 682:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @fn         R_STB_GetVersion
+ 683:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @brief      Get the Low Layer Driver specific version
+ 684:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @param[in]  p_ver_info: detailed driver information structure
+ 685:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  * @retval     STB_SUCCESS           Successful operation (always).
+ 686:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****  */
+ 687:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** int_t R_STB_GetVersion(st_ver_info_t *p_ver_info)
+ 688:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** {
+ 829              		.loc 1 688 0
+ 830              		.cfi_startproc
+ 831              		@ args = 0, pretend = 0, frame = 0
+ 832              		@ frame_needed = 0, uses_anonymous_args = 0
+ 833              		@ link register save eliminated.
+ 834              	.LVL127:
+ 835 0000 0030A0E1 		mov	r3, r0
+ 689:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_ver_info->lld.p_szdriver_name = gs_lld_info.p_szdriver_name;
+ 836              		.loc 1 689 0
+ 837 0004 002000E3 		movw	r2, #:lower16:.LC0
+ 838 0008 002040E3 		movt	r2, #:upper16:.LC0
+ 839 000c 142080E5 		str	r2, [r0, #20]
+ 690:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_ver_info->lld.version.sub.major = gs_lld_info.version.sub.major;
+ 840              		.loc 1 690 0
+ 841 0010 0120A0E3 		mov	r2, #1
+ 842 0014 BE20C0E1 		strh	r2, [r0, #14]	@ movhi
+ 691:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_ver_info->lld.version.sub.minor = gs_lld_info.version.sub.minor;
+ 843              		.loc 1 691 0
+ 844 0018 0320A0E3 		mov	r2, #3
+ 845 001c BC20C0E1 		strh	r2, [r0, #12]	@ movhi
+ 692:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     p_ver_info->lld.build = gs_lld_info.build;
+ 846              		.loc 1 692 0
+ 847 0020 0000A0E3 		mov	r0, #0
+ 848              	.LVL128:
+ 849 0024 100083E5 		str	r0, [r3, #16]
+ 693:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** 
+ 694:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c ****     return DRV_SUCCESS;
+ 695:../generate/drivers/r_stb/src/lld/r_stb_lld_rza2m.c **** }
+ 850              		.loc 1 695 0
+ 851 0028 1EFF2FE1 		bx	lr
+ 852              		.cfi_endproc
+ 853              	.LFE14:
+ 855              		.section	.rodata.R_STB_GetVersion.str1.4,"aMS",%progbits,1
+ 856              		.align	2
+ 857              	.LC0:
+ 858 0000 4C4C4420 		.ascii	"LLD EBK_RZA2M STB\000"
+ 858      45424B5F 
+ 858      525A4132 
+ 858      4D205354 
+ 858      4200
+ 859              		.section	.rodata.gs_stback,"a",%progbits
+ 860              		.align	2
+ 861              		.set	.LANCHOR2,. + 0
+ 864              	gs_stback:
+ 865 0000 01       		.byte	1
+ 866 0001 000000   		.space	3
+ 867 0004 4000FEFC 		.word	-50462656
+ 868 0008 20       		.byte	32
+ 869 0009 000000   		.space	3
+ 870 000c 11       		.byte	17
+ 871 000d 000000   		.space	3
+ 872 0010 4000FEFC 		.word	-50462656
+ 873 0014 01       		.byte	1
+ 874 0015 000000   		.space	3
+ 875 0018 14       		.byte	20
+ 876 0019 000000   		.space	3
+ 877 001c 4000FEFC 		.word	-50462656
+ 878 0020 08       		.byte	8
+ 879 0021 000000   		.space	3
+ 880 0024 15       		.byte	21
+ 881 0025 000000   		.space	3
+ 882 0028 4400FEFC 		.word	-50462652
+ 883 002c 80       		.byte	-128
+ 884 002d 000000   		.space	3
+ 885 0030 16       		.byte	22
+ 886 0031 000000   		.space	3
+ 887 0034 4400FEFC 		.word	-50462652
+ 888 0038 40       		.byte	64
+ 889 0039 000000   		.space	3
+ 890 003c 17       		.byte	23
+ 891 003d 000000   		.space	3
+ 892 0040 4800FEFC 		.word	-50462648
+ 893 0044 03       		.byte	3
+ 894 0045 000000   		.space	3
+ 895 0048 18       		.byte	24
+ 896 0049 000000   		.space	3
+ 897 004c 4800FEFC 		.word	-50462648
+ 898 0050 0C       		.byte	12
+ 899 0051 000000   		.space	3
+ 900 0054 19       		.byte	25
+ 901 0055 000000   		.space	3
+ 902 0058 4400FEFC 		.word	-50462652
+ 903 005c 08       		.byte	8
+ 904 005d 000000   		.space	3
+ 905 0060 1A       		.byte	26
+ 906 0061 000000   		.space	3
+ 907 0064 4400FEFC 		.word	-50462652
+ 908 0068 03       		.byte	3
+ 909 0069 000000   		.space	3
+ 910 006c 25       		.byte	37
+ 911 006d 000000   		.space	3
+ 912 0070 4400FEFC 		.word	-50462652
+ 913 0074 20       		.byte	32
+ 914 0075 000000   		.space	3
+ 915 0078 2C       		.byte	44
+ 916 0079 000000   		.space	3
+ 917 007c 4400FEFC 		.word	-50462652
+ 918 0080 10       		.byte	16
+ 919 0081 000000   		.space	3
+ 920 0084 2E       		.byte	46
+ 921 0085 000000   		.space	3
+ 922 0088 4400FEFC 		.word	-50462652
+ 923 008c 04       		.byte	4
+ 924 008d 000000   		.space	3
+ 925 0090 2F       		.byte	47
+ 926 0091 000000   		.space	3
+ 927 0094 4000FEFC 		.word	-50462656
+ 928 0098 04       		.byte	4
+ 929 0099 000000   		.space	3
+ 930 009c 30       		.byte	48
+ 931 009d 000000   		.space	3
+ 932 00a0 4000FEFC 		.word	-50462656
+ 933 00a4 02       		.byte	2
+ 934 00a5 000000   		.space	3
+ 935              		.section	.rodata.gs_stbcr,"a",%progbits
+ 936              		.align	2
+ 937              		.set	.LANCHOR0,. + 0
+ 940              	gs_stbcr:
+ 941 0000 01       		.byte	1
+ 942 0001 000000   		.space	3
+ 943 0004 2400FEFC 		.word	-50462684
+ 944 0008 01       		.byte	1
+ 945 0009 000000   		.space	3
+ 946 000c 02       		.byte	2
+ 947 000d 000000   		.space	3
+ 948 0010 2004FEFC 		.word	-50461664
+ 949 0014 40       		.byte	64
+ 950 0015 000000   		.space	3
+ 951 0018 03       		.byte	3
+ 952 0019 000000   		.space	3
+ 953 001c 2004FEFC 		.word	-50461664
+ 954 0020 20       		.byte	32
+ 955 0021 000000   		.space	3
+ 956 0024 04       		.byte	4
+ 957 0025 000000   		.space	3
+ 958 0028 2004FEFC 		.word	-50461664
+ 959 002c 10       		.byte	16
+ 960 002d 000000   		.space	3
+ 961 0030 05       		.byte	5
+ 962 0031 000000   		.space	3
+ 963 0034 2004FEFC 		.word	-50461664
+ 964 0038 08       		.byte	8
+ 965 0039 000000   		.space	3
+ 966 003c 06       		.byte	6
+ 967 003d 000000   		.space	3
+ 968 0040 2004FEFC 		.word	-50461664
+ 969 0044 04       		.byte	4
+ 970 0045 000000   		.space	3
+ 971 0048 07       		.byte	7
+ 972 0049 000000   		.space	3
+ 973 004c 2804FEFC 		.word	-50461656
+ 974 0050 80       		.byte	-128
+ 975 0051 000000   		.space	3
+ 976 0054 08       		.byte	8
+ 977 0055 000000   		.space	3
+ 978 0058 2004FEFC 		.word	-50461664
+ 979 005c 01       		.byte	1
+ 980 005d 000000   		.space	3
+ 981 0060 09       		.byte	9
+ 982 0061 000000   		.space	3
+ 983 0064 2404FEFC 		.word	-50461660
+ 984 0068 80       		.byte	-128
+ 985 0069 000000   		.space	3
+ 986 006c 0A       		.byte	10
+ 987 006d 000000   		.space	3
+ 988 0070 2404FEFC 		.word	-50461660
+ 989 0074 40       		.byte	64
+ 990 0075 000000   		.space	3
+ 991 0078 0B       		.byte	11
+ 992 0079 000000   		.space	3
+ 993 007c 2404FEFC 		.word	-50461660
+ 994 0080 20       		.byte	32
+ 995 0081 000000   		.space	3
+ 996 0084 0C       		.byte	12
+ 997 0085 000000   		.space	3
+ 998 0088 2404FEFC 		.word	-50461660
+ 999 008c 10       		.byte	16
+ 1000 008d 000000   		.space	3
+ 1001 0090 0D       		.byte	13
+ 1002 0091 000000   		.space	3
+ 1003 0094 2404FEFC 		.word	-50461660
+ 1004 0098 08       		.byte	8
+ 1005 0099 000000   		.space	3
+ 1006 009c 0E       		.byte	14
+ 1007 009d 000000   		.space	3
+ 1008 00a0 2404FEFC 		.word	-50461660
+ 1009 00a4 04       		.byte	4
+ 1010 00a5 000000   		.space	3
+ 1011 00a8 0F       		.byte	15
+ 1012 00a9 000000   		.space	3
+ 1013 00ac 2404FEFC 		.word	-50461660
+ 1014 00b0 02       		.byte	2
+ 1015 00b1 000000   		.space	3
+ 1016 00b4 10       		.byte	16
+ 1017 00b5 000000   		.space	3
+ 1018 00b8 2404FEFC 		.word	-50461660
+ 1019 00bc 01       		.byte	1
+ 1020 00bd 000000   		.space	3
+ 1021 00c0 11       		.byte	17
+ 1022 00c1 000000   		.space	3
+ 1023 00c4 2804FEFC 		.word	-50461656
+ 1024 00c8 40       		.byte	64
+ 1025 00c9 000000   		.space	3
+ 1026 00cc 12       		.byte	18
+ 1027 00cd 000000   		.space	3
+ 1028 00d0 2804FEFC 		.word	-50461656
+ 1029 00d4 08       		.byte	8
+ 1030 00d5 000000   		.space	3
+ 1031 00d8 13       		.byte	19
+ 1032 00d9 000000   		.space	3
+ 1033 00dc 2804FEFC 		.word	-50461656
+ 1034 00e0 04       		.byte	4
+ 1035 00e1 000000   		.space	3
+ 1036 00e4 14       		.byte	20
+ 1037 00e5 000000   		.space	3
+ 1038 00e8 2804FEFC 		.word	-50461656
+ 1039 00ec 02       		.byte	2
+ 1040 00ed 000000   		.space	3
+ 1041 00f0 15       		.byte	21
+ 1042 00f1 000000   		.space	3
+ 1043 00f4 2C04FEFC 		.word	-50461652
+ 1044 00f8 40       		.byte	64
+ 1045 00f9 000000   		.space	3
+ 1046 00fc 16       		.byte	22
+ 1047 00fd 000000   		.space	3
+ 1048 0100 2C04FEFC 		.word	-50461652
+ 1049 0104 3C       		.byte	60
+ 1050 0105 000000   		.space	3
+ 1051 0108 17       		.byte	23
+ 1052 0109 000000   		.space	3
+ 1053 010c 2C04FEFC 		.word	-50461652
+ 1054 0110 02       		.byte	2
+ 1055 0111 000000   		.space	3
+ 1056 0114 18       		.byte	24
+ 1057 0115 000000   		.space	3
+ 1058 0118 2C04FEFC 		.word	-50461652
+ 1059 011c 01       		.byte	1
+ 1060 011d 000000   		.space	3
+ 1061 0120 19       		.byte	25
+ 1062 0121 000000   		.space	3
+ 1063 0124 3004FEFC 		.word	-50461648
+ 1064 0128 80       		.byte	-128
+ 1065 0129 000000   		.space	3
+ 1066 012c 1A       		.byte	26
+ 1067 012d 000000   		.space	3
+ 1068 0130 3004FEFC 		.word	-50461648
+ 1069 0134 40       		.byte	64
+ 1070 0135 000000   		.space	3
+ 1071 0138 1B       		.byte	27
+ 1072 0139 000000   		.space	3
+ 1073 013c 3004FEFC 		.word	-50461648
+ 1074 0140 20       		.byte	32
+ 1075 0141 000000   		.space	3
+ 1076 0144 1C       		.byte	28
+ 1077 0145 000000   		.space	3
+ 1078 0148 3004FEFC 		.word	-50461648
+ 1079 014c 08       		.byte	8
+ 1080 014d 000000   		.space	3
+ 1081 0150 1D       		.byte	29
+ 1082 0151 000000   		.space	3
+ 1083 0154 3004FEFC 		.word	-50461648
+ 1084 0158 04       		.byte	4
+ 1085 0159 000000   		.space	3
+ 1086 015c 1E       		.byte	30
+ 1087 015d 000000   		.space	3
+ 1088 0160 3004FEFC 		.word	-50461648
+ 1089 0164 02       		.byte	2
+ 1090 0165 000000   		.space	3
+ 1091 0168 1F       		.byte	31
+ 1092 0169 000000   		.space	3
+ 1093 016c 3004FEFC 		.word	-50461648
+ 1094 0170 01       		.byte	1
+ 1095 0171 000000   		.space	3
+ 1096 0174 20       		.byte	32
+ 1097 0175 000000   		.space	3
+ 1098 0178 3404FEFC 		.word	-50461644
+ 1099 017c 80       		.byte	-128
+ 1100 017d 000000   		.space	3
+ 1101 0180 21       		.byte	33
+ 1102 0181 000000   		.space	3
+ 1103 0184 3404FEFC 		.word	-50461644
+ 1104 0188 40       		.byte	64
+ 1105 0189 000000   		.space	3
+ 1106 018c 22       		.byte	34
+ 1107 018d 000000   		.space	3
+ 1108 0190 3404FEFC 		.word	-50461644
+ 1109 0194 20       		.byte	32
+ 1110 0195 000000   		.space	3
+ 1111 0198 23       		.byte	35
+ 1112 0199 000000   		.space	3
+ 1113 019c 3404FEFC 		.word	-50461644
+ 1114 01a0 10       		.byte	16
+ 1115 01a1 000000   		.space	3
+ 1116 01a4 24       		.byte	36
+ 1117 01a5 000000   		.space	3
+ 1118 01a8 3404FEFC 		.word	-50461644
+ 1119 01ac 08       		.byte	8
+ 1120 01ad 000000   		.space	3
+ 1121 01b0 25       		.byte	37
+ 1122 01b1 000000   		.space	3
+ 1123 01b4 3404FEFC 		.word	-50461644
+ 1124 01b8 02       		.byte	2
+ 1125 01b9 000000   		.space	3
+ 1126 01bc 26       		.byte	38
+ 1127 01bd 000000   		.space	3
+ 1128 01c0 3804FEFC 		.word	-50461640
+ 1129 01c4 80       		.byte	-128
+ 1130 01c5 000000   		.space	3
+ 1131 01c8 27       		.byte	39
+ 1132 01c9 000000   		.space	3
+ 1133 01cc 3804FEFC 		.word	-50461640
+ 1134 01d0 40       		.byte	64
+ 1135 01d1 000000   		.space	3
+ 1136 01d4 28       		.byte	40
+ 1137 01d5 000000   		.space	3
+ 1138 01d8 3804FEFC 		.word	-50461640
+ 1139 01dc 20       		.byte	32
+ 1140 01dd 000000   		.space	3
+ 1141 01e0 29       		.byte	41
+ 1142 01e1 000000   		.space	3
+ 1143 01e4 3804FEFC 		.word	-50461640
+ 1144 01e8 08       		.byte	8
+ 1145 01e9 000000   		.space	3
+ 1146 01ec 2A       		.byte	42
+ 1147 01ed 000000   		.space	3
+ 1148 01f0 3804FEFC 		.word	-50461640
+ 1149 01f4 04       		.byte	4
+ 1150 01f5 000000   		.space	3
+ 1151 01f8 2B       		.byte	43
+ 1152 01f9 000000   		.space	3
+ 1153 01fc 3804FEFC 		.word	-50461640
+ 1154 0200 02       		.byte	2
+ 1155 0201 000000   		.space	3
+ 1156 0204 2C       		.byte	44
+ 1157 0205 000000   		.space	3
+ 1158 0208 3804FEFC 		.word	-50461640
+ 1159 020c 01       		.byte	1
+ 1160 020d 000000   		.space	3
+ 1161 0210 2D       		.byte	45
+ 1162 0211 000000   		.space	3
+ 1163 0214 3C04FEFC 		.word	-50461636
+ 1164 0218 80       		.byte	-128
+ 1165 0219 000000   		.space	3
+ 1166 021c 2E       		.byte	46
+ 1167 021d 000000   		.space	3
+ 1168 0220 3C04FEFC 		.word	-50461636
+ 1169 0224 10       		.byte	16
+ 1170 0225 000000   		.space	3
+ 1171 0228 2F       		.byte	47
+ 1172 0229 000000   		.space	3
+ 1173 022c 3C04FEFC 		.word	-50461636
+ 1174 0230 0C       		.byte	12
+ 1175 0231 000000   		.space	3
+ 1176 0234 30       		.byte	48
+ 1177 0235 000000   		.space	3
+ 1178 0238 3C04FEFC 		.word	-50461636
+ 1179 023c 03       		.byte	3
+ 1180 023d 000000   		.space	3
+ 1181              		.section	.rodata.gs_stbreq,"a",%progbits
+ 1182              		.align	2
+ 1183              		.set	.LANCHOR1,. + 0
+ 1186              	gs_stbreq:
+ 1187 0000 01       		.byte	1
+ 1188 0001 000000   		.space	3
+ 1189 0004 3000FEFC 		.word	-50462672
+ 1190 0008 20       		.byte	32
+ 1191 0009 000000   		.space	3
+ 1192 000c 11       		.byte	17
+ 1193 000d 000000   		.space	3
+ 1194 0010 3000FEFC 		.word	-50462672
+ 1195 0014 01       		.byte	1
+ 1196 0015 000000   		.space	3
+ 1197 0018 14       		.byte	20
+ 1198 0019 000000   		.space	3
+ 1199 001c 3000FEFC 		.word	-50462672
+ 1200 0020 08       		.byte	8
+ 1201 0021 000000   		.space	3
+ 1202 0024 15       		.byte	21
+ 1203 0025 000000   		.space	3
+ 1204 0028 3400FEFC 		.word	-50462668
+ 1205 002c 80       		.byte	-128
+ 1206 002d 000000   		.space	3
+ 1207 0030 16       		.byte	22
+ 1208 0031 000000   		.space	3
+ 1209 0034 3400FEFC 		.word	-50462668
+ 1210 0038 40       		.byte	64
+ 1211 0039 000000   		.space	3
+ 1212 003c 17       		.byte	23
+ 1213 003d 000000   		.space	3
+ 1214 0040 3800FEFC 		.word	-50462664
+ 1215 0044 03       		.byte	3
+ 1216 0045 000000   		.space	3
+ 1217 0048 18       		.byte	24
+ 1218 0049 000000   		.space	3
+ 1219 004c 3800FEFC 		.word	-50462664
+ 1220 0050 0C       		.byte	12
+ 1221 0051 000000   		.space	3
+ 1222 0054 19       		.byte	25
+ 1223 0055 000000   		.space	3
+ 1224 0058 3400FEFC 		.word	-50462668
+ 1225 005c 08       		.byte	8
+ 1226 005d 000000   		.space	3
+ 1227 0060 1A       		.byte	26
+ 1228 0061 000000   		.space	3
+ 1229 0064 3400FEFC 		.word	-50462668
+ 1230 0068 03       		.byte	3
+ 1231 0069 000000   		.space	3
+ 1232 006c 25       		.byte	37
+ 1233 006d 000000   		.space	3
+ 1234 0070 3400FEFC 		.word	-50462668
+ 1235 0074 20       		.byte	32
+ 1236 0075 000000   		.space	3
+ 1237 0078 2C       		.byte	44
+ 1238 0079 000000   		.space	3
+ 1239 007c 3400FEFC 		.word	-50462668
+ 1240 0080 10       		.byte	16
+ 1241 0081 000000   		.space	3
+ 1242 0084 2E       		.byte	46
+ 1243 0085 000000   		.space	3
+ 1244 0088 3400FEFC 		.word	-50462668
+ 1245 008c 04       		.byte	4
+ 1246 008d 000000   		.space	3
+ 1247 0090 2F       		.byte	47
+ 1248 0091 000000   		.space	3
+ 1249 0094 3000FEFC 		.word	-50462672
+ 1250 0098 04       		.byte	4
+ 1251 0099 000000   		.space	3
+ 1252 009c 30       		.byte	48
+ 1253 009d 000000   		.space	3
+ 1254 00a0 3000FEFC 		.word	-50462672
+ 1255 00a4 02       		.byte	2
+ 1256 00a5 000000   		.space	3
+ 1257              		.section	.rodata.gs_swrstcr,"a",%progbits
+ 1258              		.align	2
+ 1259              		.set	.LANCHOR3,. + 0
+ 1262              	gs_swrstcr:
+ 1263 0000 11       		.byte	17
+ 1264 0001 000000   		.space	3
+ 1265 0004 6404FEFC 		.word	-50461596
+ 1266 0008 02       		.byte	2
+ 1267 0009 000000   		.space	3
+ 1268 000c 14       		.byte	20
+ 1269 000d 000000   		.space	3
+ 1270 0010 6004FEFC 		.word	-50461600
+ 1271 0014 02       		.byte	2
+ 1272 0015 000000   		.space	3
+ 1273 0018 15       		.byte	21
+ 1274 0019 000000   		.space	3
+ 1275 001c 6404FEFC 		.word	-50461596
+ 1276 0020 20       		.byte	32
+ 1277 0021 000000   		.space	3
+ 1278 0024 19       		.byte	25
+ 1279 0025 000000   		.space	3
+ 1280 0028 6404FEFC 		.word	-50461596
+ 1281 002c 10       		.byte	16
+ 1282 002d 000000   		.space	3
+ 1283 0030 1A       		.byte	26
+ 1284 0031 000000   		.space	3
+ 1285 0034 6404FEFC 		.word	-50461596
+ 1286 0038 04       		.byte	4
+ 1287 0039 000000   		.space	3
+ 1288 003c 1B       		.byte	27
+ 1289 003d 000000   		.space	3
+ 1290 0040 6404FEFC 		.word	-50461596
+ 1291 0044 08       		.byte	8
+ 1292 0045 000000   		.space	3
+ 1293 0048 24       		.byte	36
+ 1294 0049 000000   		.space	3
+ 1295 004c 6004FEFC 		.word	-50461600
+ 1296 0050 01       		.byte	1
+ 1297 0051 000000   		.space	3
+ 1298 0054 25       		.byte	37
+ 1299 0055 000000   		.space	3
+ 1300 0058 6004FEFC 		.word	-50461600
+ 1301 005c 08       		.byte	8
+ 1302 005d 000000   		.space	3
+ 1303 0060 2D       		.byte	45
+ 1304 0061 000000   		.space	3
+ 1305 0064 6004FEFC 		.word	-50461600
+ 1306 0068 04       		.byte	4
+ 1307 0069 000000   		.space	3
+ 1308 006c 2E       		.byte	46
+ 1309 006d 000000   		.space	3
+ 1310 0070 6404FEFC 		.word	-50461596
+ 1311 0074 40       		.byte	64
+ 1312 0075 000000   		.space	3
+ 1313              		.text
+ 1314              	.Letext0:
+ 1315              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 1316              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1317              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1318              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1319              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1320              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1321              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1322              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1323              		.file 10 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1324              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1325              		.file 12 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1326              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1327              		.file 14 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+DEFINED SYMBOLS
+                            *ABS*:00000000 r_stb_lld_rza2m.c
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:17     .text.get_stbcr_info:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:22     .text.get_stbcr_info:00000000 get_stbcr_info
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:937    .rodata.gs_stbcr:00000000 .LANCHOR0
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:67     .text.get_stbreq_info:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:72     .text.get_stbreq_info:00000000 get_stbreq_info
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1183   .rodata.gs_stbreq:00000000 .LANCHOR1
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:116    .text.get_stback_info:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:121    .text.get_stback_info:00000000 get_stback_info
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:861    .rodata.gs_stback:00000000 .LANCHOR2
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:165    .text.get_swrstcr_info:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:170    .text.get_swrstcr_info:00000000 get_swrstcr_info
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1259   .rodata.gs_swrstcr:00000000 .LANCHOR3
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:214    .text.is_clock_supplied:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:219    .text.is_clock_supplied:00000000 is_clock_supplied
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:267    .text.R_STB_RequestModuleStart:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:273    .text.R_STB_RequestModuleStart:00000000 R_STB_RequestModuleStart
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:370    .text.R_STB_RequestModuleStop:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:376    .text.R_STB_RequestModuleStop:00000000 R_STB_RequestModuleStop
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:474    .text.R_STB_StopModule:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:480    .text.R_STB_StopModule:00000000 R_STB_StopModule
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:538    .text.R_STB_StartModule:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:544    .text.R_STB_StartModule:00000000 R_STB_StartModule
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:602    .text.R_STB_SetModuleResetState:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:608    .text.R_STB_SetModuleResetState:00000000 R_STB_SetModuleResetState
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:735    .text.R_STB_GetModuleResetState:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:741    .text.R_STB_GetModuleResetState:00000000 R_STB_GetModuleResetState
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:821    .text.R_STB_GetVersion:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:827    .text.R_STB_GetVersion:00000000 R_STB_GetVersion
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:857    .rodata.R_STB_GetVersion.str1.4:00000000 .LC0
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:856    .rodata.R_STB_GetVersion.str1.4:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:860    .rodata.gs_stback:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:864    .rodata.gs_stback:00000000 gs_stback
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:936    .rodata.gs_stbcr:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:940    .rodata.gs_stbcr:00000000 gs_stbcr
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1182   .rodata.gs_stbreq:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1186   .rodata.gs_stbreq:00000000 gs_stbreq
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1258   .rodata.gs_swrstcr:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccAuHnit.s:1262   .rodata.gs_swrstcr:00000000 gs_swrstcr
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stddef.h.39.a38874c8f8a57e66301090908ec2a69f
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
+                           .group:00000000 wm4.stddef.h.161.19e15733342b50ead2919490b095303e
+                           .group:00000000 wm4.ctype.h.2.56b1b2226dd0fb45614b0e18787c61f7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_stb_lld_rza2m.h.40.95263d75056863d52f45135c87af2bc2
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+
+UNDEFINED SYMBOLS
+RZA_IO_RegRead_8
+RZA_IO_RegWrite_8

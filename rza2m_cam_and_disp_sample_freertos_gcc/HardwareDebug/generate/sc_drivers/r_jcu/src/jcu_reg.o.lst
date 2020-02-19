@@ -1,0 +1,2534 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"jcu_reg.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.JCU_SetRegisterForInitialize,"ax",%progbits
+  17              		.align	2
+  18              		.global	JCU_SetRegisterForInitialize
+  19              		.syntax unified
+  20              		.arm
+  21              		.fpu neon
+  23              	JCU_SetRegisterForInitialize:
+  24              	.LFB5:
+  25              		.file 1 "../generate/sc_drivers/r_jcu/src/jcu_reg.c"
+   1:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /**************************************************************************************************
+   2:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * DISCLAIMER
+   3:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * applicable laws, including copyright laws.
+   6:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * following link:
+  15:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * http://www.renesas.com/disclaimer
+  16:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  *
+  17:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  18:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****  **************************************************************************************************
+  19:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /*******************************************************************************
+  20:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * File         : jcu_reg.c
+  21:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Description  : JPEG Codec Unit (JCU) driver. Setting registers.
+  22:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Version      : 1.12
+  23:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  24:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  25:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  26:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Includes   <System Includes> , "Project Includes"
+  27:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  28:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "r_typedefs.h"
+  29:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "iodefine.h"
+  30:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "iobitmask.h"
+  31:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "r_stb_lld_rza2m.h"
+  32:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "../src/r_jcu_local.h"
+  33:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "r_register_bit.h"
+  34:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #include  "rz_co.h"
+  35:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  36:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  37:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Typedef definitions
+  38:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  39:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  40:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  41:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Macro definitions
+  42:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  43:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define NUMBER_OF_QUANTIZATION_TABLE_DATA   (64)
+  44:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define NUMBER_OF_HUFFMAN_TABLE_DATA_DC     (28)
+  45:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define NUMBER_OF_HUFFMAN_TABLE_DATA_AC     (178)
+  46:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  47:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define CBCR_OFFSET_NUM     (2u)
+  48:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  49:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define SWAP_NORMAL         (0u)
+  50:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define SWAP_16BIT_OUTPUT   (1u)
+  51:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define SWAP_32BIT_OUTPUT   (2u)
+  52:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  53:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define KIND_COLOR_FORMAT   (3u)
+  54:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define KIND_LINEOFFSET     (2u)
+  55:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** #define KIND_TABLE          (4u)
+  56:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  57:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  58:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  59:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Imported global variables and functions (from other files)
+  60:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  61:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  62:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  63:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Exported global variables and functions (to be accessed by other files)
+  64:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  65:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  66:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /******************************************************************************
+  67:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** Private global variables and functions
+  68:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ******************************************************************************/
+  69:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** STATIC_INLINE uint8_t  GET_UPPER_BYTE( uint32_t const  value );
+  70:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** STATIC_INLINE uint8_t  GET_LOWER_BYTE( uint32_t const  value );
+  71:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  72:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  73:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+  74:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: GET_UPPER_BYTE
+  75:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    GET_UPPER_BYTE
+  76:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+  77:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+  78:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Byte
+  79:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+  80:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** STATIC_INLINE uint8_t  GET_UPPER_BYTE( uint32_t const  value ) 
+  81:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+  82:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     enum { num_8 = 8 }; /* SEC M1.10.1, QAC-3132 */ 
+  83:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return  (uint8_t)( value >> num_8 );
+  84:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function GET_UPPER_BYTE */
+  85:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  86:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+  87:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: GET_LOWER_BYTE
+  88:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    GET_LOWER_BYTE
+  89:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+  90:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+  91:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Byte
+  92:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+  93:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** STATIC_INLINE uint8_t  GET_LOWER_BYTE( uint32_t const  value ) 
+  94:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+  95:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+  96:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return  (uint8_t)( value );
+  97:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function GET_LOWER_BYTE */
+  98:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+  99:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 100:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForInitialize
+ 101:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForInitialize
+ 102:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 103:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 104:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    jcu_errorcode_t
+ 105:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 106:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** jcu_errorcode_t JCU_SetRegisterForInitialize( 
+ 107:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     void)
+ 108:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+  26              		.loc 1 108 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+ 109:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return JCU_ERROR_OK;
+ 110:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForInitialize */
+  31              		.loc 1 110 0
+  32 0000 0000A0E3 		mov	r0, #0
+  33 0004 1EFF2FE1 		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE5:
+  37              		.section	.text.JCU_SetRegisterForCodec,"ax",%progbits
+  38              		.align	2
+  39              		.global	JCU_SetRegisterForCodec
+  40              		.syntax unified
+  41              		.arm
+  42              		.fpu neon
+  44              	JCU_SetRegisterForCodec:
+  45              	.LFB6:
+ 111:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 112:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 113:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForCodec
+ 114:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForCodec
+ 115:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 116:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 117:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    codec
+ 118:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 119:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 120:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 121:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 122:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForCodec( const jcu_codec_t  codec ) 
+ 123:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+  46              		.loc 1 123 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 8
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50              	.LVL0:
+  51 0000 30402DE9 		push	{r4, r5, lr}
+  52              		.cfi_def_cfa_offset 12
+  53              		.cfi_offset 4, -12
+  54              		.cfi_offset 5, -8
+  55              		.cfi_offset 14, -4
+  56 0004 0CD04DE2 		sub	sp, sp, #12
+  57              		.cfi_def_cfa_offset 24
+  58 0008 0050A0E1 		mov	r5, r0
+  59              	.LVL1:
+  60              	.L3:
+ 124:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     volatile uint8_t  dummy_read;
+ 125:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 126:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 127:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Reset this IP */
+ 128:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     while ( R_STB_RequestModuleStop( MODULE_JCU ) == STB_AGAIN )
+  61              		.loc 1 128 0 discriminator 1
+  62 000c 1400A0E3 		mov	r0, #20
+  63 0010 FEFFFFEB 		bl	R_STB_RequestModuleStop
+  64              	.LVL2:
+  65 0014 020070E3 		cmn	r0, #2
+  66 0018 FBFFFF0A 		beq	.L3
+ 129:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 130:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Spin here forever.. */
+ 131:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         ;
+ 132:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 133:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 134:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 135:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( CPG,SWRSTCR1,SRST11,  1 );
+  67              		.loc 1 135 0
+  68 001c 464EA0E3 		mov	r4, #1120
+  69 0020 FE4C4FE3 		movt	r4, 64766
+  70 0024 0230A0E3 		mov	r3, #2
+  71 0028 0120A0E3 		mov	r2, #1
+  72 002c 0210A0E1 		mov	r1, r2
+  73 0030 0400A0E1 		mov	r0, r4
+  74 0034 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+  75              	.LVL3:
+ 136:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 137:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 138:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     dummy_read = R_BIT_GET_IN_REGISTER8( CPG,SWRSTCR1,SRST11 );
+  76              		.loc 1 138 0
+  77 0038 0220A0E3 		mov	r2, #2
+  78 003c 0110A0E3 		mov	r1, #1
+  79 0040 0400A0E1 		mov	r0, r4
+  80 0044 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  81              	.LVL4:
+  82 0048 0700CDE5 		strb	r0, [sp, #7]
+ 139:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 140:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 141:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_UNREFERENCED_VARIABLE( dummy_read );
+  83              		.loc 1 141 0
+  84 004c 0730DDE5 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 142:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 143:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 144:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( CPG,SWRSTCR1,SRST11,  0 );
+  85              		.loc 1 144 0
+  86 0050 0230A0E3 		mov	r3, #2
+  87 0054 0120A0E3 		mov	r2, #1
+  88 0058 0010A0E3 		mov	r1, #0
+  89 005c 0400A0E1 		mov	r0, r4
+  90 0060 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+  91              	.LVL5:
+ 145:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 146:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 147:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     dummy_read = R_BIT_GET_IN_REGISTER8( CPG,SWRSTCR1,SRST11 );
+  92              		.loc 1 147 0
+  93 0064 0220A0E3 		mov	r2, #2
+  94 0068 0110A0E3 		mov	r1, #1
+  95 006c 0400A0E1 		mov	r0, r4
+  96 0070 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  97              	.LVL6:
+  98 0074 0700CDE5 		strb	r0, [sp, #7]
+ 148:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 149:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 150:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_UNREFERENCED_VARIABLE( dummy_read );
+  99              		.loc 1 150 0
+ 100 0078 0730DDE5 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 101              	.L4:
+ 151:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     while ( R_STB_RequestModuleStart( MODULE_JCU ) == STB_AGAIN )
+ 102              		.loc 1 151 0 discriminator 1
+ 103 007c 1400A0E3 		mov	r0, #20
+ 104 0080 FEFFFFEB 		bl	R_STB_RequestModuleStart
+ 105              	.LVL7:
+ 106 0084 020070E3 		cmn	r0, #2
+ 107 0088 FBFFFF0A 		beq	.L4
+ 152:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 153:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Spin here forever */
+ 154:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             ;
+ 155:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 156:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 157:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Issue bus reset of JCU. */
+ 158:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCCMD,BRST,  1 );
+ 108              		.loc 1 158 0
+ 109 008c 8030A0E3 		mov	r3, #128
+ 110 0090 0720A0E3 		mov	r2, #7
+ 111 0094 0110A0E3 		mov	r1, #1
+ 112 0098 010007E3 		movw	r0, #28673
+ 113 009c 01084EE3 		movt	r0, 59393
+ 114 00a0 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 115              	.LVL8:
+ 159:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 160:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Enable interrupts in registers (Interrupt lines in INTC are still disabled) */
+ 161:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* This registers are set to 0 by reset this IP */
+ 162:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 163:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JINTE1,  JCU_JINTS1_ALL );
+ 116              		.loc 1 163 0
+ 117 00a4 0030E0E3 		mvn	r3, #0
+ 118 00a8 0020A0E3 		mov	r2, #0
+ 119 00ac 7710A0E3 		mov	r1, #119
+ 120 00b0 8C0007E3 		movw	r0, #28812
+ 121 00b4 01084EE3 		movt	r0, 59393
+ 122 00b8 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 123              	.LVL9:
+ 164:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 165:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 166:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 167:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Clear the all of count mode settings */
+ 168:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT,DINLC,  0 );
+ 124              		.loc 1 168 0
+ 125 00bc 404007E3 		movw	r4, #28736
+ 126 00c0 01484EE3 		movt	r4, 59393
+ 127 00c4 1030A0E3 		mov	r3, #16
+ 128 00c8 0420A0E3 		mov	r2, #4
+ 129 00cc 0010A0E3 		mov	r1, #0
+ 130 00d0 0400A0E1 		mov	r0, r4
+ 131 00d4 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 132              	.LVL10:
+ 169:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 170:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 171:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT,DINRINI,  0 );
+ 133              		.loc 1 171 0
+ 134 00d8 4030A0E3 		mov	r3, #64
+ 135 00dc 0620A0E3 		mov	r2, #6
+ 136 00e0 0010A0E3 		mov	r1, #0
+ 137 00e4 0400A0E1 		mov	r0, r4
+ 138 00e8 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 139              	.LVL11:
+ 172:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 173:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 174:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFESLC,  0u );
+ 140              		.loc 1 174 0
+ 141 00ec 0030E0E3 		mvn	r3, #0
+ 142 00f0 0020A0E3 		mov	r2, #0
+ 143 00f4 0210A0E1 		mov	r1, r2
+ 144 00f8 500007E3 		movw	r0, #28752
+ 145 00fc 01084EE3 		movt	r0, 59393
+ 146 0100 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 147              	.LVL12:
+ 175:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 176:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 177:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 178:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 179:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT,JOUTC,  0 );
+ 148              		.loc 1 179 0
+ 149 0104 013AA0E3 		mov	r3, #4096
+ 150 0108 0C20A0E3 		mov	r2, #12
+ 151 010c 0010A0E3 		mov	r1, #0
+ 152 0110 0400A0E1 		mov	r0, r4
+ 153 0114 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 154              	.LVL13:
+ 180:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 181:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 182:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT,JOUTRINI,  0 );
+ 155              		.loc 1 182 0
+ 156 0118 0139A0E3 		mov	r3, #16384
+ 157 011c 0E20A0E3 		mov	r2, #14
+ 158 0120 0010A0E3 		mov	r1, #0
+ 159 0124 0400A0E1 		mov	r0, r4
+ 160 0128 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 161              	.LVL14:
+ 183:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 184:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 185:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFEDDC,  0u );
+ 162              		.loc 1 185 0
+ 163 012c 0030E0E3 		mvn	r3, #0
+ 164 0130 0020A0E3 		mov	r2, #0
+ 165 0134 0210A0E1 		mov	r1, r2
+ 166 0138 540007E3 		movw	r0, #28756
+ 167 013c 01084EE3 		movt	r0, 59393
+ 168 0140 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 169              	.LVL15:
+ 186:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 187:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 188:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 189:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 190:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT,JINC,  0 );
+ 170              		.loc 1 190 0
+ 171 0144 584007E3 		movw	r4, #28760
+ 172 0148 01484EE3 		movt	r4, 59393
+ 173 014c 013AA0E3 		mov	r3, #4096
+ 174 0150 0C20A0E3 		mov	r2, #12
+ 175 0154 0010A0E3 		mov	r1, #0
+ 176 0158 0400A0E1 		mov	r0, r4
+ 177 015c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 178              	.LVL16:
+ 191:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 192:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 193:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT,JINRINI,  0 );
+ 179              		.loc 1 193 0
+ 180 0160 0139A0E3 		mov	r3, #16384
+ 181 0164 0E20A0E3 		mov	r2, #14
+ 182 0168 0010A0E3 		mov	r1, #0
+ 183 016c 0400A0E1 		mov	r0, r4
+ 184 0170 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 185              	.LVL17:
+ 194:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 195:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 196:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFDSDC,  0u );
+ 186              		.loc 1 196 0
+ 187 0174 0030E0E3 		mvn	r3, #0
+ 188 0178 0020A0E3 		mov	r2, #0
+ 189 017c 0210A0E1 		mov	r1, r2
+ 190 0180 680007E3 		movw	r0, #28776
+ 191 0184 01084EE3 		movt	r0, 59393
+ 192 0188 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 193              	.LVL18:
+ 197:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 198:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 199:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 200:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 201:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT,DOUTLC,  0 );
+ 194              		.loc 1 201 0
+ 195 018c 1030A0E3 		mov	r3, #16
+ 196 0190 0420A0E3 		mov	r2, #4
+ 197 0194 0010A0E3 		mov	r1, #0
+ 198 0198 0400A0E1 		mov	r0, r4
+ 199 019c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 200              	.LVL19:
+ 202:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 203:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 204:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT,DOUTRINI,  0 );
+ 201              		.loc 1 204 0
+ 202 01a0 4030A0E3 		mov	r3, #64
+ 203 01a4 0620A0E3 		mov	r2, #6
+ 204 01a8 0010A0E3 		mov	r1, #0
+ 205 01ac 0400A0E1 		mov	r0, r4
+ 206 01b0 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 207              	.LVL20:
+ 205:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 206:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 207:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFDDLC,  0u );
+ 208              		.loc 1 207 0
+ 209 01b4 0030E0E3 		mvn	r3, #0
+ 210 01b8 0020A0E3 		mov	r2, #0
+ 211 01bc 0210A0E1 		mov	r1, r2
+ 212 01c0 6C0007E3 		movw	r0, #28780
+ 213 01c4 01084EE3 		movt	r0, 59393
+ 214 01c8 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 215              	.LVL21:
+ 208:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 209:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 210:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 211:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Set the which process is select */
+ 212:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCMOD,DSP,  codec );
+ 216              		.loc 1 212 0
+ 217 01cc 0830A0E3 		mov	r3, #8
+ 218 01d0 0320A0E3 		mov	r2, #3
+ 219 01d4 0510A0E1 		mov	r1, r5
+ 220 01d8 070AA0E3 		mov	r0, #28672
+ 221 01dc 01084EE3 		movt	r0, 59393
+ 222 01e0 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 223              	.LVL22:
+ 213:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 214:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** }  /* End of function JCU_SetRegisterForCodec */
+ 224              		.loc 1 214 0
+ 225 01e4 0CD08DE2 		add	sp, sp, #12
+ 226              		.cfi_def_cfa_offset 12
+ 227              		@ sp needed
+ 228 01e8 3080BDE8 		pop	{r4, r5, pc}
+ 229              		.cfi_endproc
+ 230              	.LFE6:
+ 232              		.section	.text.JCU_ClearInterruptFlag,"ax",%progbits
+ 233              		.align	2
+ 234              		.global	JCU_ClearInterruptFlag
+ 235              		.syntax unified
+ 236              		.arm
+ 237              		.fpu neon
+ 239              	JCU_ClearInterruptFlag:
+ 240              	.LFB7:
+ 215:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 216:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 217:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_ClearInterruptFlag
+ 218:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    ClearInterruptFlag
+ 219:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 220:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 221:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 222:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 223:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_ClearInterruptFlag(void) 
+ 224:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 241              		.loc 1 224 0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245 0000 10402DE9 		push	{r4, lr}
+ 246              		.cfi_def_cfa_offset 8
+ 247              		.cfi_offset 4, -8
+ 248              		.cfi_offset 14, -4
+ 225:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     uint32_t  value;
+ 226:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 227:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Interrupt request clear */
+ 228:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCCMD,JEND,  1 );
+ 249              		.loc 1 228 0
+ 250 0004 0430A0E3 		mov	r3, #4
+ 251 0008 0220A0E3 		mov	r2, #2
+ 252 000c 0110A0E3 		mov	r1, #1
+ 253 0010 010007E3 		movw	r0, #28673
+ 254 0014 01084EE3 		movt	r0, 59393
+ 255 0018 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 256              	.LVL23:
+ 229:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 230:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Clear the JEDI interrupt source flag */
+ 231:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 232:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JINTS0,  0u );  /* Write 0 only */
+ 257              		.loc 1 232 0
+ 258 001c 0030E0E3 		mvn	r3, #0
+ 259 0020 0020A0E3 		mov	r2, #0
+ 260 0024 0210A0E1 		mov	r1, r2
+ 261 0028 0F0007E3 		movw	r0, #28687
+ 262 002c 01084EE3 		movt	r0, 59393
+ 263 0030 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 264              	.LVL24:
+ 233:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 234:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 235:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 236:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Clear the JDTI interrupt source flag */
+ 237:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 238:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     value = R_REGISTER_READ32( &JCU.JINTS1 );
+ 265              		.loc 1 238 0
+ 266 0034 904007E3 		movw	r4, #28816
+ 267 0038 01484EE3 		movt	r4, 59393
+ 268 003c 0020E0E3 		mvn	r2, #0
+ 269 0040 0010A0E3 		mov	r1, #0
+ 270 0044 0400A0E1 		mov	r0, r4
+ 271 0048 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 272              	.LVL25:
+ 239:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 240:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 241:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     value &= (~JCU_JINTS1_ALL);
+ 242:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 243:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 244:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JINTS1,  value );
+ 273              		.loc 1 244 0
+ 274 004c 0030E0E3 		mvn	r3, #0
+ 275 0050 0020A0E3 		mov	r2, #0
+ 276 0054 7710C0E3 		bic	r1, r0, #119
+ 277              	.LVL26:
+ 278 0058 0400A0E1 		mov	r0, r4
+ 279 005c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 280              	.LVL27:
+ 281 0060 1080BDE8 		pop	{r4, pc}
+ 282              		.cfi_endproc
+ 283              	.LFE7:
+ 285              		.section	.text.JCU_SetRegisterForStart,"ax",%progbits
+ 286              		.align	2
+ 287              		.global	JCU_SetRegisterForStart
+ 288              		.syntax unified
+ 289              		.arm
+ 290              		.fpu neon
+ 292              	JCU_SetRegisterForStart:
+ 293              	.LFB8:
+ 245:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 246:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 247:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 248:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** }  /* End of function JCU_ClearInterruptFlag */
+ 249:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 250:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 251:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForStart
+ 252:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForStart
+ 253:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 254:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 255:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 256:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 257:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForStart(const jcu_int_detail_errors_t error_filter) 
+ 258:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 294              		.loc 1 258 0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298              	.LVL28:
+ 299 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 300              		.cfi_def_cfa_offset 16
+ 301              		.cfi_offset 4, -16
+ 302              		.cfi_offset 5, -12
+ 303              		.cfi_offset 6, -8
+ 304              		.cfi_offset 14, -4
+ 305 0004 0050A0E1 		mov	r5, r0
+ 259:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     uint32_t  reg_jinte0;
+ 260:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 261:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Write error_filter */
+ 262:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     reg_jinte0 = (uint32_t) R_REGISTER_READ8( &JCU.JINTE0 )  &  (uint32_t) ~JCU_INT_ERROR_ALL;
+ 306              		.loc 1 262 0
+ 307 0008 0E4007E3 		movw	r4, #28686
+ 308 000c 01484EE3 		movt	r4, 59393
+ 309 0010 0020E0E3 		mvn	r2, #0
+ 310 0014 0010A0E3 		mov	r1, #0
+ 311 0018 0400A0E1 		mov	r0, r4
+ 312              	.LVL29:
+ 313 001c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 314              	.LVL30:
+ 315 0020 E010C0E3 		bic	r1, r0, #224
+ 316              	.LVL31:
+ 263:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 264:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 265:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     reg_jinte0 |= (uint32_t) error_filter;
+ 317              		.loc 1 265 0
+ 318 0024 051081E1 		orr	r1, r1, r5
+ 319              	.LVL32:
+ 266:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 267:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 268:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JINTE0,  (uint8_t) reg_jinte0 );
+ 320              		.loc 1 268 0
+ 321 0028 0030E0E3 		mvn	r3, #0
+ 322 002c 0020A0E3 		mov	r2, #0
+ 323 0030 7110EFE6 		uxtb	r1, r1
+ 324              	.LVL33:
+ 325 0034 0400A0E1 		mov	r0, r4
+ 326              	.LVL34:
+ 327 0038 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 328              	.LVL35:
+ 269:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 270:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Start */
+ 271:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCCMD,JSRT,  1 );
+ 329              		.loc 1 271 0
+ 330 003c 0130A0E3 		mov	r3, #1
+ 331 0040 0020A0E3 		mov	r2, #0
+ 332 0044 0310A0E1 		mov	r1, r3
+ 333 0048 010007E3 		movw	r0, #28673
+ 334 004c 01084EE3 		movt	r0, 59393
+ 335 0050 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 336              	.LVL36:
+ 337 0054 7080BDE8 		pop	{r4, r5, r6, pc}
+ 338              		.cfi_endproc
+ 339              	.LFE8:
+ 341              		.section	.text.JCU_SetRegisterForContinue,"ax",%progbits
+ 342              		.align	2
+ 343              		.global	JCU_SetRegisterForContinue
+ 344              		.syntax unified
+ 345              		.arm
+ 346              		.fpu neon
+ 348              	JCU_SetRegisterForContinue:
+ 349              	.LFB9:
+ 272:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 273:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** }  /* End of function JCU_SetRegisterForStart */
+ 274:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 275:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 276:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForContinue
+ 277:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForContinue
+ 278:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 279:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 280:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     type - [in]
+ 281:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 282:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 283:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 284:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 285:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForContinue(const jcu_continue_type_t  type) 
+ 286:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 350              		.loc 1 286 0
+ 351              		.cfi_startproc
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354              	.LVL37:
+ 355 0000 10402DE9 		push	{r4, lr}
+ 356              		.cfi_def_cfa_offset 8
+ 357              		.cfi_offset 4, -8
+ 358              		.cfi_offset 14, -4
+ 359 0004 0040A0E1 		mov	r4, r0
+ 287:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t  e;
+ 288:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     jcu_internal_information_t*
+ 289:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         const  self = R_JCU_GetInternalInformation(); 
+ 360              		.loc 1 289 0
+ 361 0008 FEFFFFEB 		bl	R_JCU_GetInternalInformation
+ 362              	.LVL38:
+ 290:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 291:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 292:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 293:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 294:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( self == NULL )
+ 363              		.loc 1 294 0
+ 364 000c 000050E3 		cmp	r0, #0
+ 365 0010 3500000A 		beq	.L17
+ 295:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 296:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2A;
+ 297:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             goto fin;
+ 298:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 299:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 300:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 301:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Restart register setting */
+ 302:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     switch (type)
+ 366              		.loc 1 302 0
+ 367 0014 010054E3 		cmp	r4, #1
+ 368 0018 1700000A 		beq	.L12
+ 369 001c 0300003A 		bcc	.L13
+ 370 0020 020054E3 		cmp	r4, #2
+ 371 0024 2700000A 		beq	.L14
+ 303:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 304:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_INPUT_BUFFER:
+ 305:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             if (self->Codec == JCU_STATUS_DECODE)
+ 306:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 307:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 /* Cast to an appropriate type */
+ 308:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, JINRCMD,  1 );
+ 309:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             }
+ 310:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             else
+ 311:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 312:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 /* Cast to an appropriate type */
+ 313:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 R_BIT_SET_IN_REGISTER32( JCU,JIFECNT, DINRCMD,  1 );
+ 314:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             } /* end if */
+ 315:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 break;
+ 316:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 317:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_OUTPUT_BUFFER:
+ 318:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             if (self->Codec == JCU_STATUS_DECODE)
+ 319:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 320:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 /* Cast to an appropriate type */
+ 321:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, DOUTRCMD,  1 );
+ 322:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             }
+ 323:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             else
+ 324:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 325:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 /* Cast to an appropriate type */
+ 326:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 R_BIT_SET_IN_REGISTER32( JCU,JIFECNT, JOUTRCMD,  1 );
+ 327:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             } /* end if */
+ 328:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 break;
+ 329:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 330:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_IMAGE_INFO:
+ 331:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 332:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 333:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             R_BIT_SET_IN_REGISTER8( JCU,JCCMD, JRST,  1 );
+ 334:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 break;
+ 335:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 336:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 2018 : For MISRA 15.3, SEC R3.5.2 */
+ 337:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         default:
+ 338:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 339:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* <-QAC 2018 */
+ 340:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* NOT REACHED */
+ 341:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 break;
+ 342:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end switch */
+ 343:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 344:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 372              		.loc 1 344 0
+ 373 0028 0000A0E3 		mov	r0, #0
+ 374              	.LVL39:
+ 375 002c 2C0000EA 		b	.L11
+ 376              	.LVL40:
+ 377              	.L13:
+ 305:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 378              		.loc 1 305 0
+ 379 0030 D030D0E1 		ldrsb	r3, [r0]
+ 380 0034 010053E3 		cmp	r3, #1
+ 381 0038 0700000A 		beq	.L21
+ 313:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             } /* end if */
+ 382              		.loc 1 313 0
+ 383 003c 2030A0E3 		mov	r3, #32
+ 384 0040 0520A0E3 		mov	r2, #5
+ 385 0044 0110A0E3 		mov	r1, #1
+ 386 0048 400007E3 		movw	r0, #28736
+ 387              	.LVL41:
+ 388 004c 01084EE3 		movt	r0, 59393
+ 389 0050 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 390              	.LVL42:
+ 391              		.loc 1 344 0
+ 392 0054 0000A0E3 		mov	r0, #0
+ 393 0058 210000EA 		b	.L11
+ 394              	.LVL43:
+ 395              	.L21:
+ 308:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             }
+ 396              		.loc 1 308 0
+ 397 005c 023AA0E3 		mov	r3, #8192
+ 398 0060 0D20A0E3 		mov	r2, #13
+ 399 0064 0110A0E3 		mov	r1, #1
+ 400 0068 580007E3 		movw	r0, #28760
+ 401              	.LVL44:
+ 402 006c 01084EE3 		movt	r0, 59393
+ 403 0070 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 404              	.LVL45:
+ 405              		.loc 1 344 0
+ 406 0074 0000A0E3 		mov	r0, #0
+ 407 0078 190000EA 		b	.L11
+ 408              	.LVL46:
+ 409              	.L12:
+ 318:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             {
+ 410              		.loc 1 318 0
+ 411 007c D030D0E1 		ldrsb	r3, [r0]
+ 412 0080 010053E3 		cmp	r3, #1
+ 413 0084 0700000A 		beq	.L22
+ 326:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             } /* end if */
+ 414              		.loc 1 326 0
+ 415 0088 023AA0E3 		mov	r3, #8192
+ 416 008c 0D20A0E3 		mov	r2, #13
+ 417 0090 0110A0E3 		mov	r1, #1
+ 418 0094 400007E3 		movw	r0, #28736
+ 419              	.LVL47:
+ 420 0098 01084EE3 		movt	r0, 59393
+ 421 009c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 422              	.LVL48:
+ 423              		.loc 1 344 0
+ 424 00a0 0000A0E3 		mov	r0, #0
+ 425 00a4 0E0000EA 		b	.L11
+ 426              	.LVL49:
+ 427              	.L22:
+ 321:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             }
+ 428              		.loc 1 321 0
+ 429 00a8 2030A0E3 		mov	r3, #32
+ 430 00ac 0520A0E3 		mov	r2, #5
+ 431 00b0 0110A0E3 		mov	r1, #1
+ 432 00b4 580007E3 		movw	r0, #28760
+ 433              	.LVL50:
+ 434 00b8 01084EE3 		movt	r0, 59393
+ 435 00bc FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 436              	.LVL51:
+ 437              		.loc 1 344 0
+ 438 00c0 0000A0E3 		mov	r0, #0
+ 439 00c4 060000EA 		b	.L11
+ 440              	.LVL52:
+ 441              	.L14:
+ 333:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 break;
+ 442              		.loc 1 333 0
+ 443 00c8 0230A0E3 		mov	r3, #2
+ 444 00cc 0120A0E3 		mov	r2, #1
+ 445 00d0 0210A0E1 		mov	r1, r2
+ 446 00d4 010007E3 		movw	r0, #28673
+ 447              	.LVL53:
+ 448 00d8 01084EE3 		movt	r0, 59393
+ 449 00dc FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 450              	.LVL54:
+ 451              		.loc 1 344 0
+ 452 00e0 0000A0E3 		mov	r0, #0
+ 453              	.L11:
+ 454              	.LVL55:
+ 345:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 346:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 347:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 455              		.loc 1 347 0
+ 456 00e4 FEFFFFEB 		bl	R_ERROR_Set
+ 457              	.LVL56:
+ 458 00e8 1080BDE8 		pop	{r4, pc}
+ 459              	.LVL57:
+ 460              	.L17:
+ 296:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             goto fin;
+ 461              		.loc 1 296 0
+ 462 00ec 2A0100E3 		movw	r0, #298
+ 463              	.LVL58:
+ 464 00f0 450140E3 		movt	r0, 325
+ 465 00f4 FAFFFFEA 		b	.L11
+ 466              		.cfi_endproc
+ 467              	.LFE9:
+ 469              		.section	.text.JCU_SetRegisterForSetDecodePrm,"ax",%progbits
+ 470              		.align	2
+ 471              		.global	JCU_SetRegisterForSetDecodePrm
+ 472              		.syntax unified
+ 473              		.arm
+ 474              		.fpu neon
+ 476              	JCU_SetRegisterForSetDecodePrm:
+ 477              	.LFB10:
+ 348:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 349:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 350:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForContinue */
+ 351:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 352:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 353:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForSetDecodePrm
+ 354:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForSetDecod
+ 355:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 356:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 357:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     decode - [in]
+ 358:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     buffer - [in]
+ 359:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     interruptKind - [in]
+ 360:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 361:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 362:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 363:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 364:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForSetDecodePrm( 
+ 365:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_decode_param_t   *const decode,
+ 366:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_buffer_param_t   *const buffer)
+ 367:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 478              		.loc 1 367 0
+ 479              		.cfi_startproc
+ 480              		@ args = 0, pretend = 0, frame = 16
+ 481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482              	.LVL59:
+ 483 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 484              		.cfi_def_cfa_offset 16
+ 485              		.cfi_offset 4, -16
+ 486              		.cfi_offset 5, -12
+ 487              		.cfi_offset 6, -8
+ 488              		.cfi_offset 14, -4
+ 489 0004 10D04DE2 		sub	sp, sp, #16
+ 490              		.cfi_def_cfa_offset 32
+ 491 0008 0040A0E1 		mov	r4, r0
+ 492 000c 0160A0E1 		mov	r6, r1
+ 368:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const uint32_t byteSize[KIND_COLOR_FORMAT] =   
+ 493              		.loc 1 368 0
+ 494 0010 003000E3 		movw	r3, #:lower16:.LANCHOR0
+ 495 0014 003040E3 		movt	r3, #:upper16:.LANCHOR0
+ 496 0018 070093E8 		ldm	r3, {r0, r1, r2}
+ 497              	.LVL60:
+ 498 001c 10308DE2 		add	r3, sp, #16
+ 499 0020 070003E9 		stmdb	r3, {r0, r1, r2}
+ 369:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 370:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->SEC M1.10.1 Table data. */
+ 371:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {  2u, /* JCU_OUTPUT_YCbCr422 */
+ 372:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             4u, /* JCU_OUTPUT_ARGB8888 */
+ 373:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             2u  /* JCU_OUTPUT_RGB565   */
+ 374:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         };
+ 375:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 376:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-SEC M1.10.1 */
+ 377:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t  e;
+ 378:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 379:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 380:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 381:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( decode == NULL )
+ 500              		.loc 1 381 0
+ 501 0024 000054E3 		cmp	r4, #0
+ 502 0028 4300000A 		beq	.L25
+ 382:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 383:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2B; goto fin;
+ 384:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 385:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( buffer == NULL )
+ 503              		.loc 1 385 0
+ 504 002c 000056E3 		cmp	r6, #0
+ 505 0030 4400000A 		beq	.L26
+ 386:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 387:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2C; goto fin;
+ 388:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 389:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 390:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 391:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for the cull */
+ 392:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, VINTER,  decode->verticalSubSampling );
+ 506              		.loc 1 392 0
+ 507 0034 585007E3 		movw	r5, #28760
+ 508 0038 01584EE3 		movt	r5, 59393
+ 509 003c 0332A0E3 		mov	r3, #805306368
+ 510 0040 1C20A0E3 		mov	r2, #28
+ 511 0044 0010D4E5 		ldrb	r1, [r4]	@ zero_extendqisi2
+ 512 0048 0500A0E1 		mov	r0, r5
+ 513 004c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 514              	.LVL61:
+ 393:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 394:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 395:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, HINTER,  decode->horizontalSubSampling );
+ 515              		.loc 1 395 0
+ 516 0050 0333A0E3 		mov	r3, #201326592
+ 517 0054 1A20A0E3 		mov	r2, #26
+ 518 0058 0110D4E5 		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 519 005c 0500A0E1 		mov	r0, r5
+ 520 0060 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 521              	.LVL62:
+ 396:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 397:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 398:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, OPF,     decode->decodeFormat );
+ 522              		.loc 1 398 0
+ 523 0064 0334A0E3 		mov	r3, #50331648
+ 524 0068 1820A0E3 		mov	r2, #24
+ 525 006c 0210D4E5 		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 526 0070 0500A0E1 		mov	r0, r5
+ 527 0074 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 528              	.LVL63:
+ 399:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 400:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 401:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, JINSWAP,   buffer->source.swapSetting );
+ 529              		.loc 1 401 0
+ 530 0078 073CA0E3 		mov	r3, #1792
+ 531 007c 0820A0E3 		mov	r2, #8
+ 532 0080 0010D6E5 		ldrb	r1, [r6]	@ zero_extendqisi2
+ 533 0084 0500A0E1 		mov	r0, r5
+ 534 0088 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 535              	.LVL64:
+ 402:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 403:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 404:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDCNT, DOUTSWAP,  buffer->destination.swapSetting );
+ 536              		.loc 1 404 0
+ 537 008c 0730A0E3 		mov	r3, #7
+ 538 0090 0020A0E3 		mov	r2, #0
+ 539 0094 0810D6E5 		ldrb	r1, [r6, #8]	@ zero_extendqisi2
+ 540 0098 0500A0E1 		mov	r0, r5
+ 541 009c FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 542              	.LVL65:
+ 405:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 406:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for input jpeg file information */
+ 407:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 408:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFDSA,  (uintptr_t) buffer->source.address );
+ 543              		.loc 1 408 0
+ 544 00a0 0030E0E3 		mvn	r3, #0
+ 545 00a4 0020A0E3 		mov	r2, #0
+ 546 00a8 041096E5 		ldr	r1, [r6, #4]
+ 547 00ac 5C0007E3 		movw	r0, #28764
+ 548 00b0 01084EE3 		movt	r0, 59393
+ 549 00b4 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 550              	.LVL66:
+ 409:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 410:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 411:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for output image data information */
+ 412:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 413:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFDDA,  (uintptr_t) buffer->destination.address );
+ 551              		.loc 1 413 0
+ 552 00b8 0030E0E3 		mvn	r3, #0
+ 553 00bc 0020A0E3 		mov	r2, #0
+ 554 00c0 0C1096E5 		ldr	r1, [r6, #12]
+ 555 00c4 640007E3 		movw	r0, #28772
+ 556 00c8 01084EE3 		movt	r0, 59393
+ 557 00cc FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 558              	.LVL67:
+ 414:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 415:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 416:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDDOFST, DDMW,
+ 559              		.loc 1 416 0
+ 560 00d0 F011D6E1 		ldrsh	r1, [r6, #16]
+ 561 00d4 0230D4E5 		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 562 00d8 10208DE2 		add	r2, sp, #16
+ 563 00dc 033182E0 		add	r3, r2, r3, lsl #2
+ 564 00e0 0C0013E5 		ldr	r0, [r3, #-12]
+ 565 00e4 FF3F07E3 		movw	r3, #32767
+ 566 00e8 0020A0E3 		mov	r2, #0
+ 567 00ec 900101E0 		mul	r1, r0, r1
+ 568 00f0 600007E3 		movw	r0, #28768
+ 569 00f4 01084EE3 		movt	r0, 59393
+ 570 00f8 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 571              	.LVL68:
+ 417:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         ((uint32_t)buffer->lineOffset * (uint32_t)(byteSize[decode->decodeFormat])) );
+ 418:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 419:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 420:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFDADT, ALPHA,
+ 572              		.loc 1 420 0
+ 573 00fc FF30A0E3 		mov	r3, #255
+ 574 0100 0020A0E3 		mov	r2, #0
+ 575 0104 0410D4E5 		ldrb	r1, [r4, #4]	@ zero_extendqisi2
+ 576 0108 700007E3 		movw	r0, #28784
+ 577 010c 01084EE3 		movt	r0, 59393
+ 578 0110 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 579              	.LVL69:
+ 421:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         (uint32_t)(decode->alpha) );
+ 422:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 423:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 424:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Setting for Cb/Cr offset */
+ 425:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFESHSZ, DOUTYCHG,  decode->outputCbCrOffset );
+ 580              		.loc 1 425 0
+ 581 0114 0239A0E3 		mov	r3, #32768
+ 582 0118 0F20A0E3 		mov	r2, #15
+ 583 011c 0310D4E5 		ldrb	r1, [r4, #3]	@ zero_extendqisi2
+ 584 0120 980007E3 		movw	r0, #28824
+ 585 0124 01084EE3 		movt	r0, 59393
+ 586 0128 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 587              	.LVL70:
+ 426:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 427:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 588              		.loc 1 427 0
+ 589 012c 0000A0E3 		mov	r0, #0
+ 590              	.LVL71:
+ 591              	.L24:
+ 428:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 429:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 430:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 592              		.loc 1 430 0
+ 593 0130 FEFFFFEB 		bl	R_ERROR_Set
+ 594              	.LVL72:
+ 431:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 432:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 433:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 434:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForSetDecodePrm */
+ 595              		.loc 1 434 0
+ 596 0134 10D08DE2 		add	sp, sp, #16
+ 597              		.cfi_remember_state
+ 598              		.cfi_def_cfa_offset 16
+ 599              		@ sp needed
+ 600 0138 7080BDE8 		pop	{r4, r5, r6, pc}
+ 601              	.LVL73:
+ 602              	.L25:
+ 603              		.cfi_restore_state
+ 383:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 604              		.loc 1 383 0
+ 605 013c 2B0100E3 		movw	r0, #299
+ 606 0140 450140E3 		movt	r0, 325
+ 607 0144 F9FFFFEA 		b	.L24
+ 608              	.L26:
+ 387:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 609              		.loc 1 387 0
+ 610 0148 4B0FA0E3 		mov	r0, #300
+ 611 014c 450140E3 		movt	r0, 325
+ 612 0150 F6FFFFEA 		b	.L24
+ 613              		.cfi_endproc
+ 614              	.LFE10:
+ 616              		.section	.text.JCU_SetRegisterForSetQtTable,"ax",%progbits
+ 617              		.align	2
+ 618              		.global	JCU_SetRegisterForSetQtTable
+ 619              		.syntax unified
+ 620              		.arm
+ 621              		.fpu neon
+ 623              	JCU_SetRegisterForSetQtTable:
+ 624              	.LFB11:
+ 435:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 436:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 437:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForSetQtTable
+ 438:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForSetQtTable
+ 439:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 440:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 441:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     tableNo - [in]
+ 442:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     table   - [in]
+ 443:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 444:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 445:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 446:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 447:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForSetQtTable( 
+ 448:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_table_no_t   tableNo, 
+ 449:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const uint8_t* const   table)
+ 450:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 625              		.loc 1 450 0
+ 626              		.cfi_startproc
+ 627              		@ args = 0, pretend = 0, frame = 0
+ 628              		@ frame_needed = 0, uses_anonymous_args = 0
+ 629              	.LVL74:
+ 630 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 631              		.cfi_def_cfa_offset 16
+ 632              		.cfi_offset 4, -16
+ 633              		.cfi_offset 5, -12
+ 634              		.cfi_offset 6, -8
+ 635              		.cfi_offset 14, -4
+ 451:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     volatile uint8_t*
+ 452:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         tableAtRegister;  
+ 453:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     int_fast32_t       counter;
+ 454:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t           e;
+ 455:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 456:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Select the destination of the Quantization table */
+ 457:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     switch (tableNo)
+ 636              		.loc 1 457 0
+ 637 0004 030050E3 		cmp	r0, #3
+ 638 0008 00F19F97 		ldrls	pc, [pc, r0, asl #2]
+ 639 000c 1F0000EA 		b	.L28
+ 640              	.L31:
+ 641 0010 20000000 		.word	.L30
+ 642 0014 44000000 		.word	.L38
+ 643 0018 2C000000 		.word	.L33
+ 644 001c 38000000 		.word	.L34
+ 645              	.L30:
+ 458:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 459:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 0306 */
+ 460:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_TABLE_NO_0:
+ 461:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 462:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 463:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister = (volatile uint8_t *)&JCU.JCQTBL0;
+ 646              		.loc 1 463 0
+ 647 0020 716CA0E3 		mov	r6, #28928
+ 648 0024 01684EE3 		movt	r6, 59393
+ 649 0028 070000EA 		b	.L32
+ 650              	.L33:
+ 651              	.LVL75:
+ 464:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         break;
+ 465:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_TABLE_NO_1:
+ 466:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 467:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 468:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister = (volatile uint8_t *)&JCU.JCQTBL1;
+ 469:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         break;
+ 470:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_TABLE_NO_2:
+ 471:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 472:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 473:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister = (volatile uint8_t *)&JCU.JCQTBL2;
+ 652              		.loc 1 473 0
+ 653 002c 806107E3 		movw	r6, #29056
+ 654 0030 01684EE3 		movt	r6, 59393
+ 655              	.LVL76:
+ 474:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         break;
+ 656              		.loc 1 474 0
+ 657 0034 040000EA 		b	.L32
+ 658              	.L34:
+ 659              	.LVL77:
+ 475:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         case JCU_TABLE_NO_3:
+ 476:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 477:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 478:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister = (volatile uint8_t *)&JCU.JCQTBL3;
+ 660              		.loc 1 478 0
+ 661 0038 C06107E3 		movw	r6, #29120
+ 662 003c 01684EE3 		movt	r6, 59393
+ 663              	.LVL78:
+ 479:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         break;
+ 664              		.loc 1 479 0
+ 665 0040 010000EA 		b	.L32
+ 666              	.L38:
+ 468:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         break;
+ 667              		.loc 1 468 0
+ 668 0044 406107E3 		movw	r6, #28992
+ 669 0048 01684EE3 		movt	r6, 59393
+ 670              	.L32:
+ 671 004c 0150A0E1 		mov	r5, r1
+ 672              	.LVL79:
+ 480:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 481:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 2018 : For MISRA 15.3, SEC R3.5.2 */
+ 482:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         default:
+ 483:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 484:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 2018 */
+ 485:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* NOT REACHED */
+ 486:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             return;
+ 487:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 488:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 0306 */
+ 489:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end switch */
+ 490:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 491:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 492:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 493:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 494:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( tableAtRegister == NULL )
+ 673              		.loc 1 494 0
+ 674 0050 000056E3 		cmp	r6, #0
+ 675 0054 0E00000A 		beq	.L39
+ 495:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 496:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2D; goto fin;
+ 497:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 498:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 499:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 500:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( table == NULL )
+ 676              		.loc 1 500 0
+ 677 0058 000051E3 		cmp	r1, #0
+ 678 005c 0F00000A 		beq	.L40
+ 679 0060 0040A0E3 		mov	r4, #0
+ 680 0064 050000EA 		b	.L36
+ 681              	.LVL80:
+ 682              	.L37:
+ 501:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 502:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2E; goto fin;
+ 503:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 504:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 505:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     
+ 506:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Update the quantization table data */
+ 507:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     for (counter = 0; counter < NUMBER_OF_QUANTIZATION_TABLE_DATA; counter++)
+ 508:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 509:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         RZA_IO_RegWrite_8( &tableAtRegister[ counter ],  table[ counter ],
+ 683              		.loc 1 509 0 discriminator 3
+ 684 0068 0030E0E3 		mvn	r3, #0
+ 685 006c 0020A0E3 		mov	r2, #0
+ 686 0070 0410D5E7 		ldrb	r1, [r5, r4]	@ zero_extendqisi2
+ 687 0074 040086E0 		add	r0, r6, r4
+ 688 0078 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 689              	.LVL81:
+ 507:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 690              		.loc 1 507 0 discriminator 3
+ 691 007c 014084E2 		add	r4, r4, #1
+ 692              	.LVL82:
+ 693              	.L36:
+ 507:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 694              		.loc 1 507 0 is_stmt 0 discriminator 1
+ 695 0080 3F0054E3 		cmp	r4, #63
+ 696 0084 F7FFFFDA 		ble	.L37
+ 510:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****                 IOREG_NONSHIFT_ACCESS,  IOREG_NONMASK_ACCESS );
+ 511:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end for */
+ 512:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 513:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 697              		.loc 1 513 0 is_stmt 1
+ 698 0088 0000A0E3 		mov	r0, #0
+ 699              	.LVL83:
+ 700              	.L35:
+ 514:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 515:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 516:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 701              		.loc 1 516 0
+ 702 008c FEFFFFEB 		bl	R_ERROR_Set
+ 703              	.LVL84:
+ 704              	.L28:
+ 705 0090 7080BDE8 		pop	{r4, r5, r6, pc}
+ 706              	.LVL85:
+ 707              	.L39:
+ 496:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 708              		.loc 1 496 0
+ 709 0094 2D0100E3 		movw	r0, #301
+ 710              	.LVL86:
+ 711 0098 450140E3 		movt	r0, 325
+ 712 009c FAFFFFEA 		b	.L35
+ 713              	.LVL87:
+ 714              	.L40:
+ 502:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 715              		.loc 1 502 0
+ 716 00a0 2E0100E3 		movw	r0, #302
+ 717              	.LVL88:
+ 718 00a4 450140E3 		movt	r0, 325
+ 719 00a8 F7FFFFEA 		b	.L35
+ 720              		.cfi_endproc
+ 721              	.LFE11:
+ 723              		.section	.text.JCU_SetRegisterForSetHuffTbl,"ax",%progbits
+ 724              		.align	2
+ 725              		.global	JCU_SetRegisterForSetHuffTbl
+ 726              		.syntax unified
+ 727              		.arm
+ 728              		.fpu neon
+ 730              	JCU_SetRegisterForSetHuffTbl:
+ 731              	.LFB12:
+ 517:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 518:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 519:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForSetQtTable */
+ 520:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 521:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 522:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForSetHuffTbl
+ 523:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForSetHuffTbl
+ 524:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 525:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 526:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     tableNo - [in]
+ 527:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     type    - [in]
+ 528:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     table   - [in]
+ 529:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 530:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 531:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 532:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 533:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForSetHuffTbl( 
+ 534:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_table_no_t   tableNo, 
+ 535:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_huff_t       type,
+ 536:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const uint8_t *const   table)
+ 537:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 732              		.loc 1 537 0
+ 733              		.cfi_startproc
+ 734              		@ args = 0, pretend = 0, frame = 0
+ 735              		@ frame_needed = 0, uses_anonymous_args = 0
+ 736              	.LVL89:
+ 737 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 738              		.cfi_def_cfa_offset 24
+ 739              		.cfi_offset 4, -24
+ 740              		.cfi_offset 5, -20
+ 741              		.cfi_offset 6, -16
+ 742              		.cfi_offset 7, -12
+ 743              		.cfi_offset 8, -8
+ 744              		.cfi_offset 14, -4
+ 745 0004 0260A0E1 		mov	r6, r2
+ 538:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     volatile uint8_t*
+ 539:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         tableAtRegister;  
+ 540:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     int_fast32_t       copyCount; 
+ 541:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     int_fast32_t       counter;
+ 542:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t           e;
+ 543:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 544:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Select the destination Huffman table and the size of copy data */
+ 545:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if (tableNo == JCU_TABLE_NO_0)
+ 746              		.loc 1 545 0
+ 747 0008 000050E3 		cmp	r0, #0
+ 748 000c 0E00001A 		bne	.L43
+ 546:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 547:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 0306 */
+ 548:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if (type == JCU_HUFFMAN_DC)
+ 749              		.loc 1 548 0
+ 750 0010 010051E3 		cmp	r1, #1
+ 751 0014 0800000A 		beq	.L53
+ 549:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 550:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 551:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister  = (volatile uint8_t *)&JCU.JCHTBD0;
+ 552:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_DC;
+ 553:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 554:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         else
+ 555:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 556:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 557:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister  = (volatile uint8_t *)&JCU.JCHTBA0;
+ 558:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_AC;
+ 752              		.loc 1 558 0
+ 753 0018 B270A0E3 		mov	r7, #178
+ 557:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_AC;
+ 754              		.loc 1 557 0
+ 755 001c 205207E3 		movw	r5, #29216
+ 756 0020 01584EE3 		movt	r5, 59393
+ 757              	.L44:
+ 758              	.LVL90:
+ 559:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* end if */
+ 560:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 561:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 0306 */
+ 562:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 563:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     else
+ 564:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 565:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 0306 */
+ 566:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if (type == JCU_HUFFMAN_DC)
+ 567:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 568:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 569:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister  = (volatile uint8_t *)&JCU.JCHTBD1;
+ 570:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_DC;
+ 571:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 572:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         else
+ 573:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 574:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 575:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             tableAtRegister  = (volatile uint8_t *)&JCU.JCHTBA1;
+ 576:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_AC;
+ 577:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* end if */
+ 578:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 0306 */
+ 579:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }  /* end if */
+ 580:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 581:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 582:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 583:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 584:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( tableAtRegister == NULL )
+ 759              		.loc 1 584 0
+ 760 0024 000055E3 		cmp	r5, #0
+ 761 0028 1B00000A 		beq	.L50
+ 585:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 586:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_2F; goto fin;
+ 587:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 588:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 589:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 590:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( table == NULL )
+ 762              		.loc 1 590 0
+ 763 002c 000056E3 		cmp	r6, #0
+ 764 0030 1C00000A 		beq	.L51
+ 765 0034 0040A0E3 		mov	r4, #0
+ 766 0038 120000EA 		b	.L46
+ 767              	.LVL91:
+ 768              	.L53:
+ 552:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 769              		.loc 1 552 0
+ 770 003c 1C70A0E3 		mov	r7, #28
+ 551:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_DC;
+ 771              		.loc 1 551 0
+ 772 0040 725CA0E3 		mov	r5, #29184
+ 773 0044 01584EE3 		movt	r5, 59393
+ 774 0048 F5FFFFEA 		b	.L44
+ 775              	.L43:
+ 566:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 776              		.loc 1 566 0
+ 777 004c 010051E3 		cmp	r1, #1
+ 576:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* end if */
+ 778              		.loc 1 576 0
+ 779 0050 B270A013 		movne	r7, #178
+ 575:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_AC;
+ 780              		.loc 1 575 0
+ 781 0054 20530713 		movwne	r5, #29472
+ 782 0058 01584E13 		movtne	r5, 59393
+ 783 005c F0FFFF1A 		bne	.L44
+ 784              	.L54:
+ 570:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 785              		.loc 1 570 0
+ 786 0060 1C70A0E3 		mov	r7, #28
+ 569:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             copyCount        = NUMBER_OF_HUFFMAN_TABLE_DATA_DC;
+ 787              		.loc 1 569 0
+ 788 0064 735CA0E3 		mov	r5, #29440
+ 789 0068 01584EE3 		movt	r5, 59393
+ 790 006c ECFFFFEA 		b	.L44
+ 791              	.LVL92:
+ 792              	.L47:
+ 591:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 592:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_30; goto fin;
+ 593:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 594:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 595:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 596:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Update the Huffman table */
+ 597:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     for (counter = 0; counter < copyCount; counter++)
+ 598:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 599:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         RZA_IO_RegWrite_8( &tableAtRegister[ counter ],  table[ counter ],
+ 793              		.loc 1 599 0 discriminator 3
+ 794 0070 0030E0E3 		mvn	r3, #0
+ 795 0074 0020A0E3 		mov	r2, #0
+ 796 0078 0410D6E7 		ldrb	r1, [r6, r4]	@ zero_extendqisi2
+ 797 007c 040085E0 		add	r0, r5, r4
+ 798 0080 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 799              	.LVL93:
+ 597:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 800              		.loc 1 597 0 discriminator 3
+ 801 0084 014084E2 		add	r4, r4, #1
+ 802              	.LVL94:
+ 803              	.L46:
+ 597:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 804              		.loc 1 597 0 is_stmt 0 discriminator 1
+ 805 0088 040057E1 		cmp	r7, r4
+ 806 008c F7FFFFCA 		bgt	.L47
+ 600:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             IOREG_NONSHIFT_ACCESS,  IOREG_NONMASK_ACCESS );
+ 601:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end for */
+ 602:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 603:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 807              		.loc 1 603 0 is_stmt 1
+ 808 0090 0000A0E3 		mov	r0, #0
+ 809              	.LVL95:
+ 810              	.L45:
+ 604:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 605:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 606:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 811              		.loc 1 606 0
+ 812 0094 FEFFFFEB 		bl	R_ERROR_Set
+ 813              	.LVL96:
+ 814 0098 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 815              	.LVL97:
+ 816              	.L50:
+ 586:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 817              		.loc 1 586 0
+ 818 009c 2F0100E3 		movw	r0, #303
+ 819              	.LVL98:
+ 820 00a0 450140E3 		movt	r0, 325
+ 821 00a4 FAFFFFEA 		b	.L45
+ 822              	.LVL99:
+ 823              	.L51:
+ 592:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 824              		.loc 1 592 0
+ 825 00a8 130EA0E3 		mov	r0, #304
+ 826              	.LVL100:
+ 827 00ac 450140E3 		movt	r0, 325
+ 828 00b0 F7FFFFEA 		b	.L45
+ 829              		.cfi_endproc
+ 830              	.LFE12:
+ 832              		.section	.text.JCU_SetRegisterForSetEncodePrm,"ax",%progbits
+ 833              		.align	2
+ 834              		.global	JCU_SetRegisterForSetEncodePrm
+ 835              		.syntax unified
+ 836              		.arm
+ 837              		.fpu neon
+ 839              	JCU_SetRegisterForSetEncodePrm:
+ 840              	.LFB13:
+ 607:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 608:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 609:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForSetHuffTbl */
+ 610:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 611:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 612:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForSetEncodePrm
+ 613:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    SetRegisterForSetEncode
+ 614:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 615:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 616:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     encode - [in]
+ 617:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     buffer - [in]
+ 618:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 619:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 620:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 621:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 622:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForSetEncodePrm(  
+ 623:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_encode_param_t   *const encode, 
+ 624:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const jcu_buffer_param_t   *const buffer)
+ 625:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 841              		.loc 1 625 0
+ 842              		.cfi_startproc
+ 843              		@ args = 0, pretend = 0, frame = 8
+ 844              		@ frame_needed = 0, uses_anonymous_args = 0
+ 845              	.LVL101:
+ 846 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 847              		.cfi_def_cfa_offset 16
+ 848              		.cfi_offset 4, -16
+ 849              		.cfi_offset 5, -12
+ 850              		.cfi_offset 6, -8
+ 851              		.cfi_offset 14, -4
+ 852 0004 08D04DE2 		sub	sp, sp, #8
+ 853              		.cfi_def_cfa_offset 24
+ 626:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t  e;
+ 627:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     jcu_jpeg_format_t encodeFormatTemp; 
+ 628:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     const uint32_t byteSize[KIND_LINEOFFSET] =   
+ 854              		.loc 1 628 0
+ 855 0008 0030A0E3 		mov	r3, #0
+ 856 000c 00308DE5 		str	r3, [sp]
+ 857 0010 0230A0E3 		mov	r3, #2
+ 858 0014 04308DE5 		str	r3, [sp, #4]
+ 629:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 630:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->SEC M1.10.1 Table data. */
+ 631:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {  0u, /* Reserved          */
+ 632:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             2u  /* JCU_JPEG_YCbCr422 */ };
+ 633:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 634:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-SEC M1.10.1 */
+ 635:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 636:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 637:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 638:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 639:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( encode == NULL )
+ 859              		.loc 1 639 0
+ 860 0018 004050E2 		subs	r4, r0, #0
+ 861 001c 8C00000A 		beq	.L58
+ 862 0020 0160A0E1 		mov	r6, r1
+ 640:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 641:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_31; goto fin;
+ 642:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 643:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 644:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 645:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( buffer == NULL )
+ 863              		.loc 1 645 0
+ 864 0024 000051E3 		cmp	r1, #0
+ 865 0028 8C00000A 		beq	.L59
+ 646:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 647:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_32; goto fin;
+ 648:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 649:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 650:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 651:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for the input image format */
+ 652:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCMOD, REDU,  encode->encodeFormat );
+ 866              		.loc 1 652 0
+ 867 002c 0730A0E3 		mov	r3, #7
+ 868 0030 0020A0E3 		mov	r2, #0
+ 869 0034 0010D4E5 		ldrb	r1, [r4]	@ zero_extendqisi2
+ 870              	.LVL102:
+ 871 0038 070AA0E3 		mov	r0, #28672
+ 872              	.LVL103:
+ 873 003c 01084EE3 		movt	r0, 59393
+ 874 0040 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 875              	.LVL104:
+ 653:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 654:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for the quantization table */
+ 655:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCQTN, QT1,  encode->QuantizationTable[JCU_ELEMENT_Y] );
+ 876              		.loc 1 655 0
+ 877 0044 035007E3 		movw	r5, #28675
+ 878 0048 01584EE3 		movt	r5, 59393
+ 879 004c 0330A0E3 		mov	r3, #3
+ 880 0050 0020A0E3 		mov	r2, #0
+ 881 0054 0110D4E5 		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 882 0058 0500A0E1 		mov	r0, r5
+ 883 005c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 884              	.LVL105:
+ 656:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 657:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 658:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCQTN, QT2,  encode->QuantizationTable[JCU_ELEMENT_Cb] );
+ 885              		.loc 1 658 0
+ 886 0060 0C30A0E3 		mov	r3, #12
+ 887 0064 0220A0E3 		mov	r2, #2
+ 888 0068 0210D4E5 		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 889 006c 0500A0E1 		mov	r0, r5
+ 890 0070 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 891              	.LVL106:
+ 659:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 660:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 661:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCQTN, QT3,  encode->QuantizationTable[JCU_ELEMENT_Cr] );
+ 892              		.loc 1 661 0
+ 893 0074 3030A0E3 		mov	r3, #48
+ 894 0078 0420A0E3 		mov	r2, #4
+ 895 007c 0310D4E5 		ldrb	r1, [r4, #3]	@ zero_extendqisi2
+ 896 0080 0500A0E1 		mov	r0, r5
+ 897 0084 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 898              	.LVL107:
+ 662:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 663:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for the Huffman table */
+ 664:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTA1,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Y])  );
+ 899              		.loc 1 664 0
+ 900 0088 045007E3 		movw	r5, #28676
+ 901 008c 01584EE3 		movt	r5, 59393
+ 902 0090 0230A0E3 		mov	r3, #2
+ 903 0094 0120A0E3 		mov	r2, #1
+ 904 0098 0410D4E5 		ldrb	r1, [r4, #4]	@ zero_extendqisi2
+ 905 009c 0500A0E1 		mov	r0, r5
+ 906 00a0 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 907              	.LVL108:
+ 665:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 666:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 667:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTD1,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Y])  );
+ 908              		.loc 1 667 0
+ 909 00a4 0130A0E3 		mov	r3, #1
+ 910 00a8 0020A0E3 		mov	r2, #0
+ 911 00ac 0410D4E5 		ldrb	r1, [r4, #4]	@ zero_extendqisi2
+ 912 00b0 0500A0E1 		mov	r0, r5
+ 913 00b4 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 914              	.LVL109:
+ 668:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 669:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 670:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTA2,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Cb]) );
+ 915              		.loc 1 670 0
+ 916 00b8 0830A0E3 		mov	r3, #8
+ 917 00bc 0320A0E3 		mov	r2, #3
+ 918 00c0 0510D4E5 		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+ 919 00c4 0500A0E1 		mov	r0, r5
+ 920 00c8 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 921              	.LVL110:
+ 671:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 672:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 673:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTD2,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Cb]) );
+ 922              		.loc 1 673 0
+ 923 00cc 0430A0E3 		mov	r3, #4
+ 924 00d0 0220A0E3 		mov	r2, #2
+ 925 00d4 0510D4E5 		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+ 926 00d8 0500A0E1 		mov	r0, r5
+ 927 00dc FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 928              	.LVL111:
+ 674:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 675:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 676:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTA3,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Cr]) );
+ 929              		.loc 1 676 0
+ 930 00e0 2030A0E3 		mov	r3, #32
+ 931 00e4 0520A0E3 		mov	r2, #5
+ 932 00e8 0610D4E5 		ldrb	r1, [r4, #6]	@ zero_extendqisi2
+ 933 00ec 0500A0E1 		mov	r0, r5
+ 934 00f0 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 935              	.LVL112:
+ 677:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 678:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 679:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER8( JCU,JCHTN, HTD3,  (uint32_t)(encode->HuffmanTable[JCU_ELEMENT_Cr]) );
+ 936              		.loc 1 679 0
+ 937 00f4 1030A0E3 		mov	r3, #16
+ 938 00f8 0420A0E3 		mov	r2, #4
+ 939 00fc 0610D4E5 		ldrb	r1, [r4, #6]	@ zero_extendqisi2
+ 940 0100 0500A0E1 		mov	r0, r5
+ 941 0104 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 942              	.LVL113:
+ 680:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 681:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 682:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCDRIU,  GET_UPPER_BYTE( encode->DRI_value ) );
+ 943              		.loc 1 682 0
+ 944 0108 0030E0E3 		mvn	r3, #0
+ 945 010c 0020A0E3 		mov	r2, #0
+ 946 0110 0910D4E5 		ldrb	r1, [r4, #9]	@ zero_extendqisi2
+ 947 0114 050007E3 		movw	r0, #28677
+ 948 0118 01084EE3 		movt	r0, 59393
+ 949 011c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 950              	.LVL114:
+ 683:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 684:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 685:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCDRID,  GET_LOWER_BYTE( encode->DRI_value ) );
+ 951              		.loc 1 685 0
+ 952 0120 0030E0E3 		mvn	r3, #0
+ 953 0124 0020A0E3 		mov	r2, #0
+ 954 0128 0810D4E5 		ldrb	r1, [r4, #8]	@ zero_extendqisi2
+ 955 012c 060007E3 		movw	r0, #28678
+ 956 0130 01084EE3 		movt	r0, 59393
+ 957 0134 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 958              	.LVL115:
+ 686:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for the image size */
+ 687:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* width setting */
+ 688:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCHSZU,  GET_UPPER_BYTE( encode->width ) );
+ 959              		.loc 1 688 0
+ 960 0138 0030E0E3 		mvn	r3, #0
+ 961 013c 0020A0E3 		mov	r2, #0
+ 962 0140 0D10D4E5 		ldrb	r1, [r4, #13]	@ zero_extendqisi2
+ 963 0144 090007E3 		movw	r0, #28681
+ 964 0148 01084EE3 		movt	r0, 59393
+ 965 014c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 966              	.LVL116:
+ 689:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 690:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 691:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCHSZD,  GET_LOWER_BYTE( encode->width ) );
+ 967              		.loc 1 691 0
+ 968 0150 0030E0E3 		mvn	r3, #0
+ 969 0154 0020A0E3 		mov	r2, #0
+ 970 0158 0C10D4E5 		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+ 971 015c 0A0007E3 		movw	r0, #28682
+ 972 0160 01084EE3 		movt	r0, 59393
+ 973 0164 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 974              	.LVL117:
+ 692:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* height setting */
+ 693:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCVSZU,  GET_UPPER_BYTE( encode->height ) );
+ 975              		.loc 1 693 0
+ 976 0168 0030E0E3 		mvn	r3, #0
+ 977 016c 0020A0E3 		mov	r2, #0
+ 978 0170 1110D4E5 		ldrb	r1, [r4, #17]	@ zero_extendqisi2
+ 979 0174 070007E3 		movw	r0, #28679
+ 980 0178 01084EE3 		movt	r0, 59393
+ 981 017c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 982              	.LVL118:
+ 694:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 695:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 696:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE8( &JCU.JCVSZD,  GET_LOWER_BYTE( encode->height ) );
+ 983              		.loc 1 696 0
+ 984 0180 0030E0E3 		mvn	r3, #0
+ 985 0184 0020A0E3 		mov	r2, #0
+ 986 0188 1010D4E5 		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+ 987 018c 080007E3 		movw	r0, #28680
+ 988 0190 01084EE3 		movt	r0, 59393
+ 989 0194 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 990              	.LVL119:
+ 697:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 698:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 699:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 700:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for input jpeg file information */
+ 701:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT, DINSWAP,  buffer->source.swapSetting );
+ 991              		.loc 1 701 0
+ 992 0198 405007E3 		movw	r5, #28736
+ 993 019c 01584EE3 		movt	r5, 59393
+ 994 01a0 0730A0E3 		mov	r3, #7
+ 995 01a4 0020A0E3 		mov	r2, #0
+ 996 01a8 0010D6E5 		ldrb	r1, [r6]	@ zero_extendqisi2
+ 997 01ac 0500A0E1 		mov	r0, r5
+ 998 01b0 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 999              	.LVL120:
+ 702:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 703:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 704:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFESA,  (uintptr_t) buffer->source.address );
+ 1000              		.loc 1 704 0
+ 1001 01b4 0030E0E3 		mvn	r3, #0
+ 1002 01b8 0020A0E3 		mov	r2, #0
+ 1003 01bc 041096E5 		ldr	r1, [r6, #4]
+ 1004 01c0 440007E3 		movw	r0, #28740
+ 1005 01c4 01084EE3 		movt	r0, 59393
+ 1006 01c8 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1007              	.LVL121:
+ 705:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 706:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 707:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Settings for output image data information */
+ 708:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFECNT, JOUTSWAP,  buffer->destination.swapSetting );
+ 1008              		.loc 1 708 0
+ 1009 01cc 073CA0E3 		mov	r3, #1792
+ 1010 01d0 0820A0E3 		mov	r2, #8
+ 1011 01d4 0810D6E5 		ldrb	r1, [r6, #8]	@ zero_extendqisi2
+ 1012 01d8 0500A0E1 		mov	r0, r5
+ 1013 01dc FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1014              	.LVL122:
+ 709:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 710:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 711:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JIFEDA,  (uintptr_t) buffer->destination.address );
+ 1015              		.loc 1 711 0
+ 1016 01e0 0030E0E3 		mvn	r3, #0
+ 1017 01e4 0020A0E3 		mov	r2, #0
+ 1018 01e8 0C1096E5 		ldr	r1, [r6, #12]
+ 1019 01ec 4C0007E3 		movw	r0, #28748
+ 1020 01f0 01084EE3 		movt	r0, 59393
+ 1021 01f4 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1022              	.LVL123:
+ 712:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 713:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 714:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     encodeFormatTemp = encode->encodeFormat;
+ 1023              		.loc 1 714 0
+ 1024 01f8 0030D4E5 		ldrb	r3, [r4]	@ zero_extendqisi2
+ 1025              	.LVL124:
+ 715:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if((encodeFormatTemp != JCU_JPEG_YCbCr444) && (encodeFormatTemp != JCU_JPEG_YCbCr422))
+ 1026              		.loc 1 715 0
+ 1027 01fc 010053E3 		cmp	r3, #1
+ 716:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 717:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         encodeFormatTemp = JCU_JPEG_YCbCr444;
+ 1028              		.loc 1 717 0
+ 1029 0200 0030A083 		movhi	r3, #0
+ 1030              	.LVL125:
+ 1031              	.L57:
+ 718:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end if */
+ 719:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 720:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 721:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFESOFST, ESMW,
+ 1032              		.loc 1 721 0
+ 1033 0204 F011D6E1 		ldrsh	r1, [r6, #16]
+ 1034 0208 08208DE2 		add	r2, sp, #8
+ 1035 020c 033182E0 		add	r3, r2, r3, lsl #2
+ 1036              	.LVL126:
+ 1037 0210 080013E5 		ldr	r0, [r3, #-8]
+ 1038 0214 FF3F07E3 		movw	r3, #32767
+ 1039 0218 0020A0E3 		mov	r2, #0
+ 1040 021c 900101E0 		mul	r1, r0, r1
+ 1041 0220 480007E3 		movw	r0, #28744
+ 1042 0224 01084EE3 		movt	r0, 59393
+ 1043 0228 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1044              	.LVL127:
+ 722:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         ((uint32_t)buffer->lineOffset * (uint32_t)(byteSize[encodeFormatTemp])) );
+ 723:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 724:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Setting for Cb/Cr offset */
+ 725:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_BIT_SET_IN_REGISTER32( JCU,JIFESVSZ, DINYCHG,  encode->inputCbCrOffset );
+ 1045              		.loc 1 725 0
+ 1046 022c 0239A0E3 		mov	r3, #32768
+ 1047 0230 0F20A0E3 		mov	r2, #15
+ 1048 0234 1410D4E5 		ldrb	r1, [r4, #20]	@ zero_extendqisi2
+ 1049 0238 940007E3 		movw	r0, #28820
+ 1050 023c 01084EE3 		movt	r0, 59393
+ 1051 0240 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1052              	.LVL128:
+ 726:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 727:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 1053              		.loc 1 727 0
+ 1054 0244 0000A0E3 		mov	r0, #0
+ 1055              	.LVL129:
+ 1056              	.L56:
+ 728:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 729:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 730:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 1057              		.loc 1 730 0
+ 1058 0248 FEFFFFEB 		bl	R_ERROR_Set
+ 1059              	.LVL130:
+ 731:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 732:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 733:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 734:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForSetEncodePrm */
+ 1060              		.loc 1 734 0
+ 1061 024c 08D08DE2 		add	sp, sp, #8
+ 1062              		.cfi_remember_state
+ 1063              		.cfi_def_cfa_offset 16
+ 1064              		@ sp needed
+ 1065 0250 7080BDE8 		pop	{r4, r5, r6, pc}
+ 1066              	.LVL131:
+ 1067              	.L58:
+ 1068              		.cfi_restore_state
+ 641:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 1069              		.loc 1 641 0
+ 1070 0254 310100E3 		movw	r0, #305
+ 1071              	.LVL132:
+ 1072 0258 450140E3 		movt	r0, 325
+ 1073 025c F9FFFFEA 		b	.L56
+ 1074              	.LVL133:
+ 1075              	.L59:
+ 647:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 1076              		.loc 1 647 0
+ 1077 0260 320100E3 		movw	r0, #306
+ 1078              	.LVL134:
+ 1079 0264 450140E3 		movt	r0, 325
+ 1080 0268 F6FFFFEA 		b	.L56
+ 1081              		.cfi_endproc
+ 1082              	.LFE13:
+ 1084              		.section	.text.JCU_SetRegisterForSetPause,"ax",%progbits
+ 1085              		.align	2
+ 1086              		.global	JCU_SetRegisterForSetPause
+ 1087              		.syntax unified
+ 1088              		.arm
+ 1089              		.fpu neon
+ 1091              	JCU_SetRegisterForSetPause:
+ 1092              	.LFB14:
+ 735:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 736:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 737:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_SetRegisterForSetPause
+ 738:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 739:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 740:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     is_stop - [out]
+ 741:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 742:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 743:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 744:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 745:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_SetRegisterForSetPause( const bool_t is_pause, 
+ 746:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         const jcu_int_detail_errors_t filter )
+ 747:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 1093              		.loc 1 747 0
+ 1094              		.cfi_startproc
+ 1095              		@ args = 0, pretend = 0, frame = 0
+ 1096              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1097              	.LVL135:
+ 1098 0000 10402DE9 		push	{r4, lr}
+ 1099              		.cfi_def_cfa_offset 8
+ 1100              		.cfi_offset 4, -8
+ 1101              		.cfi_offset 14, -4
+ 748:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 749:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if ( is_pause )
+ 1102              		.loc 1 749 0
+ 1103 0004 000050E3 		cmp	r0, #0
+ 1104 0008 0600001A 		bne	.L66
+ 750:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 751:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 752:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         uint8_t  filter_or_int3 = (uint8_t)( filter | JCU_JINTE0_INT3 );
+ 753:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 754:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 755:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_REGISTER_WRITE8( &JCU.JINTE0,  filter_or_int3 );
+ 756:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 757:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     else
+ 758:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 759:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 760:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_REGISTER_WRITE8( &JCU.JINTE0,  (uint8_t) filter );
+ 1105              		.loc 1 760 0
+ 1106 000c 0030E0E3 		mvn	r3, #0
+ 1107 0010 0020A0E3 		mov	r2, #0
+ 1108 0014 7110EFE6 		uxtb	r1, r1
+ 1109              	.LVL136:
+ 1110 0018 0E0007E3 		movw	r0, #28686
+ 1111              	.LVL137:
+ 1112 001c 01084EE3 		movt	r0, 59393
+ 1113 0020 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 1114              	.LVL138:
+ 1115 0024 1080BDE8 		pop	{r4, pc}
+ 1116              	.LVL139:
+ 1117              	.L66:
+ 1118              	.LBB14:
+ 752:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 1119              		.loc 1 752 0
+ 1120 0028 7110EFE6 		uxtb	r1, r1
+ 1121              	.LVL140:
+ 755:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 1122              		.loc 1 755 0
+ 1123 002c 0030E0E3 		mvn	r3, #0
+ 1124 0030 0020A0E3 		mov	r2, #0
+ 1125 0034 081081E3 		orr	r1, r1, #8
+ 1126              	.LVL141:
+ 1127 0038 0E0007E3 		movw	r0, #28686
+ 1128              	.LVL142:
+ 1129 003c 01084EE3 		movt	r0, 59393
+ 1130 0040 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 1131              	.LVL143:
+ 1132              	.LBE14:
+ 1133 0044 1080BDE8 		pop	{r4, pc}
+ 1134              		.cfi_endproc
+ 1135              	.LFE14:
+ 1137              		.section	.text.JCU_GetRegisterForGetImageInfo,"ax",%progbits
+ 1138              		.align	2
+ 1139              		.global	JCU_GetRegisterForGetImageInfo
+ 1140              		.syntax unified
+ 1141              		.arm
+ 1142              		.fpu neon
+ 1144              	JCU_GetRegisterForGetImageInfo:
+ 1145              	.LFB15:
+ 761:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 762:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 763:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_SetRegisterForSetPause */
+ 764:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 765:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 766:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_GetRegisterForGetImageInfo
+ 767:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Get "jcu_image_info_t" type value
+ 768:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 769:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 770:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     buffer - [out]<jcu_image_info_t>.
+ 771:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 772:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 773:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 774:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 775:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_GetRegisterForGetImageInfo( 
+ 776:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     jcu_image_info_t *const buffer)
+ 777:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 1146              		.loc 1 777 0
+ 1147              		.cfi_startproc
+ 1148              		@ args = 0, pretend = 0, frame = 0
+ 1149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1150              	.LVL144:
+ 1151 0000 10402DE9 		push	{r4, lr}
+ 1152              		.cfi_def_cfa_offset 8
+ 1153              		.cfi_offset 4, -8
+ 1154              		.cfi_offset 14, -4
+ 778:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     enum { num_8_bit = 8 }; 
+ 779:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     errnum_t  e;
+ 780:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 781:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #if ! defined( JCU_RELEASE )
+ 782:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 783:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 784:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( buffer == NULL )
+ 1155              		.loc 1 784 0
+ 1156 0004 004050E2 		subs	r4, r0, #0
+ 1157 0008 2600000A 		beq	.L69
+ 785:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 786:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             e=JCU_ERROR_PARAM_33; goto fin;
+ 787:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 788:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     #endif
+ 789:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 790:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Set the register value to the variables */
+ 791:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 792:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     buffer->width           = ( R_REGISTER_READ8( &JCU.JCHSZU ) << num_8_bit);
+ 1158              		.loc 1 792 0
+ 1159 000c 0020E0E3 		mvn	r2, #0
+ 1160 0010 0010A0E3 		mov	r1, #0
+ 1161 0014 090007E3 		movw	r0, #28681
+ 1162              	.LVL145:
+ 1163 0018 01084EE3 		movt	r0, 59393
+ 1164 001c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1165              	.LVL146:
+ 1166 0020 0004A0E1 		lsl	r0, r0, #8
+ 1167 0024 000084E5 		str	r0, [r4]
+ 793:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 794:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 795:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     buffer->width           |=  R_REGISTER_READ8( &JCU.JCHSZD );
+ 1168              		.loc 1 795 0
+ 1169 0028 0020E0E3 		mvn	r2, #0
+ 1170 002c 0010A0E3 		mov	r1, #0
+ 1171 0030 0A0007E3 		movw	r0, #28682
+ 1172 0034 01084EE3 		movt	r0, 59393
+ 1173 0038 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1174              	.LVL147:
+ 1175 003c 003094E5 		ldr	r3, [r4]
+ 1176 0040 000083E1 		orr	r0, r3, r0
+ 1177 0044 000084E5 		str	r0, [r4]
+ 796:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 797:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 798:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     buffer->height          = ( R_REGISTER_READ8( &JCU.JCVSZU ) << num_8_bit);
+ 1178              		.loc 1 798 0
+ 1179 0048 0020E0E3 		mvn	r2, #0
+ 1180 004c 0010A0E3 		mov	r1, #0
+ 1181 0050 070007E3 		movw	r0, #28679
+ 1182 0054 01084EE3 		movt	r0, 59393
+ 1183 0058 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1184              	.LVL148:
+ 1185 005c 0004A0E1 		lsl	r0, r0, #8
+ 1186 0060 040084E5 		str	r0, [r4, #4]
+ 799:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 800:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 801:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     buffer->height          |=  R_REGISTER_READ8( &JCU.JCVSZD );
+ 1187              		.loc 1 801 0
+ 1188 0064 0020E0E3 		mvn	r2, #0
+ 1189 0068 0010A0E3 		mov	r1, #0
+ 1190 006c 080007E3 		movw	r0, #28680
+ 1191 0070 01084EE3 		movt	r0, 59393
+ 1192 0074 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1193              	.LVL149:
+ 1194 0078 043094E5 		ldr	r3, [r4, #4]
+ 1195 007c 000083E1 		orr	r0, r3, r0
+ 1196 0080 040084E5 		str	r0, [r4, #4]
+ 802:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 803:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 804:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     buffer->encodedFormat   = (jcu_jpeg_format_t)R_BIT_GET_IN_REGISTER8( JCU,JCMOD, REDU );
+ 1197              		.loc 1 804 0
+ 1198 0084 0720A0E3 		mov	r2, #7
+ 1199 0088 0010A0E3 		mov	r1, #0
+ 1200 008c 070AA0E3 		mov	r0, #28672
+ 1201 0090 01084EE3 		movt	r0, 59393
+ 1202 0094 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1203              	.LVL150:
+ 1204 0098 0800C4E5 		strb	r0, [r4, #8]
+ 1205              	.LVL151:
+ 805:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 806:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* <-QAC 0306 */
+ 807:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 808:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     e=0;
+ 1206              		.loc 1 808 0
+ 1207 009c 0000A0E3 		mov	r0, #0
+ 1208              	.LVL152:
+ 1209              	.L68:
+ 809:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** fin:
+ 810:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 811:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_ERROR_Set(e);
+ 1210              		.loc 1 811 0
+ 1211 00a0 FEFFFFEB 		bl	R_ERROR_Set
+ 1212              	.LVL153:
+ 1213 00a4 1080BDE8 		pop	{r4, pc}
+ 1214              	.LVL154:
+ 1215              	.L69:
+ 786:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         } /* Error: <Parameter/> */
+ 1216              		.loc 1 786 0
+ 1217 00a8 330100E3 		movw	r0, #307
+ 1218              	.LVL155:
+ 1219 00ac 450140E3 		movt	r0, 325
+ 1220 00b0 FAFFFFEA 		b	.L68
+ 1221              		.cfi_endproc
+ 1222              	.LFE15:
+ 1224              		.section	.text.JCU_GetRegisterForGetErrorInfo,"ax",%progbits
+ 1225              		.align	2
+ 1226              		.global	JCU_GetRegisterForGetErrorInfo
+ 1227              		.syntax unified
+ 1228              		.arm
+ 1229              		.fpu neon
+ 1231              	JCU_GetRegisterForGetErrorInfo:
+ 1232              	.LFB16:
+ 812:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 813:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 814:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_GetRegisterForGetImageInfo */
+ 815:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 816:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 817:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_GetRegisterForGetErrorInfo
+ 818:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Get "jcu_detail_error_t" type value
+ 819:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 820:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 821:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     errorCode - [out].
+ 822:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 823:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 824:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 825:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 826:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_GetRegisterForGetErrorInfo( 
+ 827:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     jcu_detail_error_t *const errorCode)
+ 828:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 1233              		.loc 1 828 0
+ 1234              		.cfi_startproc
+ 1235              		@ args = 0, pretend = 0, frame = 0
+ 1236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1237              	.LVL156:
+ 1238 0000 10402DE9 		push	{r4, lr}
+ 1239              		.cfi_def_cfa_offset 8
+ 1240              		.cfi_offset 4, -8
+ 1241              		.cfi_offset 14, -4
+ 829:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 830:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if (errorCode != NULL)
+ 1242              		.loc 1 830 0
+ 1243 0004 004050E2 		subs	r4, r0, #0
+ 1244 0008 1080BD08 		popeq	{r4, pc}
+ 1245              	.LBB15:
+ 831:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 832:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 0306 */
+ 833:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         uint8_t const  code = R_BIT_GET_IN_REGISTER8( JCU,JCDERR, ERR );  
+ 1246              		.loc 1 833 0
+ 1247 000c 0F20A0E3 		mov	r2, #15
+ 1248 0010 0010A0E3 		mov	r1, #0
+ 1249 0014 100007E3 		movw	r0, #28688
+ 1250              	.LVL157:
+ 1251 0018 01084EE3 		movt	r0, 59393
+ 1252 001c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1253              	.LVL158:
+ 834:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 835:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 0306 */
+ 836:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 837:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 838:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         if ( (uint_fast8_t) code == 0u )
+ 1254              		.loc 1 838 0
+ 1255 0020 000050E3 		cmp	r0, #0
+ 1256              	.LVL159:
+ 1257 0024 0400000A 		beq	.L75
+ 839:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 840:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             *errorCode = JCU_JCDERR_OK;
+ 841:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 842:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         else
+ 843:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         {
+ 844:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             /* Cast to an appropriate type */
+ 845:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****             *errorCode = (jcu_detail_error_t)( E_JCU_JCDERR + ( (int_t) code << 8 ) );
+ 1258              		.loc 1 845 0
+ 1259 0028 0034A0E1 		lsl	r3, r0, #8
+ 1260 002c 513783E2 		add	r3, r3, #21233664
+ 1261 0030 123A83E2 		add	r3, r3, #73728
+ 1262 0034 003084E5 		str	r3, [r4]
+ 1263 0038 1080BDE8 		pop	{r4, pc}
+ 1264              	.L75:
+ 840:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 1265              		.loc 1 840 0
+ 1266 003c 0030A0E3 		mov	r3, #0
+ 1267 0040 003084E5 		str	r3, [r4]
+ 1268 0044 1080BDE8 		pop	{r4, pc}
+ 1269              	.LBE15:
+ 1270              		.cfi_endproc
+ 1271              	.LFE16:
+ 1273              		.section	.text.JCU_GetEncodedSize,"ax",%progbits
+ 1274              		.align	2
+ 1275              		.global	JCU_GetEncodedSize
+ 1276              		.syntax unified
+ 1277              		.arm
+ 1278              		.fpu neon
+ 1280              	JCU_GetEncodedSize:
+ 1281              	.LFB17:
+ 846:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         }
+ 847:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end if */
+ 848:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 849:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_GetRegisterForGetErrorInfo */
+ 850:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 851:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 852:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_GetEncodedSize
+ 853:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    GetEncodedSize
+ 854:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 855:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Arguments:
+ 856:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *     out_Size - [out].
+ 857:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 858:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 859:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    None
+ 860:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 861:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void JCU_GetEncodedSize( 
+ 862:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     size_t *const out_Size)
+ 863:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 1282              		.loc 1 863 0
+ 1283              		.cfi_startproc
+ 1284              		@ args = 0, pretend = 0, frame = 0
+ 1285              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1286              	.LVL160:
+ 1287 0000 10402DE9 		push	{r4, lr}
+ 1288              		.cfi_def_cfa_offset 8
+ 1289              		.cfi_offset 4, -8
+ 1290              		.cfi_offset 14, -4
+ 864:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 865:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if (out_Size != NULL)
+ 1291              		.loc 1 865 0
+ 1292 0004 004050E2 		subs	r4, r0, #0
+ 1293 0008 1080BD08 		popeq	{r4, pc}
+ 1294              	.LBB16:
+ 866:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 867:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         enum { num_16_bits = 16 }; 
+ 868:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         enum { num_8_bits = 8 }; 
+ 869:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 870:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* ->QAC 0306 */
+ 871:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         *out_Size  = (( R_REGISTER_READ8( &JCU.JCDTCU )) << num_16_bits);
+ 1295              		.loc 1 871 0
+ 1296 000c 0020E0E3 		mvn	r2, #0
+ 1297 0010 0010A0E3 		mov	r1, #0
+ 1298 0014 0B0007E3 		movw	r0, #28683
+ 1299              	.LVL161:
+ 1300 0018 01084EE3 		movt	r0, 59393
+ 1301 001c FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1302              	.LVL162:
+ 1303 0020 0008A0E1 		lsl	r0, r0, #16
+ 1304 0024 000084E5 		str	r0, [r4]
+ 872:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 873:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 874:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         (*out_Size) |= (( R_REGISTER_READ8( &JCU.JCDTCM )) << num_8_bits);
+ 1305              		.loc 1 874 0
+ 1306 0028 0020E0E3 		mvn	r2, #0
+ 1307 002c 0010A0E3 		mov	r1, #0
+ 1308 0030 0C0007E3 		movw	r0, #28684
+ 1309 0034 01084EE3 		movt	r0, 59393
+ 1310 0038 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1311              	.LVL163:
+ 1312 003c 003094E5 		ldr	r3, [r4]
+ 1313 0040 000483E1 		orr	r0, r3, r0, lsl #8
+ 1314 0044 000084E5 		str	r0, [r4]
+ 875:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 876:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 877:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         (*out_Size) |=  ( R_REGISTER_READ8( &JCU.JCDTCD ));
+ 1315              		.loc 1 877 0
+ 1316 0048 0020E0E3 		mvn	r2, #0
+ 1317 004c 0010A0E3 		mov	r1, #0
+ 1318 0050 0D0007E3 		movw	r0, #28685
+ 1319 0054 01084EE3 		movt	r0, 59393
+ 1320 0058 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1321              	.LVL164:
+ 1322 005c 003094E5 		ldr	r3, [r4]
+ 1323 0060 000083E1 		orr	r0, r3, r0
+ 1324 0064 000084E5 		str	r0, [r4]
+ 1325 0068 1080BDE8 		pop	{r4, pc}
+ 1326              	.LBE16:
+ 1327              		.cfi_endproc
+ 1328              	.LFE17:
+ 1330              		.section	.text.JCU_OnInterrupting,"ax",%progbits
+ 1331              		.align	2
+ 1332              		.global	JCU_OnInterrupting
+ 1333              		.syntax unified
+ 1334              		.arm
+ 1335              		.fpu neon
+ 1337              	JCU_OnInterrupting:
+ 1338              	.LFB18:
+ 878:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 879:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* <-QAC 0306 */
+ 880:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     } /* end if */
+ 881:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     return;
+ 882:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** } /* End of function JCU_GetEncodedSize */
+ 883:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 884:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** /***********************************************************************
+ 885:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Function Name: JCU_OnInterrupting
+ 886:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Operations on interrupting
+ 887:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *
+ 888:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** * Return Value:
+ 889:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** *    Error code, 0=No error
+ 890:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** ************************************************************************/
+ 891:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** void  JCU_OnInterrupting( bit_flags_fast32_t*  in_out_InterruptFlags ) 
+ 892:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** {
+ 1339              		.loc 1 892 0
+ 1340              		.cfi_startproc
+ 1341              		@ args = 0, pretend = 0, frame = 0
+ 1342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1343              	.LVL165:
+ 1344 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 1345              		.cfi_def_cfa_offset 16
+ 1346              		.cfi_offset 4, -16
+ 1347              		.cfi_offset 5, -12
+ 1348              		.cfi_offset 6, -8
+ 1349              		.cfi_offset 14, -4
+ 1350 0004 0060A0E1 		mov	r6, r0
+ 893:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     enum { num_8_bit = 8 }; 
+ 894:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 895:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     uint32_t  flags0;
+ 896:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     uint32_t  flags1;
+ 897:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 898:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Get interrupt status */
+ 899:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* ->QAC 0306 */
+ 900:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     flags0 = R_REGISTER_READ8(  &JCU.JINTS0 );
+ 1351              		.loc 1 900 0
+ 1352 0008 0020E0E3 		mvn	r2, #0
+ 1353 000c 0010A0E3 		mov	r1, #0
+ 1354 0010 0F0007E3 		movw	r0, #28687
+ 1355              	.LVL166:
+ 1356 0014 01084EE3 		movt	r0, 59393
+ 1357 0018 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1358              	.LVL167:
+ 1359 001c 0050A0E1 		mov	r5, r0
+ 1360              	.LVL168:
+ 901:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 902:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 903:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     flags1 = R_REGISTER_READ32( &JCU.JINTS1 );
+ 1361              		.loc 1 903 0
+ 1362 0020 0020E0E3 		mvn	r2, #0
+ 1363 0024 0010A0E3 		mov	r1, #0
+ 1364 0028 900007E3 		movw	r0, #28816
+ 1365              	.LVL169:
+ 1366 002c 01084EE3 		movt	r0, 59393
+ 1367 0030 FEFFFFEB 		bl	RZA_IO_RegRead_32
+ 1368              	.LVL170:
+ 1369 0034 0040A0E1 		mov	r4, r0
+ 1370              	.LVL171:
+ 904:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 905:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 906:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     (*in_out_InterruptFlags) |= flags0;
+ 1371              		.loc 1 906 0
+ 1372 0038 003096E5 		ldr	r3, [r6]
+ 1373 003c 033085E1 		orr	r3, r5, r3
+ 907:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 908:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Cast to an appropriate type */
+ 909:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     (*in_out_InterruptFlags) |= (flags1 << ((sizeof( JCU.JINTS0 )) * num_8_bit));
+ 1374              		.loc 1 909 0
+ 1375 0040 003483E1 		orr	r3, r3, r0, lsl #8
+ 1376 0044 003086E5 		str	r3, [r6]
+ 910:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 911:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Clear interrupt status "JINTS0" */
+ 912:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     if ( flags0 != 0u )
+ 1377              		.loc 1 912 0
+ 1378 0048 000055E3 		cmp	r5, #0
+ 1379 004c 0700001A 		bne	.L82
+ 1380              	.LVL172:
+ 1381              	.L80:
+ 913:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     {
+ 914:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         /* Cast to an appropriate type */
+ 915:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_REGISTER_WRITE8( &JCU.JINTS0,  0u );  /* Write 0 only */
+ 916:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_BIT_SET_IN_REGISTER8( JCU,JCCMD,  JEND,  1u );
+ 917:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 918:../generate/sc_drivers/r_jcu/src/jcu_reg.c **** 
+ 919:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     /* Clear interrupt status "JINTS1" */
+ 920:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     R_REGISTER_WRITE32( &JCU.JINTS1,  ~flags1 & JCU_JINTS1_ALL );
+ 1382              		.loc 1 920 0
+ 1383 0050 0410E0E1 		mvn	r1, r4
+ 1384 0054 0030E0E3 		mvn	r3, #0
+ 1385 0058 0020A0E3 		mov	r2, #0
+ 1386 005c 771001E2 		and	r1, r1, #119
+ 1387 0060 900007E3 		movw	r0, #28816
+ 1388 0064 01084EE3 		movt	r0, 59393
+ 1389 0068 FEFFFFEB 		bl	RZA_IO_RegWrite_32
+ 1390              	.LVL173:
+ 1391 006c 7080BDE8 		pop	{r4, r5, r6, pc}
+ 1392              	.LVL174:
+ 1393              	.L82:
+ 915:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****         R_BIT_SET_IN_REGISTER8( JCU,JCCMD,  JEND,  1u );
+ 1394              		.loc 1 915 0
+ 1395 0070 0030E0E3 		mvn	r3, #0
+ 1396 0074 0020A0E3 		mov	r2, #0
+ 1397 0078 0210A0E1 		mov	r1, r2
+ 1398 007c 0F0007E3 		movw	r0, #28687
+ 1399              	.LVL175:
+ 1400 0080 01084EE3 		movt	r0, 59393
+ 1401 0084 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 1402              	.LVL176:
+ 916:../generate/sc_drivers/r_jcu/src/jcu_reg.c ****     }
+ 1403              		.loc 1 916 0
+ 1404 0088 0430A0E3 		mov	r3, #4
+ 1405 008c 0220A0E3 		mov	r2, #2
+ 1406 0090 0110A0E3 		mov	r1, #1
+ 1407 0094 010007E3 		movw	r0, #28673
+ 1408 0098 01084EE3 		movt	r0, 59393
+ 1409 009c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 1410              	.LVL177:
+ 1411 00a0 EAFFFFEA 		b	.L80
+ 1412              		.cfi_endproc
+ 1413              	.LFE18:
+ 1415              		.section	.rodata
+ 1416              		.align	2
+ 1417              		.set	.LANCHOR0,. + 0
+ 1418              	.LC0:
+ 1419 0000 02000000 		.word	2
+ 1420 0004 04000000 		.word	4
+ 1421 0008 02000000 		.word	2
+ 1422              		.text
+ 1423              	.Letext0:
+ 1424              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 1425              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1426              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1427              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1428              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1429              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1430              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1431              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1432              		.file 10 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1433              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1434              		.file 12 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1435              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1436              		.file 14 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 1437              		.file 15 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 1438              		.file 16 "../generate/sc_drivers/r_jcu/src/../src/r_jcu_local.h"
+ 1439              		.file 17 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1440              		.file 18 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+DEFINED SYMBOLS
+                            *ABS*:00000000 jcu_reg.c
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:17     .text.JCU_SetRegisterForInitialize:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:23     .text.JCU_SetRegisterForInitialize:00000000 JCU_SetRegisterForInitialize
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:38     .text.JCU_SetRegisterForCodec:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:44     .text.JCU_SetRegisterForCodec:00000000 JCU_SetRegisterForCodec
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:233    .text.JCU_ClearInterruptFlag:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:239    .text.JCU_ClearInterruptFlag:00000000 JCU_ClearInterruptFlag
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:286    .text.JCU_SetRegisterForStart:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:292    .text.JCU_SetRegisterForStart:00000000 JCU_SetRegisterForStart
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:342    .text.JCU_SetRegisterForContinue:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:348    .text.JCU_SetRegisterForContinue:00000000 JCU_SetRegisterForContinue
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:470    .text.JCU_SetRegisterForSetDecodePrm:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:476    .text.JCU_SetRegisterForSetDecodePrm:00000000 JCU_SetRegisterForSetDecodePrm
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1417   .rodata:00000000 .LANCHOR0
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:617    .text.JCU_SetRegisterForSetQtTable:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:623    .text.JCU_SetRegisterForSetQtTable:00000000 JCU_SetRegisterForSetQtTable
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:641    .text.JCU_SetRegisterForSetQtTable:00000010 $d
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:647    .text.JCU_SetRegisterForSetQtTable:00000020 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:724    .text.JCU_SetRegisterForSetHuffTbl:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:730    .text.JCU_SetRegisterForSetHuffTbl:00000000 JCU_SetRegisterForSetHuffTbl
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:833    .text.JCU_SetRegisterForSetEncodePrm:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:839    .text.JCU_SetRegisterForSetEncodePrm:00000000 JCU_SetRegisterForSetEncodePrm
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1085   .text.JCU_SetRegisterForSetPause:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1091   .text.JCU_SetRegisterForSetPause:00000000 JCU_SetRegisterForSetPause
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1138   .text.JCU_GetRegisterForGetImageInfo:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1144   .text.JCU_GetRegisterForGetImageInfo:00000000 JCU_GetRegisterForGetImageInfo
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1225   .text.JCU_GetRegisterForGetErrorInfo:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1231   .text.JCU_GetRegisterForGetErrorInfo:00000000 JCU_GetRegisterForGetErrorInfo
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1274   .text.JCU_GetEncodedSize:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1280   .text.JCU_GetEncodedSize:00000000 JCU_GetEncodedSize
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1331   .text.JCU_OnInterrupting:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1337   .text.JCU_OnInterrupting:00000000 JCU_OnInterrupting
+C:\Users\tle\AppData\Local\Temp\ccGM9WSh.s:1416   .rodata:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4.stddef.h.39.a38874c8f8a57e66301090908ec2a69f
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.features.h.33.d97f2d646536517df901beeb5b9993f5
+                           .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.newlib.h.8.5f2124c7e712be65f83b91ff86a0b1c1
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_stb_lld_rza2m.h.40.95263d75056863d52f45135c87af2bc2
+                           .group:00000000 wm4.rz_co_typedef.h.30.d945c9904878daee922b7c70f5e10607
+                           .group:00000000 wm4.r_jcu_typedef.h.39.25a55931b0de0f8bae5220b1a85bd4c6
+                           .group:00000000 wm4.r_jcu_local.h.31.5b6af5fe53806913a1ad340c4f743daf
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+                           .group:00000000 wm4.r_register_bit.h.36.91d5ed7a657528d5c2570c5480fee505
+                           .group:00000000 wm4.rz_co.h.31.aecea41cce99b435cabd8b5611466e3b
+
+UNDEFINED SYMBOLS
+R_STB_RequestModuleStop
+RZA_IO_RegWrite_8
+RZA_IO_RegRead_8
+R_STB_RequestModuleStart
+RZA_IO_RegWrite_32
+RZA_IO_RegRead_32
+R_JCU_GetInternalInformation
+R_ERROR_Set

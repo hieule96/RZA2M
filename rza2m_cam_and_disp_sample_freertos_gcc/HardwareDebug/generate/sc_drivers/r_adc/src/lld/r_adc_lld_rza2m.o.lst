@@ -1,0 +1,2760 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"r_adc_lld_rza2m.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.is_valid_configuration,"ax",%progbits
+  17              		.align	2
+  18              		.syntax unified
+  19              		.arm
+  20              		.fpu neon
+  22              	is_valid_configuration:
+  23              	.LFB12:
+  24              		.file 1 "../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c"
+   1:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+   2:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * DISCLAIMER
+   3:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * This software is supplied by Renesas Electronics Corporation and is only
+   4:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * intended for use with Renesas products. No other uses are authorized. This
+   5:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * software is owned by Renesas Electronics Corporation and is protected under
+   6:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * all applicable laws, including copyright laws.
+   7:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   8:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT
+   9:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+  10:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED.
+  11:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * TO THE MAXIMUM EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS
+  12:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIES SHALL BE LIABLE
+  13:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR
+  14:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * ANY REASON RELATED TO THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE
+  15:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+  16:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Renesas reserves the right, without notice, to make changes to this software
+  17:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * and to discontinue the availability of this software. By using this software,
+  18:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * you agree to the additional terms and conditions found by accessing the
+  19:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * following link:
+  20:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * http://www.renesas.com/disclaimer
+  21:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *
+  22:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  23:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  24:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  25:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * File Name     : r_adc_lld_rza2m.c
+  26:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Device(s)     : RZ/A2M
+  27:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Tool-Chain    : GCC Arm Embedded 6.3.1
+  28:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * H/W Platform  : RZ/A2M EBK board
+  29:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description   : ADC driver
+  30:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  31:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  32:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * History       : DD.MM.YYYY Version Description
+  33:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *               : 19.02.2019 1.00
+  34:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  35:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  36:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  37:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Includes   <System Includes> , "Project Includes"
+  38:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  39:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include <stdio.h>
+  40:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include <unistd.h>
+  41:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  42:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "rza_io_regrw.h"
+  43:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "iodefine.h"
+  44:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "iobitmask.h"
+  45:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  46:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "r_stb_drv_api.h"
+  47:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  48:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "r_adc_drv_link.h"
+  49:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  50:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "r_gpio_drv_api.h"
+  51:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "r_compiler_abstraction_api.h"
+  52:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "r_adc_drv_sc_cfg.h"
+  53:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  54:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #include "driver.h"
+  55:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  56:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  57:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Macro definitions
+  58:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  59:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  60:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCER_ADC_RESOLUTION_12           (0u)
+  61:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCER_ADC_RESOLUTION_10           (1u)
+  62:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCER_ADC_RESOLUTION_8            (2u)
+  63:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  64:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCER_ADC_DATA_FORMAT_RIGHT_ALIGN (0u)
+  65:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCER_ADC_DATA_FORMAT_LEFT_ALIGN  (1u)
+  66:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  67:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCSR_ADC_SCAN_MODE_SINGLE        (0u)
+  68:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCSR_ADC_SCAN_MODE_GROUP         (1u)
+  69:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADCSR_ADC_SCAN_MODE_CONTINUOUS    (2u)
+  70:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  71:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADC_MINIMUM_SAMPLE_TIME           (5u)
+  72:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_ADC_MAXIMUM_SAMPLE_TIME           (255u)
+  73:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  74:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** #define R_ADC_PRV_DEFAULT_INTERRUPT_PRIORITY        (INTC_PRIORITY_20)
+  75:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  76:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  77:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Enumerated Types
+  78:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  79:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  80:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  81:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  82:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Structures
+  83:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  84:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  85:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  86:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+  87:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Private variables
+  88:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+  89:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  90:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static const st_drv_info_t s_lld_info =
+  91:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+  92:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+  93:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         ((R_DRV_ADC_LLD_VERSION_MAJOR << 16) + R_DRV_ADC_LLD_VERSION_MINOR)
+  94:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     },
+  95:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     R_DRV_ADC_LLD_BUILD_NUM,
+  96:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     R_DRV_ADC_LLD_DRV_NAME
+  97:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** };
+  98:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+  99:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 100:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Private functions
+ 101:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 102:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 103:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_resolution (e_r_drv_adc_resolution_t resolution);
+ 104:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_data_alignment (e_r_drv_adc_alignment_t alignment);
+ 105:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_scan_mode (e_r_drv_adc_scan_mode_t scan_mode);
+ 106:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static bool_t is_valid_configuration (st_r_drv_adc_unit_config_t * p_config);
+ 107:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_resolution_t adc_get_resolution (void);
+ 108:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_alignment_t adc_get_data_alignment (void);
+ 109:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_scan_mode_t adc_get_scan_mode (void);
+ 110:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 111:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 112:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  Global variables
+ 113:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 114:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 115:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 116:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_GetVersion
+ 117:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Gets the version number of this Low Layer Driver
+ 118:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : pinfo[out] - returns the driver information
+ 119:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : DRV_SUCCESS always returned
+ 120:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 121:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** uint32_t R_ADC_GetVersion(st_drv_info_t *pinfo)
+ 122:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 123:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->version.sub.major = s_lld_info.version.sub.major;
+ 124:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->version.sub.minor = s_lld_info.version.sub.minor;
+ 125:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->build = s_lld_info.build;
+ 126:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->p_szdriver_name = s_lld_info.p_szdriver_name;
+ 127:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 128:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return (DRV_SUCCESS);
+ 129:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 130:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 131:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_GetVersion
+ 132:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 133:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 134:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 135:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_HWInitialise
+ 136:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Initialise the hardware
+ 137:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 138:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_ERR_FAILED or ADC_SUCCESS
+ 139:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 140:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_HWInitialise(void)
+ 141:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 142:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 143:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     int_t delay;
+ 144:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 145:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_stb_err_t stb_return;
+ 146:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 147:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* enable the ADC module */
+ 148:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     stb_return = R_STB_StartModule(MODULE_ADC);
+ 149:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 150:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (STB_SUCCESS != stb_return)
+ 151:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 152:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 153:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 154:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 155:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* a delay to allow the converter to settle */
+ 156:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (delay = 0; delay < 10000; delay++)
+ 157:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 158:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         R_COMPILER_Nop();
+ 159:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 160:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 161:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* write zero to all registers */
+ 162:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 163:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSA0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 164:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADADS0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 165:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADADC.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 166:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCER.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 167:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADSTRGR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 168:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSB0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 169:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 170:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADRD.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 171:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADDISCR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 172:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADGSPCR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 173:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDRA.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 174:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDRB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 175:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPCR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 176:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPANSR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 177:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPLR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 178:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPDR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 179:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPDR1.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 180:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPSR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 181:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADCMPBNSR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 182:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADWINLLB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 183:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADWINULB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 184:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSC0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 185:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADGCTRGR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 186:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 187:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* A/D Sampling State Register n */
+ 188:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (channel = ADC_CHANNEL_AN000; channel < ADC_CHANNELS; channel++)
+ 189:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 190:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         RZA_IO_RegWrite_8((&ADC.ADSSTR0.BYTE) + channel, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_AC
+ 191:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 192:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 193:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 194:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 195:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 196:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_HWInitialise
+ 197:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 198:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 199:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 200:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_LoadInitialConfiguration
+ 201:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Load the initial configuration from the SC style table
+ 202:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_userCallback[out] - pointer to user callback function pointer
+ 203:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or ADC_ERR_INVALID_CFG
+ 204:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 205:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_LoadInitialConfiguration(void (**p_userCallback)(e_r_drv_adc_callback_reaso
+ 206:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 207:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     st_r_drv_adc_unit_config_t adc_config;
+ 208:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 209:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* Smart Configuration style initialisation */
+ 210:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.resolution = ADC_SC_TABLE.resolution;
+ 211:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.alignment = ADC_SC_TABLE.alignment;
+ 212:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.scan_mode = ADC_SC_TABLE.scan_mode;
+ 213:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.p_adcCallback = ADC_SC_TABLE.p_adcCallback;
+ 214:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.interrupt_priority = ADC_SC_TABLE.interrupt_priority;
+ 215:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN000].sample_time = ADC_SC_TABLE.sample_time_chan_0;
+ 216:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN000].trigger_source = ADC_SC_TABLE.trigger_source_chan_0;
+ 217:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN001].sample_time = ADC_SC_TABLE.sample_time_chan_1;
+ 218:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN001].trigger_source = ADC_SC_TABLE.trigger_source_chan_1;
+ 219:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN002].sample_time = ADC_SC_TABLE.sample_time_chan_2;
+ 220:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN002].trigger_source = ADC_SC_TABLE.trigger_source_chan_2;
+ 221:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN003].sample_time = ADC_SC_TABLE.sample_time_chan_3;
+ 222:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN003].trigger_source = ADC_SC_TABLE.trigger_source_chan_3;
+ 223:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN004].sample_time = ADC_SC_TABLE.sample_time_chan_4;
+ 224:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN004].trigger_source = ADC_SC_TABLE.trigger_source_chan_4;
+ 225:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN005].sample_time = ADC_SC_TABLE.sample_time_chan_5;
+ 226:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN005].trigger_source = ADC_SC_TABLE.trigger_source_chan_5;
+ 227:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN006].sample_time = ADC_SC_TABLE.sample_time_chan_6;
+ 228:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN006].trigger_source = ADC_SC_TABLE.trigger_source_chan_6;
+ 229:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN007].sample_time = ADC_SC_TABLE.sample_time_chan_7;
+ 230:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN007].trigger_source = ADC_SC_TABLE.trigger_source_chan_7;
+ 231:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 232:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (R_ADC_SetConfiguration(&adc_config) != ADC_SUCCESS)
+ 233:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 234:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_INVALID_CFG;
+ 235:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 236:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 237:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* pass the address of the user callback function back to the HLD */
+ 238:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     *p_userCallback = ADC_SC_TABLE.p_adcCallback;
+ 239:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 240:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 241:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 242:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 243:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_LoadInitialConfiguration
+ 244:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 245:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 246:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 247:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_HWUninitialise
+ 248:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Uninitialise the hardware
+ 249:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 250:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS always returned
+ 251:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 252:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_HWUninitialise(void)
+ 253:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 254:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     int_t i;
+ 255:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 256:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* write a 0 to ADST to ensure that the converter is stopped */
+ 257:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, 0, ADC_ADCSR_ADST_SHIFT, ADC_ADCSR_ADST);
+ 258:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 259:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* wait for the converter to stop */
+ 260:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (i = 0; i < 10000; i++)
+ 261:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 262:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         R_COMPILER_Nop();
+ 263:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 264:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 265:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* power the module down */
+ 266:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     R_STB_StopModule(MODULE_ADC);
+ 267:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 268:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 269:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 270:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 271:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_HWUninitialise
+ 272:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 273:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 274:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 275:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_SoftwareTrigger
+ 276:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Trigger an ADC conversion scan
+ 277:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 278:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS always returned
+ 279:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 280:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_SoftwareTrigger(void)
+ 281:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 282:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* write a 0 to the ADCSR register TRGE bit to disable synchronous and asynchronous triggering 
+ 283:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, 0, ADC_ADCSR_TRGE_SHIFT, ADC_ADCSR_TRGE);
+ 284:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 285:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* write a 1 to the ADCSR register ADST bit to trigger a conversion */
+ 286:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, 1, ADC_ADCSR_ADST_SHIFT, ADC_ADCSR_ADST);
+ 287:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 288:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 289:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 290:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /******************************************************************************
+ 291:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_SoftwareTrigger
+ 292:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  ******************************************************************************/
+ 293:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 294:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 295:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_set_resolution
+ 296:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Sets the register ADC resolution value
+ 297:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : resolution: The ADC resolution (8, 10 or 12 bits)
+ 298:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : None
+ 299:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 300:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_resolution(e_r_drv_adc_resolution_t resolution)
+ 301:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 302:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adprc;
+ 303:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 304:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (resolution)
+ 305:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 306:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 307:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_RESOLUTION_12:
+ 308:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 309:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adprc = R_ADC_PRV_ADCER_ADC_RESOLUTION_12;
+ 310:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 311:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 312:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 313:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_RESOLUTION_10:
+ 314:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 315:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adprc = R_ADC_PRV_ADCER_ADC_RESOLUTION_10;
+ 316:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 317:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 318:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 319:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_RESOLUTION_8:
+ 320:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 321:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adprc = R_ADC_PRV_ADCER_ADC_RESOLUTION_8;
+ 322:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 323:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 324:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 325:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 326:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCER.WORD, adprc, ADC_ADCER_ADPRC_SHIFT, ADC_ADCER_ADPRC);
+ 327:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 328:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 329:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_set_resolution
+ 330:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 331:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 332:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 333:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_set_data_alignment
+ 334:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Sets the register ADC data alignment value
+ 335:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : alignment - The ADC data alignment (left or right)
+ 336:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : None
+ 337:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 338:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_data_alignment(e_r_drv_adc_alignment_t alignment)
+ 339:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 340:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adcer;
+ 341:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 342:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (alignment)
+ 343:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 344:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_ALIGN_LEFT:
+ 345:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 346:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adcer = R_ADC_PRV_ADCER_ADC_DATA_FORMAT_LEFT_ALIGN;
+ 347:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 348:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 349:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 350:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 351:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_ALIGN_RIGHT:
+ 352:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 353:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adcer = R_ADC_PRV_ADCER_ADC_DATA_FORMAT_RIGHT_ALIGN;
+ 354:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 355:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 356:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 357:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 358:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCER.WORD, adcer, ADC_ADCER_ADRFMT_SHIFT, ADC_ADCER_ADRFMT);
+ 359:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 360:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /******************************************************************************
+ 361:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_set_data_alignment
+ 362:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  ******************************************************************************/
+ 363:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 364:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 365:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_set_scan_mode
+ 366:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Sets the register ADC scan mode value
+ 367:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : scan_mode - The ADC scan mode (single, group or continuous)
+ 368:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : None
+ 369:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 370:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static void adc_set_scan_mode(e_r_drv_adc_scan_mode_t scan_mode)
+ 371:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 372:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adcsr;
+ 373:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 374:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (scan_mode)
+ 375:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 376:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 377:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_SCAN_MODE_SINGLE:
+ 378:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 379:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adcsr = R_ADC_PRV_ADCSR_ADC_SCAN_MODE_SINGLE;
+ 380:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 381:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 382:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 383:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_SCAN_MODE_GROUP:
+ 384:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 385:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adcsr = R_ADC_PRV_ADCSR_ADC_SCAN_MODE_GROUP;
+ 386:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 387:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 388:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 389:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case ADC_SCAN_MODE_CONTINUOUS:
+ 390:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 391:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             adcsr = R_ADC_PRV_ADCSR_ADC_SCAN_MODE_CONTINUOUS;
+ 392:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 393:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 394:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 395:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 396:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, adcsr, ADC_ADCSR_ADCS_SHIFT, ADC_ADCSR_ADCS);
+ 397:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 398:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 399:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_set_scan_mode
+ 400:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 401:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 402:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 403:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: is_valid_configuration
+ 404:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Validates the configuration settings
+ 405:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_config[in] - pointer to configuration structure
+ 406:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : true if the settings are valid, false otherwise
+ 407:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 408:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static bool_t is_valid_configuration(st_r_drv_adc_unit_config_t * p_config)
+ 409:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+  25              		.loc 1 409 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              		@ link register save eliminated.
+  30              	.LVL0:
+ 410:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 411:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 412:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if ((ADC_RESOLUTION_12 != p_config->resolution) && (ADC_RESOLUTION_10 != p_config->resolution)
+  31              		.loc 1 412 0
+  32 0000 0030D0E5 		ldrb	r3, [r0]	@ zero_extendqisi2
+  33 0004 020053E3 		cmp	r3, #2
+  34 0008 1E00008A 		bhi	.L6
+ 413:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             && (ADC_RESOLUTION_8 != p_config->resolution))
+ 414:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 415:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return false;
+ 416:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 417:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 418:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if ((ADC_ALIGN_RIGHT != p_config->alignment) && (ADC_ALIGN_LEFT != p_config->alignment))
+  35              		.loc 1 418 0
+  36 000c 0130D0E5 		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+  37 0010 010053E3 		cmp	r3, #1
+  38 0014 0100009A 		bls	.L11
+ 419:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 420:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return false;
+  39              		.loc 1 420 0
+  40 0018 0000A0E3 		mov	r0, #0
+  41              	.LVL1:
+  42 001c 1EFF2FE1 		bx	lr
+  43              	.LVL2:
+  44              	.L11:
+ 421:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 422:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 423:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if ((ADC_SCAN_MODE_SINGLE != p_config->scan_mode) && (ADC_SCAN_MODE_GROUP != p_config->scan_mod
+  45              		.loc 1 423 0
+  46 0020 0230D0E5 		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+  47 0024 020053E3 		cmp	r3, #2
+  48 0028 1800008A 		bhi	.L8
+  49 002c 0030A0E3 		mov	r3, #0
+  50 0030 030000EA 		b	.L3
+  51              	.LVL3:
+  52              	.L4:
+ 424:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             && (ADC_SCAN_MODE_CONTINUOUS != p_config->scan_mode))
+ 425:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 426:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return false;
+ 427:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 428:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 429:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (channel = ADC_CHANNEL_AN000; channel < ADC_CHANNELS; channel++)
+ 430:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 431:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         if ((ADC_TRIGGER_DISABLED != p_config->channels[channel].trigger_source) &&
+ 432:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 ((p_config->channels[channel].sample_time < R_ADC_PRV_ADC_MINIMUM_SAMPLE_TIME) ||
+ 433:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 (p_config->channels[channel].sample_time > R_ADC_PRV_ADC_MAXIMUM_SAMPLE_TIME)))
+ 434:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 435:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             return false;
+ 436:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 437:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 438:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         if (p_config->channels[channel].trigger_source > ADC_TRIGGER_GROUPC)
+  53              		.loc 1 438 0
+  54 0034 040052E3 		cmp	r2, #4
+  55 0038 1600008A 		bhi	.L10
+ 429:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+  56              		.loc 1 429 0 discriminator 2
+  57 003c 013083E2 		add	r3, r3, #1
+  58              	.LVL4:
+  59 0040 7330EFE6 		uxtb	r3, r3
+  60              	.LVL5:
+  61              	.L3:
+ 429:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+  62              		.loc 1 429 0 is_stmt 0 discriminator 1
+  63 0044 070053E3 		cmp	r3, #7
+  64 0048 0C00008A 		bhi	.L12
+ 431:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 ((p_config->channels[channel].sample_time < R_ADC_PRV_ADC_MINIMUM_SAMPLE_TIME) ||
+  65              		.loc 1 431 0 is_stmt 1
+  66 004c 012083E2 		add	r2, r3, #1
+  67 0050 822180E0 		add	r2, r0, r2, lsl #3
+  68 0054 0820D2E5 		ldrb	r2, [r2, #8]	@ zero_extendqisi2
+  69 0058 000052E3 		cmp	r2, #0
+  70 005c F4FFFF0A 		beq	.L4
+ 432:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 (p_config->channels[channel].sample_time > R_ADC_PRV_ADC_MAXIMUM_SAMPLE_TIME)))
+  71              		.loc 1 432 0 discriminator 1
+  72 0060 011083E2 		add	r1, r3, #1
+  73 0064 811180E0 		add	r1, r0, r1, lsl #3
+  74 0068 041091E5 		ldr	r1, [r1, #4]
+  75 006c 051041E2 		sub	r1, r1, #5
+ 431:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 ((p_config->channels[channel].sample_time < R_ADC_PRV_ADC_MINIMUM_SAMPLE_TIME) ||
+  76              		.loc 1 431 0 discriminator 1
+  77 0070 FA0051E3 		cmp	r1, #250
+  78 0074 EEFFFF9A 		bls	.L4
+ 435:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+  79              		.loc 1 435 0
+  80 0078 0000A0E3 		mov	r0, #0
+  81              	.LVL6:
+  82 007c 1EFF2FE1 		bx	lr
+  83              	.LVL7:
+  84              	.L12:
+ 439:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 440:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             return false;
+ 441:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 442:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 443:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 444:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return true;
+  85              		.loc 1 444 0
+  86 0080 0100A0E3 		mov	r0, #1
+  87              	.LVL8:
+  88 0084 1EFF2FE1 		bx	lr
+  89              	.LVL9:
+  90              	.L6:
+ 415:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+  91              		.loc 1 415 0
+  92 0088 0000A0E3 		mov	r0, #0
+  93              	.LVL10:
+  94 008c 1EFF2FE1 		bx	lr
+  95              	.LVL11:
+  96              	.L8:
+ 426:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+  97              		.loc 1 426 0
+  98 0090 0000A0E3 		mov	r0, #0
+  99              	.LVL12:
+ 100 0094 1EFF2FE1 		bx	lr
+ 101              	.LVL13:
+ 102              	.L10:
+ 440:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 103              		.loc 1 440 0
+ 104 0098 0000A0E3 		mov	r0, #0
+ 105              	.LVL14:
+ 445:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 106              		.loc 1 445 0
+ 107 009c 1EFF2FE1 		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE12:
+ 111              		.section	.text.adc_set_resolution,"ax",%progbits
+ 112              		.align	2
+ 113              		.syntax unified
+ 114              		.arm
+ 115              		.fpu neon
+ 117              	adc_set_resolution:
+ 118              	.LFB9:
+ 301:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adprc;
+ 119              		.loc 1 301 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123              	.LVL15:
+ 124 0000 10402DE9 		push	{r4, lr}
+ 125              		.cfi_def_cfa_offset 8
+ 126              		.cfi_offset 4, -8
+ 127              		.cfi_offset 14, -4
+ 304:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 128              		.loc 1 304 0
+ 129 0004 010050E3 		cmp	r0, #1
+ 130 0008 0A00000A 		beq	.L17
+ 131 000c 020050E3 		cmp	r0, #2
+ 132 0010 0600000A 		beq	.L16
+ 309:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 133              		.loc 1 309 0
+ 134 0014 0010A0E3 		mov	r1, #0
+ 135              	.L15:
+ 136              	.LVL16:
+ 326:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 137              		.loc 1 326 0
+ 138 0018 0630A0E3 		mov	r3, #6
+ 139 001c 0120A0E3 		mov	r2, #1
+ 140 0020 0E0805E3 		movw	r0, #22542
+ 141              	.LVL17:
+ 142 0024 00084EE3 		movt	r0, 59392
+ 143 0028 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 144              	.LVL18:
+ 145 002c 1080BDE8 		pop	{r4, pc}
+ 146              	.LVL19:
+ 147              	.L16:
+ 321:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 148              		.loc 1 321 0
+ 149 0030 0210A0E3 		mov	r1, #2
+ 322:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 150              		.loc 1 322 0
+ 151 0034 F7FFFFEA 		b	.L15
+ 152              	.LVL20:
+ 153              	.L17:
+ 315:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 154              		.loc 1 315 0
+ 155 0038 0110A0E3 		mov	r1, #1
+ 156 003c F5FFFFEA 		b	.L15
+ 157              		.cfi_endproc
+ 158              	.LFE9:
+ 160              		.section	.text.adc_set_data_alignment,"ax",%progbits
+ 161              		.align	2
+ 162              		.syntax unified
+ 163              		.arm
+ 164              		.fpu neon
+ 166              	adc_set_data_alignment:
+ 167              	.LFB10:
+ 339:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adcer;
+ 168              		.loc 1 339 0
+ 169              		.cfi_startproc
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172              	.LVL21:
+ 173 0000 10402DE9 		push	{r4, lr}
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 4, -8
+ 176              		.cfi_offset 14, -4
+ 342:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 177              		.loc 1 342 0
+ 178 0004 010050E3 		cmp	r0, #1
+ 179 0008 0600000A 		beq	.L25
+ 353:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 180              		.loc 1 353 0
+ 181 000c 0010A0E3 		mov	r1, #0
+ 182              	.L20:
+ 183              	.LVL22:
+ 358:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 184              		.loc 1 358 0
+ 185 0010 0239A0E3 		mov	r3, #32768
+ 186 0014 0F20A0E3 		mov	r2, #15
+ 187 0018 0E0805E3 		movw	r0, #22542
+ 188              	.LVL23:
+ 189 001c 00084EE3 		movt	r0, 59392
+ 190 0020 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 191              	.LVL24:
+ 192 0024 1080BDE8 		pop	{r4, pc}
+ 193              	.LVL25:
+ 194              	.L25:
+ 346:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 195              		.loc 1 346 0
+ 196 0028 0110A0E3 		mov	r1, #1
+ 197 002c F7FFFFEA 		b	.L20
+ 198              		.cfi_endproc
+ 199              	.LFE10:
+ 201              		.section	.text.adc_set_scan_mode,"ax",%progbits
+ 202              		.align	2
+ 203              		.syntax unified
+ 204              		.arm
+ 205              		.fpu neon
+ 207              	adc_set_scan_mode:
+ 208              	.LFB11:
+ 371:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adcsr;
+ 209              		.loc 1 371 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213              	.LVL26:
+ 214 0000 10402DE9 		push	{r4, lr}
+ 215              		.cfi_def_cfa_offset 8
+ 216              		.cfi_offset 4, -8
+ 217              		.cfi_offset 14, -4
+ 374:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 218              		.loc 1 374 0
+ 219 0004 010050E3 		cmp	r0, #1
+ 220 0008 0A00000A 		beq	.L30
+ 221 000c 020050E3 		cmp	r0, #2
+ 222 0010 0600000A 		beq	.L29
+ 379:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 223              		.loc 1 379 0
+ 224 0014 0010A0E3 		mov	r1, #0
+ 225              	.L28:
+ 226              	.LVL27:
+ 396:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 227              		.loc 1 396 0
+ 228 0018 063AA0E3 		mov	r3, #24576
+ 229 001c 0D20A0E3 		mov	r2, #13
+ 230 0020 160BA0E3 		mov	r0, #22528
+ 231              	.LVL28:
+ 232 0024 00084EE3 		movt	r0, 59392
+ 233 0028 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 234              	.LVL29:
+ 235 002c 1080BDE8 		pop	{r4, pc}
+ 236              	.LVL30:
+ 237              	.L29:
+ 391:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 238              		.loc 1 391 0
+ 239 0030 0210A0E3 		mov	r1, #2
+ 392:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 240              		.loc 1 392 0
+ 241 0034 F7FFFFEA 		b	.L28
+ 242              	.LVL31:
+ 243              	.L30:
+ 385:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 244              		.loc 1 385 0
+ 245 0038 0110A0E3 		mov	r1, #1
+ 246 003c F5FFFFEA 		b	.L28
+ 247              		.cfi_endproc
+ 248              	.LFE11:
+ 250              		.section	.text.adc_get_resolution,"ax",%progbits
+ 251              		.align	2
+ 252              		.syntax unified
+ 253              		.arm
+ 254              		.fpu neon
+ 256              	adc_get_resolution:
+ 257              	.LFB14:
+ 446:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 447:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function is_valid_configuration
+ 448:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 449:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 450:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 451:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_SetConfiguration
+ 452:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Set the ADC configuration
+ 453:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_config[in] - pointer to configuration structure
+ 454:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or the error code on failure
+ 455:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 456:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_SetConfiguration(st_r_drv_adc_unit_config_t * p_config)
+ 457:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 458:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 459:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t mask;
+ 460:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t ansa0;
+ 461:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 462:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (!is_valid_configuration(p_config))
+ 463:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 464:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_INVALID_CFG;
+ 465:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 466:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 467:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* configure settings that apply to all channels */
+ 468:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_set_resolution(p_config->resolution);
+ 469:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_set_data_alignment(p_config->alignment);
+ 470:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_set_scan_mode(p_config->scan_mode);
+ 471:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 472:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     R_INTC_SetPriority(INTC_ID_ADC_S12ADI0, p_config->interrupt_priority);
+ 473:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 474:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     ansa0 = 0;
+ 475:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     mask = 1;
+ 476:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 477:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* configure the input channels */
+ 478:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (channel = ADC_CHANNEL_AN000; channel < ADC_CHANNELS; channel++)
+ 479:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 480:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         if (ADC_TRIGGER_DISABLED != p_config->channels[channel].trigger_source)
+ 481:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 482:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             /* set the channel sample time */
+ 483:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             RZA_IO_RegWrite_8((&ADC.ADSSTR0.BYTE) + channel, (uint8_t) p_config->channels[channel].
+ 484:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                     IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 485:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 486:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 487:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         if (ADC_TRIGGER_NORMAL == p_config->channels[channel].trigger_source)
+ 488:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 489:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             ansa0 |= mask;
+ 490:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 491:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 492:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         /* the compiler promotes the variable to signed integer for the shift, so cast it back */
+ 493:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         mask = (uint16_t) (mask << 1u);
+ 494:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 495:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 496:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSA0.WORD, ansa0, ADC_ADANSA0_ANSA0_SHIFT, ADC_ADANSA0_ANSA0);
+ 497:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 498:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 499:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 500:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 501:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_SetConfiguration
+ 502:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 503:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 504:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 505:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_get_resolution
+ 506:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Gets the ADC resolution setting
+ 507:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 508:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : The ADC resolution (8, 10 or 12 bits)
+ 509:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 510:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_resolution_t adc_get_resolution(void)
+ 511:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 258              		.loc 1 511 0
+ 259              		.cfi_startproc
+ 260              		@ args = 0, pretend = 0, frame = 0
+ 261              		@ frame_needed = 0, uses_anonymous_args = 0
+ 262 0000 10402DE9 		push	{r4, lr}
+ 263              		.cfi_def_cfa_offset 8
+ 264              		.cfi_offset 4, -8
+ 265              		.cfi_offset 14, -4
+ 512:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adprc;
+ 513:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_resolution_t resolution;
+ 514:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 515:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the ADPRC value from the ADCER register */
+ 516:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adprc = RZA_IO_RegRead_16(&ADC.ADCER.WORD, ADC_ADCER_ADPRC_SHIFT, ADC_ADCER_ADPRC);
+ 266              		.loc 1 516 0
+ 267 0004 0620A0E3 		mov	r2, #6
+ 268 0008 0110A0E3 		mov	r1, #1
+ 269 000c 0E0805E3 		movw	r0, #22542
+ 270 0010 00084EE3 		movt	r0, 59392
+ 271 0014 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 272              	.LVL32:
+ 517:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 518:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* map to our enumerated type */
+ 519:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (adprc)
+ 273              		.loc 1 519 0
+ 274 0018 010050E3 		cmp	r0, #1
+ 275 001c 0500000A 		beq	.L36
+ 276 0020 020050E3 		cmp	r0, #2
+ 277 0024 0100000A 		beq	.L35
+ 520:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 521:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 522:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_12:
+ 523:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 524:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             resolution = ADC_RESOLUTION_12;
+ 278              		.loc 1 524 0
+ 279 0028 0000A0E3 		mov	r0, #0
+ 280              	.LVL33:
+ 281 002c 1080BDE8 		pop	{r4, pc}
+ 282              	.LVL34:
+ 283              	.L35:
+ 525:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 526:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 527:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 528:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_10:
+ 529:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 530:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             resolution = ADC_RESOLUTION_10;
+ 531:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 532:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 533:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 534:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_8:
+ 535:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 536:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             resolution = ADC_RESOLUTION_8;
+ 284              		.loc 1 536 0
+ 285 0030 0200A0E3 		mov	r0, #2
+ 286              	.LVL35:
+ 537:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 287              		.loc 1 537 0
+ 288 0034 1080BDE8 		pop	{r4, pc}
+ 289              	.LVL36:
+ 290              	.L36:
+ 530:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 291              		.loc 1 530 0
+ 292 0038 0100A0E3 		mov	r0, #1
+ 293              	.LVL37:
+ 538:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 539:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 540:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 541:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return resolution;
+ 542:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 294              		.loc 1 542 0
+ 295 003c 1080BDE8 		pop	{r4, pc}
+ 296              		.cfi_endproc
+ 297              	.LFE14:
+ 299              		.section	.text.adc_get_data_alignment,"ax",%progbits
+ 300              		.align	2
+ 301              		.syntax unified
+ 302              		.arm
+ 303              		.fpu neon
+ 305              	adc_get_data_alignment:
+ 306              	.LFB15:
+ 543:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 544:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_get_resolution
+ 545:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 546:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 547:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 548:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_get_data_alignment
+ 549:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Gets the ADC data alignment setting
+ 550:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 551:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : The ADC data alignment (left or right)
+ 552:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 553:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_alignment_t adc_get_data_alignment(void)
+ 554:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 307              		.loc 1 554 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311 0000 10402DE9 		push	{r4, lr}
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 555:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adrfmt;
+ 556:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_alignment_t alignment;
+ 557:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 558:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the ADRFMT value from the ADCER register */
+ 559:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adrfmt = RZA_IO_RegRead_16(&ADC.ADCER.WORD, ADC_ADCER_ADRFMT_SHIFT, ADC_ADCER_ADRFMT);
+ 315              		.loc 1 559 0
+ 316 0004 0229A0E3 		mov	r2, #32768
+ 317 0008 0F10A0E3 		mov	r1, #15
+ 318 000c 0E0805E3 		movw	r0, #22542
+ 319 0010 00084EE3 		movt	r0, 59392
+ 320 0014 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 321              	.LVL38:
+ 560:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 561:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* map to our enumerated type */
+ 562:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (adrfmt)
+ 322              		.loc 1 562 0
+ 323 0018 010050E3 		cmp	r0, #1
+ 324 001c 1080BD08 		popeq	{r4, pc}
+ 563:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 564:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_DATA_FORMAT_LEFT_ALIGN:
+ 565:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 566:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             alignment = ADC_ALIGN_LEFT;
+ 567:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 568:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 569:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 570:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 571:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_DATA_FORMAT_RIGHT_ALIGN:
+ 572:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 573:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             alignment = ADC_ALIGN_RIGHT;
+ 325              		.loc 1 573 0
+ 326 0020 0000A0E3 		mov	r0, #0
+ 327              	.LVL39:
+ 574:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 575:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 576:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 577:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 578:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return alignment;
+ 579:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 328              		.loc 1 579 0
+ 329 0024 1080BDE8 		pop	{r4, pc}
+ 330              		.cfi_endproc
+ 331              	.LFE15:
+ 333              		.section	.text.adc_get_scan_mode,"ax",%progbits
+ 334              		.align	2
+ 335              		.syntax unified
+ 336              		.arm
+ 337              		.fpu neon
+ 339              	adc_get_scan_mode:
+ 340              	.LFB16:
+ 580:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 581:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_get_data_alignment
+ 582:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 583:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 584:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 585:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: adc_get_scan_mode
+ 586:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Gets the ADC scan mode setting
+ 587:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 588:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : The ADC scan mode (single, group or continuous)
+ 589:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 590:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** static e_r_drv_adc_scan_mode_t adc_get_scan_mode(void)
+ 591:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 341              		.loc 1 591 0
+ 342              		.cfi_startproc
+ 343              		@ args = 0, pretend = 0, frame = 0
+ 344              		@ frame_needed = 0, uses_anonymous_args = 0
+ 345 0000 10402DE9 		push	{r4, lr}
+ 346              		.cfi_def_cfa_offset 8
+ 347              		.cfi_offset 4, -8
+ 348              		.cfi_offset 14, -4
+ 592:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adcs;
+ 593:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_scan_mode_t scan_mode;
+ 594:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 595:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the ADCS value from the ADCSR register */
+ 596:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adcs = RZA_IO_RegRead_16(&ADC.ADCSR.WORD, ADC_ADCSR_ADCS_SHIFT, ADC_ADCSR_ADCS);
+ 349              		.loc 1 596 0
+ 350 0004 062AA0E3 		mov	r2, #24576
+ 351 0008 0D10A0E3 		mov	r1, #13
+ 352 000c 160BA0E3 		mov	r0, #22528
+ 353 0010 00084EE3 		movt	r0, 59392
+ 354 0014 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 355              	.LVL40:
+ 597:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 598:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (adcs)
+ 356              		.loc 1 598 0
+ 357 0018 010050E3 		cmp	r0, #1
+ 358 001c 0500000A 		beq	.L48
+ 359 0020 020050E3 		cmp	r0, #2
+ 360 0024 0100000A 		beq	.L47
+ 599:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 600:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 601:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCSR_ADC_SCAN_MODE_SINGLE:
+ 602:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 603:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             scan_mode = ADC_SCAN_MODE_SINGLE;
+ 361              		.loc 1 603 0
+ 362 0028 0000A0E3 		mov	r0, #0
+ 363              	.LVL41:
+ 364 002c 1080BDE8 		pop	{r4, pc}
+ 365              	.LVL42:
+ 366              	.L47:
+ 604:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 605:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 606:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 607:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCSR_ADC_SCAN_MODE_GROUP:
+ 608:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 609:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             scan_mode = ADC_SCAN_MODE_GROUP;
+ 610:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 611:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 612:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 613:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCSR_ADC_SCAN_MODE_CONTINUOUS:
+ 614:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 615:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             scan_mode = ADC_SCAN_MODE_CONTINUOUS;
+ 367              		.loc 1 615 0
+ 368 0030 0200A0E3 		mov	r0, #2
+ 369              	.LVL43:
+ 616:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 370              		.loc 1 616 0
+ 371 0034 1080BDE8 		pop	{r4, pc}
+ 372              	.LVL44:
+ 373              	.L48:
+ 609:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 374              		.loc 1 609 0
+ 375 0038 0100A0E3 		mov	r0, #1
+ 376              	.LVL45:
+ 617:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 618:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 619:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 620:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return scan_mode;
+ 621:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 377              		.loc 1 621 0
+ 378 003c 1080BDE8 		pop	{r4, pc}
+ 379              		.cfi_endproc
+ 380              	.LFE16:
+ 382              		.section	.text.R_ADC_GetVersion,"ax",%progbits
+ 383              		.align	2
+ 384              		.global	R_ADC_GetVersion
+ 385              		.syntax unified
+ 386              		.arm
+ 387              		.fpu neon
+ 389              	R_ADC_GetVersion:
+ 390              	.LFB4:
+ 122:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->version.sub.major = s_lld_info.version.sub.major;
+ 391              		.loc 1 122 0
+ 392              		.cfi_startproc
+ 393              		@ args = 0, pretend = 0, frame = 0
+ 394              		@ frame_needed = 0, uses_anonymous_args = 0
+ 395              		@ link register save eliminated.
+ 396              	.LVL46:
+ 397 0000 0030A0E1 		mov	r3, r0
+ 123:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->version.sub.minor = s_lld_info.version.sub.minor;
+ 398              		.loc 1 123 0
+ 399 0004 0120A0E3 		mov	r2, #1
+ 400 0008 B220C0E1 		strh	r2, [r0, #2]	@ movhi
+ 124:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->build = s_lld_info.build;
+ 401              		.loc 1 124 0
+ 402 000c 0000A0E3 		mov	r0, #0
+ 403              	.LVL47:
+ 404 0010 B000C3E1 		strh	r0, [r3]	@ movhi
+ 125:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     pinfo->p_szdriver_name = s_lld_info.p_szdriver_name;
+ 405              		.loc 1 125 0
+ 406 0014 040083E5 		str	r0, [r3, #4]
+ 126:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 407              		.loc 1 126 0
+ 408 0018 002000E3 		movw	r2, #:lower16:.LC0
+ 409 001c 002040E3 		movt	r2, #:upper16:.LC0
+ 410 0020 082083E5 		str	r2, [r3, #8]
+ 129:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 411              		.loc 1 129 0
+ 412 0024 1EFF2FE1 		bx	lr
+ 413              		.cfi_endproc
+ 414              	.LFE4:
+ 416              		.section	.text.R_ADC_HWInitialise,"ax",%progbits
+ 417              		.align	2
+ 418              		.global	R_ADC_HWInitialise
+ 419              		.syntax unified
+ 420              		.arm
+ 421              		.fpu neon
+ 423              	R_ADC_HWInitialise:
+ 424              	.LFB5:
+ 141:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 425              		.loc 1 141 0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 0
+ 428              		@ frame_needed = 0, uses_anonymous_args = 0
+ 429 0000 10402DE9 		push	{r4, lr}
+ 430              		.cfi_def_cfa_offset 8
+ 431              		.cfi_offset 4, -8
+ 432              		.cfi_offset 14, -4
+ 148:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 433              		.loc 1 148 0
+ 434 0004 0700A0E3 		mov	r0, #7
+ 435 0008 FEFFFFEB 		bl	R_STB_StartModule
+ 436              	.LVL48:
+ 150:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 437              		.loc 1 150 0
+ 438 000c 000050E3 		cmp	r0, #0
+ 439 0010 A500001A 		bne	.L57
+ 440 0014 0030A0E3 		mov	r3, #0
+ 441 0018 010000EA 		b	.L53
+ 442              	.LVL49:
+ 443              	.L54:
+ 444              	.LBB6:
+ 445              	.LBB7:
+ 446              		.file 2 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler
+   1:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** /**************************************************************************************************
+   2:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * DISCLAIMER
+   3:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * applicable laws, including copyright laws.
+   6:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES
+  12:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * following link:
+  15:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * http://www.renesas.com/disclaimer
+  16:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  *
+  17:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Copyright (C) 2018 Renesas Electronics Corporation. All rights reserved.
+  18:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  **************************************************************************************************
+  19:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** /**************************************************************************************************
+  20:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * File Name    : r_compiler_abstraction_api.h
+  21:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  * Description  : Provides a common api for frequently used compiler specifc operations
+  22:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h ****  **************************************************************************************************
+  23:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #include  "r_typedefs.h"
+  24:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  25:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #ifndef SRC_RENESAS_COMPILER_INC_R_COMPILER_ABSTRACTION_API_H_
+  26:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define SRC_RENESAS_COMPILER_INC_R_COMPILER_ABSTRACTION_API_H_
+  27:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  28:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define R_COMPILER_INLINE static inline
+  29:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** #define R_COMPILER_WEAK __attribute__((weak))
+  30:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  31:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __enable_irq(void);
+  32:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern uint32_t __disable_irq(void);
+  33:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __enable_fiq(void);
+  34:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** extern void __disable_fiq(void);
+  35:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  36:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** 
+  37:C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc\r_compiler_abstraction_api.h **** R_COMPILER_INLINE void R_COMPILER_Nop(void) { __asm volatile ("nop"); }
+ 447              		.loc 2 37 0
+ 448              		.syntax divided
+ 449              	@ 37 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc
+ 450 001c 00F020E3 		nop
+ 451              	@ 0 "" 2
+ 452              		.arm
+ 453              		.syntax unified
+ 454              	.LBE7:
+ 455              	.LBE6:
+ 156:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 456              		.loc 1 156 0
+ 457 0020 013083E2 		add	r3, r3, #1
+ 458              	.LVL50:
+ 459              	.L53:
+ 156:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 460              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 461 0024 0F2702E3 		movw	r2, #9999
+ 462 0028 020053E1 		cmp	r3, r2
+ 463 002c FAFFFFDA 		ble	.L54
+ 162:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSA0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 464              		.loc 1 162 0 is_stmt 1
+ 465 0030 0030E0E3 		mvn	r3, #0
+ 466              	.LVL51:
+ 467 0034 0020A0E3 		mov	r2, #0
+ 468 0038 0210A0E1 		mov	r1, r2
+ 469 003c 160BA0E3 		mov	r0, #22528
+ 470              	.LVL52:
+ 471 0040 00084EE3 		movt	r0, 59392
+ 472 0044 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 473              	.LVL53:
+ 163:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADADS0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 474              		.loc 1 163 0
+ 475 0048 0030E0E3 		mvn	r3, #0
+ 476 004c 0020A0E3 		mov	r2, #0
+ 477 0050 0210A0E1 		mov	r1, r2
+ 478 0054 040805E3 		movw	r0, #22532
+ 479 0058 00084EE3 		movt	r0, 59392
+ 480 005c FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 481              	.LVL54:
+ 164:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADADC.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 482              		.loc 1 164 0
+ 483 0060 0030E0E3 		mvn	r3, #0
+ 484 0064 0020A0E3 		mov	r2, #0
+ 485 0068 0210A0E1 		mov	r1, r2
+ 486 006c 080805E3 		movw	r0, #22536
+ 487 0070 00084EE3 		movt	r0, 59392
+ 488 0074 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 489              	.LVL55:
+ 165:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCER.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 490              		.loc 1 165 0
+ 491 0078 0030E0E3 		mvn	r3, #0
+ 492 007c 0020A0E3 		mov	r2, #0
+ 493 0080 0210A0E1 		mov	r1, r2
+ 494 0084 0C0805E3 		movw	r0, #22540
+ 495 0088 00084EE3 		movt	r0, 59392
+ 496 008c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 497              	.LVL56:
+ 166:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADSTRGR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 498              		.loc 1 166 0
+ 499 0090 0030E0E3 		mvn	r3, #0
+ 500 0094 0020A0E3 		mov	r2, #0
+ 501 0098 0210A0E1 		mov	r1, r2
+ 502 009c 0E0805E3 		movw	r0, #22542
+ 503 00a0 00084EE3 		movt	r0, 59392
+ 504 00a4 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 505              	.LVL57:
+ 167:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSB0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 506              		.loc 1 167 0
+ 507 00a8 0030E0E3 		mvn	r3, #0
+ 508 00ac 0020A0E3 		mov	r2, #0
+ 509 00b0 0210A0E1 		mov	r1, r2
+ 510 00b4 100805E3 		movw	r0, #22544
+ 511 00b8 00084EE3 		movt	r0, 59392
+ 512 00bc FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 513              	.LVL58:
+ 168:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 514              		.loc 1 168 0
+ 515 00c0 0030E0E3 		mvn	r3, #0
+ 516 00c4 0020A0E3 		mov	r2, #0
+ 517 00c8 0210A0E1 		mov	r1, r2
+ 518 00cc 140805E3 		movw	r0, #22548
+ 519 00d0 00084EE3 		movt	r0, 59392
+ 520 00d4 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 521              	.LVL59:
+ 169:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADRD.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 522              		.loc 1 169 0
+ 523 00d8 0030E0E3 		mvn	r3, #0
+ 524 00dc 0020A0E3 		mov	r2, #0
+ 525 00e0 0210A0E1 		mov	r1, r2
+ 526 00e4 180805E3 		movw	r0, #22552
+ 527 00e8 00084EE3 		movt	r0, 59392
+ 528 00ec FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 529              	.LVL60:
+ 170:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADDISCR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 530              		.loc 1 170 0
+ 531 00f0 0030E0E3 		mvn	r3, #0
+ 532 00f4 0020A0E3 		mov	r2, #0
+ 533 00f8 0210A0E1 		mov	r1, r2
+ 534 00fc 1E0805E3 		movw	r0, #22558
+ 535 0100 00084EE3 		movt	r0, 59392
+ 536 0104 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 537              	.LVL61:
+ 171:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADGSPCR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 538              		.loc 1 171 0
+ 539 0108 0030E0E3 		mvn	r3, #0
+ 540 010c 0020A0E3 		mov	r2, #0
+ 541 0110 0210A0E1 		mov	r1, r2
+ 542 0114 7A0805E3 		movw	r0, #22650
+ 543 0118 00084EE3 		movt	r0, 59392
+ 544 011c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 545              	.LVL62:
+ 172:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDRA.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 546              		.loc 1 172 0
+ 547 0120 0030E0E3 		mvn	r3, #0
+ 548 0124 0020A0E3 		mov	r2, #0
+ 549 0128 0210A0E1 		mov	r1, r2
+ 550 012c 800805E3 		movw	r0, #22656
+ 551 0130 00084EE3 		movt	r0, 59392
+ 552 0134 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 553              	.LVL63:
+ 173:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADDBLDRB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 554              		.loc 1 173 0
+ 555 0138 0030E0E3 		mvn	r3, #0
+ 556 013c 0020A0E3 		mov	r2, #0
+ 557 0140 0210A0E1 		mov	r1, r2
+ 558 0144 840805E3 		movw	r0, #22660
+ 559 0148 00084EE3 		movt	r0, 59392
+ 560 014c FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 561              	.LVL64:
+ 174:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPCR.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 562              		.loc 1 174 0
+ 563 0150 0030E0E3 		mvn	r3, #0
+ 564 0154 0020A0E3 		mov	r2, #0
+ 565 0158 0210A0E1 		mov	r1, r2
+ 566 015c 860805E3 		movw	r0, #22662
+ 567 0160 00084EE3 		movt	r0, 59392
+ 568 0164 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 569              	.LVL65:
+ 175:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPANSR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 570              		.loc 1 175 0
+ 571 0168 0030E0E3 		mvn	r3, #0
+ 572 016c 0020A0E3 		mov	r2, #0
+ 573 0170 0210A0E1 		mov	r1, r2
+ 574 0174 900805E3 		movw	r0, #22672
+ 575 0178 00084EE3 		movt	r0, 59392
+ 576 017c FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 577              	.LVL66:
+ 176:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPLR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 578              		.loc 1 176 0
+ 579 0180 0030E0E3 		mvn	r3, #0
+ 580 0184 0020A0E3 		mov	r2, #0
+ 581 0188 0210A0E1 		mov	r1, r2
+ 582 018c 940805E3 		movw	r0, #22676
+ 583 0190 00084EE3 		movt	r0, 59392
+ 584 0194 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 585              	.LVL67:
+ 177:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPDR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 586              		.loc 1 177 0
+ 587 0198 0030E0E3 		mvn	r3, #0
+ 588 019c 0020A0E3 		mov	r2, #0
+ 589 01a0 0210A0E1 		mov	r1, r2
+ 590 01a4 980805E3 		movw	r0, #22680
+ 591 01a8 00084EE3 		movt	r0, 59392
+ 592 01ac FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 593              	.LVL68:
+ 178:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPDR1.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 594              		.loc 1 178 0
+ 595 01b0 0030E0E3 		mvn	r3, #0
+ 596 01b4 0020A0E3 		mov	r2, #0
+ 597 01b8 0210A0E1 		mov	r1, r2
+ 598 01bc 9C0805E3 		movw	r0, #22684
+ 599 01c0 00084EE3 		movt	r0, 59392
+ 600 01c4 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 601              	.LVL69:
+ 179:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCMPSR0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 602              		.loc 1 179 0
+ 603 01c8 0030E0E3 		mvn	r3, #0
+ 604 01cc 0020A0E3 		mov	r2, #0
+ 605 01d0 0210A0E1 		mov	r1, r2
+ 606 01d4 9E0805E3 		movw	r0, #22686
+ 607 01d8 00084EE3 		movt	r0, 59392
+ 608 01dc FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 609              	.LVL70:
+ 180:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADCMPBNSR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 610              		.loc 1 180 0
+ 611 01e0 0030E0E3 		mvn	r3, #0
+ 612 01e4 0020A0E3 		mov	r2, #0
+ 613 01e8 0210A0E1 		mov	r1, r2
+ 614 01ec A00805E3 		movw	r0, #22688
+ 615 01f0 00084EE3 		movt	r0, 59392
+ 616 01f4 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 617              	.LVL71:
+ 181:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADWINLLB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 618              		.loc 1 181 0
+ 619 01f8 0030E0E3 		mvn	r3, #0
+ 620 01fc 0020A0E3 		mov	r2, #0
+ 621 0200 0210A0E1 		mov	r1, r2
+ 622 0204 A60805E3 		movw	r0, #22694
+ 623 0208 00084EE3 		movt	r0, 59392
+ 624 020c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 625              	.LVL72:
+ 182:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADWINULB.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 626              		.loc 1 182 0
+ 627 0210 0030E0E3 		mvn	r3, #0
+ 628 0214 0020A0E3 		mov	r2, #0
+ 629 0218 0210A0E1 		mov	r1, r2
+ 630 021c A80805E3 		movw	r0, #22696
+ 631 0220 00084EE3 		movt	r0, 59392
+ 632 0224 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 633              	.LVL73:
+ 183:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADANSC0.WORD, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 634              		.loc 1 183 0
+ 635 0228 0030E0E3 		mvn	r3, #0
+ 636 022c 0020A0E3 		mov	r2, #0
+ 637 0230 0210A0E1 		mov	r1, r2
+ 638 0234 AA0805E3 		movw	r0, #22698
+ 639 0238 00084EE3 		movt	r0, 59392
+ 640 023c FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 641              	.LVL74:
+ 184:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_8(&ADC.ADGCTRGR.BYTE, 0, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 642              		.loc 1 184 0
+ 643 0240 0030E0E3 		mvn	r3, #0
+ 644 0244 0020A0E3 		mov	r2, #0
+ 645 0248 0210A0E1 		mov	r1, r2
+ 646 024c D40805E3 		movw	r0, #22740
+ 647 0250 00084EE3 		movt	r0, 59392
+ 648 0254 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 649              	.LVL75:
+ 185:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 650              		.loc 1 185 0
+ 651 0258 0030E0E3 		mvn	r3, #0
+ 652 025c 0020A0E3 		mov	r2, #0
+ 653 0260 0210A0E1 		mov	r1, r2
+ 654 0264 D90805E3 		movw	r0, #22745
+ 655 0268 00084EE3 		movt	r0, 59392
+ 656 026c FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 657              	.LVL76:
+ 188:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 658              		.loc 1 188 0
+ 659 0270 0040A0E3 		mov	r4, #0
+ 660 0274 080000EA 		b	.L55
+ 661              	.LVL77:
+ 662              	.L56:
+ 190:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 663              		.loc 1 190 0 discriminator 3
+ 664 0278 0030E0E3 		mvn	r3, #0
+ 665 027c 0020A0E3 		mov	r2, #0
+ 666 0280 0210A0E1 		mov	r1, r2
+ 667 0284 E00805E3 		movw	r0, #22752
+ 668 0288 00084EE3 		movt	r0, 59392
+ 669 028c 000084E0 		add	r0, r4, r0
+ 670 0290 FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 671              	.LVL78:
+ 188:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 672              		.loc 1 188 0 discriminator 3
+ 673 0294 014084E2 		add	r4, r4, #1
+ 674              	.LVL79:
+ 675 0298 7440EFE6 		uxtb	r4, r4
+ 676              	.LVL80:
+ 677              	.L55:
+ 188:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 678              		.loc 1 188 0 is_stmt 0 discriminator 1
+ 679 029c 070054E3 		cmp	r4, #7
+ 680 02a0 F4FFFF9A 		bls	.L56
+ 193:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 681              		.loc 1 193 0 is_stmt 1
+ 682 02a4 0000A0E3 		mov	r0, #0
+ 683 02a8 1080BDE8 		pop	{r4, pc}
+ 684              	.LVL81:
+ 685              	.L57:
+ 152:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 686              		.loc 1 152 0
+ 687 02ac 0000E0E3 		mvn	r0, #0
+ 688              	.LVL82:
+ 194:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 689              		.loc 1 194 0
+ 690 02b0 1080BDE8 		pop	{r4, pc}
+ 691              		.cfi_endproc
+ 692              	.LFE5:
+ 694              		.section	.text.R_ADC_HWUninitialise,"ax",%progbits
+ 695              		.align	2
+ 696              		.global	R_ADC_HWUninitialise
+ 697              		.syntax unified
+ 698              		.arm
+ 699              		.fpu neon
+ 701              	R_ADC_HWUninitialise:
+ 702              	.LFB7:
+ 253:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     int_t i;
+ 703              		.loc 1 253 0
+ 704              		.cfi_startproc
+ 705              		@ args = 0, pretend = 0, frame = 0
+ 706              		@ frame_needed = 0, uses_anonymous_args = 0
+ 707 0000 10402DE9 		push	{r4, lr}
+ 708              		.cfi_def_cfa_offset 8
+ 709              		.cfi_offset 4, -8
+ 710              		.cfi_offset 14, -4
+ 257:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 711              		.loc 1 257 0
+ 712 0004 0239A0E3 		mov	r3, #32768
+ 713 0008 0F20A0E3 		mov	r2, #15
+ 714 000c 0010A0E3 		mov	r1, #0
+ 715 0010 160BA0E3 		mov	r0, #22528
+ 716 0014 00084EE3 		movt	r0, 59392
+ 717 0018 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 718              	.LVL83:
+ 260:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 719              		.loc 1 260 0
+ 720 001c 0030A0E3 		mov	r3, #0
+ 721 0020 010000EA 		b	.L60
+ 722              	.LVL84:
+ 723              	.L61:
+ 724              	.LBB8:
+ 725              	.LBB9:
+ 726              		.loc 2 37 0
+ 727              		.syntax divided
+ 728              	@ 37 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/compiler/inc
+ 729 0024 00F020E3 		nop
+ 730              	@ 0 "" 2
+ 731              		.arm
+ 732              		.syntax unified
+ 733              	.LBE9:
+ 734              	.LBE8:
+ 260:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 735              		.loc 1 260 0
+ 736 0028 013083E2 		add	r3, r3, #1
+ 737              	.LVL85:
+ 738              	.L60:
+ 260:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 739              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 740 002c 0F2702E3 		movw	r2, #9999
+ 741 0030 020053E1 		cmp	r3, r2
+ 742 0034 FAFFFFDA 		ble	.L61
+ 266:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 743              		.loc 1 266 0 is_stmt 1
+ 744 0038 0700A0E3 		mov	r0, #7
+ 745 003c FEFFFFEB 		bl	R_STB_StopModule
+ 746              	.LVL86:
+ 269:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 747              		.loc 1 269 0
+ 748 0040 0000A0E3 		mov	r0, #0
+ 749 0044 1080BDE8 		pop	{r4, pc}
+ 750              		.cfi_endproc
+ 751              	.LFE7:
+ 753              		.section	.text.R_ADC_SoftwareTrigger,"ax",%progbits
+ 754              		.align	2
+ 755              		.global	R_ADC_SoftwareTrigger
+ 756              		.syntax unified
+ 757              		.arm
+ 758              		.fpu neon
+ 760              	R_ADC_SoftwareTrigger:
+ 761              	.LFB8:
+ 281:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* write a 0 to the ADCSR register TRGE bit to disable synchronous and asynchronous triggering 
+ 762              		.loc 1 281 0
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 0
+ 765              		@ frame_needed = 0, uses_anonymous_args = 0
+ 766 0000 10402DE9 		push	{r4, lr}
+ 767              		.cfi_def_cfa_offset 8
+ 768              		.cfi_offset 4, -8
+ 769              		.cfi_offset 14, -4
+ 283:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 770              		.loc 1 283 0
+ 771 0004 164BA0E3 		mov	r4, #22528
+ 772 0008 00484EE3 		movt	r4, 59392
+ 773 000c 023CA0E3 		mov	r3, #512
+ 774 0010 0920A0E3 		mov	r2, #9
+ 775 0014 0010A0E3 		mov	r1, #0
+ 776 0018 0400A0E1 		mov	r0, r4
+ 777 001c FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 778              	.LVL87:
+ 286:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 779              		.loc 1 286 0
+ 780 0020 0239A0E3 		mov	r3, #32768
+ 781 0024 0F20A0E3 		mov	r2, #15
+ 782 0028 0110A0E3 		mov	r1, #1
+ 783 002c 0400A0E1 		mov	r0, r4
+ 784 0030 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 785              	.LVL88:
+ 289:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /******************************************************************************
+ 786              		.loc 1 289 0
+ 787 0034 0000A0E3 		mov	r0, #0
+ 788 0038 1080BDE8 		pop	{r4, pc}
+ 789              		.cfi_endproc
+ 790              	.LFE8:
+ 792              		.section	.text.R_ADC_SetConfiguration,"ax",%progbits
+ 793              		.align	2
+ 794              		.global	R_ADC_SetConfiguration
+ 795              		.syntax unified
+ 796              		.arm
+ 797              		.fpu neon
+ 799              	R_ADC_SetConfiguration:
+ 800              	.LFB13:
+ 457:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 801              		.loc 1 457 0
+ 802              		.cfi_startproc
+ 803              		@ args = 0, pretend = 0, frame = 0
+ 804              		@ frame_needed = 0, uses_anonymous_args = 0
+ 805              	.LVL89:
+ 806 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 807              		.cfi_def_cfa_offset 24
+ 808              		.cfi_offset 4, -24
+ 809              		.cfi_offset 5, -20
+ 810              		.cfi_offset 6, -16
+ 811              		.cfi_offset 7, -12
+ 812              		.cfi_offset 8, -8
+ 813              		.cfi_offset 14, -4
+ 814 0004 0070A0E1 		mov	r7, r0
+ 462:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 815              		.loc 1 462 0
+ 816 0008 FEFFFFEB 		bl	is_valid_configuration
+ 817              	.LVL90:
+ 818 000c 000050E3 		cmp	r0, #0
+ 819 0010 3100000A 		beq	.L71
+ 468:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_set_data_alignment(p_config->alignment);
+ 820              		.loc 1 468 0
+ 821 0014 0000D7E5 		ldrb	r0, [r7]	@ zero_extendqisi2
+ 822 0018 FEFFFFEB 		bl	adc_set_resolution
+ 823              	.LVL91:
+ 469:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_set_scan_mode(p_config->scan_mode);
+ 824              		.loc 1 469 0
+ 825 001c 0100D7E5 		ldrb	r0, [r7, #1]	@ zero_extendqisi2
+ 826 0020 FEFFFFEB 		bl	adc_set_data_alignment
+ 827              	.LVL92:
+ 470:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 828              		.loc 1 470 0
+ 829 0024 0200D7E5 		ldrb	r0, [r7, #2]	@ zero_extendqisi2
+ 830 0028 FEFFFFEB 		bl	adc_set_scan_mode
+ 831              	.LVL93:
+ 472:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 832              		.loc 1 472 0
+ 833 002c 0810D7E5 		ldrb	r1, [r7, #8]	@ zero_extendqisi2
+ 834 0030 F700A0E3 		mov	r0, #247
+ 835 0034 FEFFFFEB 		bl	R_INTC_SetPriority
+ 836              	.LVL94:
+ 474:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     mask = 1;
+ 837              		.loc 1 474 0
+ 838 0038 0080A0E3 		mov	r8, #0
+ 475:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 839              		.loc 1 475 0
+ 840 003c 0160A0E3 		mov	r6, #1
+ 478:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 841              		.loc 1 478 0
+ 842 0040 0840A0E1 		mov	r4, r8
+ 843 0044 080000EA 		b	.L67
+ 844              	.LVL95:
+ 845              	.L68:
+ 487:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 846              		.loc 1 487 0
+ 847 0048 015085E2 		add	r5, r5, #1
+ 848 004c 855187E0 		add	r5, r7, r5, lsl #3
+ 849 0050 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 850 0054 010053E3 		cmp	r3, #1
+ 851 0058 1500000A 		beq	.L73
+ 852              	.L69:
+ 493:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 853              		.loc 1 493 0 discriminator 2
+ 854 005c 8660A0E1 		lsl	r6, r6, #1
+ 855              	.LVL96:
+ 856 0060 7660FFE6 		uxth	r6, r6
+ 857              	.LVL97:
+ 478:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 858              		.loc 1 478 0 discriminator 2
+ 859 0064 014084E2 		add	r4, r4, #1
+ 860              	.LVL98:
+ 861 0068 7440EFE6 		uxtb	r4, r4
+ 862              	.LVL99:
+ 863              	.L67:
+ 478:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 864              		.loc 1 478 0 is_stmt 0 discriminator 1
+ 865 006c 070054E3 		cmp	r4, #7
+ 866 0070 1100008A 		bhi	.L74
+ 480:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 867              		.loc 1 480 0 is_stmt 1
+ 868 0074 0450A0E1 		mov	r5, r4
+ 869 0078 013084E2 		add	r3, r4, #1
+ 870 007c 833187E0 		add	r3, r7, r3, lsl #3
+ 871 0080 0830D3E5 		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 872 0084 000053E3 		cmp	r3, #0
+ 873 0088 EEFFFF0A 		beq	.L68
+ 483:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                     IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 874              		.loc 1 483 0
+ 875 008c 011084E2 		add	r1, r4, #1
+ 876 0090 811187E0 		add	r1, r7, r1, lsl #3
+ 877 0094 0030E0E3 		mvn	r3, #0
+ 878 0098 0020A0E3 		mov	r2, #0
+ 879 009c 0410D1E5 		ldrb	r1, [r1, #4]	@ zero_extendqisi2
+ 880 00a0 E00805E3 		movw	r0, #22752
+ 881 00a4 00084EE3 		movt	r0, 59392
+ 882 00a8 000084E0 		add	r0, r4, r0
+ 883 00ac FEFFFFEB 		bl	RZA_IO_RegWrite_8
+ 884              	.LVL100:
+ 885 00b0 E4FFFFEA 		b	.L68
+ 886              	.L73:
+ 489:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 887              		.loc 1 489 0
+ 888 00b4 088086E1 		orr	r8, r6, r8
+ 889              	.LVL101:
+ 890 00b8 E7FFFFEA 		b	.L69
+ 891              	.L74:
+ 496:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 892              		.loc 1 496 0
+ 893 00bc FF30A0E3 		mov	r3, #255
+ 894 00c0 0020A0E3 		mov	r2, #0
+ 895 00c4 0810A0E1 		mov	r1, r8
+ 896 00c8 040805E3 		movw	r0, #22532
+ 897 00cc 00084EE3 		movt	r0, 59392
+ 898 00d0 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 899              	.LVL102:
+ 498:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 900              		.loc 1 498 0
+ 901 00d4 0000A0E3 		mov	r0, #0
+ 902 00d8 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 903              	.LVL103:
+ 904              	.L71:
+ 464:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 905              		.loc 1 464 0
+ 906 00dc 0100E0E3 		mvn	r0, #1
+ 499:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 907              		.loc 1 499 0
+ 908 00e0 F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 909              		.cfi_endproc
+ 910              	.LFE13:
+ 912              		.section	.text.R_ADC_LoadInitialConfiguration,"ax",%progbits
+ 913              		.align	2
+ 914              		.global	R_ADC_LoadInitialConfiguration
+ 915              		.syntax unified
+ 916              		.arm
+ 917              		.fpu neon
+ 919              	R_ADC_LoadInitialConfiguration:
+ 920              	.LFB6:
+ 206:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     st_r_drv_adc_unit_config_t adc_config;
+ 921              		.loc 1 206 0
+ 922              		.cfi_startproc
+ 923              		@ args = 0, pretend = 0, frame = 80
+ 924              		@ frame_needed = 0, uses_anonymous_args = 0
+ 925              	.LVL104:
+ 926 0000 10402DE9 		push	{r4, lr}
+ 927              		.cfi_def_cfa_offset 8
+ 928              		.cfi_offset 4, -8
+ 929              		.cfi_offset 14, -4
+ 930 0004 50D04DE2 		sub	sp, sp, #80
+ 931              		.cfi_def_cfa_offset 88
+ 932 0008 0040A0E1 		mov	r4, r0
+ 210:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.alignment = ADC_SC_TABLE.alignment;
+ 933              		.loc 1 210 0
+ 934 000c 0030A0E3 		mov	r3, #0
+ 935 0010 0430CDE5 		strb	r3, [sp, #4]
+ 211:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.scan_mode = ADC_SC_TABLE.scan_mode;
+ 936              		.loc 1 211 0
+ 937 0014 0120A0E3 		mov	r2, #1
+ 938 0018 0520CDE5 		strb	r2, [sp, #5]
+ 212:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.p_adcCallback = ADC_SC_TABLE.p_adcCallback;
+ 939              		.loc 1 212 0
+ 940 001c 0630CDE5 		strb	r3, [sp, #6]
+ 213:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.interrupt_priority = ADC_SC_TABLE.interrupt_priority;
+ 941              		.loc 1 213 0
+ 942 0020 08308DE5 		str	r3, [sp, #8]
+ 214:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN000].sample_time = ADC_SC_TABLE.sample_time_chan_0;
+ 943              		.loc 1 214 0
+ 944 0024 1420A0E3 		mov	r2, #20
+ 945 0028 0C20CDE5 		strb	r2, [sp, #12]
+ 215:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN000].trigger_source = ADC_SC_TABLE.trigger_source_chan_0;
+ 946              		.loc 1 215 0
+ 947 002c 10308DE5 		str	r3, [sp, #16]
+ 216:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN001].sample_time = ADC_SC_TABLE.sample_time_chan_1;
+ 948              		.loc 1 216 0
+ 949 0030 1430CDE5 		strb	r3, [sp, #20]
+ 217:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN001].trigger_source = ADC_SC_TABLE.trigger_source_chan_1;
+ 950              		.loc 1 217 0
+ 951 0034 18308DE5 		str	r3, [sp, #24]
+ 218:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN002].sample_time = ADC_SC_TABLE.sample_time_chan_2;
+ 952              		.loc 1 218 0
+ 953 0038 1C30CDE5 		strb	r3, [sp, #28]
+ 219:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN002].trigger_source = ADC_SC_TABLE.trigger_source_chan_2;
+ 954              		.loc 1 219 0
+ 955 003c 20308DE5 		str	r3, [sp, #32]
+ 220:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN003].sample_time = ADC_SC_TABLE.sample_time_chan_3;
+ 956              		.loc 1 220 0
+ 957 0040 2430CDE5 		strb	r3, [sp, #36]
+ 221:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN003].trigger_source = ADC_SC_TABLE.trigger_source_chan_3;
+ 958              		.loc 1 221 0
+ 959 0044 28308DE5 		str	r3, [sp, #40]
+ 222:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN004].sample_time = ADC_SC_TABLE.sample_time_chan_4;
+ 960              		.loc 1 222 0
+ 961 0048 2C30CDE5 		strb	r3, [sp, #44]
+ 223:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN004].trigger_source = ADC_SC_TABLE.trigger_source_chan_4;
+ 962              		.loc 1 223 0
+ 963 004c 30308DE5 		str	r3, [sp, #48]
+ 224:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN005].sample_time = ADC_SC_TABLE.sample_time_chan_5;
+ 964              		.loc 1 224 0
+ 965 0050 3430CDE5 		strb	r3, [sp, #52]
+ 225:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN005].trigger_source = ADC_SC_TABLE.trigger_source_chan_5;
+ 966              		.loc 1 225 0
+ 967 0054 38308DE5 		str	r3, [sp, #56]
+ 226:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN006].sample_time = ADC_SC_TABLE.sample_time_chan_6;
+ 968              		.loc 1 226 0
+ 969 0058 3C30CDE5 		strb	r3, [sp, #60]
+ 227:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN006].trigger_source = ADC_SC_TABLE.trigger_source_chan_6;
+ 970              		.loc 1 227 0
+ 971 005c 40308DE5 		str	r3, [sp, #64]
+ 228:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN007].sample_time = ADC_SC_TABLE.sample_time_chan_7;
+ 972              		.loc 1 228 0
+ 973 0060 4430CDE5 		strb	r3, [sp, #68]
+ 229:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adc_config.channels[ADC_CHANNEL_AN007].trigger_source = ADC_SC_TABLE.trigger_source_chan_7;
+ 974              		.loc 1 229 0
+ 975 0064 48308DE5 		str	r3, [sp, #72]
+ 230:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 976              		.loc 1 230 0
+ 977 0068 4C30CDE5 		strb	r3, [sp, #76]
+ 232:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 978              		.loc 1 232 0
+ 979 006c 04008DE2 		add	r0, sp, #4
+ 980              	.LVL105:
+ 981 0070 FEFFFFEB 		bl	R_ADC_SetConfiguration
+ 982              	.LVL106:
+ 983 0074 000050E3 		cmp	r0, #0
+ 984 0078 0300001A 		bne	.L77
+ 238:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 985              		.loc 1 238 0
+ 986 007c 0030A0E3 		mov	r3, #0
+ 987 0080 003084E5 		str	r3, [r4]
+ 988              	.L76:
+ 241:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 989              		.loc 1 241 0
+ 990 0084 50D08DE2 		add	sp, sp, #80
+ 991              		.cfi_remember_state
+ 992              		.cfi_def_cfa_offset 8
+ 993              		@ sp needed
+ 994 0088 1080BDE8 		pop	{r4, pc}
+ 995              	.LVL107:
+ 996              	.L77:
+ 997              		.cfi_restore_state
+ 234:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 998              		.loc 1 234 0
+ 999 008c 0100E0E3 		mvn	r0, #1
+ 1000 0090 FBFFFFEA 		b	.L76
+ 1001              		.cfi_endproc
+ 1002              	.LFE6:
+ 1004              		.section	.text.R_ADC_GetConfiguration,"ax",%progbits
+ 1005              		.align	2
+ 1006              		.global	R_ADC_GetConfiguration
+ 1007              		.syntax unified
+ 1008              		.arm
+ 1009              		.fpu neon
+ 1011              	R_ADC_GetConfiguration:
+ 1012              	.LFB17:
+ 622:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 623:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function adc_get_scan_mode
+ 624:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 625:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 626:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 627:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_GetConfiguration
+ 628:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Get the ADC configuration
+ 629:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_config[in] - pointer to configuration structure
+ 630:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS always returned
+ 631:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 632:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_GetConfiguration(st_r_drv_adc_unit_config_t * p_config)
+ 633:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1013              		.loc 1 633 0
+ 1014              		.cfi_startproc
+ 1015              		@ args = 0, pretend = 0, frame = 0
+ 1016              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1017              	.LVL108:
+ 1018 0000 F0412DE9 		push	{r4, r5, r6, r7, r8, lr}
+ 1019              		.cfi_def_cfa_offset 24
+ 1020              		.cfi_offset 4, -24
+ 1021              		.cfi_offset 5, -20
+ 1022              		.cfi_offset 6, -16
+ 1023              		.cfi_offset 7, -12
+ 1024              		.cfi_offset 8, -8
+ 1025              		.cfi_offset 14, -4
+ 1026 0004 0070A0E1 		mov	r7, r0
+ 634:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t ansa0;
+ 635:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t mask;
+ 636:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 637:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 638:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     p_config->resolution = adc_get_resolution();
+ 1027              		.loc 1 638 0
+ 1028 0008 FEFFFFEB 		bl	adc_get_resolution
+ 1029              	.LVL109:
+ 1030 000c 0000C7E5 		strb	r0, [r7]
+ 639:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     p_config->alignment = adc_get_data_alignment();
+ 1031              		.loc 1 639 0
+ 1032 0010 FEFFFFEB 		bl	adc_get_data_alignment
+ 1033              	.LVL110:
+ 1034 0014 0100C7E5 		strb	r0, [r7, #1]
+ 640:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     p_config->scan_mode = adc_get_scan_mode();
+ 1035              		.loc 1 640 0
+ 1036 0018 FEFFFFEB 		bl	adc_get_scan_mode
+ 1037              	.LVL111:
+ 1038 001c 0200C7E5 		strb	r0, [r7, #2]
+ 641:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     R_INTC_GetPriority(INTC_ID_ADC_S12ADI0, &p_config->interrupt_priority);
+ 1039              		.loc 1 641 0
+ 1040 0020 081087E2 		add	r1, r7, #8
+ 1041 0024 F700A0E3 		mov	r0, #247
+ 1042 0028 FEFFFFEB 		bl	R_INTC_GetPriority
+ 1043              	.LVL112:
+ 642:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 643:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the ANSA0 field value from the ADANSA0 register */
+ 644:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     ansa0 = RZA_IO_RegRead_16(&ADC.ADANSA0.WORD, ADC_ADANSA0_ANSA0_SHIFT, ADC_ADANSA0_ANSA0);
+ 1044              		.loc 1 644 0
+ 1045 002c FF20A0E3 		mov	r2, #255
+ 1046 0030 0010A0E3 		mov	r1, #0
+ 1047 0034 040805E3 		movw	r0, #22532
+ 1048 0038 00084EE3 		movt	r0, 59392
+ 1049 003c FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 1050              	.LVL113:
+ 1051 0040 0080A0E1 		mov	r8, r0
+ 1052              	.LVL114:
+ 645:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 646:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     mask = 1;
+ 647:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 648:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (channel = ADC_CHANNEL_AN000; channel < ADC_CHANNELS; channel++)
+ 1053              		.loc 1 648 0
+ 1054 0044 0030A0E3 		mov	r3, #0
+ 646:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 1055              		.loc 1 646 0
+ 1056 0048 0140A0E3 		mov	r4, #1
+ 1057              		.loc 1 648 0
+ 1058 004c 0F0000EA 		b	.L80
+ 1059              	.LVL115:
+ 1060              	.L81:
+ 649:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 650:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         /* determine whether or not the channel is enabled */
+ 651:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         p_config->channels[channel].trigger_source = ((ansa0 & mask) == 0) ? ADC_TRIGGER_DISABLED :
+ 1061              		.loc 1 651 0 discriminator 3
+ 1062 0050 080014E1 		tst	r4, r8
+ 1063 0054 0120A013 		movne	r2, #1
+ 1064 0058 0020A003 		moveq	r2, #0
+ 1065 005c 015083E2 		add	r5, r3, #1
+ 1066 0060 856187E0 		add	r6, r7, r5, lsl #3
+ 1067 0064 0820C6E5 		strb	r2, [r6, #8]
+ 652:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 653:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         /* the compiler promotes the variable to signed integer for the shift, so cast it back */
+ 654:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         mask = (uint16_t) (mask << 1u);
+ 1068              		.loc 1 654 0 discriminator 3
+ 1069 0068 8440A0E1 		lsl	r4, r4, #1
+ 1070              	.LVL116:
+ 1071 006c 7440FFE6 		uxth	r4, r4
+ 1072              	.LVL117:
+ 655:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 656:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         /* read the sample time setting */
+ 657:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         p_config->channels[channel].sample_time = RZA_IO_RegRead_8((&ADC.ADSSTR0.BYTE) + channel,
+ 1073              		.loc 1 657 0 discriminator 3
+ 1074 0070 0020E0E3 		mvn	r2, #0
+ 1075 0074 0010A0E3 		mov	r1, #0
+ 1076 0078 E00805E3 		movw	r0, #22752
+ 1077 007c 00084EE3 		movt	r0, 59392
+ 1078 0080 000083E0 		add	r0, r3, r0
+ 1079 0084 FEFFFFEB 		bl	RZA_IO_RegRead_8
+ 1080              	.LVL118:
+ 1081 0088 040086E5 		str	r0, [r6, #4]
+ 648:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 1082              		.loc 1 648 0 discriminator 3
+ 1083 008c 7530EFE6 		uxtb	r3, r5
+ 1084              	.LVL119:
+ 1085              	.L80:
+ 648:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 1086              		.loc 1 648 0 is_stmt 0 discriminator 1
+ 1087 0090 070053E3 		cmp	r3, #7
+ 1088 0094 EDFFFF9A 		bls	.L81
+ 658:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_ACCESS);
+ 659:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 660:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 661:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 662:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1089              		.loc 1 662 0 is_stmt 1
+ 1090 0098 0000A0E3 		mov	r0, #0
+ 1091 009c F081BDE8 		pop	{r4, r5, r6, r7, r8, pc}
+ 1092              		.cfi_endproc
+ 1093              	.LFE17:
+ 1095              		.section	.text.R_ADC_ReadConversion,"ax",%progbits
+ 1096              		.align	2
+ 1097              		.global	R_ADC_ReadConversion
+ 1098              		.syntax unified
+ 1099              		.arm
+ 1100              		.fpu neon
+ 1102              	R_ADC_ReadConversion:
+ 1103              	.LFB18:
+ 663:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 664:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_GetConfiguration
+ 665:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 666:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 667:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 668:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_ReadConversion
+ 669:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Read ADC conversion value
+ 670:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : channel[in] - channel to get conversion value for
+ 671:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *                p_value[out] - pointer to variable to receive conversion value
+ 672:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or ADC_ERR_FAILED
+ 673:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 674:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_ReadConversion(e_r_drv_adc_channel_t channel, uint32_t *p_value)
+ 675:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1104              		.loc 1 675 0
+ 1105              		.cfi_startproc
+ 1106              		@ args = 0, pretend = 0, frame = 0
+ 1107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1108              	.LVL120:
+ 676:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (channel > ADC_CHANNEL_AN007)
+ 1109              		.loc 1 676 0
+ 1110 0000 070050E3 		cmp	r0, #7
+ 1111 0004 0A00008A 		bhi	.L85
+ 675:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (channel > ADC_CHANNEL_AN007)
+ 1112              		.loc 1 675 0
+ 1113 0008 10402DE9 		push	{r4, lr}
+ 1114              		.cfi_def_cfa_offset 8
+ 1115              		.cfi_offset 4, -8
+ 1116              		.cfi_offset 14, -4
+ 1117 000c 0140A0E1 		mov	r4, r1
+ 677:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 678:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 679:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 680:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 681:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* retrieve the ADC conversion value */
+ 682:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     *p_value = RZA_IO_RegRead_16((&ADC.ADDR0.WORD) + channel, IOREG_NONSHIFT_ACCESS, IOREG_NONMASK_
+ 1118              		.loc 1 682 0
+ 1119 0010 203805E3 		movw	r3, #22560
+ 1120 0014 00384EE3 		movt	r3, 59392
+ 1121 0018 0020E0E3 		mvn	r2, #0
+ 1122 001c 0010A0E3 		mov	r1, #0
+ 1123              	.LVL121:
+ 1124 0020 800083E0 		add	r0, r3, r0, lsl #1
+ 1125              	.LVL122:
+ 1126 0024 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 1127              	.LVL123:
+ 1128 0028 000084E5 		str	r0, [r4]
+ 683:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 684:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 1129              		.loc 1 684 0
+ 1130 002c 0000A0E3 		mov	r0, #0
+ 1131 0030 1080BDE8 		pop	{r4, pc}
+ 1132              	.LVL124:
+ 1133              	.L85:
+ 1134              		.cfi_def_cfa_offset 0
+ 1135              		.cfi_restore 4
+ 1136              		.cfi_restore 14
+ 678:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1137              		.loc 1 678 0
+ 1138 0034 0000E0E3 		mvn	r0, #0
+ 1139              	.LVL125:
+ 1140 0038 1EFF2FE1 		bx	lr
+ 1141              		.cfi_endproc
+ 1142              	.LFE18:
+ 1144              		.section	.text.R_ADC_IsConversionComplete,"ax",%progbits
+ 1145              		.align	2
+ 1146              		.global	R_ADC_IsConversionComplete
+ 1147              		.syntax unified
+ 1148              		.arm
+ 1149              		.fpu neon
+ 1151              	R_ADC_IsConversionComplete:
+ 1152              	.LFB19:
+ 685:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 686:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 687:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_ReadConversion
+ 688:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 689:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 690:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 691:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_IsConversionComplete
+ 692:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Returns true if the conversion scan has completed
+ 693:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 694:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : true if the conversion scan has completed, false if the conversion scan is ongoin
+ 695:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 696:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** bool_t R_ADC_IsConversionComplete(void)
+ 697:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1153              		.loc 1 697 0
+ 1154              		.cfi_startproc
+ 1155              		@ args = 0, pretend = 0, frame = 0
+ 1156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1157 0000 10402DE9 		push	{r4, lr}
+ 1158              		.cfi_def_cfa_offset 8
+ 1159              		.cfi_offset 4, -8
+ 1160              		.cfi_offset 14, -4
+ 698:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the value of the ADCSR register ADST bit - it will be 1 if a scan is in progress */
+ 699:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (RZA_IO_RegRead_16(&ADC.ADCSR.WORD, ADC_ADCSR_ADST_SHIFT, ADC_ADCSR_ADST) == 0)
+ 1161              		.loc 1 699 0
+ 1162 0004 0229A0E3 		mov	r2, #32768
+ 1163 0008 0F10A0E3 		mov	r1, #15
+ 1164 000c 160BA0E3 		mov	r0, #22528
+ 1165 0010 00084EE3 		movt	r0, 59392
+ 1166 0014 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 1167              	.LVL126:
+ 1168 0018 000050E3 		cmp	r0, #0
+ 1169 001c 0100000A 		beq	.L94
+ 700:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 701:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return true;
+ 702:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 703:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 704:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return false;
+ 1170              		.loc 1 704 0
+ 1171 0020 0000A0E3 		mov	r0, #0
+ 705:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1172              		.loc 1 705 0
+ 1173 0024 1080BDE8 		pop	{r4, pc}
+ 1174              	.L94:
+ 701:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1175              		.loc 1 701 0
+ 1176 0028 0100A0E3 		mov	r0, #1
+ 1177 002c 1080BDE8 		pop	{r4, pc}
+ 1178              		.cfi_endproc
+ 1179              	.LFE19:
+ 1181              		.section	.text.R_ADC_ConfigureInterrupts,"ax",%progbits
+ 1182              		.align	2
+ 1183              		.global	R_ADC_ConfigureInterrupts
+ 1184              		.syntax unified
+ 1185              		.arm
+ 1186              		.fpu neon
+ 1188              	R_ADC_ConfigureInterrupts:
+ 1189              	.LFB20:
+ 706:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 707:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_IsConversionComplete
+ 708:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 709:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 710:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 711:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_ConfigureInterrupts
+ 712:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Configure ADC interrupts
+ 713:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_interrupt_handler[in] - pointer to interrupt handler function
+ 714:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or ASC_ERR_FAILED
+ 715:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 716:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_ConfigureInterrupts(void (*p_interrupt_handler)(uint32_t sense))
+ 717:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1190              		.loc 1 717 0
+ 1191              		.cfi_startproc
+ 1192              		@ args = 0, pretend = 0, frame = 0
+ 1193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1194              	.LVL127:
+ 1195 0000 10402DE9 		push	{r4, lr}
+ 1196              		.cfi_def_cfa_offset 8
+ 1197              		.cfi_offset 4, -8
+ 1198              		.cfi_offset 14, -4
+ 718:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_intc_err_t err;
+ 719:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 720:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     err = R_INTC_RegistIntFunc(INTC_ID_ADC_S12ADI0, p_interrupt_handler);
+ 1199              		.loc 1 720 0
+ 1200 0004 0010A0E1 		mov	r1, r0
+ 1201 0008 F700A0E3 		mov	r0, #247
+ 1202              	.LVL128:
+ 1203 000c FEFFFFEB 		bl	R_INTC_RegistIntFunc
+ 1204              	.LVL129:
+ 721:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 722:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (INTC_SUCCESS != err)
+ 1205              		.loc 1 722 0
+ 1206 0010 000050E3 		cmp	r0, #0
+ 1207 0014 1000001A 		bne	.L97
+ 723:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 724:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 725:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 726:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 727:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     err = R_INTC_Enable(INTC_ID_ADC_S12ADI0);
+ 1208              		.loc 1 727 0
+ 1209 0018 F700A0E3 		mov	r0, #247
+ 1210              	.LVL130:
+ 1211 001c FEFFFFEB 		bl	R_INTC_Enable
+ 1212              	.LVL131:
+ 728:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 729:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (INTC_SUCCESS != err)
+ 1213              		.loc 1 729 0
+ 1214 0020 000050E3 		cmp	r0, #0
+ 1215 0024 0E00001A 		bne	.L98
+ 730:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 731:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 732:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 733:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 734:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     err = R_INTC_SetPriority(INTC_ID_ADC_S12ADI0, R_ADC_PRV_DEFAULT_INTERRUPT_PRIORITY);
+ 1216              		.loc 1 734 0
+ 1217 0028 1410A0E3 		mov	r1, #20
+ 1218 002c F700A0E3 		mov	r0, #247
+ 1219              	.LVL132:
+ 1220 0030 FEFFFFEB 		bl	R_INTC_SetPriority
+ 1221              	.LVL133:
+ 735:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 736:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (INTC_SUCCESS != err)
+ 1222              		.loc 1 736 0
+ 1223 0034 000050E3 		cmp	r0, #0
+ 1224 0038 0B00001A 		bne	.L99
+ 737:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 738:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 739:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 740:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 741:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* enable conversion complete interrupt */
+ 742:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     RZA_IO_RegWrite_16(&ADC.ADCSR.WORD, 1, ADC_ADCSR_ADIE_SHIFT, ADC_ADCSR_ADIE);
+ 1225              		.loc 1 742 0
+ 1226 003c 013AA0E3 		mov	r3, #4096
+ 1227 0040 0C20A0E3 		mov	r2, #12
+ 1228 0044 0110A0E3 		mov	r1, #1
+ 1229 0048 160BA0E3 		mov	r0, #22528
+ 1230              	.LVL134:
+ 1231 004c 00084EE3 		movt	r0, 59392
+ 1232 0050 FEFFFFEB 		bl	RZA_IO_RegWrite_16
+ 1233              	.LVL135:
+ 743:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 744:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 1234              		.loc 1 744 0
+ 1235 0054 0000A0E3 		mov	r0, #0
+ 1236 0058 1080BDE8 		pop	{r4, pc}
+ 1237              	.LVL136:
+ 1238              	.L97:
+ 724:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1239              		.loc 1 724 0
+ 1240 005c 0000E0E3 		mvn	r0, #0
+ 1241              	.LVL137:
+ 1242 0060 1080BDE8 		pop	{r4, pc}
+ 1243              	.LVL138:
+ 1244              	.L98:
+ 731:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1245              		.loc 1 731 0
+ 1246 0064 0000E0E3 		mvn	r0, #0
+ 1247              	.LVL139:
+ 1248 0068 1080BDE8 		pop	{r4, pc}
+ 1249              	.LVL140:
+ 1250              	.L99:
+ 738:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1251              		.loc 1 738 0
+ 1252 006c 0000E0E3 		mvn	r0, #0
+ 1253              	.LVL141:
+ 745:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1254              		.loc 1 745 0
+ 1255 0070 1080BDE8 		pop	{r4, pc}
+ 1256              		.cfi_endproc
+ 1257              	.LFE20:
+ 1259              		.section	.text.R_ADC_GetConversionWidth,"ax",%progbits
+ 1260              		.align	2
+ 1261              		.global	R_ADC_GetConversionWidth
+ 1262              		.syntax unified
+ 1263              		.arm
+ 1264              		.fpu neon
+ 1266              	R_ADC_GetConversionWidth:
+ 1267              	.LFB21:
+ 746:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 747:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_ConfigureInterrupts
+ 748:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 749:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 750:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 751:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_GetConversionWidth
+ 752:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Gets the ADC conversion width in bytes
+ 753:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : p_width[out] - pointer to the conversion width
+ 754:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS always returned
+ 755:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 756:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_GetConversionWidth(uint8_t * p_width)
+ 757:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1268              		.loc 1 757 0
+ 1269              		.cfi_startproc
+ 1270              		@ args = 0, pretend = 0, frame = 0
+ 1271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1272              	.LVL142:
+ 1273 0000 10402DE9 		push	{r4, lr}
+ 1274              		.cfi_def_cfa_offset 8
+ 1275              		.cfi_offset 4, -8
+ 1276              		.cfi_offset 14, -4
+ 1277 0004 0040A0E1 		mov	r4, r0
+ 758:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t adprc;
+ 759:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 760:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the ADPRC value from the ADCER register */
+ 761:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     adprc = RZA_IO_RegRead_16(&ADC.ADCER.WORD, ADC_ADCER_ADPRC_SHIFT, ADC_ADCER_ADPRC);
+ 1278              		.loc 1 761 0
+ 1279 0008 0620A0E3 		mov	r2, #6
+ 1280 000c 0110A0E3 		mov	r1, #1
+ 1281 0010 0E0805E3 		movw	r0, #22542
+ 1282              	.LVL143:
+ 1283 0014 00084EE3 		movt	r0, 59392
+ 1284 0018 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 1285              	.LVL144:
+ 762:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 763:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* map to width in bytes */
+ 764:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     switch (adprc)
+ 1286              		.loc 1 764 0
+ 1287 001c 010050E3 		cmp	r0, #1
+ 1288 0020 0500000A 		beq	.L103
+ 1289 0024 020050E3 		cmp	r0, #2
+ 1290 0028 0600000A 		beq	.L104
+ 765:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 766:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         default:
+ 767:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_12:
+ 768:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 769:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             *p_width = 2;
+ 1291              		.loc 1 769 0
+ 1292 002c 0230A0E3 		mov	r3, #2
+ 1293 0030 0030C4E5 		strb	r3, [r4]
+ 1294              	.L105:
+ 770:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 771:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 772:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 773:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_10:
+ 774:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 775:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             *p_width = 2;
+ 776:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 777:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 778:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 779:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         case R_ADC_PRV_ADCER_ADC_RESOLUTION_8:
+ 780:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 781:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             *p_width = 1;
+ 782:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 783:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 784:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 785:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 786:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 787:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1295              		.loc 1 787 0
+ 1296 0034 0000A0E3 		mov	r0, #0
+ 1297              	.LVL145:
+ 1298 0038 1080BDE8 		pop	{r4, pc}
+ 1299              	.LVL146:
+ 1300              	.L103:
+ 775:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 1301              		.loc 1 775 0
+ 1302 003c 0230A0E3 		mov	r3, #2
+ 1303 0040 0030C4E5 		strb	r3, [r4]
+ 776:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 1304              		.loc 1 776 0
+ 1305 0044 FAFFFFEA 		b	.L105
+ 1306              	.L104:
+ 781:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             break;
+ 1307              		.loc 1 781 0
+ 1308 0048 0130A0E3 		mov	r3, #1
+ 1309 004c 0030C4E5 		strb	r3, [r4]
+ 782:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 1310              		.loc 1 782 0
+ 1311 0050 F7FFFFEA 		b	.L105
+ 1312              		.cfi_endproc
+ 1313              	.LFE21:
+ 1315              		.section	.text.R_ADC_IsChannelEnabled,"ax",%progbits
+ 1316              		.align	2
+ 1317              		.global	R_ADC_IsChannelEnabled
+ 1318              		.syntax unified
+ 1319              		.arm
+ 1320              		.fpu neon
+ 1322              	R_ADC_IsChannelEnabled:
+ 1323              	.LFB22:
+ 788:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 789:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_GetConversionWidth
+ 790:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 791:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 792:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 793:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_IsChannelEnabled
+ 794:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Determines if a channel is enabled
+ 795:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : channel[in] - the channel to check
+ 796:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *                p_enabled[out] - pointer to channel enabled flag
+ 797:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *                                 true:  channel is enabled
+ 798:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  *                                 false: channel is disabled
+ 799:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or ADC_ERR_FAILED
+ 800:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 801:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_IsChannelEnabled(e_r_drv_adc_channel_t channel, bool_t * p_enabled)
+ 802:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1324              		.loc 1 802 0
+ 1325              		.cfi_startproc
+ 1326              		@ args = 0, pretend = 0, frame = 0
+ 1327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1328              	.LVL147:
+ 803:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t ansa0;
+ 804:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 805:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (channel > ADC_CHANNEL_AN007)
+ 1329              		.loc 1 805 0
+ 1330 0000 070050E3 		cmp	r0, #7
+ 1331 0004 1100008A 		bhi	.L110
+ 802:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     uint16_t ansa0;
+ 1332              		.loc 1 802 0
+ 1333 0008 70402DE9 		push	{r4, r5, r6, lr}
+ 1334              		.cfi_def_cfa_offset 16
+ 1335              		.cfi_offset 4, -16
+ 1336              		.cfi_offset 5, -12
+ 1337              		.cfi_offset 6, -8
+ 1338              		.cfi_offset 14, -4
+ 1339 000c 0150A0E1 		mov	r5, r1
+ 1340 0010 0040A0E1 		mov	r4, r0
+ 806:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 807:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 808:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 809:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 810:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* read the mask of enabled channels */
+ 811:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     ansa0 = RZA_IO_RegRead_16(&ADC.ADANSA0.WORD, ADC_ADANSA0_ANSA0_SHIFT, ADC_ADANSA0_ANSA0);
+ 1341              		.loc 1 811 0
+ 1342 0014 FF20A0E3 		mov	r2, #255
+ 1343 0018 0010A0E3 		mov	r1, #0
+ 1344              	.LVL148:
+ 1345 001c 040805E3 		movw	r0, #22532
+ 1346              	.LVL149:
+ 1347 0020 00084EE3 		movt	r0, 59392
+ 1348 0024 FEFFFFEB 		bl	RZA_IO_RegRead_16
+ 1349              	.LVL150:
+ 812:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 813:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if ((ansa0 & (1u << channel)) == 0)
+ 1350              		.loc 1 813 0
+ 1351 0028 3004A0E1 		lsr	r0, r0, r4
+ 1352              	.LVL151:
+ 1353 002c 010010E3 		tst	r0, #1
+ 1354 0030 0300000A 		beq	.L115
+ 814:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 815:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         *p_enabled = false;
+ 816:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 817:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     else
+ 818:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 819:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         *p_enabled = true;
+ 1355              		.loc 1 819 0
+ 1356 0034 0130A0E3 		mov	r3, #1
+ 1357 0038 003085E5 		str	r3, [r5]
+ 820:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 821:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 822:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return ADC_SUCCESS;
+ 1358              		.loc 1 822 0
+ 1359 003c 0000A0E3 		mov	r0, #0
+ 1360 0040 7080BDE8 		pop	{r4, r5, r6, pc}
+ 1361              	.L115:
+ 815:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1362              		.loc 1 815 0
+ 1363 0044 0000A0E3 		mov	r0, #0
+ 1364 0048 000085E5 		str	r0, [r5]
+ 1365 004c 7080BDE8 		pop	{r4, r5, r6, pc}
+ 1366              	.LVL152:
+ 1367              	.L110:
+ 1368              		.cfi_def_cfa_offset 0
+ 1369              		.cfi_restore 4
+ 1370              		.cfi_restore 5
+ 1371              		.cfi_restore 6
+ 1372              		.cfi_restore 14
+ 807:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1373              		.loc 1 807 0
+ 1374 0050 0000E0E3 		mvn	r0, #0
+ 1375              	.LVL153:
+ 1376 0054 1EFF2FE1 		bx	lr
+ 1377              		.cfi_endproc
+ 1378              	.LFE22:
+ 1380              		.section	.text.R_ADC_ConfigureAnalogueInputs,"ax",%progbits
+ 1381              		.align	2
+ 1382              		.global	R_ADC_ConfigureAnalogueInputs
+ 1383              		.syntax unified
+ 1384              		.arm
+ 1385              		.fpu neon
+ 1387              	R_ADC_ConfigureAnalogueInputs:
+ 1388              	.LFB23:
+ 823:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 824:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 825:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * End of function R_ADC_IsChannelEnabled
+ 826:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 827:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 828:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** /**************************************************************************************************
+ 829:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Function Name: R_ADC_ConfigureAnalogueInputs
+ 830:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Description  : Sets the pins on enabled channels to analogue input
+ 831:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Arguments    : None
+ 832:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  * Return Value : ADC_SUCCESS or ADC_ERR_FAILED
+ 833:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****  **************************************************************************************************
+ 834:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** e_r_drv_adc_err_t R_ADC_ConfigureAnalogueInputs(void)
+ 835:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** {
+ 1389              		.loc 1 835 0
+ 1390              		.cfi_startproc
+ 1391              		@ args = 0, pretend = 0, frame = 16
+ 1392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1393 0000 70402DE9 		push	{r4, r5, r6, lr}
+ 1394              		.cfi_def_cfa_offset 16
+ 1395              		.cfi_offset 4, -16
+ 1396              		.cfi_offset 5, -12
+ 1397              		.cfi_offset 6, -8
+ 1398              		.cfi_offset 14, -4
+ 1399 0004 10D04DE2 		sub	sp, sp, #16
+ 1400              		.cfi_def_cfa_offset 32
+ 1401              	.LVL154:
+ 836:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     int_t handle;
+ 837:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     st_r_drv_gpio_config_t pin_configuration;
+ 838:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     int_t result;
+ 839:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     e_r_drv_adc_channel_t channel;
+ 840:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     bool_t enabled;
+ 841:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     bool_t success = true;
+ 842:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 843:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     /* open the GPIO driver */
+ 844:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     handle = open("\\\\.\\gpio", O_RDWR);
+ 1402              		.loc 1 844 0
+ 1403 0008 0210A0E3 		mov	r1, #2
+ 1404 000c 000000E3 		movw	r0, #:lower16:.LC1
+ 1405 0010 000040E3 		movt	r0, #:upper16:.LC1
+ 1406 0014 FEFFFFEB 		bl	open
+ 1407              	.LVL155:
+ 845:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 846:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     if (handle < 0)
+ 1408              		.loc 1 846 0
+ 1409 0018 005050E2 		subs	r5, r0, #0
+ 1410 001c 220000BA 		blt	.L121
+ 1411 0020 0160A0E3 		mov	r6, #1
+ 1412 0024 0040A0E3 		mov	r4, #0
+ 1413 0028 010000EA 		b	.L118
+ 1414              	.LVL156:
+ 1415              	.L119:
+ 847:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 848:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         return ADC_ERR_FAILED;
+ 849:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 850:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 851:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     for (channel = ADC_CHANNEL_AN000; channel < ADC_CHANNELS; channel++)
+ 1416              		.loc 1 851 0 discriminator 2
+ 1417 002c 014084E2 		add	r4, r4, #1
+ 1418              	.LVL157:
+ 1419 0030 7440EFE6 		uxtb	r4, r4
+ 1420              	.LVL158:
+ 1421              	.L118:
+ 1422              		.loc 1 851 0 is_stmt 0 discriminator 1
+ 1423 0034 070054E3 		cmp	r4, #7
+ 1424 0038 1400008A 		bhi	.L125
+ 852:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     {
+ 853:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         R_ADC_IsChannelEnabled(channel, &enabled);
+ 1425              		.loc 1 853 0 is_stmt 1
+ 1426 003c 04108DE2 		add	r1, sp, #4
+ 1427 0040 0400A0E1 		mov	r0, r4
+ 1428 0044 FEFFFFEB 		bl	R_ADC_IsChannelEnabled
+ 1429              	.LVL159:
+ 854:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 855:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         if (enabled)
+ 1430              		.loc 1 855 0
+ 1431 0048 04309DE5 		ldr	r3, [sp, #4]
+ 1432 004c 000053E3 		cmp	r3, #0
+ 1433 0050 F5FFFF0A 		beq	.L119
+ 856:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         {
+ 857:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             /* set port to analogue input */
+ 858:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             /* all analogue input pins are on port 5 */
+ 859:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             pin_configuration.config.pin = (r_gpio_port_pin_t) (GPIO_PORT_5_PIN_0 + channel);
+ 1434              		.loc 1 859 0
+ 1435 0054 053C84E2 		add	r3, r4, #1280
+ 1436 0058 B830CDE1 		strh	r3, [sp, #8]	@ movhi
+ 860:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             pin_configuration.config.configuration.function = GPIO_FUNC_PERIPHERAL1;
+ 1437              		.loc 1 860 0
+ 1438 005c 0730A0E3 		mov	r3, #7
+ 1439 0060 0A30CDE5 		strb	r3, [sp, #10]
+ 861:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             pin_configuration.config.configuration.current = GPIO_CURRENT_RESERVED;
+ 1440              		.loc 1 861 0
+ 1441 0064 0530A0E3 		mov	r3, #5
+ 1442 0068 0C30CDE5 		strb	r3, [sp, #12]
+ 862:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             pin_configuration.config.configuration.tint = GPIO_TINT_DISABLE;
+ 1443              		.loc 1 862 0
+ 1444 006c 0130A0E3 		mov	r3, #1
+ 1445 0070 0B30CDE5 		strb	r3, [sp, #11]
+ 863:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 864:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             /* cast configuration structure to void pointer */
+ 865:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             result = control(handle, CTL_GPIO_SET_CONFIGURATION, (void *) &pin_configuration);
+ 1446              		.loc 1 865 0
+ 1447 0074 08208DE2 		add	r2, sp, #8
+ 1448 0078 0010A0E3 		mov	r1, #0
+ 1449 007c 0500A0E1 		mov	r0, r5
+ 1450 0080 FEFFFFEB 		bl	control
+ 1451              	.LVL160:
+ 866:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 867:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             if (DRV_SUCCESS != result)
+ 1452              		.loc 1 867 0
+ 1453 0084 000050E3 		cmp	r0, #0
+ 868:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             {
+ 869:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****                 success = false;
+ 1454              		.loc 1 869 0
+ 1455 0088 0060A013 		movne	r6, #0
+ 1456              	.LVL161:
+ 1457 008c E6FFFFEA 		b	.L119
+ 1458              	.LVL162:
+ 1459              	.L125:
+ 870:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****             }
+ 871:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****         }
+ 872:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 873:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 874:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     close(handle);
+ 1460              		.loc 1 874 0
+ 1461 0090 0500A0E1 		mov	r0, r5
+ 1462 0094 FEFFFFEB 		bl	close
+ 1463              	.LVL163:
+ 875:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** 
+ 876:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     return success ? ADC_SUCCESS : ADC_ERR_FAILED;
+ 1464              		.loc 1 876 0
+ 1465 0098 000056E3 		cmp	r6, #0
+ 1466 009c 0400000A 		beq	.L123
+ 1467 00a0 0000A0E3 		mov	r0, #0
+ 1468              	.LVL164:
+ 1469              	.L117:
+ 877:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1470              		.loc 1 877 0
+ 1471 00a4 10D08DE2 		add	sp, sp, #16
+ 1472              		.cfi_remember_state
+ 1473              		.cfi_def_cfa_offset 16
+ 1474              		@ sp needed
+ 1475 00a8 7080BDE8 		pop	{r4, r5, r6, pc}
+ 1476              	.LVL165:
+ 1477              	.L121:
+ 1478              		.cfi_restore_state
+ 848:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c ****     }
+ 1479              		.loc 1 848 0
+ 1480 00ac 0000E0E3 		mvn	r0, #0
+ 1481              	.LVL166:
+ 1482 00b0 FBFFFFEA 		b	.L117
+ 1483              	.LVL167:
+ 1484              	.L123:
+ 876:../generate/sc_drivers/r_adc/src/lld/r_adc_lld_rza2m.c **** }
+ 1485              		.loc 1 876 0
+ 1486 00b4 0000E0E3 		mvn	r0, #0
+ 1487 00b8 F9FFFFEA 		b	.L117
+ 1488              		.cfi_endproc
+ 1489              	.LFE23:
+ 1491              		.section	.rodata.R_ADC_ConfigureAnalogueInputs.str1.4,"aMS",%progbits,1
+ 1492              		.align	2
+ 1493              	.LC1:
+ 1494 0000 5C5C2E5C 		.ascii	"\\\\.\\gpio\000"
+ 1494      6770696F 
+ 1494      00
+ 1495              		.section	.rodata.R_ADC_GetVersion.str1.4,"aMS",%progbits,1
+ 1496              		.align	2
+ 1497              	.LC0:
+ 1498 0000 4C4C4420 		.ascii	"LLD EBK_RZA2M ADC\000"
+ 1498      45424B5F 
+ 1498      525A4132 
+ 1498      4D204144 
+ 1498      4300
+ 1499              		.text
+ 1500              	.Letext0:
+ 1501              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1502              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1503              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1504              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 1505              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1506              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1507              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 1508              		.file 10 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 1509              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1510              		.file 12 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1511              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1512              		.file 14 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1513              		.file 15 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1514              		.file 16 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 1515              		.file 17 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 1516              		.file 18 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 1517              		.file 19 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1518              		.file 20 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/drivers
+ 1519              		.file 21 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 1520              		.file 22 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\includ
+ 1521              		.file 23 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+ 1522              		.file 24 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+DEFINED SYMBOLS
+                            *ABS*:00000000 r_adc_lld_rza2m.c
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:17     .text.is_valid_configuration:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:22     .text.is_valid_configuration:00000000 is_valid_configuration
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:112    .text.adc_set_resolution:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:117    .text.adc_set_resolution:00000000 adc_set_resolution
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:161    .text.adc_set_data_alignment:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:166    .text.adc_set_data_alignment:00000000 adc_set_data_alignment
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:202    .text.adc_set_scan_mode:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:207    .text.adc_set_scan_mode:00000000 adc_set_scan_mode
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:251    .text.adc_get_resolution:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:256    .text.adc_get_resolution:00000000 adc_get_resolution
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:300    .text.adc_get_data_alignment:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:305    .text.adc_get_data_alignment:00000000 adc_get_data_alignment
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:334    .text.adc_get_scan_mode:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:339    .text.adc_get_scan_mode:00000000 adc_get_scan_mode
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:383    .text.R_ADC_GetVersion:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:389    .text.R_ADC_GetVersion:00000000 R_ADC_GetVersion
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1497   .rodata.R_ADC_GetVersion.str1.4:00000000 .LC0
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:417    .text.R_ADC_HWInitialise:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:423    .text.R_ADC_HWInitialise:00000000 R_ADC_HWInitialise
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:695    .text.R_ADC_HWUninitialise:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:701    .text.R_ADC_HWUninitialise:00000000 R_ADC_HWUninitialise
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:754    .text.R_ADC_SoftwareTrigger:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:760    .text.R_ADC_SoftwareTrigger:00000000 R_ADC_SoftwareTrigger
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:793    .text.R_ADC_SetConfiguration:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:799    .text.R_ADC_SetConfiguration:00000000 R_ADC_SetConfiguration
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:913    .text.R_ADC_LoadInitialConfiguration:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:919    .text.R_ADC_LoadInitialConfiguration:00000000 R_ADC_LoadInitialConfiguration
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1005   .text.R_ADC_GetConfiguration:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1011   .text.R_ADC_GetConfiguration:00000000 R_ADC_GetConfiguration
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1096   .text.R_ADC_ReadConversion:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1102   .text.R_ADC_ReadConversion:00000000 R_ADC_ReadConversion
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1145   .text.R_ADC_IsConversionComplete:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1151   .text.R_ADC_IsConversionComplete:00000000 R_ADC_IsConversionComplete
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1182   .text.R_ADC_ConfigureInterrupts:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1188   .text.R_ADC_ConfigureInterrupts:00000000 R_ADC_ConfigureInterrupts
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1260   .text.R_ADC_GetConversionWidth:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1266   .text.R_ADC_GetConversionWidth:00000000 R_ADC_GetConversionWidth
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1316   .text.R_ADC_IsChannelEnabled:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1322   .text.R_ADC_IsChannelEnabled:00000000 R_ADC_IsChannelEnabled
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1381   .text.R_ADC_ConfigureAnalogueInputs:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1387   .text.R_ADC_ConfigureAnalogueInputs:00000000 R_ADC_ConfigureAnalogueInputs
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1493   .rodata.R_ADC_ConfigureAnalogueInputs.str1.4:00000000 .LC1
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1492   .rodata.R_ADC_ConfigureAnalogueInputs.str1.4:00000000 $d
+C:\Users\tle\AppData\Local\Temp\ccFPY4FE.s:1496   .rodata.R_ADC_GetVersion.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.187.2ff233552538c6ff9b8575ca8ea52cb3
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.stddef.h.39.ec95e8feac892e292b69dc7ae75b0d64
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.30.bbece7fa40993a78092dcc5805132560
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.8188691c2279eac7a223caa50f6694b9
+                           .group:00000000 wm4.unistd.h.2.39165d5b7784d1815ef4b0c4be6df560
+                           .group:00000000 wm4.stddef.h.161.19e15733342b50ead2919490b095303e
+                           .group:00000000 wm4.unistd.h.156.614f0202926a9fae83688cfc56e25f59
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_stb_lld_rza2m.h.40.95263d75056863d52f45135c87af2bc2
+                           .group:00000000 wm4.r_intc_lld_rza2m.h.35.3d9677ac15ad6ee277be59de3e3c1590
+                           .group:00000000 wm4.r_adc_lld_rza2m.h.43.8df60c43d3804e11300d2b75d335ef18
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.reent.h.91.b3ea049ebc5486622b61409b78486f84
+                           .group:00000000 wm4._default_fcntl.h.6.b13d56891b95175b639f824a0fd1ed77
+                           .group:00000000 wm4.time.h.8.db4619001f026d0b4874c029fef0e91f
+                           .group:00000000 wm4.time.h.2.4581ce0ffb6627cfc02162c94bf846c9
+                           .group:00000000 wm4.time.h.25.0e6a0fdbc9955f5707ed54246ed2e089
+                           .group:00000000 wm4.time.h.162.d096f2f5887c52e271c4dc33d795dc64
+                           .group:00000000 wm4.stat.h.71.d65ac61ff88c651e198008cfb38bda9c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.r_devlink_wrapper.h.70.7c1584c2697f3b1858aea58c7b3e40d4
+                           .group:00000000 wm4.r_gpio_lld_rza2m.h.35.fd76d0816769697a06dd6f4a61c03021
+                           .group:00000000 wm4.r_gpio_drv_api.h.82.9514441e942567d0eb0b23efaff62239
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.r_adc_drv_sc_cfg.h.54.9db0c49e7de6e4a2371187768e641ea9
+
+UNDEFINED SYMBOLS
+RZA_IO_RegWrite_16
+RZA_IO_RegRead_16
+R_STB_StartModule
+RZA_IO_RegWrite_8
+R_STB_StopModule
+R_INTC_SetPriority
+R_INTC_GetPriority
+RZA_IO_RegRead_8
+R_INTC_RegistIntFunc
+R_INTC_Enable
+open
+control
+close

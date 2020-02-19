@@ -1,0 +1,221 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"rz_co.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.R_ERROR_Set,"ax",%progbits
+  17              		.align	2
+  18              		.global	R_ERROR_Set
+  19              		.syntax unified
+  20              		.arm
+  21              		.fpu neon
+  23              	R_ERROR_Set:
+  24              	.LFB1:
+  25              		.file 1 "../generate/sc_drivers/r_jcu/porting/rz_co.c"
+   1:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /**************************************************************************************************
+   2:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * DISCLAIMER
+   3:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * applicable laws, including copyright laws.
+   6:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * following link:
+  15:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * http://www.renesas.com/disclaimer
+  16:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  *
+  17:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  18:../generate/sc_drivers/r_jcu/porting/rz_co.c ****  **************************************************************************************************
+  19:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /***********************************************************************
+  20:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * File         : rz_co.c
+  21:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Description  : Common Functions.
+  22:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Version      : 1.12
+  23:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ************************************************************************/
+  24:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  25:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  26:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Includes   <System Includes> , "Project Includes"
+  27:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  28:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #include  "use_config_debug.h"
+  29:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #include  <stdio.h>
+  30:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #include  "rz_co.h"
+  31:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  32:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  33:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Macro definitions
+  34:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  35:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #define  GS_N  "\r\n"
+  36:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  37:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  38:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Typedef definitions
+  39:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  40:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  41:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  42:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Imported global variables and functions (from other files)
+  43:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  44:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #ifdef  USE_LIST_DEBUG_TOOL
+  45:../generate/sc_drivers/r_jcu/porting/rz_co.c **** void  R_USER_DebugPrint(void);
+  46:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #endif
+  47:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  48:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  49:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Exported global variables and functions (to be accessed by other files)
+  50:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  51:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  52:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /******************************************************************************
+  53:../generate/sc_drivers/r_jcu/porting/rz_co.c **** Private global variables and functions
+  54:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ******************************************************************************/
+  55:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  56:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /***********************************************************************
+  57:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Variable: g_CallingCountOfNotClearedError
+  58:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ************************************************************************/
+  59:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #ifdef  USE_LIST_DEBUG_TOOL
+  60:../generate/sc_drivers/r_jcu/porting/rz_co.c **** int_fast32_t  g_CallingCountOfNotClearedError = 0;
+  61:../generate/sc_drivers/r_jcu/porting/rz_co.c **** #endif
+  62:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  63:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  64:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /***********************************************************************
+  65:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Function Name: R_ERROR_Set
+  66:../generate/sc_drivers/r_jcu/porting/rz_co.c **** *
+  67:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Description:
+  68:../generate/sc_drivers/r_jcu/porting/rz_co.c **** *    To debug, set break point at "if ( calling_count >= 9999 )" or change 9999.
+  69:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ************************************************************************/
+  70:../generate/sc_drivers/r_jcu/porting/rz_co.c **** void  R_ERROR_Set( errnum_t e ) 
+  71:../generate/sc_drivers/r_jcu/porting/rz_co.c **** {
+  26              		.loc 1 71 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+  32 0000 1EFF2FE1 		bx	lr
+  33              		.cfi_endproc
+  34              	.LFE1:
+  36              		.section	.text.R_CO_SetTrue,"ax",%progbits
+  37              		.align	2
+  38              		.global	R_CO_SetTrue
+  39              		.syntax unified
+  40              		.arm
+  41              		.fpu neon
+  43              	R_CO_SetTrue:
+  44              	.LFB2:
+  72:../generate/sc_drivers/r_jcu/porting/rz_co.c ****     if ( e )
+  73:../generate/sc_drivers/r_jcu/porting/rz_co.c ****     {
+  74:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  75:../generate/sc_drivers/r_jcu/porting/rz_co.c ****         /* printf <ERROR/>  and  R_DebugBreak */
+  76:../generate/sc_drivers/r_jcu/porting/rz_co.c ****         #ifdef  USE_LIST_DEBUG_TOOL
+  77:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             bool_t  is_error_being_cleared = ( ( e & E_STATE_CLEAR_MASK ) == E_STATE_CLEAR );
+  78:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             bool_t  is_failure_oblivious   = ( ( e & E_OBLIVIOUS_MASK   ) == E_OBLIVIOUS );
+  79:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             bool_t  is_new_error = ( g_CallingCountOfNotClearedError == 0 );
+  80:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  81:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             static int_fast32_t  calling_count = 0;
+  82:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  83:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             calling_count += 1;
+  84:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  85:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             /* g_CallingCountOfNotClearedError = ... */
+  86:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             if ( is_error_being_cleared ) {
+  87:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 g_CallingCountOfNotClearedError = 0;
+  88:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             } else if ( is_new_error  &&  ! is_failure_oblivious ) {
+  89:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 g_CallingCountOfNotClearedError = calling_count;
+  90:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             }
+  91:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  92:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             /* printf <ERROR/>  and  R_DebugBreak */
+  93:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             if ( calling_count >= 9999 ) {  /* If 1 then, set break point here without changing sou
+  94:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  95:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 /* R_USER_DebugPrint(); */
+  96:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+  97:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 if ( ! is_error_being_cleared ) {
+  98:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                     printf( "<Error num=\"0x%08X\"  calling_count=\"%d\"/>"GS_N,  e,  calling_count
+  99:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                     if ( ! is_failure_oblivious ) {
+ 100:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+ 101:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                         R_DebugBreak();
+ 102:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                     }
+ 103:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 } else { /* is_error_being_cleared */
+ 104:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                     printf( "<Error clear=\"0x%08X\"  calling_count=\"%d\"/>"GS_N,  e,  calling_cou
+ 105:../generate/sc_drivers/r_jcu/porting/rz_co.c ****                 }
+ 106:../generate/sc_drivers/r_jcu/porting/rz_co.c ****             }
+ 107:../generate/sc_drivers/r_jcu/porting/rz_co.c ****         #endif /* USE_LIST_DEBUG_TOOL */
+ 108:../generate/sc_drivers/r_jcu/porting/rz_co.c ****     }
+ 109:../generate/sc_drivers/r_jcu/porting/rz_co.c **** } /* End of function R_ERROR_Set */
+ 110:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+ 111:../generate/sc_drivers/r_jcu/porting/rz_co.c **** 
+ 112:../generate/sc_drivers/r_jcu/porting/rz_co.c **** /***********************************************************************
+ 113:../generate/sc_drivers/r_jcu/porting/rz_co.c **** * Function Name: R_CO_SetTrue
+ 114:../generate/sc_drivers/r_jcu/porting/rz_co.c **** ************************************************************************/
+ 115:../generate/sc_drivers/r_jcu/porting/rz_co.c **** void  R_CO_SetTrue( volatile bool_t*  ref_Event ) 
+ 116:../generate/sc_drivers/r_jcu/porting/rz_co.c **** {
+  45              		.loc 1 116 0
+  46              		.cfi_startproc
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49              		@ link register save eliminated.
+  50              	.LVL1:
+ 117:../generate/sc_drivers/r_jcu/porting/rz_co.c ****     *ref_Event = true;
+  51              		.loc 1 117 0
+  52 0000 0130A0E3 		mov	r3, #1
+  53 0004 003080E5 		str	r3, [r0]
+  54 0008 1EFF2FE1 		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE2:
+  58              		.text
+  59              	.Letext0:
+  60              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+  61              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+  62              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+  63              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+  64              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+  65              		.file 7 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/i
+  66              		.file 8 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_drive
+DEFINED SYMBOLS
+                            *ABS*:00000000 rz_co.c
+C:\Users\tle\AppData\Local\Temp\cc0sR9k4.s:17     .text.R_ERROR_Set:00000000 $a
+C:\Users\tle\AppData\Local\Temp\cc0sR9k4.s:23     .text.R_ERROR_Set:00000000 R_ERROR_Set
+C:\Users\tle\AppData\Local\Temp\cc0sR9k4.s:37     .text.R_CO_SetTrue:00000000 $a
+C:\Users\tle\AppData\Local\Temp\cc0sR9k4.s:43     .text.R_CO_SetTrue:00000000 R_CO_SetTrue
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.187.2ff233552538c6ff9b8575ca8ea52cb3
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.stddef.h.39.ec95e8feac892e292b69dc7ae75b0d64
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.30.bbece7fa40993a78092dcc5805132560
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.8188691c2279eac7a223caa50f6694b9
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.rz_co_typedef.h.30.d945c9904878daee922b7c70f5e10607
+                           .group:00000000 wm4.rz_co.h.31.aecea41cce99b435cabd8b5611466e3b
+
+NO UNDEFINED SYMBOLS

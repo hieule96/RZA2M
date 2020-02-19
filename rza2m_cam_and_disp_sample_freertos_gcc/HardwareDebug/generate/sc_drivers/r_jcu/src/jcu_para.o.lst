@@ -1,0 +1,973 @@
+   1              		.cpu cortex-a9
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"jcu_para.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.JCU_ParaCheckSelectCodec,"ax",%progbits
+  17              		.align	2
+  18              		.global	JCU_ParaCheckSelectCodec
+  19              		.syntax unified
+  20              		.arm
+  21              		.fpu neon
+  23              	JCU_ParaCheckSelectCodec:
+  24              	.LFB3:
+  25              		.file 1 "../generate/sc_drivers/r_jcu/src/jcu_para.c"
+   1:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /**************************************************************************************************
+   2:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * DISCLAIMER
+   3:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * This software is supplied by Renesas Electronics Corporation and is only intended for use with R
+   4:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * other uses are authorized. This software is owned by Renesas Electronics Corporation and is prot
+   5:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * applicable laws, including copyright laws.
+   6:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WARRANTIES REGARDING
+   7:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   8:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAI
+   9:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * EXTENT PERMITTED NOT PROHIBITED BY LAW, NEITHER RENESAS ELECTRONICS CORPORATION NOR ANY OF ITS A
+  10:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES FOR ANY R
+  11:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * THIS SOFTWARE, EVEN IF RENESAS OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DA
+  12:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * Renesas reserves the right, without notice, to make changes to this software and to discontinue 
+  13:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * this software. By using this software, you agree to the additional terms and conditions found by
+  14:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * following link:
+  15:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * http://www.renesas.com/disclaimer
+  16:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  *
+  17:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  * Copyright (C) 2019 Renesas Electronics Corporation. All rights reserved.
+  18:../generate/sc_drivers/r_jcu/src/jcu_para.c ****  **************************************************************************************************
+  19:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /*******************************************************************************
+  20:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * File         : jcu_para.c
+  21:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Description  : JPEG Codec Unit (JCU) driver. checking parameter.
+  22:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Version      : 1.12
+  23:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  24:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  25:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  26:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Includes   <System Includes> , "Project Includes"
+  27:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  28:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  <string.h>
+  29:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "r_typedefs.h"
+  30:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "iodefine.h"
+  31:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "iobitmask.h"
+  32:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "r_jcu.h"
+  33:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "r_register_bit.h"
+  34:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "../src/r_jcu_local.h"
+  35:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #include  "rz_co.h"
+  36:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  37:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #ifndef  JCU_RELEASE
+  38:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  39:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  40:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Typedef definitions
+  41:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  42:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  43:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  44:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Macro definitions
+  45:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  46:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #define MASK_LOW_3BIT   (0x7u)
+  47:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #define MOD_8           (0x8u)
+  48:../generate/sc_drivers/r_jcu/src/jcu_para.c **** #define MOD_16          (0x10u)
+  49:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  50:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  51:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Imported global variables and functions (from other files)
+  52:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  53:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  54:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  55:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Exported global variables and functions (to be accessed by other files)
+  56:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  57:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  58:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /******************************************************************************
+  59:../generate/sc_drivers/r_jcu/src/jcu_para.c **** Private global variables and functions
+  60:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ******************************************************************************/
+  61:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  62:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+  63:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckSelectCodec
+  64:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    SelectCodec api's parameter checking
+  65:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+  66:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+  67:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] codec  codec type
+  68:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+  69:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+  70:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+  71:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+  72:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckSelectCodec( 
+  73:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_codec_t   codec)
+  74:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+  26              		.loc 1 74 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 10402DE9 		push	{r4, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  75:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue; 
+  76:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  77:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((codec != JCU_ENCODE)
+  35              		.loc 1 77 0
+  36 0004 010050E3 		cmp	r0, #1
+  37 0008 0500009A 		bls	.L3
+  78:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         && (codec != JCU_DECODE))
+  79:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+  80:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_F;  /* Error: <Parameter/> */
+  38              		.loc 1 80 0
+  39 000c 0F4100E3 		movw	r4, #271
+  40 0010 454140E3 		movt	r4, 325
+  41              	.L2:
+  42              	.LVL1:
+  81:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+  82:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     else
+  83:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+  84:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_OK;
+  85:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+  86:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  87:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     R_ERROR_Set( returnValue );
+  43              		.loc 1 87 0
+  44 0014 0400A0E1 		mov	r0, r4
+  45              	.LVL2:
+  46 0018 FEFFFFEB 		bl	R_ERROR_Set
+  47              	.LVL3:
+  88:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+  89:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckSelectCodec */
+  48              		.loc 1 89 0
+  49 001c 0400A0E1 		mov	r0, r4
+  50 0020 1080BDE8 		pop	{r4, pc}
+  51              	.LVL4:
+  52              	.L3:
+  84:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+  53              		.loc 1 84 0
+  54 0024 0040A0E3 		mov	r4, #0
+  55 0028 F9FFFFEA 		b	.L2
+  56              		.cfi_endproc
+  57              	.LFE3:
+  59              		.section	.text.JCU_ParaCheckStart,"ax",%progbits
+  60              		.align	2
+  61              		.global	JCU_ParaCheckStart
+  62              		.syntax unified
+  63              		.arm
+  64              		.fpu neon
+  66              	JCU_ParaCheckStart:
+  67              	.LFB4:
+  90:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+  91:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+  92:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckStart
+  93:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    Start api's parameter checking
+  94:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+  95:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+  96:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] codec  codec type
+  97:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+  98:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+  99:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 100:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 101:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckStart( 
+ 102:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     void)
+ 103:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+  68              		.loc 1 103 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 10402DE9 		push	{r4, lr}
+  73              		.cfi_def_cfa_offset 8
+  74              		.cfi_offset 4, -8
+  75              		.cfi_offset 14, -4
+ 104:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t   returnValue; 
+ 105:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 106:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* If jcu already start, it cannot update this bit (this is limitation of hardware) */
+ 107:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ( (uint32_t) R_BIT_GET_IN_REGISTER8( JCU,JCCMD,JSRT ) == 1u )
+  76              		.loc 1 107 0
+  77 0004 0120A0E3 		mov	r2, #1
+  78 0008 0010A0E3 		mov	r1, #0
+  79 000c 010007E3 		movw	r0, #28673
+  80 0010 01084EE3 		movt	r0, 59393
+  81 0014 FEFFFFEB 		bl	RZA_IO_RegRead_8
+  82              	.LVL5:
+  83 0018 010050E3 		cmp	r0, #1
+  84 001c 0400000A 		beq	.L9
+ 108:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 109:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_STATUS_14;  /* Error: */
+ 110:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 111:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     else
+ 112:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 113:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_OK;
+  85              		.loc 1 113 0
+  86 0020 0040A0E3 		mov	r4, #0
+  87              	.L6:
+  88              	.LVL6:
+ 114:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 115:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 116:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     R_ERROR_Set( returnValue );
+  89              		.loc 1 116 0
+  90 0024 0400A0E1 		mov	r0, r4
+  91 0028 FEFFFFEB 		bl	R_ERROR_Set
+  92              	.LVL7:
+ 117:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 118:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckStart */
+  93              		.loc 1 118 0
+  94 002c 0400A0E1 		mov	r0, r4
+  95 0030 1080BDE8 		pop	{r4, pc}
+  96              	.LVL8:
+  97              	.L9:
+ 109:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+  98              		.loc 1 109 0
+  99 0034 854FA0E3 		mov	r4, #532
+ 100 0038 454041E3 		movt	r4, 4165
+ 101 003c F8FFFFEA 		b	.L6
+ 102              		.cfi_endproc
+ 103              	.LFE4:
+ 105              		.section	.text.JCU_ParaCheckSetDecodeParam,"ax",%progbits
+ 106              		.align	2
+ 107              		.global	JCU_ParaCheckSetDecodeParam
+ 108              		.syntax unified
+ 109              		.arm
+ 110              		.fpu neon
+ 112              	JCU_ParaCheckSetDecodeParam:
+ 113              	.LFB5:
+ 119:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 120:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+ 121:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckSetDecodeParam
+ 122:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    SetDecodeParam api's parameter checking
+ 123:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 124:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+ 125:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] buffer        - input and output buffer settings
+ 126:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] interruptKind - tye type of interrupt that use in this system
+ 127:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 128:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+ 129:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 130:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 131:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckSetDecodeParam( 
+ 132:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_decode_param_t   *const decode, 
+ 133:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_buffer_param_t   *const buffer)
+ 134:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+ 114              		.loc 1 134 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              	.LVL9:
+ 119 0000 10402DE9 		push	{r4, lr}
+ 120              		.cfi_def_cfa_offset 8
+ 121              		.cfi_offset 4, -8
+ 122              		.cfi_offset 14, -4
+ 123              	.LVL10:
+ 135:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 136:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 137:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* Cast to an appropriate type */
+ 138:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((decode == NULL) || (buffer == NULL))
+ 124              		.loc 1 138 0
+ 125 0004 000051E3 		cmp	r1, #0
+ 126 0008 00005013 		cmpne	r0, #0
+ 127 000c 0500001A 		bne	.L21
+ 139:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 140:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_19;  /* Error: <Parameter/> */
+ 128              		.loc 1 140 0
+ 129 0010 194100E3 		movw	r4, #281
+ 130 0014 454140E3 		movt	r4, 325
+ 131              	.LVL11:
+ 132              	.L11:
+ 141:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 142:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 143:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 144:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* NULL check for the address data */
+ 145:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((buffer->source.address == NULL)|| (buffer->destination.address == NULL))
+ 146:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 147:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_1A;  /* Error: <Parameter/> */
+ 148:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 149:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 150:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 151:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* Check for the address alignment */
+ 152:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 11.3 */ /* ->SEC R2.7.1 */
+ 153:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ( ((uint32_t) buffer->source.address % MOD_8) != 0u )
+ 154:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 11.3 */ /* <-SEC R2.7.1 */
+ 155:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 156:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_35;  /* Error: The source address is not multiple of 8. */
+ 157:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 158:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 159:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 160:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* Check for the address alignment */
+ 161:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 11.3 */ /* ->SEC R2.7.1 */
+ 162:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ( ((uint32_t) buffer->destination.address % MOD_8) != 0u )
+ 163:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 11.3 */ /* <-SEC R2.7.1 */
+ 164:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 165:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_1B;  /* Error: The destination address is not multiple of 8. 
+ 166:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 167:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 168:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 169:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /*Check for Cb/Cr offset */
+ 170:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if(decode->decodeFormat == JCU_OUTPUT_YCbCr422)
+ 171:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 172:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         if (((decode->outputCbCrOffset) != JCU_CBCR_OFFSET_0) && ((decode->outputCbCrOffset) != JCU
+ 173:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 174:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             returnValue = JCU_ERROR_PARAM_1C;  /* Error: Bad value in "outputCbCrOffset" */
+ 175:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         }  /* end if */
+ 176:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 177:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     else
+ 178:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 179:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         if ((decode->outputCbCrOffset) != JCU_CBCR_OFFSET_0) 
+ 180:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 181:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             returnValue = JCU_ERROR_PARAM_34;  /* Error: Bad value in "outputCbCrOffset" */
+ 182:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         }  /* end if */
+ 183:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 184:../generate/sc_drivers/r_jcu/src/jcu_para.c **** fin:
+ 185:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 186:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         R_ERROR_Set(returnValue);
+ 133              		.loc 1 186 0
+ 134 0018 0400A0E1 		mov	r0, r4
+ 135              	.LVL12:
+ 136 001c FEFFFFEB 		bl	R_ERROR_Set
+ 137              	.LVL13:
+ 187:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 188:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 189:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckSetDecodeParam */
+ 138              		.loc 1 189 0
+ 139 0020 0400A0E1 		mov	r0, r4
+ 140 0024 1080BDE8 		pop	{r4, pc}
+ 141              	.LVL14:
+ 142              	.L21:
+ 143 0028 0130A0E1 		mov	r3, r1
+ 145:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 144              		.loc 1 145 0
+ 145 002c 041091E5 		ldr	r1, [r1, #4]
+ 146              	.LVL15:
+ 147 0030 000051E3 		cmp	r1, #0
+ 148 0034 1B00000A 		beq	.L14
+ 145:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 149              		.loc 1 145 0 is_stmt 0 discriminator 1
+ 150 0038 0C3093E5 		ldr	r3, [r3, #12]
+ 151              	.LVL16:
+ 152 003c 000053E3 		cmp	r3, #0
+ 153 0040 1B00000A 		beq	.L15
+ 153:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 11.3 */ /* <-SEC R2.7.1 */
+ 154              		.loc 1 153 0 is_stmt 1
+ 155 0044 070011E3 		tst	r1, #7
+ 156:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 156              		.loc 1 156 0
+ 157 0048 35410013 		movwne	r4, #309
+ 158 004c 45414013 		movtne	r4, 325
+ 159 0050 F0FFFF1A 		bne	.L11
+ 160              	.L22:
+ 162:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 11.3 */ /* <-SEC R2.7.1 */
+ 161              		.loc 1 162 0
+ 162 0054 070013E3 		tst	r3, #7
+ 165:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 163              		.loc 1 165 0
+ 164 0058 1B410013 		movwne	r4, #283
+ 165 005c 45414013 		movtne	r4, 325
+ 166 0060 ECFFFF1A 		bne	.L11
+ 167              	.L23:
+ 170:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 168              		.loc 1 170 0
+ 169 0064 0230D0E5 		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 170 0068 000053E3 		cmp	r3, #0
+ 171 006c 0600001A 		bne	.L12
+ 172:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 172              		.loc 1 172 0
+ 173 0070 0330D0E5 		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 174 0074 010053E3 		cmp	r3, #1
+ 174:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         }  /* end if */
+ 175              		.loc 1 174 0
+ 176 0078 474FA083 		movhi	r4, #284
+ 177 007c 45414083 		movthi	r4, 325
+ 178 0080 E4FFFF8A 		bhi	.L11
+ 179              	.L24:
+ 135:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 180              		.loc 1 135 0
+ 181 0084 0040A0E3 		mov	r4, #0
+ 182 0088 E2FFFFEA 		b	.L11
+ 183              	.L12:
+ 179:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 184              		.loc 1 179 0
+ 185 008c 0330D0E5 		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 186 0090 000053E3 		cmp	r3, #0
+ 181:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         }  /* end if */
+ 187              		.loc 1 181 0
+ 188 0094 4D4FA013 		movne	r4, #308
+ 189 0098 45414013 		movtne	r4, 325
+ 190 009c DDFFFF1A 		bne	.L11
+ 191              	.L25:
+ 135:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 192              		.loc 1 135 0
+ 193 00a0 0040A0E3 		mov	r4, #0
+ 194 00a4 DBFFFFEA 		b	.L11
+ 195              	.LVL17:
+ 196              	.L14:
+ 147:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 197              		.loc 1 147 0
+ 198 00a8 1A4100E3 		movw	r4, #282
+ 199 00ac 454140E3 		movt	r4, 325
+ 200 00b0 D8FFFFEA 		b	.L11
+ 201              	.LVL18:
+ 202              	.L15:
+ 203 00b4 1A4100E3 		movw	r4, #282
+ 204 00b8 454140E3 		movt	r4, 325
+ 205 00bc D5FFFFEA 		b	.L11
+ 206              		.cfi_endproc
+ 207              	.LFE5:
+ 209              		.section	.text.JCU_ParaCheckGetImageInfo,"ax",%progbits
+ 210              		.align	2
+ 211              		.global	JCU_ParaCheckGetImageInfo
+ 212              		.syntax unified
+ 213              		.arm
+ 214              		.fpu neon
+ 216              	JCU_ParaCheckGetImageInfo:
+ 217              	.LFB6:
+ 190:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 191:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+ 192:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckGetImageInfo
+ 193:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    GetImageInfo api's parameter checking
+ 194:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 195:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+ 196:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] buffer         buffer address that set the image information
+ 197:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 198:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+ 199:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 200:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 201:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckGetImageInfo( 
+ 202:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_image_info_t   *const buffer)
+ 203:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+ 218              		.loc 1 203 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 0
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222              	.LVL19:
+ 223 0000 10402DE9 		push	{r4, lr}
+ 224              		.cfi_def_cfa_offset 8
+ 225              		.cfi_offset 4, -8
+ 226              		.cfi_offset 14, -4
+ 227              	.LVL20:
+ 204:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 205:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 206:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* Cast to an appropriate type */
+ 207:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if (buffer == NULL)
+ 228              		.loc 1 207 0
+ 229 0004 000050E3 		cmp	r0, #0
+ 230 0008 0400000A 		beq	.L28
+ 204:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 231              		.loc 1 204 0
+ 232 000c 0040A0E3 		mov	r4, #0
+ 233              	.L27:
+ 234              	.LVL21:
+ 208:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 209:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_1D;  /* Error: <Parameter/> */
+ 210:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 211:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 212:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     R_ERROR_Set( returnValue );
+ 235              		.loc 1 212 0
+ 236 0010 0400A0E1 		mov	r0, r4
+ 237              	.LVL22:
+ 238 0014 FEFFFFEB 		bl	R_ERROR_Set
+ 239              	.LVL23:
+ 213:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 214:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckGetImageInfo */
+ 240              		.loc 1 214 0
+ 241 0018 0400A0E1 		mov	r0, r4
+ 242 001c 1080BDE8 		pop	{r4, pc}
+ 243              	.LVL24:
+ 244              	.L28:
+ 209:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 245              		.loc 1 209 0
+ 246 0020 1D4100E3 		movw	r4, #285
+ 247 0024 454140E3 		movt	r4, 325
+ 248 0028 F8FFFFEA 		b	.L27
+ 249              		.cfi_endproc
+ 250              	.LFE6:
+ 252              		.section	.text.JCU_ParaCheckSetQuantizationTbl,"ax",%progbits
+ 253              		.align	2
+ 254              		.global	JCU_ParaCheckSetQuantizationTbl
+ 255              		.syntax unified
+ 256              		.arm
+ 257              		.fpu neon
+ 259              	JCU_ParaCheckSetQuantizationTbl:
+ 260              	.LFB7:
+ 215:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 216:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+ 217:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckSetQuantizationTbl
+ 218:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    SetQuantizationTable api's parameter checking
+ 219:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 220:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+ 221:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] tableNo        the table number that set the parameter
+ 222:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 223:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+ 224:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 225:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 226:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckSetQuantizationTbl( 
+ 227:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_table_no_t   tableNo)
+ 228:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+ 261              		.loc 1 228 0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265              	.LVL25:
+ 266 0000 10402DE9 		push	{r4, lr}
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 4, -8
+ 269              		.cfi_offset 14, -4
+ 270              	.LVL26:
+ 229:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 230:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 231:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 13.7 : For fail safe. */
+ 232:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if (tableNo > JCU_TABLE_NO_3)
+ 271              		.loc 1 232 0
+ 272 0004 030050E3 		cmp	r0, #3
+ 273 0008 0500009A 		bls	.L34
+ 233:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 13.7 */
+ 234:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 14.1 ->QAC 3201 : For fail safe. */
+ 235:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 236:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_1E;  /* Error: <Parameter/> */
+ 274              		.loc 1 236 0
+ 275 000c 1E4100E3 		movw	r4, #286
+ 276 0010 454140E3 		movt	r4, 325
+ 277              	.L31:
+ 278              	.LVL27:
+ 237:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 238:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 14.1 <-QAC 3201 */
+ 239:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 240:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     R_ERROR_Set( returnValue );
+ 279              		.loc 1 240 0
+ 280 0014 0400A0E1 		mov	r0, r4
+ 281              	.LVL28:
+ 282 0018 FEFFFFEB 		bl	R_ERROR_Set
+ 283              	.LVL29:
+ 241:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 242:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckSetQuantizationTbl */
+ 284              		.loc 1 242 0
+ 285 001c 0400A0E1 		mov	r0, r4
+ 286 0020 1080BDE8 		pop	{r4, pc}
+ 287              	.LVL30:
+ 288              	.L34:
+ 229:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 289              		.loc 1 229 0
+ 290 0024 0040A0E3 		mov	r4, #0
+ 291 0028 F9FFFFEA 		b	.L31
+ 292              		.cfi_endproc
+ 293              	.LFE7:
+ 295              		.section	.text.JCU_ParaCheckSetHuffmanTable,"ax",%progbits
+ 296              		.align	2
+ 297              		.global	JCU_ParaCheckSetHuffmanTable
+ 298              		.syntax unified
+ 299              		.arm
+ 300              		.fpu neon
+ 302              	JCU_ParaCheckSetHuffmanTable:
+ 303              	.LFB8:
+ 243:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 244:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+ 245:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckSetHuffmanTable
+ 246:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    SetHuffmanTable api's parameter checking
+ 247:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 248:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+ 249:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] tableNo   - the table number that set the parameter
+ 250:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    [in] type      - the type which table is set(AC or DC)
+ 251:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 252:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+ 253:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 254:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 255:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckSetHuffmanTable( 
+ 256:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_table_no_t   tableNo,
+ 257:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_huff_t       type)
+ 258:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+ 304              		.loc 1 258 0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 0
+ 307              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308              	.LVL31:
+ 309 0000 10402DE9 		push	{r4, lr}
+ 310              		.cfi_def_cfa_offset 8
+ 311              		.cfi_offset 4, -8
+ 312              		.cfi_offset 14, -4
+ 313              	.LVL32:
+ 259:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 260:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 261:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 13.7 : For fail safe. */
+ 262:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if (tableNo > JCU_TABLE_NO_1)
+ 314              		.loc 1 262 0
+ 315 0004 010050E3 		cmp	r0, #1
+ 316 0008 0500009A 		bls	.L40
+ 263:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 264:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 13.7 */
+ 265:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 266:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_1F;  /* Error: <Parameter/> */
+ 317              		.loc 1 266 0
+ 318 000c 1F4100E3 		movw	r4, #287
+ 319 0010 454140E3 		movt	r4, 325
+ 320              	.L36:
+ 321              	.LVL33:
+ 267:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 268:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 269:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 270:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 13.7 : For fail safe. */
+ 271:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((type != JCU_HUFFMAN_AC)
+ 272:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         && (type != JCU_HUFFMAN_DC))
+ 273:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 274:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 13.7 */
+ 275:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* ->MISRA 14.1 ->QAC 3201 : For fail safe. */
+ 276:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 277:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_20;  /* Error: <Parameter/> */
+ 278:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 279:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 280:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* <-MISRA 14.1 <-QAC 3201 */
+ 281:../generate/sc_drivers/r_jcu/src/jcu_para.c **** fin:
+ 282:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 283:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         R_ERROR_Set(returnValue);
+ 322              		.loc 1 283 0
+ 323 0014 0400A0E1 		mov	r0, r4
+ 324              	.LVL34:
+ 325 0018 FEFFFFEB 		bl	R_ERROR_Set
+ 326              	.LVL35:
+ 284:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 285:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 286:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckSetHuffmanTable */
+ 327              		.loc 1 286 0
+ 328 001c 0400A0E1 		mov	r0, r4
+ 329 0020 1080BDE8 		pop	{r4, pc}
+ 330              	.LVL36:
+ 331              	.L40:
+ 271:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         && (type != JCU_HUFFMAN_DC))
+ 332              		.loc 1 271 0
+ 333 0024 010051E3 		cmp	r1, #1
+ 277:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 334              		.loc 1 277 0
+ 335 0028 124EA083 		movhi	r4, #288
+ 336 002c 45414083 		movthi	r4, 325
+ 337 0030 F7FFFF8A 		bhi	.L36
+ 338              	.L41:
+ 259:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 339              		.loc 1 259 0
+ 340 0034 0040A0E3 		mov	r4, #0
+ 341 0038 F5FFFFEA 		b	.L36
+ 342              		.cfi_endproc
+ 343              	.LFE8:
+ 345              		.section	.text.JCU_ParaCheckEncodeParam,"ax",%progbits
+ 346              		.align	2
+ 347              		.global	JCU_ParaCheckEncodeParam
+ 348              		.syntax unified
+ 349              		.arm
+ 350              		.fpu neon
+ 352              	JCU_ParaCheckEncodeParam:
+ 353              	.LFB9:
+ 287:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 288:../generate/sc_drivers/r_jcu/src/jcu_para.c **** /***********************************************************************
+ 289:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Function Name: JCU_ParaCheckEncodeParam
+ 290:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *     api's parameter checking
+ 291:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 292:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Arguments:
+ 293:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *     encode - [in] <jcu_encode_param_t>.
+ 294:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *     buffer - [in] <jcu_buffer_param_t>.
+ 295:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *
+ 296:../generate/sc_drivers/r_jcu/src/jcu_para.c **** * Return Value:
+ 297:../generate/sc_drivers/r_jcu/src/jcu_para.c **** *    jcu_errorcode_t
+ 298:../generate/sc_drivers/r_jcu/src/jcu_para.c **** ************************************************************************/
+ 299:../generate/sc_drivers/r_jcu/src/jcu_para.c **** jcu_errorcode_t JCU_ParaCheckEncodeParam( 
+ 300:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_encode_param_t   *const encode, 
+ 301:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     const jcu_buffer_param_t   *const buffer)
+ 302:../generate/sc_drivers/r_jcu/src/jcu_para.c **** {
+ 354              		.loc 1 302 0
+ 355              		.cfi_startproc
+ 356              		@ args = 0, pretend = 0, frame = 0
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358              	.LVL37:
+ 359 0000 10402DE9 		push	{r4, lr}
+ 360              		.cfi_def_cfa_offset 8
+ 361              		.cfi_offset 4, -8
+ 362              		.cfi_offset 14, -4
+ 363              	.LVL38:
+ 303:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     jcu_errorcode_t  returnValue = JCU_ERROR_OK; 
+ 304:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 305:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* Cast to an appropriate type */
+ 306:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((encode == NULL) || (buffer == NULL))
+ 364              		.loc 1 306 0
+ 365 0004 000051E3 		cmp	r1, #0
+ 366 0008 00005013 		cmpne	r0, #0
+ 367 000c 0500001A 		bne	.L52
+ 307:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 308:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_21;  /* Error: <Parameter/> */
+ 368              		.loc 1 308 0
+ 369 0010 214100E3 		movw	r4, #289
+ 370 0014 454140E3 		movt	r4, 325
+ 371              	.LVL39:
+ 372              	.L43:
+ 309:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 310:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 311:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 312:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /* NULL check for the address data */
+ 313:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if ((buffer->source.address == NULL) || (buffer->destination.address == NULL))
+ 314:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 315:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_22;  /* Error: <Parameter/> */
+ 316:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 317:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 318:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 319:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 320:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if (encode->encodeFormat == JCU_JPEG_YCbCr422)
+ 321:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 322:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         /* Check the width of the image data */
+ 323:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         if ((encode->width % MOD_16) != 0u)
+ 324:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 325:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             returnValue = JCU_ERROR_PARAM_23;  /* Error: <Parameter/> */
+ 326:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             goto fin;
+ 327:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         } /* end if */
+ 328:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 329:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         /* Check the height of the image data */
+ 330:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         if ((encode->height % MOD_8) != 0u)
+ 331:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 332:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             returnValue = JCU_ERROR_PARAM_24;  /* Error: <Parameter/> */
+ 333:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             goto fin;
+ 334:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         } /* end if */
+ 335:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 336:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     else
+ 337:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 338:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM;
+ 339:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 340:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     } /* end if */
+ 341:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 342:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     /*Check for Cb/Cr offset */
+ 343:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     if (((encode->inputCbCrOffset) != JCU_CBCR_OFFSET_0) && ((encode->inputCbCrOffset) != JCU_CBCR_
+ 344:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 345:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         returnValue = JCU_ERROR_PARAM_25;  /* Error: <Parameter/> */
+ 346:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 347:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 348:../generate/sc_drivers/r_jcu/src/jcu_para.c **** fin:
+ 349:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 350:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         R_ERROR_Set(returnValue);
+ 373              		.loc 1 350 0
+ 374 0018 0400A0E1 		mov	r0, r4
+ 375              	.LVL40:
+ 376 001c FEFFFFEB 		bl	R_ERROR_Set
+ 377              	.LVL41:
+ 351:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }
+ 352:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     return (returnValue);
+ 353:../generate/sc_drivers/r_jcu/src/jcu_para.c **** } /* End of function JCU_ParaCheckEncodeParam */
+ 378              		.loc 1 353 0
+ 379 0020 0400A0E1 		mov	r0, r4
+ 380 0024 1080BDE8 		pop	{r4, pc}
+ 381              	.LVL42:
+ 382              	.L52:
+ 383 0028 0130A0E1 		mov	r3, r1
+ 313:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 384              		.loc 1 313 0
+ 385 002c 041091E5 		ldr	r1, [r1, #4]
+ 386              	.LVL43:
+ 387 0030 000051E3 		cmp	r1, #0
+ 388 0034 1800000A 		beq	.L45
+ 313:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 389              		.loc 1 313 0 is_stmt 0 discriminator 1
+ 390 0038 0C3093E5 		ldr	r3, [r3, #12]
+ 391              	.LVL44:
+ 392 003c 000053E3 		cmp	r3, #0
+ 393 0040 1800000A 		beq	.L46
+ 320:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 394              		.loc 1 320 0 is_stmt 1
+ 395 0044 0030D0E5 		ldrb	r3, [r0]	@ zero_extendqisi2
+ 396 0048 010053E3 		cmp	r3, #1
+ 338:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 397              		.loc 1 338 0
+ 398 004c 014CA013 		movne	r4, #256
+ 399 0050 45414013 		movtne	r4, 325
+ 400 0054 EFFFFF1A 		bne	.L43
+ 401              	.L53:
+ 323:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 402              		.loc 1 323 0
+ 403 0058 0C3090E5 		ldr	r3, [r0, #12]
+ 404 005c 0F0013E3 		tst	r3, #15
+ 325:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             goto fin;
+ 405              		.loc 1 325 0
+ 406 0060 23410013 		movwne	r4, #291
+ 407 0064 45414013 		movtne	r4, 325
+ 408 0068 EAFFFF1A 		bne	.L43
+ 409              	.L54:
+ 330:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         {
+ 410              		.loc 1 330 0
+ 411 006c 103090E5 		ldr	r3, [r0, #16]
+ 412 0070 070013E3 		tst	r3, #7
+ 332:../generate/sc_drivers/r_jcu/src/jcu_para.c ****             goto fin;
+ 413              		.loc 1 332 0
+ 414 0074 494FA013 		movne	r4, #292
+ 415 0078 45414013 		movtne	r4, 325
+ 416 007c E5FFFF1A 		bne	.L43
+ 417              	.L55:
+ 343:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     {
+ 418              		.loc 1 343 0
+ 419 0080 1430D0E5 		ldrb	r3, [r0, #20]	@ zero_extendqisi2
+ 420 0084 010053E3 		cmp	r3, #1
+ 345:../generate/sc_drivers/r_jcu/src/jcu_para.c ****     }  /* end if */
+ 421              		.loc 1 345 0
+ 422 0088 25410083 		movwhi	r4, #293
+ 423 008c 45414083 		movthi	r4, 325
+ 424 0090 E0FFFF8A 		bhi	.L43
+ 425              	.L56:
+ 303:../generate/sc_drivers/r_jcu/src/jcu_para.c **** 
+ 426              		.loc 1 303 0
+ 427 0094 0040A0E3 		mov	r4, #0
+ 428 0098 DEFFFFEA 		b	.L43
+ 429              	.LVL45:
+ 430              	.L45:
+ 315:../generate/sc_drivers/r_jcu/src/jcu_para.c ****         goto fin;
+ 431              		.loc 1 315 0
+ 432 009c 224100E3 		movw	r4, #290
+ 433 00a0 454140E3 		movt	r4, 325
+ 434 00a4 DBFFFFEA 		b	.L43
+ 435              	.LVL46:
+ 436              	.L46:
+ 437 00a8 224100E3 		movw	r4, #290
+ 438 00ac 454140E3 		movt	r4, 325
+ 439 00b0 D8FFFFEA 		b	.L43
+ 440              		.cfi_endproc
+ 441              	.LFE9:
+ 443              		.text
+ 444              	.Letext0:
+ 445              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 446              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 447              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 448              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\lib\\gcc\\arm-none-eab
+ 449              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 450              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 451              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q2-update\\arm-none-eabi\\include
+ 452              		.file 9 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/i
+ 453              		.file 10 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 454              		.file 11 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 455              		.file 12 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/sc_driv
+ 456              		.file 13 "C:/Users/tle/e2_studio/workspace/rza2m_cam_and_disp_sample_freertos_gcc/generate/system/
+DEFINED SYMBOLS
+                            *ABS*:00000000 jcu_para.c
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:17     .text.JCU_ParaCheckSelectCodec:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:23     .text.JCU_ParaCheckSelectCodec:00000000 JCU_ParaCheckSelectCodec
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:60     .text.JCU_ParaCheckStart:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:66     .text.JCU_ParaCheckStart:00000000 JCU_ParaCheckStart
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:106    .text.JCU_ParaCheckSetDecodeParam:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:112    .text.JCU_ParaCheckSetDecodeParam:00000000 JCU_ParaCheckSetDecodeParam
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:210    .text.JCU_ParaCheckGetImageInfo:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:216    .text.JCU_ParaCheckGetImageInfo:00000000 JCU_ParaCheckGetImageInfo
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:253    .text.JCU_ParaCheckSetQuantizationTbl:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:259    .text.JCU_ParaCheckSetQuantizationTbl:00000000 JCU_ParaCheckSetQuantizationTbl
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:296    .text.JCU_ParaCheckSetHuffmanTable:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:302    .text.JCU_ParaCheckSetHuffmanTable:00000000 JCU_ParaCheckSetHuffmanTable
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:346    .text.JCU_ParaCheckEncodeParam:00000000 $a
+C:\Users\tle\AppData\Local\Temp\ccx4rYaU.s:352    .text.JCU_ParaCheckEncodeParam:00000000 JCU_ParaCheckEncodeParam
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.14fc17be114e5a2cba0959c511ea2aaf
+                           .group:00000000 wm4._newlib_version.h.4.3572908597b70d672d181fc7fc501c19
+                           .group:00000000 wm4.newlib.h.21.59901f4bf241ab46c63694665baa7297
+                           .group:00000000 wm4.features.h.22.5cdadbb3efe495d1c9e38350b8c376c7
+                           .group:00000000 wm4.config.h.219.65a553ab5bef5482f0d7880b0d33015e
+                           .group:00000000 wm4._ansi.h.23.9f8fcfa20193763fcf364fb91705c94b
+                           .group:00000000 wm4.stddef.h.39.a38874c8f8a57e66301090908ec2a69f
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:00000000 wm4._types.h.183.c226d164ceca1f2ecb9ae9360c54a098
+                           .group:00000000 wm4.reent.h.17.23b059516345f8f5abfa01ddc379570f
+                           .group:00000000 wm4.cdefs.h.47.e658329a094974ebad41b40c60502de7
+                           .group:00000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
+                           .group:00000000 wm4.stddef.h.161.19e15733342b50ead2919490b095303e
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.math.h.13.adb102f7bd7860b1f241e149d6914a1e
+                           .group:00000000 wm4.r_typedefs.h.38.e90d9de5300d9ae020e5db8c5af88b3e
+                           .group:00000000 wm4.adc_iodefine.h.29.14c6f50dce37432a7d004e4b1ce33da7
+                           .group:00000000 wm4.bsc_iodefine.h.29.9281d1f3639266933964d6d0c2d42c4f
+                           .group:00000000 wm4.ceu_iodefine.h.29.2a669d0b46fdde030a50db9e3c307fbf
+                           .group:00000000 wm4.cpg_iodefine.h.29.d6fdc9cb4798723afd88b251d64c2ce2
+                           .group:00000000 wm4.csi2link_iodefine.h.29.221c4531636a409f24d307b16341ada8
+                           .group:00000000 wm4.dmac_iodefine.h.29.578fccc2cc1da886ec95a029bf874f01
+                           .group:00000000 wm4.drpk_iodefine.h.29.580eb8588a2b2d43d2726fbe791e513f
+                           .group:00000000 wm4.drw_iodefine.h.29.df30f4a4a34a79f6a86c4df91353dffe
+                           .group:00000000 wm4.edmac_iodefine.h.29.33e8759349004a722f42f5429c1353f6
+                           .group:00000000 wm4.eptpc_iodefine.h.29.74d8f9fab0f5549b56097fb9e937dde8
+                           .group:00000000 wm4.etherc_iodefine.h.29.14602750383a574f1c21f994ad33a366
+                           .group:00000000 wm4.gpio_iodefine.h.29.3d0b021c56839cee4ae5149903684e4b
+                           .group:00000000 wm4.gpt_iodefine.h.29.557ead75d7b0585b898d3898b64c7f87
+                           .group:00000000 wm4.hyper_iodefine.h.29.000caadbb74d881e97db55b39b432154
+                           .group:00000000 wm4.imr_iodefine.h.29.77c022f017e711c4d51cc0145db1dad3
+                           .group:00000000 wm4.intc_iodefine.h.29.b68f5799a35a7495d63b4cd458e1ba57
+                           .group:00000000 wm4.irda_iodefine.h.29.37e67bd2005173d68a74d1cc937d8444
+                           .group:00000000 wm4.jcu_iodefine.h.29.3aca452908962e7a7ccf26164751feda
+                           .group:00000000 wm4.lvds_iodefine.h.29.c11cbe1900e5209c8dcc76c2336c16bc
+                           .group:00000000 wm4.mtu_iodefine.h.29.5498fb974bb53caf05aa143c2deec781
+                           .group:00000000 wm4.nandc_iodefine.h.29.e0b343306750f017ee86e169ad98efe9
+                           .group:00000000 wm4.octa_iodefine.h.29.4cb0d62e4b9633e173858000dc1c626c
+                           .group:00000000 wm4.ostm_iodefine.h.29.6914f7e330a1cf0008b34219adcdfed4
+                           .group:00000000 wm4.pl_iodefine.h.29.abbb6d725aed990aa8343242bfe31416
+                           .group:00000000 wm4.pmg_iodefine.h.29.8bcfbc4771a6f9b7dd4d6f504427219e
+                           .group:00000000 wm4.poeg_iodefine.h.29.0d8e258d10986260cbc70cfb8c0ef273
+                           .group:00000000 wm4.poe_iodefine.h.29.fe74e55e7b6b4afbe3596c74ba035e98
+                           .group:00000000 wm4.prr_iodefine.h.29.c1f15576f7a27b9c83aa3b40f5b2f988
+                           .group:00000000 wm4.ptpedmac_iodefine.h.29.cd24a93374ce35cebc41e26889d619ef
+                           .group:00000000 wm4.rcanfd_iodefine.h.29.532dd48b82fcb61d63538aba4b6f1289
+                           .group:00000000 wm4.rcan_iodefine.h.29.a47a89db1b35c12b54af48fa1956acba
+                           .group:00000000 wm4.riic_iodefine.h.29.f96943d49800d297612c4af3bba5c943
+                           .group:00000000 wm4.rspi_iodefine.h.29.7efa041fe34a7d27db66a7b337879dfe
+                           .group:00000000 wm4.rtc_iodefine.h.29.6dc76be5ca3df69cecb5a81d06cc46b5
+                           .group:00000000 wm4.scifa_iodefine.h.29.b04ccd664d71baaf31c75761c45b9c4d
+                           .group:00000000 wm4.scim_iodefine.h.29.87d0760abf94446b00d826c797bf0ff2
+                           .group:00000000 wm4.sdmmc_iodefine.h.29.e67e9815445e8057a3262d1566bea0db
+                           .group:00000000 wm4.spdif_iodefine.h.29.59f5d70150fa200a4d8ee50be1ee34c8
+                           .group:00000000 wm4.spibsc_iodefine.h.29.f4930f8b8da1140200204513a363c76f
+                           .group:00000000 wm4.sprite_iodefine.h.29.55796d1fa083a2457fea4ece974a192e
+                           .group:00000000 wm4.ssif_iodefine.h.29.054ec6d95f487f631f16aee39c85c47a
+                           .group:00000000 wm4.usb_iodefine.h.29.6dc44ea388ba227e8fdcfb33c315887b
+                           .group:00000000 wm4.vdc_iodefine.h.29.db282ded1f052d8567fbbd3b61ce8f7a
+                           .group:00000000 wm4.vin_iodefine.h.29.9b392e5601347d53e64be3272934e170
+                           .group:00000000 wm4.wdt_iodefine.h.29.ed07bb44b797072f8c28b41c64fdca30
+                           .group:00000000 wm4.iobitmask.h.29.773e8f8428b0c21e1206a8c47a6d3927
+                           .group:00000000 wm4.adc_iobitmask.h.29.48ba2821c8a4fc20022447ad9316d399
+                           .group:00000000 wm4.bsc_iobitmask.h.29.115d15c4ad4b48e00598dcd62d33c637
+                           .group:00000000 wm4.ceu_iobitmask.h.29.413b5b68bb3c2148786493166a57173e
+                           .group:00000000 wm4.cpg_iobitmask.h.29.128911f0454a5339c74031b8d73e8fed
+                           .group:00000000 wm4.csi2link_iobitmask.h.29.701c130cb17627664fe7c147084057cf
+                           .group:00000000 wm4.dmac_iobitmask.h.29.98850e876107975c53dc0bb8ebb53eb5
+                           .group:00000000 wm4.drpk_iobitmask.h.29.167e7cf6b1feb4d38b8903a46d8c35ac
+                           .group:00000000 wm4.drw_iobitmask.h.29.71d46f2244f6e7ae6117fe6c41c5567d
+                           .group:00000000 wm4.edmac_iobitmask.h.29.4e406d859155ba914663e1cf61cad89a
+                           .group:00000000 wm4.eptpc_iobitmask.h.29.64bcd0a67db3a886572992ae6da8898c
+                           .group:00000000 wm4.etherc_iobitmask.h.29.07b13cb10c426023658e5c51f952b6de
+                           .group:00000000 wm4.gpio_iobitmask.h.29.ea8c1464682eb61f2d0763b97ed530f9
+                           .group:00000000 wm4.gpt_iobitmask.h.29.94173800a704c5ba32e348ba97cd23cf
+                           .group:00000000 wm4.hyper_iobitmask.h.29.f09febbc7b835674abe34ae75f3c700d
+                           .group:00000000 wm4.imr2_iobitmask.h.29.fff702c4c9409266054e806327fa236b
+                           .group:00000000 wm4.intc_iobitmask.h.29.6d3be2e47bf3d7eb7e91eeddcab863af
+                           .group:00000000 wm4.irda_iobitmask.h.29.6f43dde454e599a1d4a8be2978ac9459
+                           .group:00000000 wm4.jcu_iobitmask.h.29.9fd48851a81ff31733aa19b29e4846ad
+                           .group:00000000 wm4.lvds_iobitmask.h.29.4a6f69c8911426fa05f0b05eab5f5e15
+                           .group:00000000 wm4.mtu_iobitmask.h.29.0dfead439d92d73e6bac91e937399f90
+                           .group:00000000 wm4.nandc_iobitmask.h.29.a3a0f4ae99fdf814aa6f25f430186b14
+                           .group:00000000 wm4.octa_iobitmask.h.29.75dc3e3c70ac86c7551744de3991f583
+                           .group:00000000 wm4.ostm_iobitmask.h.29.38ee9f4e1711e17bd3f38545ba631cde
+                           .group:00000000 wm4.pl310_iobitmask.h.29.c1ef5625c0a9d67f24e89fe2fd7e4886
+                           .group:00000000 wm4.pmg_iobitmask.h.29.d20cb8352080a58cf6cbf526935d968e
+                           .group:00000000 wm4.poe3_iobitmask.h.29.3a3444cc2dbf606e2370573e16d57254
+                           .group:00000000 wm4.poeg_iobitmask.h.29.5601eb8cf1161926d683c0720340f85d
+                           .group:00000000 wm4.prr_iobitmask.h.29.52f8479a52e2236c122b5956e4bdbfce
+                           .group:00000000 wm4.ptpedmac_iobitmask.h.29.494dcb2240ebba7fa20d0c2ab02007f7
+                           .group:00000000 wm4.rcanfd_iobitmask.h.29.d172f89cbc4f253e32a4e10346bdc9f6
+                           .group:00000000 wm4.rcan_iobitmask.h.29.c6f8b9b62e8fdc007f8b5f40c1f7e95d
+                           .group:00000000 wm4.riic_iobitmask.h.29.b6e4a30b4a750b93bf8b54b204e41e8e
+                           .group:00000000 wm4.rspi_iobitmask.h.29.2e257f44186c83ca40dbb0db2548623b
+                           .group:00000000 wm4.rtc_iobitmask.h.29.2c82d3237997f1de7d2ac9d93855f3da
+                           .group:00000000 wm4.scifa_iobitmask.h.29.c7af830569e0d6a26f3d66e3adc293d7
+                           .group:00000000 wm4.scim_iobitmask.h.29.3b5e9d8b03a11c94acd93de96d2037f6
+                           .group:00000000 wm4.sdmmc_iobitmask.h.29.21d47a25c0df1ed3d24cd6232ec3b4e7
+                           .group:00000000 wm4.spdif_iobitmask.h.29.c16f83f628828ab24aa2b72615b93e69
+                           .group:00000000 wm4.spibsc_iobitmask.h.29.8ade4a581f57cd5b82569a69eb5f0d67
+                           .group:00000000 wm4.sprite_iobitmask.h.29.82888597faf7ebb3bc86b5f1018a2253
+                           .group:00000000 wm4.ssif_iobitmask.h.29.482529b431f1ad627a02168620c61eee
+                           .group:00000000 wm4.usb_iobitmask.h.29.aae4dfd463dfdd120bf5855c9dc97483
+                           .group:00000000 wm4.vdc6_iobitmask.h.29.3ce0a3f9d2209ce71e4fec48b4ecb79a
+                           .group:00000000 wm4.vin_iobitmask.h.29.576a1d6e4b2cf6cbd353044865e437f2
+                           .group:00000000 wm4.wdt_iobitmask.h.29.c612db09eac33fb3da8d8aaee67287a9
+                           .group:00000000 wm4.rz_co_typedef.h.30.d945c9904878daee922b7c70f5e10607
+                           .group:00000000 wm4.r_jcu_typedef.h.39.25a55931b0de0f8bae5220b1a85bd4c6
+                           .group:00000000 wm4.r_startup_config.h.28.5c666c62fea732748f6d5e42947a9287
+                           .group:00000000 wm4.r_compiler_abstraction_api.h.26.3b351159b244321245f7af93e3423b5f
+                           .group:00000000 wm4.driver.h.34.180df73e0731406f5e50150641059ede
+                           .group:00000000 wm4.r_os_abstraction_api.h.52.0a236ebd862fe9ea15cb48eccaec65a1
+                           .group:00000000 wm4.compiler_settings.h.55.412db3588640e7e83336e77c1cd11233
+                           .group:00000000 wm4.rza_io_regrw.h.33.07c1ee176b41ade23637426c80e4b86a
+                           .group:00000000 wm4.r_register_bit.h.36.91d5ed7a657528d5c2570c5480fee505
+                           .group:00000000 wm4.r_jcu_local.h.31.5b6af5fe53806913a1ad340c4f743daf
+                           .group:00000000 wm4.rz_co.h.31.aecea41cce99b435cabd8b5611466e3b
+
+UNDEFINED SYMBOLS
+R_ERROR_Set
+RZA_IO_RegRead_8
